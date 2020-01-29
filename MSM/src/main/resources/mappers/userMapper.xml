@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="userMapper">
+
+	<!-- Email select -->
+	<select id = "selectByEmail" resultType = "com.project.member.vo.MemberVO">
+	<![CDATA[
+		SELECT
+			MEMAIL,
+			MNAME
+		FROM
+			MSM_MEMBER
+		WHERE
+			MEMAIL = #{mEmail}
+	]]>
+	</select>
+	
+	<!-- ID select -->
+	<select id = "selectByID" resultType = "com.project.member.vo.MemberVO">
+	<![CDATA[
+		SELECT
+			MID,
+			MNAME
+		FROM
+			MSM_MEMBER
+		WHERE
+			MID = #{mId}
+	]]>
+	</select>
+	
+	<!-- Sign Up SQL -->
+	<insert id = "register">
+		<![CDATA[
+			INSERT INTO MSM_MEMBER
+			(
+				MID,
+				MPW,
+				MNAME,
+				MEMAIL,
+				MPHONE,
+				MZIP_CODE,
+				M_FIRST_ADDR,
+				M_SECOND_ADDR
+			)
+			VALUES
+			(
+				#{mId},
+				#{mPw},
+				#{mName},
+				#{mEmail},
+				#{mPhone},
+				#{mZip_Code},
+				#{mFirst_Addr},
+				#{mSecond_Addr}				
+			)
+		]]>		
+	</insert>
+	
+	<!-- idCheck -->
+	<select id = "idCheck" resultType = "HashMap" parameterType = "HashMap">
+		<![CDATA[
+			SELECT COUNT(MID) AS RESULT
+			FROM MSM_MEMBER
+			WHERE MID = #{mId}
+		]]>
+	</select>
+	
+	<!-- idCheck2 -->
+	<select id = "idCheck2" resultType = "Int" parameterType = "String">
+	<![CDATA[
+		SELECT COUNT(*)
+		FROM MSM_MEMBER
+		WHERE MID = #{mId}
+	]]>
+	</select>
+	
+	<!-- Login Query -->
+	<select id = "selectUserById" resultType = "com.project.member.vo.MemberVO">
+		<![CDATA[
+			SELECT 
+				MID,
+				MPW,
+				MNAME,
+				MEMAIL,
+				MPHONE,
+				MZIP_CODE,
+				M_FIRST_ADDR,
+				M_SECOND_ADDR,
+				AUTHORITY,
+				ENABLED,
+				REGDATE
+			FROM MSM_MEMBER
+			WHERE MID = #{mId}
+		]]>
+	</select>
+	
+</mapper>

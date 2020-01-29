@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+	
+	<http pattern = "/resources/**" security = "none"></http>
+	<http pattern = "/upload/**" security = "none"></http>
+	<http auto-config = "true" use-expressions = "true">
+		<headers> <!-- X-Frame-Option : deny 해결(iframe issue) -->
+			<frame-options disabled="true"></frame-options>
+		</headers>
+		<!-- 
+		auto-config='true' 를 설정한 것만으로 기본 로그인페이지 / HTTP 기본인증 / 로그아웃 기능 등을 제공 
+		use-expressions = "true"는 SpEL(Spring Expression Language) 을 사용 
+		default는 false 이다. true 시는 SpEL을 사용해야만 에러가 발생 안 함.
+		-->	
+		
+		<intercept-url pattern = "/" access = "permitAll" />
+		<!-- URL에 접근하기 위한 권한을 설정  pattern은 url형태 access속성에 권한을 부여 -->
+		<!-- permitAll 은 모든 사람에게 권한을 줌. -->
+		<!-- 우선순위는 위부터 아래로 -->
+		<intercept-url pattern = "/home" access = "permitAll" />
+		<intercept-url pattern = "/login" access = "permitAll" />
+		<intercept-url pattern = "/join" access = "permitAll" />
+		<intercept-url pattern = "/login_duplicate" access = "permitAll" />
+		<intercept-url pattern = "/admin/**" access = "ROLE_ADMIN" />
+		<intercept-url pattern = "/**" access = "permitAll" />
+		<!-- ROLE_USER는 일반 가입자에게만 허용이고 hasRole()이 SpEL -->
+		<!-- hasRole('ROLE_ANONYMOUS')는 permitAll이고 hasRole('ROLE_ADMIN')은 관리자에게만 허용. -->
+		
+		<!-- form-login 엘리먼트는 사용자 이름과 비밀번호를 가지고 있는 폼 기반 인증방법을 사용한다. -->
+		<!-- login-page = "/login" 이 login으로 요청 시 포워딩된 페이지가 로그인으로 사용하는 페이지임을 스프링에 알려 줌. -->
+		<!-- 설정 안하면 스프링 제공 login page를 사용하게 됨. -->
+		<!-- username-parameter, password-parameter 는 앞으로 사용할 id와 password 속성명으로 form에서 지정한 name 속성을 변경할 수 있음. -->
+		<!-- (작성하지 않으면 form의 name속성을 그대로 사용) -->
+		<!-- authentication-failure-url은 로그인 실패 시 이동할 경로 -->
+		<!-- always-use-default-target = "true" 를 해야 원활히 타겟경로로 이동함. -->
+		
+		<form-login
+			login-page = "/home"
+			username-parameter = "mId"
+			password-parameter = "mPw"
+			default-target-url = "/home"
+			authentication-failure-url = "/login?fail=true"			
+			always-use-default-target = "true"		
+		/>
+		
+		<!-- 중복 로그인 방지 -->
+		<session-management>
+			<concurrency-control max-sessions = "1" expired-url = "/login_duplicate"/>
+		</session-management>
+		
+		<!-- 로그아웃처리 엘리먼트 -->
+		<!-- invalidate-session = "true" 는 로그아웃하면 세션을 제거 -->
+		<!-- logout-url은 로그아웃 경로 -->
+		<!-- logout-success-url은 로그아웃 성공 시 이동 경로 -->
+		<!-- 
+		<logout invalidate-session = "true" logout-url = "/logout" logout-success-url = "/login?logout=1" />
+		 -->
+		<logout invalidate-session = "true" delete-cookies = "JSESSIONID,SPRING_SECURITY_REMEMBER_ME_COOKIE" logout-success-url="/home" logout-url = "/logout" />
+		
+		
+		<!-- 
+		<remember-me key = "wmosky" token-validity-seconds = "2419200" />  4주 --> 
+		
+		<!-- csrf는 cross site request forgery 는 사이트 간 요청 위조로 다른 페이지에서 요청을 위조해서 공격하는 방식 csrf 해킹을 예방하기 위해 사용. -->
+		<csrf/>
+	
+	</http>
+	
+	<!-- authentication-manager는 인증처리를 위한 최상위 엘리먼트 -->
+	<!-- authentication-provider는 인증처리하는 엘리먼트 -->
+	<!-- user-service-ref 속성은 스프링시큐리티에서 데이터베이스에  요청에 대해 사용자이름/비밀번호를 다시 스프링으로 제공해 줄 서비스 클래스 객체 등록-->
+	<authentication-manager>
+		<authentication-provider ref = "CustomAuthenticationProvider"/>
+		<authentication-provider user-service-ref="UserLoginService">		
+			<password-encoder ref = "passwordEncoder" hash = "bcrypt"></password-encoder>
+		</authentication-provider>
+	</authentication-manager>
+	
+	<!-- user-service-ref로 사용할 bean 정의(해당 클래스를 자바 클래스로 만들어 주어야 함. -->
+	
+	<beans:bean id = "UserLoginService" class = "com.project.member.service.UserLoginService" />
+	<beans:bean id = "CustomAuthenticationProvider" class = "com.project.msm.security.CustomAuthenticationProvider"/>
+	<beans:bean id = "passwordEncoder" class = "org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	
+</beans:beans>

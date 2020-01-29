@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- 오라클 접속 -->
+    <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+        <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
+        <property name="url" value="jdbc:log4jdbc:oracle:thin:@localhost:1521/orcl"/>
+        <property name="username" value="scott"/>
+        <property name="password" value="tiger"/>
+    </bean>
+   
+    <!-- Mybatis 연동 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+         <property name="dataSource" ref="dataSource"></property>
+         <property name="configLocation" value="classpath:/mybatis-config.xml"></property>
+         <property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"/>
+    </bean>
+    
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+    </bean>
+    
+    <bean name = "template" class = "org.springframework.jdbc.core.JdbcTemplate">
+		<property name = "dataSource" ref = "dataSource"></property>
+	</bean>
+    
+    <!-- transaction bean -->
+	<bean name = "transactionManager" class = "org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name = "dataSource" ref = "dataSource" />
+	</bean>
+
+	<!-- transactiontemplate bean -->
+	<bean name = "transactionTemplate" class = "org.springframework.transaction.support.TransactionTemplate">
+		<property name = "transactionManager" ref = "transactionManager"></property>
+	</bean>
+	
+	<!-- template & transactionManger 사용 시 주석 풀고 경로 지정하여 사용할 것.  -->
+	<bean name = "dao" class = "com.project.msm.dao.BDaoTemplate">
+		<property name = "template" ref = "template"></property>
+		<property name = "transactionManager" ref = "transactionManager"></property>
+	</bean>	
+	
+	
+	<!-- Password Encoder -->
+	<bean name = "passwordEncoder" class = "org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	
+	<!-- security 로그인 실패 시 메세지  -->
+	<bean id = "messageSource" class = "org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name = "basenames">
+			<list>
+				<value>/WEB-INF/messages/spring_security_messages</value>
+			</list>
+		</property>
+		<property name = "defaultEncoding" value = "UTF-8"/>
+		<property name = "cacheSeconds" value = "5" />
+	</bean>
+	
+	<!-- Mail 인증 관련 -->
+	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="msmproject2020@gmail.com" />
+		<property name="password" value="dldydwp2020" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>		
+	</bean>
+	
+	<bean id = "mailService" class = "com.project.member.service.UserServiceImpl">
+		<property name = "javaMailSender" ref = "javaMailSender"/>
+	</bean>
+	
+	<!-- 파일 업로드 관련 설정 -->
+	<bean id = "multipartResolver" class = "org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value = "10485760"></property>
+	</bean> 
+	
+	<!-- 파일업로드를 위한 디렉토리 설정 -->
+	<bean id = "uploadPath" class = "java.lang.String">
+		<constructor-arg value = "c:/upload"/>
+	</bean>
+	
+	<!-- 업로드 패스 설정 --> 
+	<!--  
+	<bean class="java.lang.String"  name="uploadPath" id="uploadPath">
+ 		<constructor-arg value="D:\MSM\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MSM\resources" />
+    </bean>
+	 -->
+	<!--  
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+     --> 
+    <!-- scan -->
+    <context:component-scan base-package="com.project.board.service"></context:component-scan>
+    <context:component-scan base-package="com.project.board.dao"></context:component-scan>
+    <context:component-scan base-package="com.project.board.vo"></context:component-scan>
+    <context:component-scan base-package="com.project.goods.service"></context:component-scan>
+    <context:component-scan base-package="com.project.goods.dao"></context:component-scan>
+    <context:component-scan base-package="com.project.goods.vo"></context:component-scan>
+    <context:component-scan base-package="com.project.member.vo"></context:component-scan>
+    <context:component-scan base-package="com.project.member.dao"></context:component-scan>
+    <context:component-scan base-package="com.project.member.service"></context:component-scan>
+    <context:component-scan base-package="com.project.cart.vo"></context:component-scan>
+    <context:component-scan base-package="com.project.cart.dao"></context:component-scan>
+    <context:component-scan base-package="com.project.cart.service"></context:component-scan>
+		
+</beans>
