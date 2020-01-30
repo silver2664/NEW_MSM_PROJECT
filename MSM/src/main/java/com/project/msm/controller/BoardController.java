@@ -136,7 +136,7 @@ public class BoardController {
 		}
 
 		// 게시판 삭제
-		@RequestMapping(value = "/board/qna/delete", method = RequestMethod.POST)
+		@RequestMapping(value = "/board/delete", method = RequestMethod.POST)
 		public String delete(BoardVO boardVO,@ModelAttribute("scri") SearchCriteria scri,RedirectAttributes rttr) throws Exception{
 			logger.info("delete");			
 			service.delete(boardVO.getQid());		

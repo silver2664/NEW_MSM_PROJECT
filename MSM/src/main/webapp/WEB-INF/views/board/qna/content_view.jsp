@@ -25,20 +25,22 @@ h2 {
 	text-align: center;
 }
 </style>
-<!--font-awesome -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<!--bootstrap -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/css/mdb.min.css" />
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
+<!-- resource CSS -->
+<link href = "<c:url value = "/resources/css/home.css"/>" rel = "stylesheet" type = "text/css">
+<script src="/resources/js/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 	<div class="container mb-5">
 		<h2>게시판 글 보기</h2>
 
 		<form name="readForm" role="form" method="post">
+			<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
 			<input type="hidden" id="qid" name="qid" value="${content_view.qid }" />
 			<input type="hidden" id="page" name="page" value="${scri.page}">
 			<input type="hidden" id="perPageNum" name="perPageNum"	value="${scri.perPageNum}">
@@ -91,6 +93,7 @@ h2 {
 			</ol>
 		</div>
 		<form name="replyForm" method="post">
+			<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
 			<input type="hidden" id="qid" name="qid" value="${content_view.qid}" />
 			<input type="hidden" id="page" name="page" value="${scri.page}">
 			<input type="hidden" id="perPageNum" name="perPageNum"	value="${scri.perPageNum}">
@@ -133,24 +136,39 @@ h2 {
 	<%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>
 
 
-	<!--jquery -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<!--popper -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-	<!--javascript -->
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/js/mdb.min.js"></script>
+<!-- SCRIPTS -->
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
+<script>
+function openNav() {
+	  document.getElementById("mySidenav").style.width = "30vw";
+	}
+	
+function openNav2() {
+	  document.getElementById("mySidenav2").style.width = "30vw";
+	}
+
+function closeNav() {
+	  document.getElementById("mySidenav").style.width = "0";
+	}
+
+function closeNav2() {
+	  document.getElementById("mySidenav2").style.width = "0";
+	}
+</script>
 	<script>
 		$(document)	.ready(	function() {
 							var formObj = $("form[name='readForm']");
 
 							//리스트
 							$("#btnList")	.on("click",function() {
-												location.href = "/board/list?page=${scri.page}"
+												location.href = "/board/qna/qnaList?page=${scri.page}"
 														+ "&perPageNum=${scri.perPageNum}"
 														+ "&searchType=${scri.searchType}&keyword=${scri.keyword}";
 											});
@@ -168,7 +186,7 @@ h2 {
 
 							//수정
 							$("#modify").on("click", function() {
-								formObj.attr("action", "/board/updateView");
+								formObj.attr("action", "/board/qna/updateView");
 								formObj.attr("method", "get");
 								formObj.submit();
 							});
@@ -176,7 +194,7 @@ h2 {
 							//댓글 달기
 							$(".replyWriteBtn").on("click", function() {
 								var formObj = $("form[name='replyForm']");
-								formObj.attr("action", "/board/replyWrite");
+								formObj.attr("action", "/board/qna/replyWrite");
 								formObj.submit();
 							});
 

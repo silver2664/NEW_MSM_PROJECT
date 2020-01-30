@@ -85,8 +85,11 @@
 							<a class = "btn btn-outline-white mb-5" href = "#" target = "_blank" role = "button">
 								Cart
 							</a>
-							<a class = "btn btn-outline-white mb-5" href = "/board/list" role = "button">
-								BOARD
+							<a class = "btn btn-outline-white mb-5" href = "/board/notice/noticeList" role = "button">
+								Notice
+							</a>
+							<a class = "btn btn-outline-white mb-5" href = "/board/qna/qnaList" role = "button">
+								QnA
 							</a>
 							<sec:authorize access = "isAuthenticated()">
 							<form action = "logout" method = "post">

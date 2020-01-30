@@ -15,7 +15,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta id = "_csrf" name = "_csrf" content = "${_csrf.token}"/>
-<title>Material Design Bootstrap</title>
+<title>CART</title>
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <!-- Bootstrap core CSS -->
@@ -24,6 +24,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
 <!-- resource CSS -->
 <link href = "<c:url value = "/resources/css/home.css"/>" rel = "stylesheet" type = "text/css">
+
 </head>
 <body>
 
