@@ -122,6 +122,12 @@ public class UserController {
 		}
 	}
 	
+	@RequestMapping(value = "/member/loginForm")
+	public String loginForm() throws Exception {
+		logger.info("Login Form Connect!");
+		return "/member/loginForm";
+	}
+	
 	/*
 	@RequestMapping(value = "/member/step3", method=RequestMethod.POST)
 	public ModelAndView step3(RegisterRequest regReq, Errors errors) throws Exception {

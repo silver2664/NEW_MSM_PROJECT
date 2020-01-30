@@ -149,7 +149,7 @@ public class BoardController {
 			return "redirect:/board/qna/qnaList";
 		}
 		//¥Ò±€ ¿€º∫
-		@RequestMapping(value="/board/replyWrite", method = RequestMethod.POST)
+		@RequestMapping(value="/board/qna/replyWrite", method = RequestMethod.POST)
 		public String replyWrite(ReplyVO vo,@ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr) throws Exception {
 			logger.info("reply Write");
 			

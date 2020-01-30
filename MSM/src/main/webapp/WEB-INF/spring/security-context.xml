@@ -39,11 +39,11 @@
 		<!-- always-use-default-target = "true" 를 해야 원활히 타겟경로로 이동함. -->
 		
 		<form-login
-			login-page = "/home"
+			login-page = "/login"
 			username-parameter = "mId"
 			password-parameter = "mPw"
 			default-target-url = "/home"
-			authentication-failure-url = "/login?fail=true"			
+			authentication-failure-url = "/member/loginForm"			
 			always-use-default-target = "true"		
 		/>
 		
