@@ -1,6 +1,8 @@
 package com.project.member.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,26 +15,30 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.project.member.dao.UserLoginDAO;
+import com.project.member.vo.MemberDTO;
 import com.project.member.vo.MemberVO;
 
 @Service
 public class UserLoginService implements UserDetailsService {
 	
 	@Autowired
-	private UserLoginDAO dao;
-	
-		
+	private UserLoginDAO dao;	
 	
 	@Override
 	public UserDetails loadUserByUsername(String mId) throws UsernameNotFoundException {
 		System.out.println("UserLoginService mId : " + mId);
-		
+		//로그인 사용자 조회		
 		MemberVO vo = dao.getUserById(mId);
-		GrantedAuthority authority = new SimpleGrantedAuthority(vo.getAuthority());
-		UserDetails userDetails = (UserDetails)new User(vo.getUsername(), vo.getmPw(), Arrays.asList(authority));
-		System.out.println("Password : " + vo.getmPw());
+		System.out.println("UserLoginService vo :" + vo);
+		UserDetails loginUser = null;
 		
-		return userDetails;
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		System.out.println("UserLoginService authority : " + authorities);
+		
+		loginUser = new MemberDTO(authorities, vo.getmId(), vo.getmPw(), vo.getmName(), vo.getmEmail(), vo.getmPhone(), vo.getmZip_Code()
+				, vo.getmFirst_Addr(), vo.getmSecond_Addr(), vo.getAuthority(), vo.isEnabled(), vo.getRegDate());
+		
+		return loginUser;
 	} 
 
 }

@@ -77,7 +77,7 @@
 	]]>
 	</select>
 	
-	<!-- Login Query -->
+	<!-- Login Query and 게시물 상세보기. -->
 	<select id = "selectUserById" resultType = "com.project.member.vo.MemberVO">
 		<![CDATA[
 			SELECT 
@@ -87,8 +87,8 @@
 				MEMAIL,
 				MPHONE,
 				MZIP_CODE,
-				M_FIRST_ADDR,
-				M_SECOND_ADDR,
+				M_FIRST_ADDR AS mFirst_Addr,
+				M_SECOND_ADDR AS mSecond_Addr,
 				AUTHORITY,
 				ENABLED,
 				REGDATE
@@ -96,5 +96,61 @@
 			WHERE MID = #{mId}
 		]]>
 	</select>
+	
+	<!-- Member List -->
+	<select id = "selectAll" resultType = "com.project.member.vo.MemberVO" parameterType = "com.project.board.vo.Criteria">
+		
+			SELECT 
+				MID,
+				MPW,
+				MNAME,
+				MEMAIL,
+				MPHONE,
+				MZIP_CODE,
+				M_FIRST_ADDR AS mFirst_Addr,
+				M_SECOND_ADDR AS mSecond_Addr,
+				AUTHORITY,
+				ENABLED,
+				REGDATE
+			FROM (
+				SELECT
+					MID,
+					MPW,
+					MNAME,
+					MEMAIL,
+					MPHONE,
+					MZIP_CODE,
+					M_FIRST_ADDR,
+					M_SECOND_ADDR,
+					AUTHORITY,
+					ENABLED,
+					REGDATE,
+					ROW_NUMBER() OVER(ORDER BY MID DESC) AS RNUM
+					FROM MSM_MEMBER
+					WHERE 1=1
+						<include refid = "search"></include>
+			) MP
+			WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+			ORDER BY MID DESC
+		
+	</select>
+	
+	<!-- 총 회원의 수 -->
+	<select id="listCount" resultType="int" parameterType="com.project.board.vo.SearchCriteria">
+		
+			SELECT COUNT(MID)
+			FROM MSM_MEMBER
+			WHERE 1=1
+			<include refid ="search"></include>
+			
+	</select>
+	
+	<!-- search SQl -->
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">AND MID LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'c'.toString()">AND MEMAIL LIKE '%' || #{keyword} || '%'</if>
+		</if>
+	</sql>
 	
 </mapper>

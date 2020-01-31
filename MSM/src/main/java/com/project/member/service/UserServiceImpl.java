@@ -2,6 +2,7 @@ package com.project.member.service;
 
 
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -13,7 +14,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import com.project.board.vo.SearchCriteria;
 import com.project.member.dao.UserDAO;
+import com.project.member.vo.MemberDTO;
 import com.project.member.vo.MemberVO;
 import com.project.msm.exception.AlreadyExistingEmailException;
 import com.project.msm.exception.AlreadyExistingIdException;
@@ -114,6 +117,21 @@ public class UserServiceImpl implements UserService {
 		
 		return false;
 			
+	}
+	
+	// 6. 전체 회원 조회
+		public List<MemberVO> getMemberList(SearchCriteria scri) throws Exception{
+			return userDAO.getMemberList(scri);
+		}
+		
+	// 7. 게시물 총 갯수
+	public int listCount(SearchCriteria scri) throws Exception {
+		return userDAO.listCount(scri);
+	}
+	
+	// 8. 회원 상세 보기
+	public MemberVO memberDetail(String mId) throws Exception {
+		return userDAO.memberDetail(mId);
 	}
 	
 	

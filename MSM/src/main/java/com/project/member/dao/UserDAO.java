@@ -1,7 +1,10 @@
 package com.project.member.dao;
 
+import java.util.List;
 import java.util.Map;
 
+import com.project.board.vo.SearchCriteria;
+import com.project.member.vo.MemberDTO;
 import com.project.member.vo.MemberVO;
 import com.project.msm.util.RegisterRequest;
 
@@ -26,5 +29,13 @@ public interface UserDAO {
 	// 06. idChek2
 	public int idCheck2(String mId) throws Exception;
 	
+	//07. MEMBER 테이블 모든 사원 조회
+	public List<MemberVO> getMemberList(SearchCriteria scri) throws Exception;
+	
+	//08. 게시물 갯수
+	public int listCount(SearchCriteria scri) throws Exception;
+	
+	//09. 회원 상세 정보
+	public MemberVO memberDetail(String mId) throws Exception;
 	
 }

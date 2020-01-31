@@ -47,8 +47,8 @@ h2 {
 			<input type="hidden" id="qid" name="qid" value="${content_view.qid }" />
 			<input type="hidden" id="page" name="page" value="${scri.page}">
 			<input type="hidden" id="perPageNum" name="perPageNum"	value="${scri.perPageNum}">
-			 <input type="hidden"	id="searchType" name="searchType" value="${scri.searchType}">
-			<input type="hidden" id="keyword" name="keyword"	value="${scri.keyword}">
+			<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}">
+			<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
 		</form>
 		<table class="table table-hover">
 			<tbody>

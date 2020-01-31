@@ -1,6 +1,9 @@
 package com.project.msm.controller;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import javax.annotation.Resource;
@@ -12,15 +15,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.board.vo.PageMaker;
+import com.project.board.vo.SearchCriteria;
 import com.project.member.service.UserService;
+import com.project.member.vo.MemberDTO;
 import com.project.member.vo.MemberVO;
 
 @Controller // bean 인스턴스 생성
@@ -157,4 +166,28 @@ public class UserController {
 		return mv;
 	}
 	*/
+	
+	// 회원목록 조회.
+	@RequestMapping(value = "/member/memberList")
+	public ModelAndView memberList(@ModelAttribute("scri") SearchCriteria scri) throws Exception {		
+		ArrayList<MemberVO> memberList = (ArrayList<MemberVO>)userService.getMemberList(scri);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("memberList", memberList);
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(scri);
+		pageMaker.setTotalCount(userService.listCount(scri));
+		mv.addObject("pageMaker", pageMaker);
+		mv.setViewName("/member/memberList");
+		return mv;
+	}
+	
+	// 회원정보상세보기.
+	@RequestMapping(value = "/member/memberDetail")
+	public ModelAndView memberDetail(MemberVO memberVO, @ModelAttribute("scri") SearchCriteria scri, ModelAndView mv) throws Exception {
+		mv.addObject("memberDetail", userService.memberDetail(memberVO.getmId()));
+		mv.addObject("scri", scri);
+		mv.setViewName("/member/memberDetail");
+		return mv;
+	}
+	
 }
