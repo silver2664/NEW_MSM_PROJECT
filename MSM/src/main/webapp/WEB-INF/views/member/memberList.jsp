@@ -48,7 +48,7 @@
 		<c:forEach var = "member" items = "${memberList}">
 		<tr>
 			<td>
-				<a href="/member/detailView?mId=${member.mId}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}"><c:out value="${member.mId}" /></a>
+				<a href="/member/memberDetail?mId=${member.mId}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}"><c:out value="${member.mId}" /></a>
 			</td>
 			<!-- <td>${member.mPw}</td>  -->
 			<td>${member.mName}</td>

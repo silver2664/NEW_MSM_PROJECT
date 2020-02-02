@@ -40,6 +40,43 @@
 		<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}">
 		<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
 	</form>
+	
+	<table class="table table-hover">
+			<tbody>
+				<tr>
+					<th><strong>ID</strong></th>
+					<td>${memberDetail.mId}</td>
+				</tr>
+				<tr>
+					<th><strong>Name</strong></th>
+					<td>${memberDetail.mName}</td>
+				</tr>
+				<tr>
+					<th><strong>E-mail</strong></th>
+					<td>${memberDetail.mEmail}</td>
+				</tr>
+				<tr>
+					<th><strong>Phone</strong></th>
+					<td>${memberDetail.mPhone}</td>
+				</tr>
+				<tr>
+					<th><strong>우편번호</strong></th>
+					<td>${memberDetail.mZip_Code}</td>
+				</tr>
+				<tr>
+					<th><strong>주소</strong></th>
+					<td>${memberDetail.mFirst_Addr}&nbsp;${memberDetail.mSecond_Addr}</td>
+				</tr>				
+				<tr>
+					<th><strong>회원권한</strong></th>
+					<td>${memberDetail.authority}</td>
+				</tr>
+				<tr>
+					<th><strong>가입일</strong></th>
+					<td><fmt:formatDate value="${memberDetail.regDate}"	pattern="yyyy-MM-dd HH:mm " /></td>
+				</tr>
+			</tbody>		
+		</table>
 
 </div>
 

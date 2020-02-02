@@ -29,7 +29,7 @@
 	<div class = "container-fluid">
 		<!-- BRAND -->
 		<a class = "navbar-brand wave-effect" href = "/home">
-			<strong class = "blue-text">MSM</strong>
+			<img src = "/resources/images/logo/logo2.jpg" style = "width : 200px; height : 80px;">
 		</a>
 		<!-- Collapse Menu -->
 	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerMenu">
@@ -63,9 +63,12 @@
 					<div id = "mySidenav" class = "sidenav">
 						<h3 class = "text-center text-white mb-5">My Account</h3>
 						<a href = "javascript:void(0)" class = "closebtn" onclick = "closeNav()">&times;</a>
-						<a class = "btn btn-outline-white mb-5" href = "#" target = "_blank" role = "button">
+						<sec:authorize access="isAuthenticated()">
+						<sec:authentication property ="principal.username" var = "mId"/>
+						<a id ="mId" class = "btn btn-outline-white mb-5" href = "/member/memberDetail?mId=${mId}&page=1&perPageNum=10&searchType=&keyword=" role = "button">
 							Profile
-						</a>
+						</a>						
+						</sec:authorize>
 						<a class = "btn btn-outline-white mb-5" href = "/cart/cartView" role = "button">
 							Cart
 						</a>

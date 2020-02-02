@@ -77,7 +77,7 @@
 	]]>
 	</select>
 	
-	<!-- Login Query and 게시물 상세보기. -->
+	<!-- Login Query and 회원정보 상세보기. -->
 	<select id = "selectUserById" resultType = "com.project.member.vo.MemberVO">
 		<![CDATA[
 			SELECT 
