@@ -57,7 +57,7 @@ h2{
 				editor = CKEDITOR.replace('bcontent');
 				editor.on( 'required', function( evt ) {
 				    alert( '내용을 입력하세요' );		
-
+					
 				    evt.cancel();
 				} );
 				</script>
