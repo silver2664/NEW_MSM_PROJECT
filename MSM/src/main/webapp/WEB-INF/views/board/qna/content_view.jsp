@@ -105,7 +105,7 @@ h2 {
 			<div class="form-group">
 				<label for="writer" class="col-sm-2 control-label">댓글 작성자</label>
 				<div class="col-sm-5">
-					<input class="form-control" type="text" id="writer" name="writer"  required >
+					<input class="form-control" type="text" id="writer" value="${user}" name="writer" readonly required >
 				</div>
 			</div>
 			<div class="form-group">

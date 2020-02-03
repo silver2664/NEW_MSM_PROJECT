@@ -71,8 +71,12 @@ public class BoardController {
 	
 	    //게시판 글 작성 화면 
 		@RequestMapping(value="/board/qna/writeView", method = RequestMethod.GET)
-		public void writeView() throws	Exception {
-			logger.info("writeView");			
+		public void writeView(Principal principal,Model model) throws	Exception {
+			logger.info("writeView");		
+			System.out.println(principal.getName());
+			String name= principal.getName();
+			model.addAttribute("user", name);
+				
 		}
 		
 		//게시판 글 작성
@@ -99,11 +103,15 @@ public class BoardController {
 		
 		//게시물 상세 보기
 		@RequestMapping(value="/board/qna/content_view", method= RequestMethod.GET)
-		public String content_view(BoardVO boardVO,@ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception{
+		public String content_view(BoardVO boardVO,@ModelAttribute("scri") SearchCriteria scri, Model model,Principal principal) throws Exception{
 			logger.info("content_view");	
 			
 			model.addAttribute("content_view",service.content_view(boardVO.getQid()));		
 			model.addAttribute("scri",scri);
+			
+			System.out.println(principal.getName());
+			String name= principal.getName();
+			model.addAttribute("user", name);
 			
 			List<ReplyVO> replyList = replyService.readReply(boardVO.getQid());
 			model.addAttribute("replyList",replyList);
