@@ -21,11 +21,11 @@
 		<!-- URL에 접근하기 위한 권한을 설정  pattern은 url형태 access속성에 권한을 부여 -->
 		<!-- permitAll 은 모든 사람에게 권한을 줌. -->
 		<!-- 우선순위는 위부터 아래로 -->
+		<intercept-url pattern = "/admin/**" access = "hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern = "/home" access = "permitAll" />
 		<intercept-url pattern = "/login" access = "permitAll" />
 		<intercept-url pattern = "/join" access = "permitAll" />
 		<intercept-url pattern = "/login_duplicate" access = "permitAll" />
-		<intercept-url pattern = "/admin/**" access = "ROLE_ADMIN" />
 		<intercept-url pattern = "/**" access = "permitAll" />
 		<!-- ROLE_USER는 일반 가입자에게만 허용이고 hasRole()이 SpEL -->
 		<!-- hasRole('ROLE_ANONYMOUS')는 permitAll이고 hasRole('ROLE_ADMIN')은 관리자에게만 허용. -->
@@ -39,7 +39,7 @@
 		<!-- always-use-default-target = "true" 를 해야 원활히 타겟경로로 이동함. -->
 		
 		<form-login
-			login-page = "/login"
+			login-page = "/member/loginForm"
 			username-parameter = "mId"
 			password-parameter = "mPw"
 			default-target-url = "/home"

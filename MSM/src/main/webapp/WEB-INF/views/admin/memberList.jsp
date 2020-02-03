@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta id = "_csrf" name = "_csrf" content = "${_csrf.token}"/>
-<title>Member Detail</title>
+<title>Basic Form</title>
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <!-- Bootstrap core CSS -->
@@ -24,63 +24,73 @@
 <!-- CK EDITOR -->
 <script src="/resources/js/ckeditor/ckeditor.js"></script>
 </head>
+
 <body>
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
 
-<div class = "container">
-	
-	<h3>회원 상세정보</h3>
-	<hr/>
-	
-	<form name = "memberDeailForm" role = "form" method = "post" action = "/member/updateMember">
-		<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
-		<input type="hidden" id="mId" name="mId" value="${memberDetail.mId}" />
-		<input type="hidden" id="page" name="page" value="${scri.page}">
-		<input type="hidden" id="perPageNum" name="perPageNum"	value="${scri.perPageNum}">
-		<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}">
-		<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
-	</form>
-	
-	<table class="table table-hover">
-			<tbody>
-				<tr>
-					<th><strong>ID</strong></th>
-					<td>${memberDetail.mId}</td>
-				</tr>
-				<tr>
-					<th><strong>Name</strong></th>
-					<td>${memberDetail.mName}</td>
-				</tr>
-				<tr>
-					<th><strong>E-mail</strong></th>
-					<td>${memberDetail.mEmail}</td>
-				</tr>
-				<tr>
-					<th><strong>Phone</strong></th>
-					<td>${memberDetail.mPhone}</td>
-				</tr>
-				<tr>
-					<th><strong>우편번호</strong></th>
-					<td>${memberDetail.mZip_Code}</td>
-				</tr>
-				<tr>
-					<th><strong>주소</strong></th>
-					<td>${memberDetail.mFirst_Addr}&nbsp;${memberDetail.mSecond_Addr}</td>
-				</tr>
-				<!--  			
-				<tr>
-					<th><strong>회원권한</strong></th>
-					<td>${memberDetail.authority}</td>
-				</tr>
-				 -->
-				<tr>
-					<th><strong>가입일</strong></th>
-					<td><fmt:formatDate value="${memberDetail.regDate}"	pattern="yyyy-MM-dd HH:mm " /></td>
-				</tr>
-			</tbody>		
-		</table>
+<h3>MemberList</h3>
+<hr/>
 
+<div class = "container mb-3">
+	<form role = "form" method = "get">
+	<table>
+		<tr>
+			<th>ID</th>
+			<!-- <th>PASSWORD</th>  -->
+			<th>NAME</th>
+			<th>EMAIL</th>
+			<th>PHONE</th>
+			<th>권한</th>
+			<th>우편번호</th>
+			<th>주소</th>
+			<th>가입일</th>
+		</tr>
+		<c:forEach var = "member" items = "${memberList}">
+		<tr>
+			<td>
+				<a href="/member/memberDetail?mId=${member.mId}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}"><c:out value="${member.mId}" /></a>
+			</td>
+			<!-- <td>${member.mPw}</td>  -->
+			<td>${member.mName}</td>
+			<td>${member.mEmail}</td>
+			<td>${member.mPhone}</td>
+			<td>${member.authority}</td>
+			<td>${member.mZip_Code}</td>
+			<td>${member.mFirst_Addr}&nbsp;${member.mSecond_Addr}</td>
+			<td>${member.regDate}</td>			
+		</tr>
+		</c:forEach>  		
+	</table>
+	<div class="search">
+	    <select name="searchType">
+	      	<option value="n"<c:out value="${scri.searchType == null ? 'selected' : ''}"/>>-----</option>
+	     	<option value="t"<c:out value="${scri.searchType eq 't' ? 'selected' : ''}"/>>ID</option>
+	      	<option value="c"<c:out value="${scri.searchType eq 'c' ? 'selected' : ''}"/>>EMAIL</option>	     
+	    </select>
+	
+	    <input type="text" name="keyword" id="keywordInput" value="${scri.keyword}"/>
+	
+	    <button id="searchBtn" type="button">검색</button>
+	    				
+  	</div>
+  	<div style = "height : 50px;">
+  		<ul>
+    		<c:if test="${pageMaker.prev}">
+    			<li style = "list-style : none; float : left; padding : 6px;"><a href="memberList${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
+    		</c:if> 
+
+    		<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+    			<li style = "list-style : none; float : left; padding : 6px;"><a href="memberList${pageMaker.makeSearch(idx)}">${idx}</a></li>
+    		</c:forEach>
+
+    		<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+    			<li style = "list-style : none; float : left; padding : 6px;"><a href="memberList${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
+    		</c:if> 
+  		</ul>
+	</div>
+	</form>
 </div>
+
 
 
 
@@ -116,6 +126,13 @@ function closeNav() {
 function closeNav2() {
 	  document.getElementById("mySidenav2").style.width = "0";
 	}
+</script>
+<script>
+$(function(){
+	$('#searchBtn').click(function() {
+		self.location = "list" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val());
+	});
+});   
 </script>
 </body>
 </html>

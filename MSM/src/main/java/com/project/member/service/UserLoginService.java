@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.project.member.dao.UserLoginDAO;
+import com.project.member.vo.MemberAuthorityDTO;
 import com.project.member.vo.MemberDTO;
 import com.project.member.vo.MemberVO;
 
@@ -32,11 +33,18 @@ public class UserLoginService implements UserDetailsService {
 		System.out.println("UserLoginService vo :" + vo);
 		UserDetails loginUser = null;
 		
+		List<MemberAuthorityDTO> authorityList = dao.getUserAuthority(mId);
+		System.out.println("LoginService authorityList : " + authorityList);
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		for(int i = 0; i < authorityList.size(); i++) {
+			authorities.add(new SimpleGrantedAuthority(authorityList.get(i).getAuthority()));
+		}
 		System.out.println("UserLoginService authority : " + authorities);
 		
 		loginUser = new MemberDTO(authorities, vo.getmId(), vo.getmPw(), vo.getmName(), vo.getmEmail(), vo.getmPhone(), vo.getmZip_Code()
-				, vo.getmFirst_Addr(), vo.getmSecond_Addr(), vo.getAuthority(), vo.isEnabled(), vo.getRegDate());
+				, vo.getmFirst_Addr(), vo.getmSecond_Addr(), vo.isEnabled(), vo.getRegDate());
+		
+		System.out.println("loginUser : " + authorities + loginUser);
 		
 		return loginUser;
 	} 
