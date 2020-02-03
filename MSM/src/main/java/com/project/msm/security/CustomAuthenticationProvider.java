@@ -92,8 +92,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
 		*/
 	}
 	
+	/*
 	private boolean matchPassword(String password, Object credentials) {
 		return password.equals(credentials);
 	}
-
+	*/
 }

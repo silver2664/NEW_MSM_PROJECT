@@ -54,7 +54,7 @@
 			<td>${member.mName}</td>
 			<td>${member.mEmail}</td>
 			<td>${member.mPhone}</td>
-			<!-- <td>${member.authority}</td> -->
+			<td>${member.authority}</td> 
 			<td>${member.mZip_Code}</td>
 			<td>${member.mFirst_Addr}&nbsp;${member.mSecond_Addr}</td>
 			<td>${member.regDate}</td>			

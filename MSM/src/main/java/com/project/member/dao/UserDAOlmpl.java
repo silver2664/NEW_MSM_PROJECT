@@ -58,7 +58,7 @@ public class UserDAOlmpl implements UserDAO {
 		return result;
 	}
 	
-	//07. MEMBER 테이블 모든 사원 조회
+	//07. MEMBER 테이블 모든 회원 조회
 	public List<MemberVO> getMemberList(SearchCriteria scri) throws Exception {
 		return sqlSession.selectList("userMapper.selectAll", scri);
 	}

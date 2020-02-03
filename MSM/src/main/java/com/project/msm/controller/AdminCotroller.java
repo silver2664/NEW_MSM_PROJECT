@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.board.vo.PageMaker;
 import com.project.board.vo.SearchCriteria;
 import com.project.member.service.UserService;
+import com.project.member.vo.MemberDTO;
 import com.project.member.vo.MemberVO;
 
 @Controller

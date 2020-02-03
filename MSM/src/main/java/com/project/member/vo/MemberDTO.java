@@ -20,13 +20,15 @@ public class MemberDTO extends User {
 	private String mSecond_Addr;
 	private boolean enabled;
 	private Date regDate;
+	private String authority;
 	
+		
 	public MemberDTO (String mId, String mPw, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
 		super(mId, mPw, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
 	}
 	
 	public MemberDTO (Collection<? extends GrantedAuthority> authorities, String mId, String mPw, String mName, String mEmail, String mPhone,
-			String mZip_Code, String mFirst_Addr, String mSecond_Addr, boolean enabled, Date regDate) {
+			String mZip_Code, String mFirst_Addr, String mSecond_Addr, boolean enabled, Date regDate, String authority) {
 		super(mId, mPw, authorities);
 		this.mId = mId;
 		this.mPw = mPw;
@@ -38,6 +40,7 @@ public class MemberDTO extends User {
 		this.mSecond_Addr = mSecond_Addr;
 		this.enabled = enabled;
 		this.regDate = regDate;
+		this.authority = authority;
 	}
 
 	public String getmId() {
@@ -104,7 +107,13 @@ public class MemberDTO extends User {
 		this.mSecond_Addr = mSecond_Addr;
 	}
 
+	public String getAuthority() {
+		return authority;
+	}
 
+	public void setAuthority(String authority) {
+		this.authority = authority;
+	}
 
 	public boolean isEnabled() {
 		return enabled;
@@ -125,7 +134,7 @@ public class MemberDTO extends User {
 	@Override
 	public String toString() {
 		return "MemberDTO [mId=" + mId + ",mPw=" + mPw + ",mName=" + mName + ",mEmail=" + mEmail + ",mPhone=" + mPhone + ",mZip_Code=" + mZip_Code +
-				",mFirst_Addr=" + mFirst_Addr + ",mSecond_Addr=" + mSecond_Addr + ",enabled=" + enabled + ",regDate=" + regDate + "]"; 
+				",mFirst_Addr=" + mFirst_Addr + ",mSecond_Addr=" + mSecond_Addr + ",enabled=" + enabled + ",regDate=" + regDate + ",authority=" + authority + "]"; 
 	}
 	
 	

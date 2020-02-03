@@ -33,7 +33,8 @@ public class UserLoginService implements UserDetailsService {
 		System.out.println("UserLoginService vo :" + vo);
 		UserDetails loginUser = null;
 		
-		List<MemberAuthorityDTO> authorityList = dao.getUserAuthority(mId);
+		String authority = vo.getAuthority();
+		List<MemberAuthorityDTO> authorityList = dao.getUserAuthority(mId, authority);
 		System.out.println("LoginService authorityList : " + authorityList);
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		for(int i = 0; i < authorityList.size(); i++) {
@@ -42,7 +43,7 @@ public class UserLoginService implements UserDetailsService {
 		System.out.println("UserLoginService authority : " + authorities);
 		
 		loginUser = new MemberDTO(authorities, vo.getmId(), vo.getmPw(), vo.getmName(), vo.getmEmail(), vo.getmPhone(), vo.getmZip_Code()
-				, vo.getmFirst_Addr(), vo.getmSecond_Addr(), vo.isEnabled(), vo.getRegDate());
+				, vo.getmFirst_Addr(), vo.getmSecond_Addr(), vo.isEnabled(), vo.getRegDate(), vo.getAuthority());
 		
 		System.out.println("loginUser : " + authorities + loginUser);
 		

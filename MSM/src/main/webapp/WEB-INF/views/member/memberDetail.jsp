@@ -66,16 +66,14 @@
 				<tr>
 					<th><strong>주소</strong></th>
 					<td>${memberDetail.mFirst_Addr}&nbsp;${memberDetail.mSecond_Addr}</td>
-				</tr>
-				<!--  			
+				</tr>				 			
 				<tr>
 					<th><strong>회원권한</strong></th>
 					<td>${memberDetail.authority}</td>
-				</tr>
-				 -->
+				</tr>				 
 				<tr>
 					<th><strong>가입일</strong></th>
-					<td><fmt:formatDate value="${memberDetail.regDate}"	pattern="yyyy-MM-dd HH:mm " /></td>
+					<td><fmt:formatDate value="${memberDetail.regDate}"	pattern="yyyy-MM-dd" /></td>
 				</tr>
 			</tbody>		
 		</table>

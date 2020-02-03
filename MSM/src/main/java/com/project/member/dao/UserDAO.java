@@ -29,7 +29,7 @@ public interface UserDAO {
 	// 06. idChek2
 	public int idCheck2(String mId) throws Exception;
 	
-	//07. MEMBER 테이블 모든 사원 조회
+	//07. MEMBER 테이블 모든 ghldnjs 조회
 	public List<MemberVO> getMemberList(SearchCriteria scri) throws Exception;
 	
 	//08. 게시물 갯수

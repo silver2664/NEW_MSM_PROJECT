@@ -90,15 +90,15 @@
 				M_FIRST_ADDR AS mFirst_Addr,
 				M_SECOND_ADDR AS mSecond_Addr,
 				ENABLED,
-				REGDATE
+				REGDATE,
+				AUTHORITYNAME AS authority
 			FROM MSM_MEMBER
 			WHERE MID = #{mId}
 		]]>
 	</select>
 	
 	<!-- Member List -->
-	<select id = "selectAll" resultType = "com.project.member.vo.MemberVO" parameterType = "com.project.board.vo.Criteria">
-		
+	<select id = "selectAll" resultType = "com.project.member.vo.MemberVO" parameterType = "com.project.board.vo.Criteria">		
 			SELECT 
 				MID,
 				MPW,
@@ -109,7 +109,8 @@
 				M_FIRST_ADDR AS mFirst_Addr,
 				M_SECOND_ADDR AS mSecond_Addr,
 				ENABLED,
-				REGDATE
+				REGDATE,
+				AUTHORITYNAME AS authority
 			FROM (
 				SELECT
 					MID,
@@ -122,6 +123,7 @@
 					M_SECOND_ADDR,
 					ENABLED,
 					REGDATE,
+					AUTHORITYNAME,
 					ROW_NUMBER() OVER(ORDER BY MID DESC) AS RNUM
 					FROM MSM_MEMBER
 					WHERE 1=1
@@ -152,9 +154,9 @@
 	
 	<select id = "authorityList" parameterType = "String" resultType = "com.project.member.vo.MemberAuthorityDTO">
 		<![CDATA[
-			SELECT MID, AUTHORITY
-			FROM AUTHORITIES 
-			WHERE MID = #{mId}
+			SELECT M.MID, A.AUTHORITY
+			FROM MSM_MEMBER M, AUTHORITIES A 
+			WHERE M.MID = #{mId} AND A.AUTHORITYNAME = #{authority}
 		]]>
 	</select>
 	
