@@ -109,7 +109,7 @@ $(document).ready(function() {
 	
 	$("#btnList").click(function(e) {
 		e.preventDefault();
-		location.href="list";
+		location.href="noticeList";
 	});
 		
 	

@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 
@@ -85,7 +86,7 @@ public class BoardController {
 		//게시물 목록 조회
 		@RequestMapping(value="/board/qna/qnaList", method = RequestMethod.GET)
 		public String list(Model model,@ModelAttribute("scri") SearchCriteria scri) throws Exception{
-			logger.info("list");			
+			logger.info("qnalist");			
 			model.addAttribute("list",service.list(scri));	
 			
 			PageMaker pageMaker = new PageMaker();
@@ -193,7 +194,10 @@ public class BoardController {
 		}
 		
 		@RequestMapping("/board/notice/boardForm")
-		public String boardForm(Model model) {
+		public String boardForm(Model model, Principal principal) {
+			System.out.println(principal.getName());
+			String name= principal.getName();
+			model.addAttribute("user", name);
 			return "/board/notice/boardForm";
 			
 		}

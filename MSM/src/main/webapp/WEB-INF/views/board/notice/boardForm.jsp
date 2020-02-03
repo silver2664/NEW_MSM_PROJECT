@@ -48,7 +48,7 @@ h2{
 			</div>
 			<div class="mb-3">
 				<label for="mid"><strong>작성자</strong></label>
-				<input type="text" class="form-control"name="mid" id="mid" placeholder="이름을 입력해 주세요" required>
+				<input type="text" class="form-control"name="mid" id="mid" value="${user }" readonly required>
 			</div>	
 			<div class="mb-3">
 				<label for="bcontent"><strong>내용</strong></label>			
