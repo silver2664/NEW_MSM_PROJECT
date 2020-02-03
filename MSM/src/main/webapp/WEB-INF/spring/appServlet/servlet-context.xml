@@ -35,8 +35,6 @@
 	<!-- ck 에디터 파일 업로드 경로 -->
 	<resources location="/resources/ckUpload" mapping="/ckUpload/**"></resources>
 	
-	<context:component-scan base-package="com.project.msm"/>
-	
-	
+	<context:component-scan base-package="com.project.*" />
 	
 </beans:beans>

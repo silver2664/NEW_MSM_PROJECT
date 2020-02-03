@@ -4,6 +4,11 @@
  */
 
 CKEDITOR.editorConfig = function( config ) {
+	
+	config.filebrowserUploadUrl = 'product/ckupload';
+
+
+	config.enterMode =CKEDITOR.ENTER_BR;	
 	// Define changes to default configuration here. For example:
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';

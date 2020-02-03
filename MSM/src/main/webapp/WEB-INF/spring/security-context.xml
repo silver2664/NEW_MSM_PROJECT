@@ -27,6 +27,8 @@
 		<intercept-url pattern = "/login_duplicate" access = "permitAll" />
 		<intercept-url pattern = "/admin/**" access = "ROLE_ADMIN" />
 		<intercept-url pattern = "/**" access = "permitAll" />
+		<intercept-url pattern = "/product/ckUpload" access = "permitAll" />
+		
 		<!-- ROLE_USER는 일반 가입자에게만 허용이고 hasRole()이 SpEL -->
 		<!-- hasRole('ROLE_ANONYMOUS')는 permitAll이고 hasRole('ROLE_ADMIN')은 관리자에게만 허용. -->
 		

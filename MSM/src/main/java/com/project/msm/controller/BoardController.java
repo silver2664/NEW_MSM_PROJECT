@@ -64,8 +64,7 @@ public class BoardController {
 	GoodsService productService;
 	*/
 	
-	@Resource(name="uploadPath")
-	private String uploadPath;
+	
 	
 	
 	
@@ -273,92 +272,7 @@ public class BoardController {
 			return "product/product_reg";			
 		}
 		
-		/*
-		//상품등록
-		@RequestMapping(value="product/register", method=RequestMethod.POST)
-		public String register(GoodsVO vo) throws Exception {
-			
-	
-			
-			productService.register(vo);
-			
-			return "redirect:admin";
-			
-		}
-		*/
-		//ck에디터 이미지 등록
-		@RequestMapping(value = "product/imgeUpload", method = RequestMethod.POST)
-		public void postCKEditorImgUpload(HttpServletRequest req,
-		          HttpServletResponse res,
-		          @RequestParam MultipartFile upload) throws Exception {
-		 logger.info("post CKEditor img upload");
-		 
-		 // 랜덤 문자 생성
-		 UUID uid = UUID.randomUUID();
-		 
-		 OutputStream out = null;
-		 PrintWriter printWriter = null;
-		 JsonObject json = new JsonObject();
-		 
-		   
-		 // 인코딩
-		 res.setCharacterEncoding("utf-8");
-		 res.setContentType("text/html;charset=utf-8");
-		 
-		 try {
-		  
-		  String fileName = upload.getOriginalFilename();  // 파일 이름 가져오기
-		  byte[] bytes = upload.getBytes();
-		  
-		  // 업로드 경로
-		  String ckUploadPath = uploadPath + File.separator + "ckUpload" + File.separator + uid + "_" + fileName;
-		  System.out.println(ckUploadPath);
-		  
-		  out = new FileOutputStream(new File(ckUploadPath));
-		  out.write(bytes);
-		  out.flush();  // out에 저장된 데이터를 전송하고 초기화
-		  
-		  String callback = req.getParameter("CKEditorFuncNum");
-		  System.out.println(callback);
-		  printWriter = res.getWriter();
-		  String fileUrl = "resources/ckUpload/" + uid + "_" + fileName;  // 작성화면
-		  System.out.println(fileUrl + "fileUrl");
-		  // 업로드시 메시지 출력
-		/*  printWriter.println("<script>"
-		     + "window.parent.CKEDITOR.tools.callFunction("
-		     + callback+",'"+ fileUrl+"','이미지를 업로드하였습니다.')"
-		     +"</script>");*/
-		  
-		  json.addProperty("uploaded", 1);
-          json.addProperty("fileName", fileName);
-          json.addProperty("url", fileUrl);
-
-          printWriter.println(json);
-
-
-		  
-		  printWriter.flush();
-		  
-		 } catch (IOException e) { 
-			 e.printStackTrace();
-		 } finally {
-		  try {
-			  if(out != null) { 
-				  out.close();
-			  }
-			  if(printWriter != null) { 
-			   printWriter.close(); 
-			   }
-		   
-		  
-		  
-		  } catch(IOException e) {
-			  e.printStackTrace(); 
-			  }
-		 }
-		 
-		 return; 
-		}
+		
 	
 	}
 		

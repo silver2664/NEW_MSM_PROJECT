@@ -91,17 +91,17 @@
 		<property name="maxUploadSize" value = "10485760"></property>
 	</bean> 
 	
-	<!-- 파일업로드를 위한 디렉토리 설정 -->
+	<!-- 파일업로드를 위한 디렉토리 설정 
 	<bean id = "uploadPath" class = "java.lang.String">
 		<constructor-arg value = "c:/upload"/>
-	</bean>
+	</bean> -->
 	
 	<!-- 업로드 패스 설정 --> 
-	<!--  
+	  
 	<bean class="java.lang.String"  name="uploadPath" id="uploadPath">
- 		<constructor-arg value="D:\MSM\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MSM\resources" />
+ 		<constructor-arg value="D:\작업공간\새 폴더 (2)\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MSM\resources\" />
     </bean>
-	 -->
+	
 	<!--  
 	<tx:annotation-driven transaction-manager="transactionManager"/>
      --> 
