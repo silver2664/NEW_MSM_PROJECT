@@ -38,4 +38,7 @@ public interface UserDAO {
 	//09. 회원 상세 정보
 	public MemberVO memberDetail(String mId) throws Exception;
 	
+	//10. 회원정보 수정
+		public void update(MemberVO memberVO) throws Exception;
+	
 }

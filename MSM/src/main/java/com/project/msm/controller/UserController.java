@@ -19,12 +19,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.board.vo.PageMaker;
 import com.project.board.vo.SearchCriteria;
@@ -112,7 +114,7 @@ public class UserController {
 		System.out.println("AuthCode : " + authCode);
 		session.setAttribute("authCode", authCode);
 		session.setAttribute("random", random);
-		String subject = ("회원가입 인증 코드 발급 안내입니다.");
+		String subject = ("MSM 인증 코드 발급 안내입니다.");
 		StringBuilder sb = new StringBuilder();
 		sb.append("회원님의 인증 코드는 " + authCode + "입니다.");		
 		return userService.send(subject, sb.toString(), "msmproject2020", Email, null);
@@ -188,6 +190,34 @@ public class UserController {
 		mv.addObject("scri", scri);
 		mv.setViewName("/member/memberDetail");
 		return mv;
+	}
+	
+	// 회원정보수정VIEW.
+	@RequestMapping(value = "/member/updateView", method = RequestMethod.GET)
+	public String updateView(MemberVO memberVO, @ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception {
+		
+		model.addAttribute("update", userService.memberDetail(memberVO.getmId()));
+		model.addAttribute("scri", scri);
+		int ran = new Random().nextInt(900000) + 100000;
+		model.addAttribute("random", ran);
+		
+		return "/member/updateView";
+	}
+	
+	// 회원정보수정
+	@RequestMapping(value = "/member/update", method = RequestMethod.POST)
+	public String update(MemberVO memberVO, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr) throws Exception {
+		
+		logger.info("update MemberInfo");
+		
+		userService.update(memberVO);
+		
+		rttr.addAttribute("page", scri.getPage());
+		rttr.addAttribute("perPageNum", scri.getPerPageNum());
+		rttr.addAttribute("searchType", scri.getSearchType());
+		rttr.addAttribute("keyword", scri.getKeyword());
+		
+		return "redirect:/home";
 	}
 	
 }

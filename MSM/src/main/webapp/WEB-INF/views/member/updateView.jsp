@@ -1,21 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session = "true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix = "sec" uri = "http://www.springframework.org/security/tags" %>
-<%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta id = "_csrf" name = "_csrf" content = "${_csrf.token}" />
-<title>Material Design Bootstrap</title>
+<meta id = "_csrf" name = "_csrf" content = "${_csrf.token}"/>
+<title>Member Update View</title>
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <!-- Bootstrap core CSS -->
@@ -24,30 +21,35 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
 <!-- resource CSS -->
 <link href = "<c:url value = "/resources/css/home.css"/>" rel = "stylesheet" type = "text/css">
+<!-- CK EDITOR -->
+<script src="/resources/js/ckeditor/ckeditor.js"></script>
 
 </head>
 <body>
+<%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
 
-<div class = "container">
-	<div class = "page-header">
-		<div class = "col-md-12">
-			<h3>회원가입</h3>
-		</div>
-	</div>
-	
+<div id="root" class = "container">	
+	<h1>회원정보 수정</h1>	
+	<hr />	
 	<div class = "col-md-12">
-		<form action = "/member/step3" method = "post" role = "form" id = "usercheck" name ="member">
-		<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />		
+		<form action = "/member/update" method = "post" role = "form" id = "usercheck" name ="member">
+			<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
+			<input type="hidden" id="page" name="page" value="${scri.page}">
+			<input type="hidden" id="perPageNum" name="perPageNum"	value="${scri.perPageNum}">
+			<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}">
+			<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
 			<div class = "form-group">
 				<label for = "mId">아이디</label>
-				<input type = "text" class = "form-control" id = "mId" name = "mId" placeholder = "ID"/>
-				<div class = "eheck_font" id = "id_check"></div>				
+				<input type = "text" class = "form-control" id = "mId" name = "mId" value = "${update.mId}" readonly = "readonly"/>
 			</div>
-			
+			<div class = "form-group">
+				<input type = "hidden" class = "form-control" id = "mPw" name = "mPw" value = "${update.mPw}" readonly = "readonly"/>
+			</div>
+			<!--
 			<div class = "form-group">
 				<label for = "mPw">비밀번호</label>
 				<input type = "password" class = "form-control" id = "mPw" name = "mPw" placeholder = "PassWord"/>
-				<div class = "eheck_font" id = "pw_check"><span style = "color : blue"> * 8-15 자의 [문자/숫자/특수문자]를 조합하세요. </span></div>
+				<div class = "eheck_font" id = "pw_check"><span style = "color : blue"> * 변경하실 비밀번호를 8-15 자의 [문자/숫자/특수문자]를 조합하세요. </span></div>
 			</div>
 			
 			<div class = "form-group">
@@ -55,53 +57,63 @@
 				<input type = "password" class = "form-control" id = "mPw2" name = "mPw2" placeholder = "Confirm PassWord"/>
 				<div class = "eheck_font" id = "pw2_check"></div>
 			</div>
-			
+			  -->
 			<div class = "form-group">
 				<label for = "mName">이름</label>
-				<input type = "text" class = "form-control" id = "mName" name = "mName" placeholder = "Name"/>
-				<div class = "eheck_font" id = "name_check"></div>
+				<input type = "text" class = "form-control" id = "mName" name = "mName" value = "${update.mName}" readonly = "readonly"/>
 			</div>
 			
 			<div class = "form-group">
-				<label for = "mEmail">E-mail</label>
-				<input type = "email" class = "form-control" id = "mEmail" name = "mEmail" placeholder = "EMAIL"/>
-				<div class = "eheck_font" id = "email_check"></div>
-				<button type = "button" class ="btn btn-primary" id = "emailBtn">인증메일 발송</button>
+				<label for = "mEmail">이메일</label><br/>
+				<input type = "email" style = "width : 40%; display : inline;" class = "form-control" id = "mEmail" name = "mEmail" value = "${update.mEmail}"/>
+				<button type = "button" class ="btn btn-primary" id = "emailBtn" style = "width : 170px; height : 38px;">인증메일 발송</button>
+				<div class = "eheck_font" id = "email_check"><span style = "color : blue">변경하실 EMAIL 주소 입력 후 인증 절차 진행해주세요.</span></div>				
 				<input type = "hidden" path = "random" id = "random" value = "${random}"/>
-				<input type = "text" class = "form-control" id = "emailAuth" name = "emailAuth" placeholder = "인증번호 입력해주세요."/>
-				<button type = "button" class = "btn btn-primary" id = "emailAuthBtn">Email 인증하기</button>
+				<input type = "text" style = "width : 40%; display : inline;" class = "form-control" id = "emailAuth" name = "emailAuth" placeholder = "인증번호 입력해주세요."/>
+				<button type = "button" class = "btn btn-primary" id = "emailAuthBtn" style = "width : 170px; height : 38px;">Email 인증하기</button>
 			</div>
 			
 			<div class = "form-group">
 				<label for = "mPhone">휴대전화</label>
-				<input type = "tel" class = "form-control" id = "mPhone" name = "mPhone" placeholder = "Phone Number"/>
+				<input type = "tel" class = "form-control" id = "mPhone" name = "mPhone" placeholder = "${update.mPhone}"/>
 				<div class = "eheck_font" id = "phone_check"><span style = "color : blue">[" - "] 없이 번호로만 작성해주세요.</span></div>
 			</div>
 			
 			<div class = "form-group">
 				<input class = "form-control" style = "width : 40%; display : inline;" id = "mZip_Code" name = "mZip_Code"
-					type = "text" readonly="readonly"/>
+					type = "text" readonly="readonly" placeholder = "${update.mZip_Code}"/>
 				<button type = "button" class = "btn btn-default" onclick = "execPostCode();"><i class = "fa fa-search"></i>우편번호 찾기</button>
 			</div>
 			
 			<div class = "form-group">
-				<input class = "form-control" style = "top : 5px;" placeholder = "도로명 주소" name = "mFirst_Addr" id = "mFirst_Addr"
-					type = "text" readonly = "readonly"/>
+				<input class = "form-control" style = "top : 5px;" name = "mFirst_Addr" id = "mFirst_Addr"
+					type = "text" readonly = "readonly" placeholder = "${update.mFirst_Addr}"/>
 			</div>
 			
 			<div class = "form-group">
-				<input class = "form-control" style = "top : 5px;" placeholder = "상세 주소" name = "mSecond_Addr" id = "mSecond_Addr"
-					type = "text"/>
+				<input class = "form-control" style = "top : 5px;" name = "mSecond_Addr" id = "mSecond_Addr"
+					type = "text" placeholder = "${update.mSecond_Addr}"/>
 			</div>
-			
+			<sec:authorize url = "/admin/**">
+			<div class = "form-group">
+				<label for = "authority">회원권한</label>
+				<input type = "text" class = "form-control" id = "authority" value = "${update.authority}" readonly = "readonly"/>
+				<select name = "authority" id = "selectAuth">
+					<option value = "">권한 부여하기</option>
+					<option value = "USER">USER</option>
+					<option value = "MANAGER">MANAGER</option>
+				</select>
+			</div>
+			</sec:authorize>
 			<div class = "form-group text-center">
-				<button type = "submit" class = "btn btn-primary">회원가입</button>
+				<button type = "submit" class = "btn btn-primary">수정</button>
 				<button type = "reset" id = "cancel" class = "btn btn-warning">취소</button>
 			</div>
 		</form>
 	</div>
 </div>
 
+<%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>
 <!-- SCRIPTS -->
 <!-- JQuery -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -113,63 +125,35 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
 <!-- DAUM 주소 API -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+function openNav() {
+	  document.getElementById("mySidenav").style.width = "30vw";
+	}
+	
+function openNav2() {
+	  document.getElementById("mySidenav2").style.width = "30vw";
+	}
+
+function closeNav() {
+	  document.getElementById("mySidenav").style.width = "0";
+	}
+
+function closeNav2() {
+	  document.getElementById("mySidenav2").style.width = "0";
+	}
+</script>
 
 <script>
-//모든 공백 체크 정규식
-var empJ = /\s/g;
-//ID 정규식
-var idJ = /^[a-z0-9]{3,12}$/;
 //비밀번호 정규식
 var pwJ = /^.*(?=^.{7,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-//이름 정규식
-var nameJ = /^[가-힣]{2,6}$/;
 //이메일 검사 정규식
 var mailJ = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 //휴대폰 번호 정규식
 var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
-// 주소입력 시 사용
+//주소입력 시 사용
 var address = $('#mSecond_Addr');
-//================= ID 중복체크 AJAX ================= //
-$(document).ready(function(){			
-	
-	// ID 중복 확인
-	$('#mId').blur(function(){
-		if(($('mId').val()) == ''){
-			$("#id_check").text('아이디를 입력하세요.');			
-			$("#id_check").css("color", "red");
-		} else if(idJ.test(($('#mId').val())) != true){
-			$("#id_check").text('공백없이 4-12자의 영문 소문자와 숫자만 사용 가능합니다.');
-			$("#id_check").css("color", "red");			
-		} else if (($('#mId').val()).length > 3){
-			var mId = $('#mId').val();
-			$.ajax({
-				data : {"mId" : mId},								
-				url : "/member/idCheck",
-				/*
-				beforeSend : function(xhr) {
-					xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-				},
-				*/
-				success : function(data){
-					console.log("data : " + data);
-					if(data > 0 ){
-						$("#id_check").text('중복된 아이디입니다.');
-						$("#id_check").css('color', 'red');
-						$("#usercheck").attr('disabled', true);
-					} else {
-						$('#id_check').text('사용 가능한 ID입니다.');
-						$('#id_check').css('color', 'blue');
-						$('#usercheck').attr('disabled', false);						
-					}
-				},
-				error : function(request, status, error){
-					console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-				}
-			});
-		}
-	});
-	
-	
+
+$(document).ready(function(){
 	// Password 유효성 검사
 	$('#mPw').blur(function(){
 		if(pwJ.test($('#mPw').val())){
@@ -182,7 +166,6 @@ $(document).ready(function(){
 			$('#pw_check').css('color', 'red');
 		}
 	});
-	
 	// 패스워드 일치 확인
 	$('#mPw2').blur(function(){
 		if($('#mPw').val() != $('#mPw2').val()){
@@ -193,18 +176,6 @@ $(document).ready(function(){
 			$('#pw2_check').css('color', 'blue');
 		}
 	});
-	
-	// 이름에 특수문자 들어가지 않도록 설정
-	$('#mName').blur(function(){
-		if(nameJ.test($('#mName').val())){
-			console.log(nameJ.test($('#mName').val()));
-			$('#name_check').text('');
-		} else {
-			$("#name_check").text('한글 2-6자 이내로 입력하세요. (특수기호, 공백 사용 불가)');
-			$("#name_check").css('color', 'red');
-		}
-	});
-	
 	// 이메일 양식 검사
 	$("#mEmail").blur(function(){
 		if(mailJ.test($('#mEmail').val())){
@@ -214,89 +185,12 @@ $(document).ready(function(){
 			$('#email_check').css('color', 'red');
 		}
 	});
-	
-	/*=== Form 제출 클릭 후 최종 유효성 체크 ===*/
-	
-	$('form').on('submit', function(){
-		
-		var inval_Arr = new Array(6).fill(false);
-		
-		if(idJ.test($("#mId").val())){
-			inval_Arr[0] = true;
-		} else {
-			inval_Arr[0] = false;
-			alert('아이디를 확인하세요.');
-			return false;
-		}
-		
-		// 비밀번호가 같을 경우 && 비밀번호 정규식		
-		if(($('#mPw').val() == ($('#mPw2').val())) && pwJ.test($('#mPw').val()))
-			inval_Arr[1] = true;		
-		else {
-			inval_Arr[1] = false;
-			alert('비밀번호를 확인하세요.');
-			return false;
-		}
-		
-		// 이름 정규식
-		if(nameJ.test($('#mName').val())) 
-			inval_Arr[2] = true;
-		else {
-			inval_Arr[2] = false;
-			alert('이름을 확인하세요.');
-			return false;
-		}
-		
-		// E-mail 정규식
-		if(mailJ.test($('#mEmail').val())) {
-			console.log(mailJ.test($('#mEmail').val()));
-			inval_Arr[3] = true;
-		} else {
-			inval_Arr[3] = false;
-			alert('이메일을 확인하세요.');
-			return false;
-		}
-		
-		//휴대전화 정규식
-		if(phoneJ.test($('#mPhone').val())){
-			console.log(phone.test($('#mPhone').val()));
-			inval_Arr[4] = true;
-		} else {
-			inval_Arr[4] = false;
-			alert('휴대전화번호 확인하세요.');
-			return false;
-		}
-		
-		//주소 확인
-		if(adress.val() == ''){
-			inval_Arr[5] = false;
-			alert('주소를 확인하세요.');
-			return false;
-		} else {
-			inval_Arr[5] = true;
-		}
-	
-		//전체 유효성 검사
-		var validAll = true;
-		for (var i = 0; i < inval_Arr.length; i++){
-			if (inval_Arr[i] == false){
-				validAll = false;
-			}
-		}
-		if(validAll == true){ //유효성 통과
-			alert("MSM 회원가입을 환영합니다.");	
-		} else {
-			alert("정보를 다시 확인해주세요.");
-		}
-	});
-	
 	//취소
 	$('#cancel').on("click", function(){
 		event.preventDefault();
 		location.href = "/home";
 	});
 });
-
 </script>
 
 <!-- ========= 다음 주소 API ========= -->
@@ -365,7 +259,6 @@ $(document).ready(function(){
 	});
 });
 </script>
-
 <script>
 $(document).ready(function(){
 	$("#emailAuthBtn").on("click", function(){
@@ -392,23 +285,5 @@ $(document).ready(function(){
 });
 </script>
 
-<script>
-function openNav() {
-	  document.getElementById("mySidenav").style.width = "30vw";
-	}
-	
-function openNav2() {
-	  document.getElementById("mySidenav2").style.width = "30vw";
-	}
-
-function closeNav() {
-	  document.getElementById("mySidenav").style.width = "0";
-	}
-
-function closeNav2() {
-	  document.getElementById("mySidenav2").style.width = "0";
-	}
-</script>
-<%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>
 </body>
 </html>

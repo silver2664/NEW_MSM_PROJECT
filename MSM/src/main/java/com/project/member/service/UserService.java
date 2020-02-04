@@ -31,4 +31,7 @@ public interface UserService {
 	
 	// 8. 회원 상세 보기
 	public MemberVO memberDetail(String mId) throws Exception;
+	
+	// 9, 회원정보 수정
+	public void update(MemberVO memberVO) throws Exception;
 }

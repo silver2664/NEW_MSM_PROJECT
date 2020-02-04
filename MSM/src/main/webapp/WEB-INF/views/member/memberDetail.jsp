@@ -32,7 +32,7 @@
 	<h3>회원 상세정보</h3>
 	<hr/>
 	
-	<form name = "memberDeailForm" role = "form" method = "post" action = "/member/updateMember">
+	<form id = "memberDetailForm" role = "form" method = "post" action = "/member/updateView">
 		<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
 		<input type="hidden" id="mId" name="mId" value="${memberDetail.mId}" />
 		<input type="hidden" id="page" name="page" value="${scri.page}">
@@ -69,7 +69,7 @@
 				</tr>				 			
 				<tr>
 					<th><strong>회원권한</strong></th>
-					<td>${memberDetail.authority}</td>
+					<td>${memberDetail.authority}</td>					
 				</tr>				 
 				<tr>
 					<th><strong>가입일</strong></th>
@@ -77,15 +77,14 @@
 				</tr>
 			</tbody>		
 		</table>
-
+		<div>
+			<button type="submit" class="update_btn" id = "update_btn">수정</button>
+			<button type="submit" class="delete_btn" id = "delete_btn">삭제</button>
+			<sec:authorize url = "/admin/**">
+			<button type="submit" class="list_btn" id = "list_btn">목록</button>	
+			</sec:authorize>
+		</div>
 </div>
-
-
-
-
-
-
-
 
 
 <%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>
@@ -115,5 +114,20 @@ function closeNav2() {
 	  document.getElementById("mySidenav2").style.width = "0";
 	}
 </script>
+
+<script>
+$(document).ready(function(){
+	
+	var formObj = $("#memberDetailForm");
+	
+	//수정
+	$("#update_btn").on("click", function(){
+		formObj.attr("action", "/member/updateView");
+		formObj.attr("method", "get");
+		formObj.submit();
+	});
+});
+</script>
+
 </body>
 </html>

@@ -22,6 +22,7 @@
 		<!-- permitAll 은 모든 사람에게 권한을 줌. -->
 		<!-- 우선순위는 위부터 아래로 -->
 		<intercept-url pattern = "/admin/**" access = "hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern = "/cart/**" access = "hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_USER')"/>
 		<intercept-url pattern = "/home" access = "permitAll" />
 		<intercept-url pattern = "/login" access = "permitAll" />
 		<intercept-url pattern = "/join" access = "permitAll" />

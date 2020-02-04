@@ -152,6 +152,7 @@
 		</if>
 	</sql>
 	
+	<!-- 회원 권한 목록 -->
 	<select id = "authorityList" parameterType = "String" resultType = "com.project.member.vo.MemberAuthorityDTO">
 		<![CDATA[
 			SELECT M.MID, A.AUTHORITY
@@ -159,5 +160,19 @@
 			WHERE M.MID = #{mId} AND A.AUTHORITYNAME = #{authority}
 		]]>
 	</select>
+	
+	<!-- 회원정보 수정하기 -->
+	<update id = "update" parameterType = "com.project.member.vo.MemberVO">
+		<![CDATA[
+			UPDATE MSM_MEMBER
+			SET MEMAIL = #{mEmail},
+				MPHONE = #{mPhone},
+				MZIP_CODE = #{mZip_Code},
+				M_FIRST_ADDR = #{mFirst_Addr},
+				M_SECOND_ADDR = #{mSecond_Addr},
+				AUTHORITYNAME = #{authority}
+			WHERE MID = #{mId}
+		]]>>
+	</update>
 	
 </mapper>

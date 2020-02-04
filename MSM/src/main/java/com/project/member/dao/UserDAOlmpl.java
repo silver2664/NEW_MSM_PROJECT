@@ -72,4 +72,9 @@ public class UserDAOlmpl implements UserDAO {
 	public MemberVO memberDetail(String mId) throws Exception {
 		return sqlSession.selectOne("userMapper.selectUserById", mId);
 	}
+	
+	//10. 회원정보수정
+		public void update(MemberVO memberVO) throws Exception{
+			sqlSession.update("userMapper.update", memberVO);
+		}
 }

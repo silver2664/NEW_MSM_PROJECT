@@ -134,6 +134,11 @@ public class UserServiceImpl implements UserService {
 		return userDAO.memberDetail(mId);
 	}
 	
+	// 9, 회원정보 수정
+		public void update(MemberVO memberVO) throws Exception {
+			userDAO.update(memberVO);
+		}
+	
 	
 	
 
