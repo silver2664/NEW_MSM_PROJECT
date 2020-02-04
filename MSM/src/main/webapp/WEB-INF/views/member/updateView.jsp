@@ -34,10 +34,12 @@
 	<div class = "col-md-12">
 		<form action = "/member/update" method = "post" role = "form" id = "usercheck" name ="member">
 			<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
+			<!-- 
 			<input type="hidden" id="page" name="page" value="${scri.page}">
 			<input type="hidden" id="perPageNum" name="perPageNum"	value="${scri.perPageNum}">
 			<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}">
 			<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
+			 -->
 			<div class = "form-group">
 				<label for = "mId">아이디</label>
 				<input type = "text" class = "form-control" id = "mId" name = "mId" value = "${update.mId}" readonly = "readonly"/>
@@ -75,41 +77,48 @@
 			
 			<div class = "form-group">
 				<label for = "mPhone">휴대전화</label>
-				<input type = "tel" class = "form-control" id = "mPhone" name = "mPhone" placeholder = "${update.mPhone}"/>
+				<input type = "tel" class = "form-control" id = "mPhone" name = "mPhone" value = "${update.mPhone}"/>
 				<div class = "eheck_font" id = "phone_check"><span style = "color : blue">[" - "] 없이 번호로만 작성해주세요.</span></div>
 			</div>
 			
 			<div class = "form-group">
 				<input class = "form-control" style = "width : 40%; display : inline;" id = "mZip_Code" name = "mZip_Code"
-					type = "text" readonly="readonly" placeholder = "${update.mZip_Code}"/>
+					type = "text" readonly="readonly" value = "${update.mZip_Code}"/>
 				<button type = "button" class = "btn btn-default" onclick = "execPostCode();"><i class = "fa fa-search"></i>우편번호 찾기</button>
 			</div>
 			
 			<div class = "form-group">
 				<input class = "form-control" style = "top : 5px;" name = "mFirst_Addr" id = "mFirst_Addr"
-					type = "text" readonly = "readonly" placeholder = "${update.mFirst_Addr}"/>
+					type = "text" readonly = "readonly" value = "${update.mFirst_Addr}"/>
 			</div>
 			
 			<div class = "form-group">
 				<input class = "form-control" style = "top : 5px;" name = "mSecond_Addr" id = "mSecond_Addr"
-					type = "text" placeholder = "${update.mSecond_Addr}"/>
+					type = "text" value = "${update.mSecond_Addr}"/>
 			</div>
-			<sec:authorize url = "/admin/**">
 			<div class = "form-group">
 				<label for = "authority">회원권한</label>
-				<input type = "text" class = "form-control" id = "authority" value = "${update.authority}" readonly = "readonly"/>
-				<select name = "authority" id = "selectAuth">
-					<option value = "">권한 부여하기</option>
-					<option value = "USER">USER</option>
-					<option value = "MANAGER">MANAGER</option>
-				</select>
+				<input type = "text" class = "form-control" id = "authority" name = "authority" value = "${update.authority}" readonly = "readonly"/>
 			</div>
-			</sec:authorize>
 			<div class = "form-group text-center">
 				<button type = "submit" class = "btn btn-primary">수정</button>
 				<button type = "reset" id = "cancel" class = "btn btn-warning">취소</button>
 			</div>
 		</form>
+		<sec:authorize url = "/admin/**">
+		<form action = "/member/updateAuth" method = "POST">
+			<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}"/>			
+			<input type = "hidden" name = "mId" value = "${update.mId}"/>			
+			<div class = "form-group">
+				<label for = "authority">회원권한</label>
+				<select name = "authority" id = "authority">
+					<option value = "USER">USER</option>
+					<option value = "MANAGER">MANAGER</option>
+				</select>
+			</div>
+			<div><button type = "submit" class = "btn btn-primary btn-sm">회원권한변경</button></div>
+		</form>
+		</sec:authorize>
 	</div>
 </div>
 
@@ -185,6 +194,57 @@ $(document).ready(function(){
 			$('#email_check').css('color', 'red');
 		}
 	});
+	
+/*=== Form 제출 클릭 후 최종 유효성 체크 ===*/
+	
+	$('form').on('submit', function(){
+		
+		var inval_Arr = new Array(3).fill(false);
+		
+		// E-mail 정규식
+		if(mailJ.test($('#mEmail').val())) {
+			console.log(mailJ.test($('#mEmail').val()));
+			inval_Arr[0] = true;
+		} else {
+			inval_Arr[0] = false;
+			alert('이메일을 확인하세요.');
+			return false;
+		}
+		
+		//휴대전화 정규식
+		if(phoneJ.test($('#mPhone').val())){
+			console.log(phone.test($('#mPhone').val()));
+			inval_Arr[1] = true;
+		} else {
+			inval_Arr[1] = false;
+			alert('휴대전화번호 확인하세요.');
+			return false;
+		}
+		
+		//주소 확인
+		if(adress.val() == ''){
+			inval_Arr[2] = false;
+			alert('주소를 확인하세요.');
+			return false;
+		} else {
+			inval_Arr[2] = true;
+		}
+	
+		//전체 유효성 검사
+		var validAll = true;
+		for (var i = 0; i < inval_Arr.length; i++){
+			if (inval_Arr[i] == false){
+				validAll = false;
+			}
+		}
+		if(validAll == true){ //유효성 통과
+			alert("회원정보 수정을 완료하였습니다.");	
+		} else {
+			alert("정보를 다시 확인해주세요.");
+		}
+	});
+	
+	
 	//취소
 	$('#cancel').on("click", function(){
 		event.preventDefault();

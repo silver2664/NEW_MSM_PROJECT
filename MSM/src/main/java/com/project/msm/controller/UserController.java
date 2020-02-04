@@ -220,4 +220,19 @@ public class UserController {
 		return "redirect:/home";
 	}
 	
+	@RequestMapping(value = "/member/updateAuth", method = RequestMethod.POST)
+	public String updateAuth(MemberVO memberVO, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr) throws Exception {
+		
+		logger.info("update MemberAuth");
+		
+		userService.updateAuth(memberVO);
+		
+		rttr.addAttribute("page", scri.getPage());
+		rttr.addAttribute("perPageNum", scri.getPerPageNum());
+		rttr.addAttribute("searchType", scri.getSearchType());
+		rttr.addAttribute("keyword", scri.getKeyword());
+		
+		return "redirect:/home";
+	}
+	
 }

@@ -59,7 +59,7 @@
 	        <div>
 	          <!-- Remember me -->
 	          <div class="form-check">
-	            <input type="checkbox" class="form-check-input" id="materialLoginFormRemember">
+	            <input type="checkbox" class="form-check-input" id="remember_me" name ="_spring_security_remember_me">
 	            <label class="form-check-label" for="materialLoginFormRemember">Remember me</label>
 	          </div>
 	        </div>

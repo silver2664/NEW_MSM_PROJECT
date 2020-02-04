@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import com.project.board.vo.SearchCriteria;
 import com.project.member.dao.UserDAO;
-import com.project.member.vo.MemberDTO;
 import com.project.member.vo.MemberVO;
 import com.project.msm.exception.AlreadyExistingEmailException;
 import com.project.msm.exception.AlreadyExistingIdException;
@@ -134,10 +133,15 @@ public class UserServiceImpl implements UserService {
 		return userDAO.memberDetail(mId);
 	}
 	
-	// 9, 회원정보 수정
-		public void update(MemberVO memberVO) throws Exception {
-			userDAO.update(memberVO);
-		}
+	// 9. 회원정보 수정
+	public void update(MemberVO memberVO) throws Exception {
+		userDAO.update(memberVO);
+	}
+	
+	//10. 회원권한 변경
+	public void updateAuth(MemberVO memberVO) throws Exception{
+		userDAO.updateAuth(memberVO);
+	}
 	
 	
 	

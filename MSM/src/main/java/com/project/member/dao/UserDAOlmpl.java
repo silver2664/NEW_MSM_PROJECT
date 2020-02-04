@@ -74,7 +74,11 @@ public class UserDAOlmpl implements UserDAO {
 	}
 	
 	//10. 회원정보수정
-		public void update(MemberVO memberVO) throws Exception{
-			sqlSession.update("userMapper.update", memberVO);
-		}
+	public void update(MemberVO memberVO) throws Exception{
+		sqlSession.update("userMapper.update", memberVO);
+	}
+	//11. 회원권한 변경
+	public void updateAuth(MemberVO memberVO) throws Exception{
+		sqlSession.update("userMapper.updateAuth", memberVO);
+	}
 }

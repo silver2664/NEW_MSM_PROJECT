@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.project.board.vo.SearchCriteria;
-import com.project.member.vo.MemberDTO;
 import com.project.member.vo.MemberVO;
 import com.project.msm.util.RegisterRequest;
 
@@ -34,4 +33,7 @@ public interface UserService {
 	
 	// 9, 회원정보 수정
 	public void update(MemberVO memberVO) throws Exception;
+	
+	//10. 회원권한 변경
+	public void updateAuth(MemberVO memberVO) throws Exception;
 }

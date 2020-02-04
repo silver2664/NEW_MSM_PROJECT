@@ -60,11 +60,9 @@
 		<!-- 
 		<logout invalidate-session = "true" logout-url = "/logout" logout-success-url = "/login?logout=1" />
 		 -->
-		<logout invalidate-session = "true" delete-cookies = "JSESSIONID,SPRING_SECURITY_REMEMBER_ME_COOKIE" logout-success-url="/home" logout-url = "/logout" />
+		<logout invalidate-session = "true" delete-cookies = "JSESSIONID,SPRING_SECURITY_REMEMBER_ME_COOKIE" logout-success-url="/home" logout-url = "/logout" />		
 		
-		
-		<!-- 
-		<remember-me key = "wmosky" token-validity-seconds = "2419200" />  4주 --> 
+		<remember-me key = "wmosky" token-validity-seconds = "2419200" /> <!-- 4주 자동로그인 --> 
 		
 		<!-- csrf는 cross site request forgery 는 사이트 간 요청 위조로 다른 페이지에서 요청을 위조해서 공격하는 방식 csrf 해킹을 예방하기 위해 사용. -->
 		<csrf/>

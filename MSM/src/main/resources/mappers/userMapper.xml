@@ -169,10 +169,17 @@
 				MPHONE = #{mPhone},
 				MZIP_CODE = #{mZip_Code},
 				M_FIRST_ADDR = #{mFirst_Addr},
-				M_SECOND_ADDR = #{mSecond_Addr},
-				AUTHORITYNAME = #{authority}
+				M_SECOND_ADDR = #{mSecond_Addr}
 			WHERE MID = #{mId}
-		]]>>
+		]]>
+	</update>
+	<!-- 회원권한 수정하기 -->
+	<update id = "updateAuth" parameterType = "com.project.member.vo.MemberVO">
+		<![CDATA[
+			UPDATE MSM_MEMBER
+			SET AUTHORITYNAME = #{authority}
+			WHERE MID = #{mId}
+		]]>
 	</update>
 	
 </mapper>
