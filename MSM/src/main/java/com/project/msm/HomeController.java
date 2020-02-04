@@ -36,7 +36,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "index";
+		return "/product/productView";
 	}	
 	
 	@RequestMapping ("home") 

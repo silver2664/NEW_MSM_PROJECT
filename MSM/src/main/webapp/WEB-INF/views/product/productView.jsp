@@ -1,11 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session = "true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix = "sec" uri = "http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -13,7 +11,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Material Design Bootstrap</title>
+<meta id = "_csrf" name = "_csrf" content = "${_csrf.token}"/>
+<title>Basic Form</title>
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <!-- Bootstrap core CSS -->
@@ -22,41 +21,59 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
 <!-- resource CSS -->
 <link href = "<c:url value = "/resources/css/home.css"/>" rel = "stylesheet" type = "text/css">
+<!-- CK EDITOR -->
+<script src="/resources/js/ckeditor/ckeditor.js"></script>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/tabs.css"/>" />
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/tabstyles.css"/>" />
+<script src="/resources/js/modernizr.custom.js"></script>
+<style>
+#section-linetriangle-2 {
+	text-align:left;
+	
+	font: 11px
+}
+</style>
 </head>
 <body>
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
-<div class = "container">
-<h2>상품목록</h2>
-<table border = "1">
-	<tr>
-		<th>상품ID번호</th>
-		<th>상품이미지</th>
-		<th>상품명</th>
-		<th>가격</th>
-	</tr>
-	<c:forEach var = "row" items = "${list}">
-		<tr>
-			<td>
-				${row.mgNum}
-			</td>
-			<td>
-				<a href = "${path}/product/productView/${row.mgNum}">
-					<img src = "/resources/images/${row.mgImg}" width = "120px" height = "110px">
-				</a>
-			</td>
-			<td>
-				<a href = "${path}/product/detailView/${row.mgNum}">
-					${row.mgName}
-				</a>
-			</td>
-			<td>
-				<fmt:formatNumber value = "${row.mgPrice}" pattern = "###,###,###"/>
-			</td>
-		</tr>
-	</c:forEach>
-</table>
-</div>
 
+
+
+
+
+<section>
+				<div class="tabs tabs-style-linetriangle">
+					<nav>
+						<ul>
+							<li><a href="#section-linetriangle-1"><span>상세정보</span></a></li>
+							<li><a href="#section-linetriangle-2"><span>배송정보</span></a></li>
+							<li><a href="#section-linetriangle-3"><span>교환및 환불 정책</span></a></li>
+							
+						</ul>
+					</nav>
+					
+					<div class="content-wrap">
+					<c:forEach var="tablist" items="${tablist}">
+						<section id="section-linetriangle-1">${tablist.detailinfo}</section>
+						<section id="section-linetriangle-2">${tablist.delivery}</section>
+						<section id="section-linetriangle-3">${tablist.refund }</section>					
+					</c:forEach>
+					</div><!-- /content -->
+					
+				</div><!-- /tabs -->
+			</section>
+<script src="/resources/js/cbpFWTabs.js"></script>
+		<script>
+			(function() {
+
+				[].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
+					new CBPFWTabs( el );
+				});
+
+			})();
+			</script>
+
+<%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>
 <!-- SCRIPTS -->
 <!-- JQuery -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -83,7 +100,5 @@ function closeNav2() {
 	  document.getElementById("mySidenav2").style.width = "0";
 	}
 </script>
-
-<%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>
 </body>
 </html>

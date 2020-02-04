@@ -20,4 +20,6 @@ public interface GoodsService {
 	
 	//05. 상품등록
 	public void register(GoodsVO vo) throws Exception;
+	
+	
 }

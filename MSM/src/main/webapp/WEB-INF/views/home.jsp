@@ -63,7 +63,7 @@
 					<div id = "mySidenav" class = "sidenav">
 						<h3 class = "text-center text-white mb-5">My Account</h3>
 						<a href = "javascript:void(0)" class = "closebtn" onclick = "closeNav()">&times;</a>
-						<a class = "btn btn-outline-white mb-5" href = "product/product_reg" target = "_blank" role = "button">
+						<a class = "btn btn-outline-white mb-5" href = "#" target = "_blank" role = "button">
 							Profile
 						</a>
 						<a class = "btn btn-outline-white mb-5" href = "/cart/cartView" role = "button">

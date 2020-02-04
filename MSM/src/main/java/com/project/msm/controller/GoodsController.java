@@ -25,7 +25,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.JsonObject;
 import com.project.goods.service.GoodsService;
+import com.project.goods.service.TabService;
 import com.project.goods.vo.GoodsVO;
+import com.project.goods.vo.TabsVO;
 
 @Controller
 @RequestMapping("/product/*")
@@ -35,6 +37,9 @@ public class GoodsController {
 	
 	@Inject
 	GoodsService service;
+	
+	@Inject
+	TabService tabservice;
 	
 	
 	@Resource(name="uploadPath")
@@ -148,6 +153,20 @@ public class GoodsController {
 				
 				return "redirect:admin";
 				
+			}
+			
+			//  tab¸®½ºÆ®
+			@RequestMapping(value = "/product/productView", method = RequestMethod.GET)
+			public String tablist(Model model) throws Exception {
+				
+				logger.info("productview");	
+				
+				model.addAttribute("tablist", tabservice.tabslist());
+				
+				System.out.println(model);
+			
+				
+				return "/product/productView";
 			}
 
 }
