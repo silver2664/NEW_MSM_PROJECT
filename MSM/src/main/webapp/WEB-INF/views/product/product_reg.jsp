@@ -53,7 +53,7 @@ h2{
 				<script type="text/javascript">
 				
 				CKEDITOR.replace('mgContent',{
-					filebrowserUploadUrl:'<c:url value="product/ckUpload" />?${_csrf.parameterName}=${_csrf.token}'
+					filebrowserUploadUrl:"product/ckUpload" 
 
 									
 				});			

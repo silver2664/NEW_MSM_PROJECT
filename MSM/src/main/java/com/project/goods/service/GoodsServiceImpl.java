@@ -38,4 +38,10 @@ public class GoodsServiceImpl implements GoodsService {
 
 	}
 
+	@Override
+	public void register(GoodsVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		dao.register(vo);		
+	}
+
 }

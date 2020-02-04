@@ -5,7 +5,7 @@
 
 CKEDITOR.editorConfig = function( config ) {
 	
-	config.filebrowserUploadUrl = 'product/ckupload';
+	
 
 
 	config.enterMode =CKEDITOR.ENTER_BR;	

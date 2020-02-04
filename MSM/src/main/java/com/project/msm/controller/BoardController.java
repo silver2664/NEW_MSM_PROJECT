@@ -265,12 +265,7 @@ public class BoardController {
 			return "redirect:/board/notice/noticeList";
 		}
 		
-		//상품등록화면
-		@RequestMapping("product/product_reg")
-		public String goodsRegisterView() {
-			
-			return "product/product_reg";			
-		}
+		
 		
 		
 	

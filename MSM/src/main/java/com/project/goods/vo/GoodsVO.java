@@ -18,9 +18,19 @@ public class GoodsVO {
 	private int mgNum;
 	private String mgName;
 	private int mgPrice;
+	private int mgStock;
 	private String mgContent;
 	private String mgImg; // 상품이미지경로
 	private MultipartFile productPhoto; // 상품이미지파일
+	
+	
+	
+	public int getMgStock() {
+		return mgStock;
+	}
+	public void setMgStock(int mgStock) {
+		this.mgStock = mgStock;
+	}
 	public int getMgNum() {
 		return mgNum;
 	}

@@ -37,4 +37,10 @@ public class GoodsDAOImpl implements GoodsDAO {
 
 	}
 
+	@Override
+	public void register(GoodsVO vo) throws Exception {
+		sqlSession.insert("goodsMapper.register",vo);
+		
+	}
+
 }

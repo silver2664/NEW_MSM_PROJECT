@@ -18,5 +18,8 @@ public interface GoodsDAO {
 	// 04. 상품삭제
 	public void deleteProduct(int mgNum);
 	
+	// 05. 상품 등록
+	public void register(GoodsVO vo)throws Exception;
+	
 
 }

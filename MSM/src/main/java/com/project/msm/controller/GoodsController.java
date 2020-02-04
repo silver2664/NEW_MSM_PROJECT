@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.JsonObject;
 import com.project.goods.service.GoodsService;
+import com.project.goods.vo.GoodsVO;
 
 @Controller
 @RequestMapping("/product/*")
@@ -58,6 +59,13 @@ public class GoodsController {
 		mav.addObject("vo", service.detailProduct(mgNum));
 		return mav;
 	}
+	
+	//상품등록화면
+			@RequestMapping("product/product_reg")
+			public String goodsRegisterView() {
+				logger.info("registerView");
+				return "product/product_reg";			
+			}
 	
 	//ck에디터 이미지 등록
 			@RequestMapping(value = "product/ckUpload", method = RequestMethod.POST)
@@ -131,6 +139,15 @@ public class GoodsController {
 			 }
 			 
 			 return; 
+			}
+			
+			//상품등록
+			@RequestMapping(value="product/register", method=RequestMethod.POST)
+			public String register(GoodsVO vo) throws Exception {
+				service.register(vo);
+				
+				return "redirect:admin";
+				
 			}
 
 }

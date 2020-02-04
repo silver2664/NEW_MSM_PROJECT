@@ -17,4 +17,10 @@
 	FROM EX_GOODS
 	WHERE MGNUM = #{mgNum}
 </select>
+
+<!-- 03. 상품 등록 -->
+<insert id="register">
+		INSERT INTO EX_GOODS  (MGNUM,MGNAME,MGPRICE,MGSTOCK,MGCONTENT)
+			VALUES (PRODUCT_SEQ.nextval,#{mgName},#{mgPrice},#{mgStock},#{mgContent})
+</insert>
 </mapper>
