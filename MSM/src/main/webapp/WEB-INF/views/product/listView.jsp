@@ -13,7 +13,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Material Design Bootstrap</title>
+<title>상품 목록 -- MSM</title>
+
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <!-- Bootstrap core CSS -->
@@ -54,7 +55,8 @@
 			</td>
 		</tr>
 	</c:forEach>
-</table>
+</table><br/>
+<button class="btn btn-info" id="btnList">상품등록</button>
 </div>
 
 <!-- SCRIPTS -->
@@ -67,6 +69,12 @@
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
 <script>
+$(document).ready(function() {	
+	$("#btnList").click(function(e) {
+		
+		location.href="/product/product_reg";
+	});
+});
 function openNav() {
 	  document.getElementById("mySidenav").style.width = "30vw";
 	}
@@ -82,6 +90,8 @@ function closeNav() {
 function closeNav2() {
 	  document.getElementById("mySidenav2").style.width = "0";
 	}
+	
+
 </script>
 
 <%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>

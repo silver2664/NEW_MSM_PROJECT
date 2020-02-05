@@ -7,6 +7,9 @@
 	
 	<http pattern = "/resources/**" security = "none"></http>
 	<http pattern = "/upload/**" security = "none"></http>
+	<http pattern = "/product/ckUpload" security = "none"></http>
+	  <!--<http pattern = "/product/product_reg" security = "none"></http>-->
+	
 	<http auto-config = "true" use-expressions = "true">
 		<headers> <!-- X-Frame-Option : deny 해결(iframe issue) -->
 			<frame-options disabled="true"></frame-options>

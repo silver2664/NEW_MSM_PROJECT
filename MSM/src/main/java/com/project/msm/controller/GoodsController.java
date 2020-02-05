@@ -107,7 +107,7 @@ public class GoodsController {
 			  String callback = req.getParameter("CKEditorFuncNum");
 			  System.out.println(callback);
 			  printWriter = res.getWriter();
-			  String fileUrl = "/ckUpload/" + uid + "_" + fileName;  // 작성화면
+			  String fileUrl = "/resources/ckUpload/" + uid + "_" + fileName;  // 작성화면
 			  System.out.println(fileUrl + "fileUrl");
 			  // 업로드시 메시지 출력
 			/*  printWriter.println("<script>"
@@ -155,18 +155,19 @@ public class GoodsController {
 				
 			}
 			
-			//  tab리스트
-			@RequestMapping(value = "/product/productView", method = RequestMethod.GET)
-			public String tablist(Model model) throws Exception {
+			//  상품 상세보기
+			@RequestMapping(value = "/productView/{mgNum}")
+			public ModelAndView tablist(@PathVariable("mgNum")int mgNum,ModelAndView mav) throws Exception {
 				
 				logger.info("productview");	
 				
-				model.addAttribute("tablist", tabservice.tabslist());
+				mav.setViewName("/product/productView");
+				mav.addObject("vo",service.detailProduct(mgNum));
+				mav.addObject("tablist",tabservice.tabslist());
 				
-				System.out.println(model);
 			
 				
-				return "/product/productView";
+				return mav;
 			}
 
 }

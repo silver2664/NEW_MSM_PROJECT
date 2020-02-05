@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta id = "_csrf" name = "_csrf" content = "${_csrf.token}"/>
-<title>Basic Form</title>
+<title>상품 페이지 --MSM</title>
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <!-- Bootstrap core CSS -->
@@ -27,10 +27,27 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/tabstyles.css"/>" />
 <script src="/resources/js/modernizr.custom.js"></script>
 <style>
+h2 {
+	text-align:center;
+	margin-bottom:20px;	
+}
+table {
+	margin:auto;
+}
+#section-linetriangle-1 {
+	text-align:left;	
+	font: 11px;
+	
+}
 #section-linetriangle-2 {
 	text-align:left;
 	
-	font: 11px
+	font-size: 14px;
+}
+#section-linetriangle-3 {
+	text-align:left;
+	
+	font-size: 14px;
 }
 </style>
 </head>
@@ -38,30 +55,69 @@
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
 
 
-
-
-
-<section>
-				<div class="tabs tabs-style-linetriangle">
-					<nav>
-						<ul>
-							<li><a href="#section-linetriangle-1"><span>상세정보</span></a></li>
-							<li><a href="#section-linetriangle-2"><span>배송정보</span></a></li>
-							<li><a href="#section-linetriangle-3"><span>교환및 환불 정책</span></a></li>
-							
-						</ul>
-					</nav>
+	<h2>상품 상세정보</h2>
+	<table >
+		<tr>
+			<td>
+				<img src = "/resources/images/${vo.mgImg}" width = "540" height = "300">
+			</td>
+			<td>
+				<table style = "height : 516px; width : 456px;">
+					<tr align = "center">
+						<td>상품명</td>
+						<td>${vo.mgName}</td>
+					</tr>
 					
-					<div class="content-wrap">
-					<c:forEach var="tablist" items="${tablist}">
-						<section id="section-linetriangle-1">${tablist.detailinfo}</section>
-						<section id="section-linetriangle-2">${tablist.delivery}</section>
-						<section id="section-linetriangle-3">${tablist.refund }</section>					
-					</c:forEach>
-					</div><!-- /content -->
-					
-				</div><!-- /tabs -->
-			</section>
+					<tr align = "center">
+						<td>가격</td>
+						<td>${vo.mgPrice}</td>
+					</tr>
+					<tr align = "center">
+						<td colspan = "2">
+							<form name = "form1" method = "post" action = "/cart/insert">
+								<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
+								<input type = "hidden" name = "productId" value = "${vo.mgNum}"/>
+								<select name = "amount">
+									<c:forEach begin = "1" end = "10" var = "i">
+										<option value = "${i}">${i}</option>
+									</c:forEach>
+								</select>&nbsp; 개
+								<input type = "submit" value = "장바구니에 담기">
+							</form>
+								<a href = "/product/listView">상품목록</a>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	<br>
+	<hr class="container">
+	<br>
+	
+
+
+	<!--  tab -->
+	<section>
+		<div class="tabs tabs-style-linetriangle">
+			<nav>
+				<ul>
+					<li><a href="#section-linetriangle-1"><span>상세정보</span></a></li>
+					<li><a href="#section-linetriangle-2"><span>배송정보</span></a></li>
+					<li><a href="#section-linetriangle-3"><span>교환및 환불 정책</span></a></li>					
+				</ul>
+			</nav>			
+			<div class="content-wrap">
+			<c:forEach var="tablist" items="${tablist}">
+				<section id="section-linetriangle-1">${vo.mgContent}</section>
+				<section id="section-linetriangle-2">${tablist.delivery}</section>
+				<section id="section-linetriangle-3">${tablist.refund }</section>					
+			</c:forEach>
+			</div><!-- /content -->			
+		</div>
+	</section>
+			
+			
 <script src="/resources/js/cbpFWTabs.js"></script>
 		<script>
 			(function() {
