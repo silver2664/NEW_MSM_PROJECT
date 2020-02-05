@@ -60,6 +60,22 @@
 				<div class = "eheck_font" id = "pw2_check"></div>
 			</div>
 			  -->
+			  
+			<!-- 비밀번호 변경 구현하기 -->
+			<div class = "form-group">
+				<label for = "originalPw">기존 비밀번호</label>
+				<input type = "text" id = "originalPw" name = "originalPw" value = ""/>
+			</div>
+			<div class = "form-group">
+				<label for = "changePw">변경할 비밀번호</label>
+				<input type = "text" id = "changePw" name ="changePw" value = ""/>
+			</div>
+			<div class = "form-group">
+				<label for = "changePw2">변경할 비밀번호 확인</label>
+				<input type = "text" id = "changePw2" value = ""/>
+			</div>
+			<!-- // 비밀번호 변경 구현 -->
+			  
 			<div class = "form-group">
 				<label for = "mName">이름</label>
 				<input type = "text" class = "form-control" id = "mName" name = "mName" value = "${update.mName}" readonly = "readonly"/>

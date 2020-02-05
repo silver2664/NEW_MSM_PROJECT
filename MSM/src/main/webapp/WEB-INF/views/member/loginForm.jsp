@@ -23,6 +23,8 @@
 <link href = "<c:url value = "/resources/css/home.css"/>" rel = "stylesheet" type = "text/css">
 <!-- CK EDITOR -->
 <script src="/resources/js/ckeditor/ckeditor.js"></script>
+<!-- 네이버로그인 -->
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
 </head>
 <body>
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>

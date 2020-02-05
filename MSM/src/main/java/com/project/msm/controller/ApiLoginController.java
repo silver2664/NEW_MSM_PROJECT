@@ -39,7 +39,7 @@ public class ApiLoginController {
 	}
 	
 	//네이버 로그인 성공 시 callback호출 메소드
-	@RequestMapping("callback")
+	@RequestMapping(value = "/naverLoginSuccess", method = {RequestMethod.GET, RequestMethod.POST})
 	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
 		
 		System.out.println("Naver Login CallBack");
@@ -72,7 +72,7 @@ public class ApiLoginController {
 		session.setAttribute("sessionId", nickname);
 		model.addAttribute("result", apiResult);
 		
-		return "/apiLogin";
+		return "redirect:/home";
 	}
 	
 	//로그아웃

@@ -22,7 +22,7 @@ public class NaverLoginBO {
 	
 	private final static String CLIENT_ID = "IZ1PntFnFl5PXpYUlwVq";
 	private final static String CLIENT_SECRET = "CoDZ5yumKZ";
-	private final static String REDIRECT_URI = "http://localhost:8181/home";
+	private final static String REDIRECT_URI = "http://localhost:8181/naverLoginSuccess";
 	private final static String SESSION_STATE = "oauth_state";
 	
 	/* 프로질 조회 API URL */
