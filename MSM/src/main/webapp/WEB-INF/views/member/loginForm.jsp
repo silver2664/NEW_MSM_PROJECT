@@ -59,7 +59,7 @@
 	        <div>
 	          <!-- Remember me -->
 	          <div class="form-check">
-	            <input type="checkbox" class="form-check-input" id="remember_me" name ="_spring_security_remember_me">
+	            <input type="checkbox" class="form-check-input" id="remember-me" name ="remember-me">
 	            <label class="form-check-label" for="materialLoginFormRemember">Remember me</label>
 	          </div>
 	        </div>
@@ -74,13 +74,11 @@
 	      
 	      <c:if test ="${not empty param.fail}">
 		  	<div class = col-md-12>
-				<font color = "red">
-					<p>Your SIGN IN attempt was not successful, try again.</p>
-					<p>Reason : ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</p>														
-				</font>
+				<div>Your SIGN IN attempt was not successful, try again.</div>
+				<div>Reason : ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</div>													
 				<c:remove scope = "session" var = "SPRING_SECURITY_LAST_EXCEPTION"/>
 			</div>
-		</c:if>	
+		 </c:if>	
 	
 	      <!-- Register -->
 	      <p>Not a member?
@@ -104,6 +102,10 @@
 	
 	    </form>
 	    <!-- Form -->
+	    <div id="naver_id_login" style="text-align:center"><a href="${url}">
+			<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a>
+		</div>
+
 	
 	  </div>
 	

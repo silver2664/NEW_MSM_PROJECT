@@ -62,12 +62,16 @@
 		 -->
 		<logout invalidate-session = "true" delete-cookies = "JSESSIONID,SPRING_SECURITY_REMEMBER_ME_COOKIE" logout-success-url="/home" logout-url = "/logout" />		
 		
-		<remember-me key = "wmosky" token-validity-seconds = "2419200" /> <!-- 4주 자동로그인 --> 
+		 <!--  <remember-me key = "wmosky" token-validity-seconds = "2419200" /> -->
+		 <!-- <remember-me remember-me-parameter = "remember-me" remember-me-cookie = "remember-me" token-validity-seconds = "86400"/> -->
 		
 		<!-- csrf는 cross site request forgery 는 사이트 간 요청 위조로 다른 페이지에서 요청을 위조해서 공격하는 방식 csrf 해킹을 예방하기 위해 사용. -->
+		
 		<csrf/>
 	
 	</http>
+	
+	
 	
 	<!-- authentication-manager는 인증처리를 위한 최상위 엘리먼트 -->
 	<!-- authentication-provider는 인증처리하는 엘리먼트 -->
