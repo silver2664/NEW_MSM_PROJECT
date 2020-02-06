@@ -143,6 +143,16 @@ public class UserServiceImpl implements UserService {
 		userDAO.updateAuth(memberVO);
 	}
 	
+	//11. 회원비밀번호 변경
+	public void updatePw(MemberVO memberVO) throws Exception {
+		userDAO.updatePw(memberVO);
+	}
+	
+	//12. 유저 이메일 셀렉.
+	public String checkEmail(String mId) throws Exception {
+		return userDAO.emailCheck(mId);
+	}
+	
 	
 	
 

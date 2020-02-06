@@ -140,56 +140,7 @@ public class UserController {
 		} else {
 			return new ResponseEntity<String>("false", HttpStatus.OK);
 		}
-	}
-	
-	/*
-	@RequestMapping(value = "/member/loginForm", method = {RequestMethod.GET, RequestMethod.POST})
-	public String loginForm(Model model, HttpSession session) throws Exception {
-		logger.info("Login Form Connect!");
-		//네이버 아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 
-		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-		System.out.println("네이버 : " + naverAuthUrl);
-		model.addAttribute("url", naverAuthUrl);
-		return "/member/loginForm";
-	}
-	*/
-	
-	//네이버 로그인 성공 시 callback호출 메소드
-	@RequestMapping(value = "/callback", method = {RequestMethod.GET, RequestMethod.POST})
-	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
-			
-		System.out.println("Naver Login CallBack");
-		OAuth2AccessToken oauthToken;
-		oauthToken = naverLoginBO.getAccessToken(session, code, state);
-			
-		//01. 로그인 사용자 정보를 읽어온다.
-		apiResult = naverLoginBO.getUserProfile(oauthToken); // String 형식의 JSON 데이터
-			
-		/** apiResult json 구조
-		{"resultcode":"00",
-		"message":"success",
-		"response":{"id":"33666449","nickname":"shinn****","age":"20-29","gender":"M","email":"sh@naver.com","name":"\uc2e0\ubc94\ud638"}}
-		**/
-			
-		//02. String 형식인 apiResult를 json형태로 바꿈
-		JSONParser parser = new JSONParser();
-		Object obj = parser.parse(apiResult);
-		JSONObject jsonObj = (JSONObject) obj;
-			
-		//03. 데이터 파싱
-		//Top레벨 단계 _response 파싱
-		JSONObject response_obj = (JSONObject)jsonObj.get("response");
-		//response의 nickname값 파싱
-		String nickname = (String)response_obj.get("nickname");
-			
-		System.out.println("데이터파싱 : " + nickname);
-			
-		//04. 파싱 닉네임 세션으로 저장
-		session.setAttribute("sessionId", nickname);
-		model.addAttribute("result", apiResult);
-			
-		return "/home";
-	}
+	}	
 	
 	/*
 	@RequestMapping(value = "/member/step3", method=RequestMethod.POST)
@@ -272,6 +223,7 @@ public class UserController {
 		return "redirect:/home";
 	}
 	
+	// 회원 권한 부여.
 	@RequestMapping(value = "/member/updateAuth", method = RequestMethod.POST)
 	public String updateAuth(MemberVO memberVO, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr) throws Exception {
 		
@@ -285,6 +237,67 @@ public class UserController {
 		rttr.addAttribute("keyword", scri.getKeyword());
 		
 		return "redirect:/home";
+	}
+	
+	// 회원 비밀번호 변경 시, 기존 비밀번호와 비교
+	@RequestMapping(value = "/member/pwCheck")	
+	public @ResponseBody int pwCheck(@RequestParam String mPw, @RequestParam String originalPw) throws Exception {
+		
+		logger.info("controller pwCheck");
+		
+		System.out.println("mPw : " + mPw);
+		System.out.println("originalPw : " +originalPw);
+		boolean state = passwordEncoder.matches(originalPw, mPw);
+		System.out.println(state);
+		if(state) {
+			return 1;
+		} else {
+			return 0;
+		}		
+	}
+	
+	// 회원 비밀번호 변경하기.
+	@RequestMapping(value = "/member/updatePw", method = RequestMethod.POST)
+	public @ResponseBody void updatePw(MemberVO memberVO, @RequestParam String mPw3) throws Exception {
+		
+		logger.info("update MemberPassWord");
+		System.out.println(mPw3);
+		String mPw = passwordEncoder.encode(mPw3);
+		memberVO.setmPw(mPw);
+		userService.updatePw(memberVO);
+		
+	}
+	
+	// 회원 인증 EMAIL 확인하기
+	@RequestMapping(value = "/member/emailCheck")	
+	public @ResponseBody int emailCheck(@RequestParam String mEmail, @RequestParam String mId) throws Exception {
+		
+		logger.info("controller emailCheck");
+		System.out.println("input Email : " + mEmail);
+		String email = userService.checkEmail(mId);
+		System.out.println("Controller email : " + email);
+		if(mEmail.equals(email)) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+	
+	@RequestMapping(value="/member/sendEmail", method = RequestMethod.GET)
+	public @ResponseBody boolean createEmailCheck2(@RequestParam String mEmail, @RequestParam String mId, HttpServletRequest request, MemberVO memberVO) throws Exception {
+		logger.info("이메일발송");
+		int ran = new Random().nextInt(900000) + 100000; // 임시비밀번호랜덤숫자생성.
+		System.out.println("RanCode : " + ran);
+		String mPw = Integer.toString(ran);
+		mPw = passwordEncoder.encode(mPw);
+		memberVO.setmPw(mPw);
+		userService.updatePw(memberVO); // 랜덤숫자암호화하여 업데이트		
+		String authCode = String.valueOf(ran);
+		System.out.println("AuthCode : " + authCode);
+		String subject = ("MSM 임시비밀번호 안내입니다.");
+		StringBuilder sb = new StringBuilder();
+		sb.append("회원님의 임시비밀번호는 " + authCode + "입니다.");		
+		return userService.send(subject, sb.toString(), "msmproject2020", mEmail, null);
 	}
 	
 }

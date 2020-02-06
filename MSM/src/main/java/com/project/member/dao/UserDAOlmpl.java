@@ -19,6 +19,7 @@ public class UserDAOlmpl implements UserDAO {
 	@Inject
 	SqlSession sqlSession;
 	
+	// 유저 이메일 셀렉.
 	@Override
 	public MemberVO selectByEmail(String mEmail) throws Exception {
 		return sqlSession.selectOne("userMapper.selectByEmail", mEmail);
@@ -80,5 +81,15 @@ public class UserDAOlmpl implements UserDAO {
 	//11. 회원권한 변경
 	public void updateAuth(MemberVO memberVO) throws Exception{
 		sqlSession.update("userMapper.updateAuth", memberVO);
+	}
+	
+	//12. 회원비밀번호 변경
+	public void updatePw(MemberVO memberVO) throws Exception{
+		sqlSession.update("userMapper.updatePw", memberVO);
+	}
+	
+	//13. 회원Email 체크
+	public String emailCheck(String mId) throws Exception {
+		return sqlSession.selectOne("checkEmail", mId);
 	}
 }

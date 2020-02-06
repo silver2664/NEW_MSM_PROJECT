@@ -5,7 +5,7 @@
 
 <mapper namespace="userMapper">
 
-	<!-- Email select -->
+	
 	<select id = "selectByEmail" resultType = "com.project.member.vo.MemberVO">
 	<![CDATA[
 		SELECT
@@ -181,5 +181,26 @@
 			WHERE MID = #{mId}
 		]]>
 	</update>
+	
+	<!-- 회원비밀번호 수정하기 -->
+	<update id = "updatePw" parameterType = "com.project.member.vo.MemberVO">
+		<![CDATA[
+			UPDATE MSM_MEMBER
+			SET MPW = #{mPw}
+			WHERE MID = #{mId}
+		]]>
+	</update>
+	
+	<!-- 회원이메일 체크 -->
+	<select id = "checkEmail" resultType = "String">
+	<![CDATA[
+		SELECT
+			MEMAIL
+		FROM
+			MSM_MEMBER
+		WHERE
+			MID = #{mId}
+	]]>
+	</select>
 	
 </mapper>

@@ -18,8 +18,7 @@ public interface UserService {
 	
 	public int idCheck2(String mId) throws Exception;
 	
-	// 5. Email 인증
-	
+	// 5. Email 인증	
 	public boolean send(String subject, String text, String from, String to, String filePath);
 	
 	// 6. 전체 회원 조회
@@ -36,4 +35,11 @@ public interface UserService {
 	
 	//10. 회원권한 변경
 	public void updateAuth(MemberVO memberVO) throws Exception;
+	
+	//11. 회원비밀번호 변경
+	public void updatePw(MemberVO memberVO) throws Exception;
+	
+	//12. 유저 이메일 셀렉.
+	public String checkEmail(String mId) throws Exception;
+	
 }

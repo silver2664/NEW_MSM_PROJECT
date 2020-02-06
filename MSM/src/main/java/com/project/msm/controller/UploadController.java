@@ -41,6 +41,7 @@ public class UploadController {
 	
 	@RequestMapping(value = "/upload/uploadForm", method = RequestMethod.POST)
 	public ModelAndView uploadForm(MultipartFile file, ModelAndView mv) throws Exception {
+		System.out.println(file);
 		logger.info("파일이름 : " + file.getOriginalFilename() );
 		String savedName = file.getOriginalFilename();
 		logger.info("파일크기 : " + file.getSize());

@@ -47,35 +47,12 @@
 			<div class = "form-group">
 				<input type = "hidden" class = "form-control" id = "mPw" name = "mPw" value = "${update.mPw}" readonly = "readonly"/>
 			</div>
-			<!--
-			<div class = "form-group">
-				<label for = "mPw">비밀번호</label>
-				<input type = "password" class = "form-control" id = "mPw" name = "mPw" placeholder = "PassWord"/>
-				<div class = "eheck_font" id = "pw_check"><span style = "color : blue"> * 변경하실 비밀번호를 8-15 자의 [문자/숫자/특수문자]를 조합하세요. </span></div>
-			</div>
 			
-			<div class = "form-group">
-				<label for = "mPw2">비밀번호 확인</label>
-				<input type = "password" class = "form-control" id = "mPw2" name = "mPw2" placeholder = "Confirm PassWord"/>
-				<div class = "eheck_font" id = "pw2_check"></div>
+			<!-- Modal 실행 버튼 -->
+			<div>
+  				<a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#changePw">비밀번호 변경하기</a>
 			</div>
-			  -->
-			  
-			<!-- 비밀번호 변경 구현하기 -->
-			<div class = "form-group">
-				<label for = "originalPw">기존 비밀번호</label>
-				<input type = "text" id = "originalPw" name = "originalPw" value = ""/>
-			</div>
-			<div class = "form-group">
-				<label for = "changePw">변경할 비밀번호</label>
-				<input type = "text" id = "changePw" name ="changePw" value = ""/>
-			</div>
-			<div class = "form-group">
-				<label for = "changePw2">변경할 비밀번호 확인</label>
-				<input type = "text" id = "changePw2" value = ""/>
-			</div>
-			<!-- // 비밀번호 변경 구현 -->
-			  
+						  
 			<div class = "form-group">
 				<label for = "mName">이름</label>
 				<input type = "text" class = "form-control" id = "mName" name = "mName" value = "${update.mName}" readonly = "readonly"/>
@@ -114,7 +91,7 @@
 			</div>
 			<div class = "form-group">
 				<label for = "authority">회원권한</label>
-				<input type = "text" class = "form-control" id = "authority" name = "authority" value = "${update.authority}" readonly = "readonly"/>
+				<input type = "text" class = "form-control" id = "authority2" name = "authority2" value = "${update.authority}" readonly = "readonly"/>
 			</div>
 			<div class = "form-group text-center">
 				<button type = "submit" class = "btn btn-primary">수정</button>
@@ -136,6 +113,53 @@
 		</form>
 		</sec:authorize>
 	</div>
+</div>
+
+
+
+<!-- 비밀번호 변경 MODAL 창 처리 -->
+<div class="modal fade" id="changePw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-notify modal-warning" role="document">
+		<!--Content-->
+		
+		<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
+    	<div class="modal-content">
+      		<!--Header-->
+      		<div class="modal-header text-center">
+        		<h4 class="modal-title white-text w-100 font-weight-bold py-2">Change Password</h4>
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          		<span aria-hidden="true" class="white-text">&times;</span>
+        		</button>
+      		</div>
+      		<!-- Body -->
+      		<div class="modal-body">
+      			<div class = "md-form mb-5">
+					<input type = "text" class = "form-control" id = "mId2" name = "mId2" value = "${update.mId}" readonly = "readonly"/>
+					<label for = "mId">아이디</label>
+				</div>
+      			<div class="md-form mb-5">
+					<input type = "password" id = "originalPw" name = "originalPw" class = "form-control" value = ""/>
+					<label for="originalPw">기존 비밀번호</label>
+					<div id = "check_originalPw"></div>
+      			</div>
+      			<div class="md-form mb-5">
+          			<input type="password" id="mPw3" name = "mPw3" class="form-control" value = ""/>
+          			<label for="mPw">변경 할 비밀번호</label>
+          			<div class = "eheck_font" id = "pw_check"><span style = "color : blue"> * 비밀번호를 8-15 자의 [문자/숫자/특수문자]를 조합하세요. </span></div>
+        		</div>
+        		<div class="md-form mb-5">
+          			<input type="password" id="mPw2" name = "mPw2" class="form-control" value = ""/>
+          			<label for="mPw2">비밀번호 확인</label>
+          			<div class = "eheck_font" id = "pw2_check"></div>
+        		</div>
+      		</div>
+      		<!--Footer-->
+      		<div class="modal-footer justify-content-center">
+        		<button type = "submit" id = "changePw_btn" class="btn btn-outline-primary waves-effect">비밀번호 변경</button>
+      		</div>
+      	</div>
+      	
+	</div>  
 </div>
 
 <%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>
@@ -169,8 +193,6 @@ function closeNav2() {
 </script>
 
 <script>
-//비밀번호 정규식
-var pwJ = /^.*(?=^.{7,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 //이메일 검사 정규식
 var mailJ = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 //휴대폰 번호 정규식
@@ -179,28 +201,6 @@ var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
 var address = $('#mSecond_Addr');
 
 $(document).ready(function(){
-	// Password 유효성 검사
-	$('#mPw').blur(function(){
-		if(pwJ.test($('#mPw').val())){
-			console.log('true');
-			$('#pw_check').text('유효한 비밀번호입니다.');
-			$('#pw_check').css('color', 'blue');
-		} else {
-			console.log('false');
-			$('#pw_check').text(' *8-15 자의 [문자/숫자/특수문자]를 조합하세요. ');
-			$('#pw_check').css('color', 'red');
-		}
-	});
-	// 패스워드 일치 확인
-	$('#mPw2').blur(function(){
-		if($('#mPw').val() != $('#mPw2').val()){
-			$('#pw2_check').text('비밀번호가 일치 하지 않습니다.');
-			$('#pw2_check').css('color', 'red');
-		} else {
-			$('#pw2_check').text('비밀번호 일치하였습니다.');
-			$('#pw2_check').css('color', 'blue');
-		}
-	});
 	// 이메일 양식 검사
 	$("#mEmail").blur(function(){
 		if(mailJ.test($('#mEmail').val())){
@@ -358,6 +358,94 @@ $(document).ready(function(){
 			}
 		});
 	});
+});
+</script>
+
+<script>
+// 기존 비밀번호 매칭 AJAX
+$(document).ready(function(){
+	
+
+	//비밀번호 정규식
+	var pwJ = /^.*(?=^.{7,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+	
+	$('#originalPw').blur(function(){
+		
+		var mPw = $('#mPw').val();
+		var originalPw = $('#originalPw').val();
+		
+		if(originalPw.length > 0) {
+			$.ajax({
+				data : {
+					"originalPw" : originalPw,
+					"mPw" : mPw
+					},
+				url : "/member/pwCheck",
+				success : function(data){
+					console.log("data : " + data)
+					if(data == 1) {
+						$('#check_originalPw').text('기존비밀번호와 일치합니다.');
+						$('#check_originalPw').css('color', 'blue');
+					} else {
+						$('#check_originalPw').text('기존비밀번호와 일치하지 않습니다.');
+						$('#check_originalPw').css('color', 'red');
+					}
+				}
+			});
+		}	
+	});
+	
+	// Password 유효성 검사
+	$('#mPw3').blur(function(){
+		
+		if ($('#mPw3').val() == $('#originalPw').val()){
+			$('#pw_check').text('기존의 비밀번호입니다.');
+			$('#pw_check').css('color', 'red');
+		} else if(pwJ.test($('#mPw3').val())){
+			console.log('true');
+			$('#pw_check').text('유효한 비밀번호입니다.');
+			$('#pw_check').css('color', 'blue');
+		} else {
+			console.log('false');
+			$('#pw_check').text(' *8-15 자의 [문자/숫자/특수문자]를 조합하세요. ');
+			$('#pw_check').css('color', 'red');
+		}
+	});
+	
+	// 패스워드 일치 확인
+	$('#mPw2').blur(function(){
+		if($('#mPw3').val() != $('#mPw2').val()){
+			$('#pw2_check').text('비밀번호가 일치 하지 않습니다.');
+			$('#pw2_check').css('color', 'red');
+		} else {
+			$('#pw2_check').text('비밀번호 일치하였습니다.');
+			$('#pw2_check').css('color', 'blue');
+		}
+	});
+	
+	$('#changePw_btn').on("click", function(){
+		var mPw3 = $('#mPw3').val()
+		$.ajax({
+			type : "post",
+			data : {
+				"mPw3" : mPw3,
+				"mId" : $('#mId2').val()
+			},
+			url : "/member/updatePw",
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+			},
+			success : function(){
+				console.log("비밀번호변경 성공!");
+				alert("비밀번호변경 성공!");
+				$('#changePw').modal('hide');
+			},
+			error : function(request, status, error){
+				console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+			}
+		});
+	});
+	
 });
 </script>
 

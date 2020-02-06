@@ -67,7 +67,7 @@
 	        </div>
 	        <div>
 	          <!-- Forgot password -->
-	          <a href="#">Forgot password?</a>
+	          <a style = "color : blue" data-toggle = "modal" data-target = "#findPw">Forgot password?</a>
 	        </div>
 	      </div>
 	
@@ -81,7 +81,11 @@
 				<c:remove scope = "session" var = "SPRING_SECURITY_LAST_EXCEPTION"/>
 			</div>
 		 </c:if>	
-	
+		 <!-- 네이버 로그인 화면 -->
+		 <div id="naver_id_login" style="text-align:center" class = "mb-2"><a href="${url}">
+			<img width="200" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a>
+		 </div>
+		 
 	      <!-- Register -->
 	      <p>Not a member?
 	        <a href="/member/step1">Register</a>
@@ -104,10 +108,7 @@
 	
 	    </form>
 	    <!-- Form -->
-	    <div id="naver_id_login" style="text-align:center"><a href="${url}">
-			<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a>
-		</div>
-
+	    
 	
 	  </div>
 	
@@ -116,15 +117,43 @@
 </div>
 <!-- Material form login -->
 
-
-
-
-
-
-
-
-
-
+<!-- 비밀번호 찾기 Modal 창. -->
+<!-- 비밀번호 변경 MODAL 창 처리 -->
+<div class="modal fade" id="findPw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-notify modal-warning" role="document">
+	
+		<!--Content-->		
+		<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
+    	<div class="modal-content">
+      		<!--Header-->
+      		<div class="modal-header text-center">
+        		<h4 class="modal-title white-text w-100 font-weight-bold py-2">비밀번호 찾기</h4>
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          		<span aria-hidden="true" class="white-text">&times;</span>
+        		</button>
+      		</div>
+      		<!-- Body -->
+      		<div class="modal-body">      			
+      			<div class="md-form mb-5">
+					<input type = "text" id = "mId2" name = "mId2" class = "form-control" value = ""/>
+					<label for="originalPw">ID</label>
+					<div id = "id_check" style = "color : blue; font-size : 12px;">회원가입 시 등록한 ID를 입력해주세요.</div>
+      			</div>
+      			<div class="md-form mb-5">
+					<input type = "text" id = "mEmail" name = "mEmail" class = "form-control" value = ""/>
+					<label for="originalPw">EMAIL</label>
+					<div id = "checkEmail" style = "color : blue; font-size : 12px;">회원가입 시 인증한 EMAIL을 입력해주세요.</div>
+      			</div>
+      			<p style = "font-size : 12px">회원가입 시 등록하셨던 ID와 EMAIL을 입력해주세요.<br/>ID와 EMAIL 확인 후 임시비밀번호를 해당 EMAIL로 보내드립니다.</p>      			
+      		</div>
+      		<!--Footer-->
+      		<div class="modal-footer justify-content-center">
+        		<button type = "submit" id = "sendEmail" class="btn btn-outline-primary waves-effect">임시비밀번호 발송</button>
+      		</div>
+      	</div>
+      	
+	</div>  
+</div>
 
 <%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>
 <!-- SCRIPTS -->
@@ -153,5 +182,97 @@ function closeNav2() {
 	  document.getElementById("mySidenav2").style.width = "0";
 	}
 </script>
+
+<!-- 비밀번호 찾기 AJAX -->
+<script>
+$(document).ready(function(){
+	
+	// ID 등록 확인
+	$('#mId2').blur(function(){
+		
+		if (($('#mId2').val()).length > 0){
+			var mId = $('#mId2').val();
+			$.ajax({
+				data : {"mId" : mId},								
+				url : "/member/idCheck",
+				/*
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+				},
+				*/
+				success : function(data){
+					console.log("data : " + data);
+					if(data > 0 ){
+						$("#id_check").text('ID 확인되었습니다.');
+						$("#id_check").css('color', 'blue');
+					} else {
+						$('#id_check').text('등록되지 않은 ID입니다.');
+						$('#id_check').css('color', 'red');						
+					}
+				},
+				error : function(request, status, error){
+					console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+				}
+			});
+		}
+	});
+	
+	// Email 등록 확인
+	$('#mEmail').blur(function(){
+		
+		if (($('#mEmail').val()).length > 0){
+			var mId = $('#mId2').val();
+			var mEmail = $('#mEmail').val();
+			$.ajax({
+				data : {
+					"mId" : mId,
+					"mEmail" : mEmail
+				},								
+				url : "/member/emailCheck",
+				/*
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+				},
+				*/
+				success : function(data){
+					console.log("data : " + data);
+					if(data > 0 ){
+						$("#checkEmail").text('Email 확인되었습니다.');
+						$("#checkEmail").css('color', 'blue');
+					} else {
+						$('#checkEmail').text('해당 ID에 등록되지 않은 Email입니다.');
+						$('#checkEmail').css('color', 'red');						
+					}
+				},
+				error : function(request, status, error){
+					console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+				}
+			});
+		}
+	});
+	
+	
+		
+	$('#sendEmail').on("click", function(){
+			
+		$.ajax({
+			url : "/member/sendEmail",
+			data : {
+				"mEmail" : $('#mEmail').val(),
+				"mId" : $('#mId2').val()	
+			},
+			success : function(data){
+				alert ("메일발송완료하였습니다.<br/>전송된 임시비밀번호를 이용하여 로그인 해주세요.")
+			},
+			error : function(data){
+				alert("서버 에러가 발생하였습니다.")
+			}
+		});
+			
+	});
+	
+});
+</script>
+
 </body>
 </html>
