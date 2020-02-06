@@ -27,8 +27,8 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public void updateProduct(GoodsVO vo) {
-		// TODO Auto-generated method stub
+	public void productModify(GoodsVO vo) throws Exception {
+		dao.productModify(vo);
 
 	}
 

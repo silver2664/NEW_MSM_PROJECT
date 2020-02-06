@@ -13,7 +13,7 @@ public interface GoodsDAO {
 	public GoodsVO detailProduct(int mgNum);
 	
 	// 03. 상품수정
-	public void updateProduct(GoodsVO vo);
+	public void productModify(GoodsVO vo)throws Exception;
 	
 	// 04. 상품삭제
 	public void deleteProduct(int mgNum);

@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>QNA 수정 -- MSM</title>
+<title>상품 수정 -- MSM</title>
 <style>
 body {
  	padding-top:70px;
@@ -38,26 +38,36 @@ h2{
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
 <article class="mb-5">
 	<div class="container">
-		<h2> QNA  수정</h2>
+		<h2> 상품  수정</h2>
 		<hr/>
-		<form name="form" id="form"  method="post" action="/board/update" >
+		<form name="form" id="form"  method="post" action="/product/productModify" >
 		<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
-		<input type="hidden" id="qid" name="qid" value="${update.qid}" readonly="readonly">
+		<input type="hidden" id="mgNum" name="n" value="${mo.mgNum}" readonly="readonly">
 			<div class="mb-3">
-				<label for="title"><strong>제목</strong></label>
-				<input type="text" class="form-control" name="qtitle" id="qtitle" value="${update.qtitle}" required>
-			</div>
-			<!-- 작성자는 수정이 아니라 값을 받아 오므로 readonly속성으로 수정불가 -->
-			<div class="mb-3">
-				<label for="title"><strong>작성자</strong></label>
-				<input type="text" class="form-control" name="qwriter" id="qwriter" value="${update.qwriter}"readonly="readonly">
+				<label for="mgName"><strong>상품명</strong></label>
+				<input type="text" class="form-control" name="mgName" id="mhName" value="${mo.mgName}" required>
 			</div>
 			
 			<div class="mb-3">
+				<label for="mgPrice"><strong>가격</strong></label>
+				<input type="text" class="form-control" name="mgPrice" id="mgPrice" value="${mo.mgPrice}">
+			</div>
+			<div class="mb-3">
+				<label for="mgStock"><strong>수량</strong></label>
+				<input type="text" class="form-control" name="mgStock" id="mgStock" value="${mo.mgStock}">
+			</div>
+			<div class="inputArea">
+ 			<label for="gdsImg">이미지</label>
+ 			<input type="file" id="mgImg" name="mgImg" value="${mo.mgImg}" />
+ 			<div class="select_img"><img src="" /></div>
+ 			
+ 			</div>
+			
+			<div class="mb-3">
 				<label for="content"><strong>내용</strong></label>			
-				<textarea class="form-control" cols="80" rows="10" name="qcontent" id="qcontent"  required>${update.qcontent}</textarea>
+				<textarea class="form-control" cols="80" rows="10" name="mgContent" id="mgContent"  required>${mo.mgContent}</textarea>
 				<script type="text/javascript">
-				editor = CKEDITOR.replace('qcontent');
+				editor = CKEDITOR.replace('mgContent');
 				editor.on( 'required', function( evt ) {
 				    alert( '내용을 입력하세요' );		
 				  

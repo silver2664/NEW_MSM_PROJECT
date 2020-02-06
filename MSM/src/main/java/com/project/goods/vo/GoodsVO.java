@@ -22,9 +22,18 @@ public class GoodsVO {
 	private String mgContent;
 	private String mgImg; // 상품이미지경로
 	private MultipartFile productPhoto; // 상품이미지파일
+	private String mgThumbImg;
 	
 	
 	
+	
+	
+	public String getMgThumbImg() {
+		return mgThumbImg;
+	}
+	public void setMgThumbImg(String mgThumbImg) {
+		this.mgThumbImg = mgThumbImg;
+	}
 	public int getMgStock() {
 		return mgStock;
 	}

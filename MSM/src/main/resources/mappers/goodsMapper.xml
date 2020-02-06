@@ -13,14 +13,26 @@
 
 <!-- 02. 상품 상세 보기 -->
 <select id = "detailProduct" resultType = "com.project.goods.vo.GoodsVO">
-	SELECT MGNUM, MGNAME, MGPRICE, MGCONTENT, MGIMG
+	SELECT MGNUM, MGNAME, MGPRICE, MGCONTENT, MGIMG ,MGSTOCK
 	FROM EX_GOODS
 	WHERE MGNUM = #{mgNum}
 </select>
 
 <!-- 03. 상품 등록 -->
 <insert id="register">
-		INSERT INTO EX_GOODS  (MGNUM,MGNAME,MGPRICE,MGSTOCK,MGCONTENT)
-			VALUES (PRODUCT_SEQ.nextval,#{mgName},#{mgPrice},#{mgStock},#{mgContent})
+		INSERT INTO EX_GOODS  (MGNUM,MGNAME,MGPRICE,MGSTOCK,MGCONTENT,MGIMG,MGTHUMBIMG)
+			VALUES (PRODUCT_SEQ.nextval,#{mgName},#{mgPrice},#{mgStock},#{mgContent},#{mgImg},#{mgThumbImg})
 </insert>
+
+<!-- 상품수정  -->
+<update id="productModify" parameterType="com.project.goods.vo.GoodsVO">
+	UPDATE EX_GOODS 
+	SET 
+	MGNAME= #{mgName},
+	MGPRICE = #{mgPrice},
+	MGSTOCK =#{mgStock},
+	MGIMG =#{mgImg},
+	MGCONTENT = #{mgContent}
+	WHERE MGNUM = ${mgNum}
+</update>
 </mapper>

@@ -28,6 +28,7 @@ import com.project.goods.service.GoodsService;
 import com.project.goods.service.TabService;
 import com.project.goods.vo.GoodsVO;
 import com.project.goods.vo.TabsVO;
+import com.project.msm.util.UploadFileUtils;
 
 @Controller
 @RequestMapping("/product/*")
@@ -44,6 +45,9 @@ public class GoodsController {
 	
 	@Resource(name="uploadPath")
 	private String uploadPath;
+	
+
+	
 	
 	// 01. 상품전체목록
 	@RequestMapping(value = "/listView", method = RequestMethod.GET)
@@ -66,11 +70,12 @@ public class GoodsController {
 	}
 	
 	//상품등록화면
-			@RequestMapping("product/product_reg")
+			@RequestMapping(value="product/product_reg")
 			public String goodsRegisterView() {
 				logger.info("registerView");
 				return "product/product_reg";			
 			}
+			
 	
 	//ck에디터 이미지 등록
 			@RequestMapping(value = "product/ckUpload", method = RequestMethod.POST)
@@ -146,12 +151,33 @@ public class GoodsController {
 			 return; 
 			}
 			
+			
 			//상품등록
 			@RequestMapping(value="product/register", method=RequestMethod.POST)
-			public String register(GoodsVO vo) throws Exception {
+			public String register(GoodsVO vo,MultipartFile file) throws Exception {
+				System.out.println(file);
+				System.out.println("register");
+				//이미지 업로드
+				String imgUploadPath = uploadPath + File.separator + "imgUpload";
+				String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+				String fileName = null;
+				
+				System.out.println("imgUploadPath : " + imgUploadPath);
+				if(file != null) {
+					fileName = UploadFileUtils.uploadFile(imgUploadPath, file.getOriginalFilename(),file.getBytes());
+				} else {
+					fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+				}
+				vo.setMgImg( "imgUpload"   + File.separator +ymdPath + File.separator + fileName);
+				vo.setMgThumbImg(  "imgUpload" + ymdPath +File.separator +"s" + File.separator +"s" +fileName);
+				
+				
+				System.out.println(fileName);
+				
+				//상품등록
 				service.register(vo);
 				
-				return "redirect:admin";
+				return "redirect:/product/listView";
 				
 			}
 			
@@ -169,5 +195,32 @@ public class GoodsController {
 				
 				return mav;
 			}
+			
+			//상품 수정
+			@RequestMapping(value="/product/productModifyView",method=RequestMethod.GET)
+			public void getProductModify(@RequestParam("n") int mgNum,Model model) throws Exception	 {
+				logger.info("get product modify");
+				
+				GoodsVO vo = service.detailProduct(mgNum);
+				model.addAttribute("mo",vo);
+				
+				
+			
+			}
+			//상품수정 
+			@RequestMapping(value="/product/productModify",method=RequestMethod.POST)
+			public String productModify(GoodsVO vo) throws Exception {
+				logger.info("productModify");
+				
+				service.productModify(vo);
+				
+				return "redirect:/product/listView";
+			}
 
-}
+			
+			
+			}
+			
+
+			
+

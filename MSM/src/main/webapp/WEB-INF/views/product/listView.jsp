@@ -14,6 +14,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <title>상품 목록 -- MSM</title>
+<style>
+.row {
+	margin:auto;
+	
+}
+.card {
+	margin-bottom:20px;
+}
+.card-columns {
+	@include media-breakpoint-only(lg) {
+    column-count: 4;
+}
+
+</style>
 
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
@@ -28,6 +42,8 @@
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
 <div class = "container">
 <h2>상품목록</h2>
+<!--  
+
 <table border = "1">
 	<tr>
 		<th>상품ID번호</th>
@@ -42,21 +58,75 @@
 			</td>
 			<td>
 				<a href = "${path}/product/productView/${row.mgNum}">
-					<img src = "/resources/images/${row.mgImg}" width = "120px" height = "110px">
+					<img src = "/resources/${row.mgImg}" width = "120px" height = "110px">
 				</a>
 			</td>
 			<td>
-				<a href = "${path}/product/detailView/${row.mgNum}">
+				<!--  <a href = "${path}/product/detailView/${row.mgNum}">
 					${row.mgName}
-				</a>
-			</td>
+				</a>-->
+			 <!-- </td>
 			<td>
 				<fmt:formatNumber value = "${row.mgPrice}" pattern = "###,###,###"/>
 			</td>
 		</tr>
 	</c:forEach>
-</table><br/>
-<button class="btn btn-info" id="btnList">상품등록</button>
+</table><br/> 
+
+</div>-->
+
+<div class="row">
+	<div class="d-md-flex">
+	<c:forEach var = "row" items = "${list}">
+		<div class="card card-cascade narrow card-ecommerce d-flex">
+			<!-- Card Image -->
+			
+			<div class="view view-cascade overlay">
+				<a href = "${path}/product/productView/${row.mgNum}">
+						<img src = "/resources/${row.mgImg}" style="width:100%">
+					</a>			
+			</div>
+			<!-- Card Content -->
+			<div class="card-body card-body-cascade text-center pb-3">
+				<!-- Title -->
+				<h5 class="card-title mb-1">
+					<strong> <a href="${path}/product/productView/${row.mgNum}">${row.mgName}</a>
+					</strong>
+				</h5>
+				<!-- Rating 
+				<div class="container">
+					<i class="fas fa-star amber-text"></i> <i
+						class="fas fa-star amber-text"></i> <i
+						class="fas fa-star amber-text"></i> <i
+						class="fas fa-star amber-text"></i> <i
+						class="fas fa-star amber-text"></i>
+				</div>-->
+				<!-- Description 
+				<p class="card-text">MSM Goods No.1 Example</p>-->
+				<!-- Card Footer -->
+				
+				<div class="card-footer px-1">
+					<span class="float-left font-weight-bold">
+					 <strong><fmt:setLocale value="ko_KR"/>
+					 <fmt:formatNumber type="currency" value="${row.mgPrice}"/></strong>
+					</span> <span class="float-right"> <a
+						class="material-tooltip-main" data-toggle="tooltip"
+						data-place="top" title="Add to Cart"> <i
+							class="fas fa-shopping-cart grey-text ml-3"></i>
+					</a> <a class="material-tooltip-main" data-toggle="tooltip"
+						data-place="top" title="Add to WishList"> <i
+							class="fas fa-heart grey-text ml-3"></i>
+					</a>
+					</span>
+				</div>
+			</div>
+		</div>
+		</c:forEach>
+		
+	</div>
+	<button class="btn btn-info btn-sm" id="register">상품등록</button>
+	
+</div>
 </div>
 
 <!-- SCRIPTS -->
@@ -70,7 +140,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
 <script>
 $(document).ready(function() {	
-	$("#btnList").click(function(e) {
+	$("#register").click(function(e) {
 		
 		location.href="/product/product_reg";
 	});

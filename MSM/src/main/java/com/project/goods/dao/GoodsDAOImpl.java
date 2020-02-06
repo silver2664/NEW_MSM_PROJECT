@@ -26,8 +26,8 @@ public class GoodsDAOImpl implements GoodsDAO {
 	}
 
 	@Override
-	public void updateProduct(GoodsVO vo) {
-		// TODO Auto-generated method stub
+	public void productModify(GoodsVO vo) throws Exception {
+		sqlSession.update("goodsMapper.productModify",vo);
 
 	}
 

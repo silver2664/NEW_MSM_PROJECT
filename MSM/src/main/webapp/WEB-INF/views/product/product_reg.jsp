@@ -21,7 +21,11 @@ body {
 h2{
 	text-align:center;
 }
+.select_img img {
+	margin:20px 0;
+}
 </style>
+<link rel="shortcut icon" href="/resources/images/logo.ico">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <!-- Bootstrap core CSS -->
@@ -42,8 +46,9 @@ h2{
 	<div class="container" role="main">
 		<h2>상품등록</h2>
 		<hr/>
-		<form name="form" id="form" role="form" method="post" action="/product/register" >
+		<form name="form" id="form" role="form" method="post" action="/product/register" enctype = "multipart/form-data">
 		<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
+		<input type ="hidden" name=n"/>
 			<div class="mb-3">
 				<label for="mgName"><strong>상품명</strong></label>
 				<input type="text" class="form-control" name="mgName" id="mgName" placeholder="상품명을 입력하세요" required>
@@ -56,6 +61,14 @@ h2{
 				<label for="mgStock"><strong>수량</strong></label>
 				<input type="text" class="form-control"name="mgStock" id="mgStock" placeholder="수량을 입력해주세요" required>
 			</div>	
+			<div class="inputArea">
+ 			<label for="gdsImg">이미지</label>
+ 			<input type="file" id="mgImg" name="file" />
+ 			<div class="select_img"><img src="" /></div>
+ 			
+ 			</div>
+ 			
+			
 			<div class="mb-3">
 				<label for="mgContent"><strong>내용</strong></label>			
 				<textarea class="form-control" cols="80" rows="10" name="mgContent" id="mgContent" placeholder="내용을 입력해주세요" required></textarea>
@@ -67,9 +80,11 @@ h2{
 				});			
 				</script>
 			</div>
+			
+			
 				
 			<div>
-				<button class="btn btn-sm btn-primary" id="btnSave">상품등록</button>
+				<button type="submit" class="btn btn-sm btn-primary" id="btnSave">상품등록</button>
 				<button type="button" class="btn btn-sm btn-info" id="btnList">목록</button>
 			</div>
 		</form>
@@ -88,11 +103,23 @@ h2{
 
 <script>
 $(document).ready(function() {	
-	$("#btnList").click(function(e) {
-		
+	$("#btnList").click(function(e) {		
 		location.href="/product/listView";
 	});
+	
+	$("#mgImg").change(function(){
+		   if(this.files && this.files[0]) {
+		    var reader = new FileReader;
+		    reader.onload = function(data) {
+		     $(".select_img img").attr("src", data.target.result).width(500);        
+		    }
+		    reader.readAsDataURL(this.files[0]);
+		   }
+		  });
+		
+	
 });
 </script>
+
 </body>
 </html>

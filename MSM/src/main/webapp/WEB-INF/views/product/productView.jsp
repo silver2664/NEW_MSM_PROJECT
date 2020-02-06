@@ -35,13 +35,12 @@ table {
 	margin:auto;
 }
 #section-linetriangle-1 {
-	text-align:left;	
+	text-align:center;	
 	font: 11px;
 	
 }
 #section-linetriangle-2 {
-	text-align:left;
-	
+	text-align:left;	
 	font-size: 14px;
 }
 #section-linetriangle-3 {
@@ -55,28 +54,26 @@ table {
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
 
 
-	<h2>상품 상세정보</h2>
+	
 	<table >
 		<tr>
 			<td>
-				<img src = "/resources/images/${vo.mgImg}" width = "540" height = "300">
+				<img src = "/resources/${vo.mgImg}" width = "540" height = "300">
 			</td>
 			<td>
 				<table style = "height : 516px; width : 456px;">
-					<tr align = "center">
-						<td>상품명</td>
+					<tr align = "center">						
 						<td>${vo.mgName}</td>
-					</tr>
-					
-					<tr align = "center">
-						<td>가격</td>
-						<td>${vo.mgPrice}</td>
+					</tr>					
+					<tr align = "center">						
+						<td><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${vo.mgPrice}"/></td>
 					</tr>
 					<tr align = "center">
 						<td colspan = "2">
-							<form name = "form1" method = "post" action = "/cart/insert">
+							<form name = "form1" role="form" method = "post" action = "/cart/insert">
 								<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
-								<input type = "hidden" name = "productId" value = "${vo.mgNum}"/>
+								<input type = "hidden" name = "n" value = "${vo.mgNum}"/>
+								<input type ="hidden" name>
 								<select name = "amount">
 									<c:forEach begin = "1" end = "10" var = "i">
 										<option value = "${i}">${i}</option>
@@ -85,8 +82,11 @@ table {
 								<input type = "submit" value = "장바구니에 담기">
 							</form>
 								<a href = "/product/listView">상품목록</a>
+								<button class="btn btn-primary btn-sm" id="update">상품 수정</button>
+								
 						</td>
 					</tr>
+					
 				</table>
 			</td>
 		</tr>
@@ -118,7 +118,7 @@ table {
 	</section>
 			
 			
-<script src="/resources/js/cbpFWTabs.js"></script>
+		<script src="/resources/js/cbpFWTabs.js"></script>
 		<script>
 			(function() {
 
@@ -155,6 +155,15 @@ function closeNav() {
 function closeNav2() {
 	  document.getElementById("mySidenav2").style.width = "0";
 	}
+	
+		var formObj = $("form[role='form']");
+		$("#update").click(function() {
+			formObj.attr("action","/product/productModifyView");
+			formObj.attr("method","get");
+			formObj.submit();
+		});
+
+	
 </script>
 </body>
 </html>
