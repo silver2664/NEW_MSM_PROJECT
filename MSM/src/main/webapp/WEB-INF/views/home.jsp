@@ -193,7 +193,7 @@
 							<div class="col-md-6 col-xl-3 sub-menu mb-xl-0 mb-4">
 								<h6 class="sub-title text-uppercase font-weight-bold">ACCESSORY</h6>
 								<ul class="list-unstyled">
-									<li><a href="/product/listView" class="menu-item">AAS-Studio</a></li>
+									<li><a href="/product/brandListView" class="menu-item">AAS-Studio</a></li>
 									<li><a href="#" class="menu-item">Example01</a></li>
 									<li><a href="#" class="menu-item">Example02</a></li>
 								</ul>

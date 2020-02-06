@@ -2,12 +2,12 @@
 </head>
 <body>
 <!-- Header Navbar -->
-<div style = "height : 10%" class = "mb-5">
+<div style = "height : 10%" class = "mb-4">
 	<nav class = "navbar fixed-top navbar-expand-lg navbar-light white" id = "headerNav">
 		<div class = "container-fluid">
 			<!-- BRAND -->
 			<a class = "navbar-brand wave-effect" href = "/home">
-				<strong class = "blue-text">MSM</strong>
+				<img src = "/resources/images/logo/logo2.jpg" style = "width : 200px; height : 80px;">
 			</a>
 			<!-- Collapse Menu -->
 		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerMenu">
@@ -58,7 +58,7 @@
 								<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
 								<button type = "submit" class = "btn btn-outline-white mb-5" style = "color : black" id = "signOut1">Sign Out</button>
 							</form>
-						</sec:authorize>
+							</sec:authorize>
 						</div>					
 					</li>
 				</ul>

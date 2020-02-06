@@ -33,6 +33,17 @@ public class GoodsController {
 		return "/product/listView";
 	}
 	
+	// 02. 브랜드몰
+	@RequestMapping(value = "/brandListView", method = RequestMethod.GET)
+	public String Brandlist(Model model) throws Exception {
+			
+		logger.info("BrandMall List");	
+			
+		model.addAttribute("list", service.listProduct());
+			
+		return "/product/brandListView";
+	}
+	
 	// 02. 상품상세보기
 	@RequestMapping(value = "/detailView/{mgNum}")
 	public ModelAndView detail(@PathVariable("mgNum") int mgNum, ModelAndView mav) {

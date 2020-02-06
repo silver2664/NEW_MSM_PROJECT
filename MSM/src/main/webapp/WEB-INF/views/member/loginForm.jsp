@@ -81,10 +81,7 @@
 				<c:remove scope = "session" var = "SPRING_SECURITY_LAST_EXCEPTION"/>
 			</div>
 		 </c:if>	
-		 <!-- 네이버 로그인 화면 -->
-		 <div id="naver_id_login" style="text-align:center" class = "mb-2"><a href="${url}">
-			<img width="200" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a>
-		 </div>
+		
 		 
 	      <!-- Register -->
 	      <p>Not a member?
@@ -93,18 +90,10 @@
 	
 	      <!-- Social login -->
 	      <p>or sign in with:</p>
-	      <a type="button" class="btn-floating btn-fb btn-sm">
-	        <i class="fab fa-facebook-f"></i>
-	      </a>
-	      <a type="button" class="btn-floating btn-tw btn-sm">
-	        <i class="fab fa-twitter"></i>
-	      </a>
-	      <a type="button" class="btn-floating btn-li btn-sm">
-	        <i class="fab fa-linkedin-in"></i>
-	      </a>
-	      <a type="button" class="btn-floating btn-git btn-sm">
-	        <i class="fab fa-github"></i>
-	      </a>
+	     <!-- 네이버 로그인 화면 -->
+		 <div id="naver_id_login" style="text-align:center" class = "mb-2"><a href="${url}">
+			<img width="200" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a>
+		 </div>
 	
 	    </form>
 	    <!-- Form -->
@@ -187,89 +176,170 @@ function closeNav2() {
 <script>
 $(document).ready(function(){
 	
+	
 	// ID 등록 확인
 	$('#mId2').blur(function(){
-		
-		if (($('#mId2').val()).length > 0){
-			var mId = $('#mId2').val();
-			$.ajax({
-				data : {"mId" : mId},								
-				url : "/member/idCheck",
-				/*
-				beforeSend : function(xhr) {
-					xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-				},
-				*/
-				success : function(data){
-					console.log("data : " + data);
-					if(data > 0 ){
-						$("#id_check").text('ID 확인되었습니다.');
-						$("#id_check").css('color', 'blue');
-					} else {
-						$('#id_check').text('등록되지 않은 ID입니다.');
-						$('#id_check').css('color', 'red');						
+			if (($('#mId2').val()).length > 0){
+				var mId = $('#mId2').val();
+				$.ajax({
+					data : {"mId" : mId},								
+					url : "/member/idCheck",
+					success : function(data){
+						console.log("data : " + data);
+						if(data > 0 ){
+							$("#id_check").text('ID 확인되었습니다.');
+							$("#id_check").css('color', 'blue');
+						} else {
+							$('#id_check').text('등록되지 않은 ID입니다.');
+							$('#id_check').css('color', 'red');						
+						}
+					},
+					error : function(request, status, error){
+						console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 					}
-				},
-				error : function(request, status, error){
-					console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-				}
-			});
-		}
+				});
+			}
+		
 	});
 	
 	// Email 등록 확인
 	$('#mEmail').blur(function(){
 		
-		if (($('#mEmail').val()).length > 0){
-			var mId = $('#mId2').val();
-			var mEmail = $('#mEmail').val();
-			$.ajax({
-				data : {
-					"mId" : mId,
-					"mEmail" : mEmail
-				},								
-				url : "/member/emailCheck",
-				/*
-				beforeSend : function(xhr) {
-					xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-				},
-				*/
-				success : function(data){
-					console.log("data : " + data);
-					if(data > 0 ){
-						$("#checkEmail").text('Email 확인되었습니다.');
-						$("#checkEmail").css('color', 'blue');
-					} else {
-						$('#checkEmail').text('해당 ID에 등록되지 않은 Email입니다.');
-						$('#checkEmail').css('color', 'red');						
+			if (($('#mEmail').val()).length > 0){
+				var mId = $('#mId2').val();
+				var mEmail = $('#mEmail').val();
+				$.ajax({
+					data : {
+						"mId" : mId,
+						"mEmail" : mEmail
+					},								
+					url : "/member/emailCheck",
+					success : function(data){
+						console.log("data : " + data);
+						if(data > 0 ){
+							$("#checkEmail").text('Email 확인되었습니다.');
+							$("#checkEmail").css('color', 'blue');
+						} else {
+							$('#checkEmail').text('해당 ID에 등록되지 않은 Email입니다.');
+							$('#checkEmail').css('color', 'red');						
+						}
+					},
+					error : function(request, status, error){
+						console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 					}
-				},
-				error : function(request, status, error){
-					console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-				}
-			});
-		}
-	});
-	
-	
+				});
+			}
+		
+	});	
 		
 	$('#sendEmail').on("click", function(){
-			
-		$.ajax({
-			url : "/member/sendEmail",
-			data : {
-				"mEmail" : $('#mEmail').val(),
-				"mId" : $('#mId2').val()	
-			},
-			success : function(data){
-				alert ("메일발송완료하였습니다.<br/>전송된 임시비밀번호를 이용하여 로그인 해주세요.")
-			},
-			error : function(data){
-				alert("서버 에러가 발생하였습니다.")
-			}
-		});
-			
+		
+			$.ajax({
+				url : "/member/sendEmail",
+				data : {
+					"mEmail" : $('#mEmail').val(),
+					"mId" : $('#mId2').val()	
+				},
+				success : function(data){
+					alert ("메일발송완료하였습니다.<br/>전송된 임시비밀번호를 이용하여 로그인 해주세요.");
+				},
+				error : function(data){
+					alert("서버 에러가 발생하였습니다.");
+				}
+			});
+				
+		
 	});
+	
+	
+	/*
+	//1번 AJAX ID 체크
+	function promise_function(){
+		return new Promise(function(resolve, reject){
+			$('#mId2').blur(function(){
+				if (($('#mId2').val()).length > 0){
+					var mId = $('#mId2').val();
+					$.ajax({
+						data : {"mId" : mId},								
+						url : "/member/idCheck",
+						success : function(data){
+							console.log("data : " + data);
+							if(data > 0 ){
+								$("#id_check").text('ID 확인되었습니다.');
+								$("#id_check").css('color', 'blue');
+							} else {
+								$('#id_check').text('등록되지 않은 ID입니다.');
+								$('#id_check').css('color', 'red');						
+							}
+						},
+						error : function(request, status, error){
+							console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+						}
+					}); //ajax 끝
+				} // if 끝
+			}); // blur function 끝
+		}); // new Promise 끝
+	} // promise_function() 끝
+	
+	//2번 AJAX 이메일 체크
+	function promise_function2(){
+		return new Promise(function(resolve, reject){
+			$('#mId2').blur(function(){
+				if (($('#mId2').val()).length > 0){
+					var mId = $('#mId2').val();
+					var mEmail = $('#mEmail').val();
+					$.ajax({
+						data : {
+							"mId" : mId,
+							"mEmail" : mEmail
+						},								
+						url : "/member/emailCheck",
+						success : function(data){
+							console.log("data : " + data);
+							if(data > 0 ){
+								$("#checkEmail").text('Email 확인되었습니다.');
+								$("#checkEmail").css('color', 'blue');
+							} else {
+								$('#checkEmail').text('해당 ID에 등록되지 않은 Email입니다.');
+								$('#checkEmail').css('color', 'red');						
+							}
+						},
+						error : function(request, status, error){
+							console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+						}
+					}); //ajax 끝
+				} // if 끝
+			}); // blur function 끝
+		}); // new Promise 끝
+	} // promise_function() 끝
+	
+	function promise_function3(){
+		return new Promise(function(resolve, reject){
+			$.ajax({
+				url : "/member/sendEmail",
+				data : {
+					"mEmail" : $('#mEmail').val(),
+					"mId" : $('#mId2').val()	
+				},
+				success : function(data){
+					alert ("메일발송완료하였습니다.<br/>전송된 임시비밀번호를 이용하여 로그인 해주세요.")
+				},
+				error : function(data){
+					alert("서버 에러가 발생하였습니다.")
+				}
+			}); // ajax 끝
+		}); // new Promise 끝
+	} // promise_function3 끝
+	
+	
+	
+	promise_function()
+	.then(promise_function2())
+	.then(promise_function3())
+	.catch(function(err){
+		console.log('then error : ', + err);
+	});
+	*/
 	
 });
 </script>

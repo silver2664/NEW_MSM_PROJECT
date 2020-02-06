@@ -79,7 +79,7 @@ body {
 #fullpage {
 }
 #sec1 {
-	background-image : url("/resources/images/indexPageImg/ms1.jpg");
+	background-image : url("/resources/images/indexPageImg/indexImg.jpg");
 	background-repeat: no-repeat;
 	background-size: 100%;
 }
@@ -99,13 +99,13 @@ body {
 	background-size: 100%;
 }
 #sec5 {
-	background-image : url("/resources/images/indexPageImg/indexImg.jpg");
+	background-image : url("/resources/images/indexPageImg/ms1.jpg");
 	background-repeat: no-repeat;
 	background-size: 100%;
 	float : center center;
 }
 #slide1 {
-	background-image : url("/resources/images/indexPageImg/ms1.jpg");
+	background-image : url("/resources/images/indexPageImg/indexImg.jpg");
 	background-repeat: no-repeat;
 	background-size: 100%;
 }
@@ -125,7 +125,7 @@ body {
 	background-size: 100%;
 }
 #slide5 {
-	background-image : url("/resources/images/indexPageImg/indexImg.jpg");
+	background-image : url("/resources/images/indexPageImg/ms1.jpg");
 	background-repeat: no-repeat;
 	background-size: 100%;
 	float : center center;
@@ -148,11 +148,11 @@ body {
 
 	<div id="fullpage">
 		<div class="section" id ="sec1">
-			<div class="slide" id="slide5"></div>
 			<div class="slide" id="slide1"></div>
 			<div class="slide" id="slide2"></div>
 			<div class="slide" id="slide3"></div>
 			<div class="slide" id="slide4"></div>
+			<div class="slide" id="slide5"></div>
 		</div>
 	
 		<div class="section" id ="sec2"></div>
@@ -163,6 +163,13 @@ body {
 		
 		<div class="section" id ="sec5"></div>
 	</div>
+	<!-- 
+	<div class="slide" id="slide1"></div>
+	<div class="slide" id="slide2"></div>
+	<div class="slide" id="slide3"></div>
+	<div class="slide" id="slide4"></div>
+	<div class="slide" id="slide5"></div>
+	 -->
 </div>
 
 <!-- SCRIPTS -->

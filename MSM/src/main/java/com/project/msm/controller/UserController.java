@@ -1,7 +1,7 @@
 package com.project.msm.controller;
 
 
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -9,9 +9,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +25,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.github.scribejava.core.model.OAuth2AccessToken;
+
 import com.project.board.vo.PageMaker;
 import com.project.board.vo.SearchCriteria;
 import com.project.member.service.UserService;
 import com.project.member.vo.MemberVO;
-import com.project.naverLogin.NaverLoginBO;
+
 
 @Controller // bean 인스턴스 생성
 @RequestMapping("/member/*") // Class Level Mapping 'member'로 들어오는 모든 요청에 대한 처리.
@@ -47,14 +44,7 @@ public class UserController {
 	@Autowired	
 	PasswordEncoder passwordEncoder;
 	
-	private NaverLoginBO naverLoginBO;
-	private String apiResult = null;
-	
-	@Autowired
-	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
-		this.naverLoginBO = naverLoginBO;
-	}
-	
+	// 회원가입 STEP1 (이용약관 페이지) 이동
 	@RequestMapping(value = "/member/step1", method = RequestMethod.GET)
 	// Handler Level Mapping : 요청 url에 대해 해당 메서드가 함. (* member/step1의 GET 요청에 대한 처리를 함. )
 	// value : 요청 url로 요청이 들어오면 이 메서드가 수행함. method : 요청 method 명시.
@@ -76,6 +66,7 @@ public class UserController {
 	}
 	*/
 	
+	// 회원가입 STEP2 (EMAIL인증코드생성)
 	@RequestMapping(value = "/member/step2", method = RequestMethod.POST)
 	public ModelAndView step2(@RequestParam(value="agree", defaultValue="false") Boolean agree) throws Exception {
 		
@@ -94,6 +85,7 @@ public class UserController {
 		return mv;	
 	}
 	
+	// 회원가입 완료(STEP3)
 	@RequestMapping(value = "/member/step3", method = RequestMethod.POST)
 	public ModelAndView step3(ModelAndView mv, MemberVO memberVO) throws Exception {
 		logger.info("signUp step3");
@@ -105,6 +97,7 @@ public class UserController {
 		return mv;
 	}
 	
+	// 회원가입 시 ID 중복체크
 	@RequestMapping(value = "/member/idCheck")	
 	public @ResponseBody int idCheck(String mId) throws Exception {
 		
@@ -114,6 +107,7 @@ public class UserController {
 		return cnt;
 	}	
 	
+	//Email 인증메일 발송
 	@RequestMapping(value="/member/email", method = RequestMethod.GET)
 	public @ResponseBody boolean createEmailCheck(@RequestParam String Email, @RequestParam int random, HttpServletRequest request) {
 		logger.info("이메일발송");
@@ -129,6 +123,7 @@ public class UserController {
 		return userService.send(subject, sb.toString(), "msmproject2020", Email, null);
 	}
 	
+	//Email 인증코드 확인
 	@RequestMapping(value = "/member/emailAuth")
 	public @ResponseBody ResponseEntity<String> emailAuth(@RequestParam String authCode, @RequestParam int random, HttpSession session){
 		logger.info("이메일인증");
@@ -283,6 +278,7 @@ public class UserController {
 		}
 	}
 	
+	// 임시 비밀번호 발송
 	@RequestMapping(value="/member/sendEmail", method = RequestMethod.GET)
 	public @ResponseBody boolean createEmailCheck2(@RequestParam String mEmail, @RequestParam String mId, HttpServletRequest request, MemberVO memberVO) throws Exception {
 		logger.info("이메일발송");
@@ -291,12 +287,12 @@ public class UserController {
 		String mPw = Integer.toString(ran);
 		mPw = passwordEncoder.encode(mPw);
 		memberVO.setmPw(mPw);
-		userService.updatePw(memberVO); // 랜덤숫자암호화하여 업데이트		
+		userService.updatePw(memberVO); // 랜덤숫자암호화하여 업데이트
 		String authCode = String.valueOf(ran);
 		System.out.println("AuthCode : " + authCode);
 		String subject = ("MSM 임시비밀번호 안내입니다.");
 		StringBuilder sb = new StringBuilder();
-		sb.append("회원님의 임시비밀번호는 " + authCode + "입니다.");		
+		sb.append(mId + "님의 임시비밀번호는 " + authCode + "입니다.");		
 		return userService.send(subject, sb.toString(), "msmproject2020", mEmail, null);
 	}
 	
