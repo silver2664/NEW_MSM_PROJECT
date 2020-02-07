@@ -2,19 +2,9 @@ package com.project.goods.vo;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class GoodsVO {
-	
-	/*
-	 CREATE TABLE EX_GOODS (
-    MGNUM   NUMBER NOT NULL,
-    MGNAME VARCHAR2(100),
-    MGPRICE NUMBER DEFAULT 0,
-    MGCONTENT VARCHAR2(500),
-    MGIMG VARCHAR2(500),
-    PRIMARY KEY (MGNUM)    
-	);
-	 */
+public class GoodsViewVO {
 
+	
 	private int mgNum;
 	private String mgName;
 	private int mgPrice;
@@ -28,27 +18,10 @@ public class GoodsVO {
 	
 	
 	
+	private String cateName;
+	private String cateCodeRef;
 	
 	
-	
-	public String getCateCode() {
-		return cateCode;
-	}
-	public void setCateCode(String cateCode) {
-		this.cateCode = cateCode;
-	}
-	public String getMgThumbImg() {
-		return mgThumbImg;
-	}
-	public void setMgThumbImg(String mgThumbImg) {
-		this.mgThumbImg = mgThumbImg;
-	}
-	public int getMgStock() {
-		return mgStock;
-	}
-	public void setMgStock(int mgStock) {
-		this.mgStock = mgStock;
-	}
 	public int getMgNum() {
 		return mgNum;
 	}
@@ -66,6 +39,12 @@ public class GoodsVO {
 	}
 	public void setMgPrice(int mgPrice) {
 		this.mgPrice = mgPrice;
+	}
+	public int getMgStock() {
+		return mgStock;
+	}
+	public void setMgStock(int mgStock) {
+		this.mgStock = mgStock;
 	}
 	public String getMgContent() {
 		return mgContent;
@@ -85,10 +64,30 @@ public class GoodsVO {
 	public void setProductPhoto(MultipartFile productPhoto) {
 		this.productPhoto = productPhoto;
 	}
-	
-	@Override
-	public String toString() {
-		return "GoodsVO [mgNum=" + mgNum + ", mgName=" + mgName + ", mgPrice=" + mgPrice + ", mgContent=" + mgContent + ", mgImg="
-				+ mgImg + "]";
+	public String getMgThumbImg() {
+		return mgThumbImg;
 	}
+	public void setMgThumbImg(String mgThumbImg) {
+		this.mgThumbImg = mgThumbImg;
+	}
+	public String getCateCode() {
+		return cateCode;
+	}
+	public void setCateCode(String cateCode) {
+		this.cateCode = cateCode;
+	}
+	public String getCateName() {
+		return cateName;
+	}
+	public void setCateName(String cateName) {
+		this.cateName = cateName;
+	}
+	public String getCateCodeRef() {
+		return cateCodeRef;
+	}
+	public void setCateCodeRef(String cateCodeRef) {
+		this.cateCodeRef = cateCodeRef;
+	}
+	
+	
 }

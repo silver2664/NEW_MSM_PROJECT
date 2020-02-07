@@ -21,11 +21,13 @@
 }
 .card {
 	margin-bottom:20px;
+	
 }
 .card-columns {
 	@include media-breakpoint-only(lg) {
     column-count: 4;
 }
+
 
 </style>
 
@@ -76,9 +78,9 @@
 </div>-->
 
 <div class="row">
-	<div class="d-md-flex">
+	
 	<c:forEach var = "row" items = "${list}">
-		<div class="card card-cascade narrow card-ecommerce d-flex">
+		<div class="col-xl-3 col-md-3 col-sm-3 card card-cascade narrow card-ecommerce d-flex">
 			<!-- Card Image -->
 			
 			<div class="view view-cascade overlay">
@@ -123,10 +125,11 @@
 		</div>
 		</c:forEach>
 		
-	</div>
-	<button class="btn btn-info btn-sm" id="register">상품등록</button>
+	
+	
 	
 </div>
+<button class="btn btn-info btn-sm" id="register">상품등록</button>
 </div>
 
 <!-- SCRIPTS -->

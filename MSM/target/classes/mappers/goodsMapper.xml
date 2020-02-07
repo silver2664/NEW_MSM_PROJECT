@@ -11,17 +11,17 @@
 	ORDER BY MGNUM DESC
 </select>
 
-<!-- 02. 상품 상세 보기 -->
+<!-- 02. 상품 상세 보기
 <select id = "detailProduct" resultType = "com.project.goods.vo.GoodsVO">
-	SELECT MGNUM, MGNAME, MGPRICE, MGCONTENT, MGIMG ,MGSTOCK
+	SELECT MGNUM, MGNAME, MGPRICE, MGCONTENT, MGIMG ,MGSTOCK,CATECODE
 	FROM EX_GOODS
 	WHERE MGNUM = #{mgNum}
-</select>
+</select> -->
 
 <!-- 03. 상품 등록 -->
 <insert id="register">
-		INSERT INTO EX_GOODS  (MGNUM,MGNAME,MGPRICE,MGSTOCK,MGCONTENT,MGIMG,MGTHUMBIMG)
-			VALUES (PRODUCT_SEQ.nextval,#{mgName},#{mgPrice},#{mgStock},#{mgContent},#{mgImg},#{mgThumbImg})
+		INSERT INTO EX_GOODS  (MGNUM,MGNAME,MGPRICE,MGSTOCK,MGCONTENT,MGIMG,MGTHUMBIMG,CATECODE)
+			VALUES (PRODUCT_SEQ.nextval,#{mgName},#{mgPrice},#{mgStock},#{mgContent},#{mgImg},#{mgThumbImg},#{cateCode})
 </insert>
 
 <!-- 상품수정  -->
@@ -34,6 +34,7 @@
 	MGSTOCK =#{mgStock},
 	MGIMG = #{mgImg},
 	MGCONTENT = #{mgContent}
+	CATECODE = #{cateCode}
 	WHERE MGNUM = #{mgNum}
 </update>
 
@@ -42,4 +43,21 @@
 	DELETE EX_GOODS
 	WHERE MGNUM = #{mgNum}
 </delete>
+
+<!-- 카테고리 호출 -->
+<select id="category" resultType="com.project.goods.vo.CategoryVO">
+	select level, cateName,cateCode,cateCodeRef
+	 from goods_category
+	Start with cateCodeRef is null connect by prior cateCode = cateCodeRef
+			
+</select>
+
+<!-- 상품 조회 + 카테고리 조인 -->
+<select id="goodsView" resultType="com.project.goods.vo.GoodsViewVO">
+	SELECT G.MGNUM, G.MGNAME, C.CATECODEREF,C.CATENAME, MGPRICE, MGCONTENT, MGIMG ,MGSTOCK,G.CATECODE
+	FROM EX_GOODS G
+	INNER JOIN GOODS_CATEGORY C
+	ON G.CATECODE = C.CATECODE
+	WHERE MGNUM = #{mgNum}
+</select>
 </mapper>

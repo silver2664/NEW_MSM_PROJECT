@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -23,12 +24,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.project.goods.service.GoodsService;
 import com.project.goods.service.TabService;
+import com.project.goods.vo.CategoryVO;
 import com.project.goods.vo.GoodsVO;
-import com.project.goods.vo.TabsVO;
+import com.project.goods.vo.GoodsViewVO;
 import com.project.msm.util.UploadFileUtils;
+
+import net.sf.json.JSONArray;
 
 @Controller
 @RequestMapping("/product/*")
@@ -71,8 +76,12 @@ public class GoodsController {
 	
 	//상품등록화면
 			@RequestMapping(value="product/product_reg")
-			public String goodsRegisterView() {
+			public String goodsRegisterView(Model model)throws Exception {
 				logger.info("registerView");
+				
+				List<CategoryVO> category = null;
+				category = service.category();
+				model.addAttribute("category",JSONArray.fromObject(category));
 				return "product/product_reg";			
 			}
 			
@@ -154,9 +163,11 @@ public class GoodsController {
 			
 			//상품등록
 			@RequestMapping(value="product/register", method=RequestMethod.POST)
-			public String register(GoodsVO vo,MultipartFile file) throws Exception {
-				System.out.println(file);
-				System.out.println("register");
+			public String register(GoodsVO vo,MultipartFile file,Model model) throws Exception {
+				
+				System.out.println("상품등록");
+				
+				
 				//이미지 업로드
 				String imgUploadPath = uploadPath + File.separator + "imgUpload";
 				String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
@@ -187,6 +198,8 @@ public class GoodsController {
 				
 				logger.info("productview");	
 				
+				
+				
 				mav.setViewName("/product/productView");
 				mav.addObject("vo",service.detailProduct(mgNum));
 				mav.addObject("tablist",tabservice.tabslist());
@@ -200,11 +213,13 @@ public class GoodsController {
 			@RequestMapping(value="/product/productModifyView",method=RequestMethod.GET)
 			public void getProductModify(@RequestParam("mgNum") int mgNum,Model model) throws Exception	 {
 				logger.info("get product modify");
-				GoodsVO vo = service.detailProduct(mgNum);
-				System.out.println(vo.getMgNum());
+				GoodsViewVO vo = service.detailProduct(mgNum);
 				
-				System.out.println(vo.getMgImg());
 				model.addAttribute("mo",vo);
+				
+				List<CategoryVO> category = null;
+				category=service.category();
+				model.addAttribute("category",JSONArray.fromObject(category));
 				
 				
 			

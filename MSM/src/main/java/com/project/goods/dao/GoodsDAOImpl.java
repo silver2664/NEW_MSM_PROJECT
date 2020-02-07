@@ -7,7 +7,9 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.project.goods.vo.CategoryVO;
 import com.project.goods.vo.GoodsVO;
+import com.project.goods.vo.GoodsViewVO;
 
 @Repository
 public class GoodsDAOImpl implements GoodsDAO {
@@ -21,8 +23,8 @@ public class GoodsDAOImpl implements GoodsDAO {
 	}
 
 	@Override
-	public GoodsVO detailProduct(int mgNum) {
-		return sqlSession.selectOne("goodsMapper.detailProduct", mgNum);
+	public GoodsViewVO detailProduct(int mgNum) {
+		return sqlSession.selectOne("goodsMapper.goodsView", mgNum);
 	}
 
 	@Override
@@ -43,6 +45,11 @@ public class GoodsDAOImpl implements GoodsDAO {
 	public void register(GoodsVO vo) throws Exception {
 		sqlSession.insert("goodsMapper.register",vo);
 		
+	}
+
+	@Override
+	public List<CategoryVO> category() throws Exception {
+		return sqlSession.selectList("goodsMapper.category");
 	}
 
 }

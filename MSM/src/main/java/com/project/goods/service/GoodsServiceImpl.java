@@ -7,7 +7,9 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.project.goods.dao.GoodsDAO;
+import com.project.goods.vo.CategoryVO;
 import com.project.goods.vo.GoodsVO;
+import com.project.goods.vo.GoodsViewVO;
 
 @Service
 public class GoodsServiceImpl implements GoodsService {
@@ -22,7 +24,7 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public GoodsVO detailProduct(int mgNum) {
+	public GoodsViewVO detailProduct(int mgNum) {
 		return dao.detailProduct(mgNum);
 	}
 
@@ -42,6 +44,12 @@ public class GoodsServiceImpl implements GoodsService {
 	public void register(GoodsVO vo) throws Exception {
 		// TODO Auto-generated method stub
 		dao.register(vo);		
+	}
+
+	@Override
+	public List<CategoryVO> category() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.category();
 	}
 
 }

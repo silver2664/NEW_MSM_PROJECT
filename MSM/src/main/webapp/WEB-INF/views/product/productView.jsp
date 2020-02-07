@@ -33,6 +33,7 @@ h2 {
 }
 table {
 	margin:auto;
+	
 }
 #section-linetriangle-1 {
 	text-align:center;	
