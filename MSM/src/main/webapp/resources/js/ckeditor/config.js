@@ -4,6 +4,7 @@
  */
 
 CKEDITOR.editorConfig = function( config ) {
+	config.language = 'ko';	
 	config.filebrowserUploadUrl='/product/ckUpload';
 	config.font_defaultLabel = '맑은 고딕'; // 기본 폰트 지정
     config.font_names =  '맑은 고딕; 돋움; 바탕; 돋음; 궁서;'; // 폰트 목록
