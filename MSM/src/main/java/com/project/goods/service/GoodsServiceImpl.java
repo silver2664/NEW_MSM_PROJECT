@@ -33,8 +33,8 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public void deleteProduct(int mgNum) {
-		// TODO Auto-generated method stub
+	public void productDelete(int mgNum) {
+		dao.productDelete(mgNum);
 
 	}
 

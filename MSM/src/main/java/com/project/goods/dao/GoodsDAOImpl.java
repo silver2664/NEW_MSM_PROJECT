@@ -27,13 +27,15 @@ public class GoodsDAOImpl implements GoodsDAO {
 
 	@Override
 	public void productModify(GoodsVO vo) throws Exception {
+		System.out.println("productModify");
+		
 		sqlSession.update("goodsMapper.productModify",vo);
-
 	}
 
 	@Override
-	public void deleteProduct(int mgNum) {
-		// TODO Auto-generated method stub
+	public void productDelete(int mgNum) {
+		
+		sqlSession.delete("goodsMapper.productDelete",mgNum);
 
 	}
 

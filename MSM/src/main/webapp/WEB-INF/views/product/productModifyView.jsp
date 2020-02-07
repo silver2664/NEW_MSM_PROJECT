@@ -40,12 +40,12 @@ h2{
 	<div class="container">
 		<h2> 상품  수정</h2>
 		<hr/>
-		<form name="form" id="form"  method="post" action="/product/productModify" >
+		<form name="form" id="form"  method="post" action="/product/productModify" enctype="multipart/form-data" >
 		<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
-		<input type="hidden" id="mgNum" name="n" value="${mo.mgNum}" readonly="readonly">
+		<input type="hidden" id="mgNum" name="mgNum" value="${mo.mgNum}" readonly="readonly">
 			<div class="mb-3">
 				<label for="mgName"><strong>상품명</strong></label>
-				<input type="text" class="form-control" name="mgName" id="mhName" value="${mo.mgName}" required>
+				<input type="text" class="form-control" name="mgName" id="mgName" value="${mo.mgName}" required>
 			</div>
 			
 			<div class="mb-3">
@@ -58,7 +58,8 @@ h2{
 			</div>
 			<div class="inputArea">
  			<label for="gdsImg">이미지</label>
- 			<input type="file" id="mgImg" name="mgImg" value="${mo.mgImg}" />
+ 			<input type="hidden" name="mgImg" value="${mo.mgImg}">
+ 			<input type="file" id="mgImg" name="file"  />
  			<div class="select_img"><img src="" /></div>
  			
  			</div>
@@ -120,7 +121,7 @@ $(document).ready(function() {
 	
 	$("#btnList").click(function(e) {
 		e.preventDefault();
-		location.href="qnaList";
+		location.href="listView";
 	});
 		
 	

@@ -26,13 +26,20 @@
 
 <!-- 상품수정  -->
 <update id="productModify" parameterType="com.project.goods.vo.GoodsVO">
-	UPDATE EX_GOODS 
+
+	UPDATE EX_GOODS
 	SET 
 	MGNAME= #{mgName},
 	MGPRICE = #{mgPrice},
 	MGSTOCK =#{mgStock},
-	MGIMG =#{mgImg},
+	MGIMG = #{mgImg},
 	MGCONTENT = #{mgContent}
-	WHERE MGNUM = ${mgNum}
+	WHERE MGNUM = #{mgNum}
 </update>
+
+<!-- 상품삭제 -->
+<delete id="productDelete">
+	DELETE EX_GOODS
+	WHERE MGNUM = #{mgNum}
+</delete>
 </mapper>

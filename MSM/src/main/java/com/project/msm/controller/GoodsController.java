@@ -198,10 +198,12 @@ public class GoodsController {
 			
 			//상품 수정
 			@RequestMapping(value="/product/productModifyView",method=RequestMethod.GET)
-			public void getProductModify(@RequestParam("n") int mgNum,Model model) throws Exception	 {
+			public void getProductModify(@RequestParam("mgNum") int mgNum,Model model) throws Exception	 {
 				logger.info("get product modify");
-				
 				GoodsVO vo = service.detailProduct(mgNum);
+				System.out.println(vo.getMgNum());
+				
+				System.out.println(vo.getMgImg());
 				model.addAttribute("mo",vo);
 				
 				
@@ -209,14 +211,42 @@ public class GoodsController {
 			}
 			//상품수정 
 			@RequestMapping(value="/product/productModify",method=RequestMethod.POST)
-			public String productModify(GoodsVO vo) throws Exception {
+			public String productModify(GoodsVO vo,MultipartFile file,HttpServletRequest req) throws Exception {
 				logger.info("productModify");
 				
+				//새로운 상품이 등록되었는지 확인
+				if (file.getOriginalFilename() != null && file.getOriginalFilename() !="") {
+					//기존 파일을 삭제
+					new File(uploadPath + req.getParameter("mgImg")).delete();
+					new File(uploadPath + req.getParameter("gdsThumbImg")).delete();
+					
+					//새로운 첨부 파일을 등록
+					String imgUploadPath = uploadPath + File.separator + "imgUpload";
+					String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+					String fileName = UploadFileUtils.uploadFile(imgUploadPath, file.getOriginalFilename(),file.getBytes());
+					
+					vo.setMgImg( "imgUpload"   + File.separator +ymdPath + File.separator + fileName);
+					vo.setMgThumbImg(  "imgUpload" + ymdPath +File.separator +"s" + File.separator +"s" +fileName);
+				} else { //새로운 파일이 등록되지 않았다면
+					//기존 이미지 그대로 사용
+					vo.setMgImg(req.getParameter("mgImg"));
+					vo.setMgThumbImg(req.getParameter("mgThumbImg"));
+				}
 				service.productModify(vo);
 				
 				return "redirect:/product/listView";
 			}
-
+			
+			//상품 삭제
+			@RequestMapping(value="/product/productDelete", method=RequestMethod.POST)
+			public String productDelete(@RequestParam("mgNum") int mgNum) {
+				logger.info("productDelete");
+				
+				service.productDelete(mgNum);
+				
+				return "redirect:/product/listView";
+				
+			}
 			
 			
 			}

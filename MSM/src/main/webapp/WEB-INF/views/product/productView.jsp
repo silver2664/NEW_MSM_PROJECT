@@ -62,8 +62,9 @@ table {
 			</td>
 			<td>
 				<table style = "height : 516px; width : 456px;">
-					<tr align = "center">						
-						<td>${vo.mgName}</td>
+					<tr align = "center" >	
+								
+						<td><span>${vo.mgName}</span></td>
 					</tr>					
 					<tr align = "center">						
 						<td><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${vo.mgPrice}"/></td>
@@ -72,8 +73,8 @@ table {
 						<td colspan = "2">
 							<form name = "form1" role="form" method = "post" action = "/cart/insert">
 								<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
-								<input type = "hidden" name = "n" value = "${vo.mgNum}"/>
-								<input type ="hidden" name>
+								<input type = "hidden" name = "mgNum" value = "${vo.mgNum}"/>
+								
 								<select name = "amount">
 									<c:forEach begin = "1" end = "10" var = "i">
 										<option value = "${i}">${i}</option>
@@ -83,6 +84,7 @@ table {
 							</form>
 								<a href = "/product/listView">상품목록</a>
 								<button class="btn btn-primary btn-sm" id="update">상품 수정</button>
+								<button class="btn btn-danger btn-sm" id="delete">상품 삭제</button>
 								
 						</td>
 					</tr>
@@ -161,6 +163,13 @@ function closeNav2() {
 			formObj.attr("action","/product/productModifyView");
 			formObj.attr("method","get");
 			formObj.submit();
+		});
+		$("#delete").click(function() {
+			var con = confirm("정말로 삭제 하시겠습니까?");
+			if(con) {
+				formObj.attr("action","/product/productDelete");
+				formObj.submit();
+			}
 		});
 
 	
