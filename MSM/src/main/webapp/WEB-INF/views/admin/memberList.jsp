@@ -26,27 +26,38 @@
 </head>
 
 <body>
-<%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
 
 <h3>MemberList</h3>
 <hr/>
 
 <div class = "container mb-3">
 	<form role = "form" method = "get">
-	<table>
-		<tr>
-			<th>ID</th>
-			<!-- <th>PASSWORD</th>  -->
-			<th>NAME</th>
-			<th>EMAIL</th>
-			<th>PHONE</th>
-			<th>권한</th>
-			<th>우편번호</th>
-			<th>주소</th>
-			<th>가입일</th>
-		</tr>
+	<table class = "table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>
+					<div class = "custom-control custom-checkbox">
+						<input type = "checkbox" class = "custom-control-input" id = "tableDefaultCheck1">
+						<label class = "custom-control-label" for = "tableDefaultCheck1"></label>
+					</div>
+				</th>
+				<th>ID</th>
+				<th>NAME</th>
+				<th>EMAIL</th>
+				<th>PHONE</th>
+				<th>권한</th>				
+				<th>가입일</th>
+			</tr>
+		</thead>
+		<tbody>
 		<c:forEach var = "member" items = "${memberList}">
 		<tr>
+			<th scope = "row">
+				<div class = "custom-control custom-checkbox">
+					<input type = "checkbox" class = "custom-control-input" id = "tableDefaultCheck2">
+					<label class = "custom-control-label" for = "tableDefaultCheck2"></label>
+				</div>
+			</th>
 			<td>
 				<a href="/member/memberDetail?mId=${member.mId}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}"><c:out value="${member.mId}" /></a>
 			</td>
@@ -54,12 +65,11 @@
 			<td>${member.mName}</td>
 			<td>${member.mEmail}</td>
 			<td>${member.mPhone}</td>
-			<td>${member.authority}</td>
-			<td>${member.mZip_Code}</td>
-			<td>${member.mFirst_Addr}&nbsp;${member.mSecond_Addr}</td>
+			<td>${member.authority}</td>			
 			<td>${member.regDate}</td>			
 		</tr>
-		</c:forEach>  		
+		</c:forEach>
+		</tbody>  		
 	</table>
 	<div class="search">
 	    <select name="searchType">
@@ -92,7 +102,15 @@
 </div>
 
 
-<%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>
+
+
+
+
+
+
+
+
+
 <!-- SCRIPTS -->
 <!-- JQuery -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

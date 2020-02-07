@@ -2,7 +2,7 @@
 </head>
 <body>
 <!-- Header Navbar -->
-<div style = "height : 10%" class = "mb-4">
+<div style = "height : 10%" class = "mb-5">
 	<nav class = "navbar fixed-top navbar-expand-lg navbar-light white" id = "headerNav">
 		<div class = "container-fluid">
 			<!-- BRAND -->
