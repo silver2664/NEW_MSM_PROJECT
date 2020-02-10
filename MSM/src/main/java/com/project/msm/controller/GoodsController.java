@@ -262,9 +262,19 @@ public class GoodsController {
 				return "redirect:/product/listView";
 				
 			}
-			
-			
+			@RequestMapping(value = "/list", method = RequestMethod.GET)
+			public String listView(Model model) throws Exception {
+				
+				logger.info("Goods List");	
+				
+				model.addAttribute("list", service.listProduct());
+				
+				return "/product/list";
 			}
+			
+			
+			
+}
 			
 
 			

@@ -33,7 +33,7 @@
 	MGPRICE = #{mgPrice},
 	MGSTOCK =#{mgStock},
 	MGIMG = #{mgImg},
-	MGCONTENT = #{mgContent}
+	MGCONTENT = #{mgContent},
 	CATECODE = #{cateCode}
 	WHERE MGNUM = #{mgNum}
 </update>
@@ -60,4 +60,15 @@
 	ON G.CATECODE = C.CATECODE
 	WHERE MGNUM = #{mgNum}
 </select>
+
+<!-- 카테고리 리스트 -->
+<select id="cateList" resultType="com.project.goods.vo.GoodsViewVO">
+	select
+    g.mgNum, g.mgName,g.cateCode,c.cateCodeRef,c.cateName,mgPrice,mgStock,mgContent,g.mgImg
+    from ex_goods g
+            inner join goods_category c
+                on g.catecode = c.catecode
+                where g.catecode = #{cateCode}
+</select>
+
 </mapper>

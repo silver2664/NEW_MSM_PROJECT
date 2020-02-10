@@ -9,6 +9,18 @@
 			<a class = "navbar-brand wave-effect" href = "/home">
 				<strong class = "blue-text">MSM</strong>
 			</a>
+			<ul class="nav navbar-nav">				
+				<li class="dropdown"><a href="/product/listView" class="droopdown-toggle" data-toggle="dropdown">AAS<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="/brand/brandList?c=101&l=2">Rings</a></li>
+						<li><a href="/brand/brandList?c=102&l=2">Earrings</a></li>
+						<li><a href="/brand/brandList?c=103&l=2">Bracelets</a></li>
+						<li><a href="/brand/brandList?c=104&l=2">Necklaces</a></li>
+					</ul>
+				</li>
+			
+			</ul>
+			
 			<!-- Collapse Menu -->
 		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerMenu">
 		   		<span class="navbar-toggler-icon"></span>

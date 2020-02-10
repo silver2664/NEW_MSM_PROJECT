@@ -26,6 +26,12 @@ public interface GoodsService {
 	//카테고리
 	public List<CategoryVO> category() throws Exception;
 	
+	//카테고리 리스트
+	
+
+	public List<GoodsViewVO> catelist(int cateCode) throws Exception;;
+	
+	
 	
 	
 }

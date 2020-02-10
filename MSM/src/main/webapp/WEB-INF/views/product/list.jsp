@@ -1,11 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session = "true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix = "sec" uri = "http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -13,41 +11,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>상품 목록 -- MSM</title>
-<style>
-.row {
-	
-	
-}
-div#root {
-	width:90%;
-	margin: 0 auto;
-}
-
-aside {
-	float:left;
-	width:180px;
-}
- 
-.card {
-	margin-bottom:20px;
-	
-}
-.card-columns {
-	@include media-breakpoint-only(lg) {
-    column-count: 4;
-}
-#brandIntro {
-	height : 100vh;
-	background-image : url("/resources/images/indexPageImg/ms1.jpg");
-	background-size : cover;
-	background-position : center;
-	background-repeat : no-repeat;	
-}
-
-
-</style>
-
+<meta id = "_csrf" name = "_csrf" content = "${_csrf.token}"/>
+<title>MSM Brand Mall</title>
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <!-- Bootstrap core CSS -->
@@ -56,13 +21,23 @@ aside {
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
 <!-- resource CSS -->
 <link href = "<c:url value = "/resources/css/home.css"/>" rel = "stylesheet" type = "text/css">
+<!-- CK EDITOR -->
+<script src="/resources/js/ckeditor/ckeditor.js"></script>
+<style>
+#brandIntro {
+	height : 100vh;
+	background-image : url("/resources/images/indexPageImg/ms1.jpg");
+	background-size : cover;
+	background-position : center;
+	background-repeat : no-repeat;	
+}
+</style>
 </head>
 <body>
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
 
-
-<div class = "container-fulid">
-	<div class = "mask rgba-blakc-white d-flex justify-content-start align-items-center" style = "height : 700px;" id = "brandIntro">
+<!-- Brand Intro Image & Text -->
+<div class = "mask rgba-blakc-white d-flex justify-content-start align-items-center" style = "height : 700px;" id = "brandIntro">
 	<div class = "text-left mx-5">
 		<h3 class = "mb-4 font-weight-bold text-monospace"><strong>AAS-STUDIO</strong></h3>
 		<p class = "mb-3 text-monospace font-weight-bolder font-italic"><strong>젠더리스 쥬얼리 아스 - Find your second skin</strong></p>
@@ -86,65 +61,71 @@ aside {
 		<a target = "_blank" href = "http://aas-studio.com" class = "btn btn-outline-secondary btn-lg">AAS-STUDIO HOMEPAGE</a>
 	</div>	
 </div>
-</div>
-<hr>
 
-<div class="container-fluid">
-	<aside>
-	<%@ include file = "/WEB-INF/views/shareResource/aside.jsp" %>
-	</aside>
-	<div class="row">		
-		<c:forEach var = "row" items = "${list}">
-			<div class="col-xl-3 col-md-3 col-sm-3 card card-cascade narrow card-ecommerce d-flex">
-				<!-- Card Image -->
-				
-				<div class="view view-cascade overlay">
-					<a href = "${path}/product/productView/${row.mgNum}">
-							<img src = "/resources/${row.mgImg}" style="width:100%">
-						</a>			
-				</div>
-				<!-- Card Content -->
-				<div class="card-body card-body-cascade text-center pb-3">
-					<!-- Title -->
-					<h5 class="card-title mb-1">
-						<strong> <a href="${path}/product/productView/${row.mgNum}">${row.mgName}</a>
-						</strong>
-					</h5>
-					<!-- Rating 
-					<div class="container">
-						<i class="fas fa-star amber-text"></i> <i
-							class="fas fa-star amber-text"></i> <i
-							class="fas fa-star amber-text"></i> <i
-							class="fas fa-star amber-text"></i> <i
-							class="fas fa-star amber-text"></i>
-					</div>-->
-					<!-- Description 
-					<p class="card-text">MSM Goods No.1 Example</p>-->
-					<!-- Card Footer -->
-					
-					<div class="card-footer px-1">
-						<span class="float-left font-weight-bold">
-						 <strong><fmt:setLocale value="ko_KR"/>
-						 <fmt:formatNumber type="currency" value="${row.mgPrice}"/></strong>
-						</span> <span class="float-right"> <a
-							class="material-tooltip-main" data-toggle="tooltip"
-							data-place="top" title="Add to Cart"> <i
-								class="fas fa-shopping-cart grey-text ml-3"></i>
-						</a> <a class="material-tooltip-main" data-toggle="tooltip"
-							data-place="top" title="Add to WishList"> <i
-								class="fas fa-heart grey-text ml-3"></i>
-						</a>
-						</span>
-					</div>
-				</div>
+<!-- Brand LOGOs -->
+<div class = "mt-2" style = "height : 150px; background-color : #fafafa">
+	<div class = "container-fluid">
+		<div class = "row mb-2" style = "margin : auto">
+			<div class = "col-sm-2 mt-3 mb-2 ml-4" style = "height : 100px; margin : auto">
+				<img src = "/resources/images/logo/logo2.jpg" style = "width : 200px; height : 100px;">
 			</div>
-			</c:forEach>		
+			<div class = "col-sm-2 mt-3 mb-2 ml-4" style = "height : 100px; margin : auto">
+				<img src= "/resources/images/logo/aasLogo.jpg" style = "width : 200px; height : 100px;">
+			</div>
+			<div class = "col-sm-2 mt-3 mb-2 ml-4" style = "height : 100px; margin : auto">
+				<img src= "/resources/images/logo/mdbLogo.jpg" style = "width : 200px; height : 100px;">
+			</div>
+			<div class = "col-sm-2 mt-3 mb-2 ml-4" style = "height : 100px; margin : auto">
+				<img src= "/resources/images/logo/githubLogo.jpg" style = "width : 200px; height : 100px;">
+			</div>
+			<div class = "col-sm-2 mt-3 mb-2 ml-4" style = "height : 100px; margin : auto">
+				<img src= "/resources/images/logo/javaLogo.jpg" style = "width : 200px; height : 100px;">
+			</div>	
+		</div>
+	</div>
 </div>
+<div class = "mb-3" style = "height : 150px; background-color : #fafafa">
+	<div class = "container-fluid">
+		<div class = "row mb-2" style = "margin : auto">
+			<div class = "col-sm-2 mt-3 mb-2 ml-4" style = "height : 100px; margin : auto">
+				<img src = "/resources/images/logo/springLogo.png" style = "width : 200px; height : 100px;">
+			</div>
+			<div class = "col-sm-2 mt-3 mb-2 ml-4" style = "height : 100px; margin : auto">
+				<img src= "/resources/images/logo/eclipseLogo.jpg" style = "width : 200px; height : 100px;">
+			</div>
+			<div class = "col-sm-2 mt-3 mb-2 ml-4" style = "height : 100px; margin : auto">
+				<img src= "/resources/images/logo/bootstrapLogo.png" style = "width : 200px; height : 100px;">
+			</div>
+			<div class = "col-sm-2 mt-3 mb-2 ml-4" style = "height : 100px; margin : auto">
+				<img src= "/resources/images/logo/googleLogo.jpg" style = "width : 200px; height : 100px;">
+			</div>
+			<div class = "col-sm-2 mt-3 mb-2 ml-4" style = "height : 100px; margin : auto">
+				<img src= "/resources/images/logo/w3shools.png" style = "width : 200px; height : 100px;">
+			</div>	
+		</div>
+	</div>
 </div>
 
-<button class="btn btn-info btn-sm" id="register">상품등록</button>
+<!-- Contents -->
+
+<section>
+	<div>
+		<section>
+			<c:forEach var = "row" items = "${list}">
+			<li>
+				<div class="mgImg">
+					<img  src="${row.mgImg}">
+				</div>
+			</li>
+			</c:forEach>
+		</section>
+	</div>
+</section>
 
 
+
+
+<%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>
 <!-- SCRIPTS -->
 <!-- JQuery -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -155,12 +136,6 @@ aside {
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
 <script>
-$(document).ready(function() {	
-	$("#register").click(function(e) {
-		
-		location.href="/product/product_reg";
-	});
-});
 function openNav() {
 	  document.getElementById("mySidenav").style.width = "30vw";
 	}
@@ -176,10 +151,6 @@ function closeNav() {
 function closeNav2() {
 	  document.getElementById("mySidenav2").style.width = "0";
 	}
-	
-
 </script>
-
-<%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>
 </body>
 </html>

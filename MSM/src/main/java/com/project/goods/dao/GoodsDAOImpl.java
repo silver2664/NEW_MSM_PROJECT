@@ -51,5 +51,12 @@ public class GoodsDAOImpl implements GoodsDAO {
 	public List<CategoryVO> category() throws Exception {
 		return sqlSession.selectList("goodsMapper.category");
 	}
+	
+	//카테고리 리스트
+	@Override
+	public List<GoodsViewVO> catelist(int cateCode) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("goodsMapper.cateList",cateCode);
+	}
 
 }

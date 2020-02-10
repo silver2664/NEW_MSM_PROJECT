@@ -2,8 +2,10 @@ package com.project.msm;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,12 +15,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.project.goods.service.GoodsService;
+import com.project.goods.vo.GoodsViewVO;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
 public class HomeController {
+	
+	@Inject
+	GoodsService service;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -40,7 +49,9 @@ public class HomeController {
 	}	
 	
 	@RequestMapping ("home") 
-	public String home(HttpServletRequest request, HttpServletResponse response) { 
+	public String home(HttpServletRequest request, HttpServletResponse response) throws Exception { 
+		
+		
 		return "home"; 
 	}
 

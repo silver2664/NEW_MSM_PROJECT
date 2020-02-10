@@ -26,5 +26,8 @@ public interface GoodsDAO {
 	//카테고리
 	public List<CategoryVO> category() throws Exception; 
 	
+	//카테 리스트
+	public List<GoodsViewVO> catelist(int cateCode) throws Exception;
+	
 
 }

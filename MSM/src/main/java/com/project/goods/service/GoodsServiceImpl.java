@@ -52,4 +52,10 @@ public class GoodsServiceImpl implements GoodsService {
 		return dao.category();
 	}
 
+	@Override
+	public List<GoodsViewVO> catelist(int cateCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.catelist(cateCode);
+	}
+
 }
