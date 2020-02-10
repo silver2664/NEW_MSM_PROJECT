@@ -224,7 +224,7 @@ public class UserController {
 		
 		logger.info("update MemberAuth");
 		
-		userService.updateAuth(memberVO);
+		//userService.updateAuth(memberVO);
 		
 		rttr.addAttribute("page", scri.getPage());
 		rttr.addAttribute("perPageNum", scri.getPerPageNum());

@@ -1,5 +1,6 @@
 package com.project.member.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +35,7 @@ public interface UserService {
 	public void update(MemberVO memberVO) throws Exception;
 	
 	//10. 회원권한 변경
-	public void updateAuth(MemberVO memberVO) throws Exception;
+	public void updateAuth(HashMap<String, Object> map) throws Exception;
 	
 	//11. 회원비밀번호 변경
 	public void updatePw(MemberVO memberVO) throws Exception;

@@ -2,6 +2,7 @@ package com.project.member.service;
 
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -139,8 +140,8 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	//10. 회원권한 변경
-	public void updateAuth(MemberVO memberVO) throws Exception{
-		userDAO.updateAuth(memberVO);
+	public void updateAuth(HashMap<String, Object> map) throws Exception{
+		userDAO.updateAuth(map);
 	}
 	
 	//11. 회원비밀번호 변경

@@ -83,11 +83,12 @@
 
 <h1 class = "text-center mt-4">Member List</h1>
 <hr/>
-
+<button class = "btn btn-primary btn-sm" id = "updateAuth">권한변경하기</button>
+<button class = "btn btn-primary btn-sm" id = "updateAuth2">ROW DATA 출력</button>
 <!-- MemberList -->
 <div class = "container mb-3">
 	<form role = "form" method = "get">
-		<button type = "submit" class = "btn btn-primary btn-sm updateAuth">권한변경하기</button>
+		
 		<table class = "table table-bordered table-striped table-hover">
 			<thead class = "black white-text text-center">
 				<tr>
@@ -107,24 +108,22 @@
 			</thead>
 			<tbody class = "text-center">
 				<c:forEach var = "member" items = "${memberList}">
-				<input type = "hidden" id = "authority" name = "${member.authority}"/>
 				<tr id = "memberTR">
-					<th scope = "row">
+					<td scope = "row">
 						<div class = "custom-control custom-checkbox">
 							<input type = "checkbox" class = "custom-control-input chk" name = "chk" id = "${member.mId}" data-memberId="${member.mId}">
 							<label class = "custom-control-label" for = "${member.mId}"></label>
 						</div>
-					</th>
+					</td>
 					<td>
 						<a href="/member/memberDetail?mId=${member.mId}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}"><c:out value="${member.mId}"/></a>
 					</td>
-					<!-- <td>${member.mPw}</td>  -->
 					<td>${member.mName}</td>
 					<td>${member.mEmail}</td>
 					<td>${member.mPhone}</td>
 					<td>
-						<select name = "authority" id = "authority">
-							<option value = "${member.authority}">${member.authority}</option>
+						<select name ="authority">
+							<option value = "${member.authority}" selected = "selected">${member.authority}</option>
 							<option value = "USER">USER</option>
 							<option value = "MANAGER">MANAGER</option>
 						</select>
@@ -134,6 +133,9 @@
 				</c:forEach>
 			</tbody> 
 		</table>
+		
+		<div id = "result"></div><br/>
+		<div id = "result2"></div>
 		
 		<!-- pagination -->
 		<div style = "height : 50px;">
@@ -274,20 +276,24 @@ $(".chk").click(function(){
 </script>
 
 <script>
-/*
-$('.updateAuth').click(function(){
+
+$('#updateAuth').click(function(){
 	var confirm_val = confirm("회원 권한 변경하시겠습니까?");
 			
 	if(confirm_val){
-		var checkArr = new Array();
+		var tdArr = new Array();
+		var tdArr2 = new Array();		
+		var checkBox = $("input[name='chk']:checked")
 				
-		$("input[class='chk']:checked").each(function(){
-			checkArr.push($(this).attr("data-memberId"));
+		$(checkBox).each(function(){
+			var authority = $("select[name='authority']").val();
+			tdArr.push($(this).attr("data-memberId"));
+			tdArr2.push(authority);
 		});
 				
 		var data = {};
-		data["mId"] = checkArr;
-				
+		data["mId"] = tdArr;
+		data["authority"] = tdArr2;		
 		$.ajax({
 			url : "/admin/updateAuth",
 			type : "POST",
@@ -308,27 +314,27 @@ $('.updateAuth').click(function(){
 		});
 	}
 });
-*/
+
 </script>
 
 <script>
-$('.updateAuth').click(function(){
+$('#updateAuth2').click(function(){
 	
 	var rowData = new Array();
 	var tdArr = new Array();
 	var checkBox = $("input[name='chk']:checked");
 	
 	checkBox.each(function(i){
-		var tr = checkBox.parent().parent().eq(i);
-		var td = tr.child();
+		var tr = checkBox.parent().parent().parent().eq(i); // checkbox의 부모 div -> td -> tr
+		var td = tr.children();
 		
-		rowData.push(tr, text());
+		rowData.push(tr.text()); // 체크된 모든 ROW 데이터
 		
-		var id = td.eq(1).text+", ";
-		var name = td.eq(2).text+", ";
-		var email = td.eq(3).text+", ";
-		var phone = td.eq(4).text+", ";
-		var authority = td.eq(5).text+", ";
+		var id = td.eq(1).text()+", ";
+		var name = td.eq(2).text()+", ";
+		var email = td.eq(3).text()+", ";
+		var phone = td.eq(4).text()+", ";
+		var authority = td.eq(5).text()+", ";
 		
 		tdArr.push(id);
 		tdArr.push(name);
@@ -337,8 +343,8 @@ $('.updateAuth').click(function(){
 		tdArr.push(authority);
 	});
 	
-	console.log(rowData);
-	console.log(tdArr);	
+	$("#result").html("체크된 모든 ROW 데이터 : " + rowData);
+	$('#result2').html(tdArr);
 });
 
 </script>

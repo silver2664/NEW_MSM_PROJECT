@@ -1,10 +1,10 @@
 package com.project.member.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.project.board.vo.SearchCriteria;
-import com.project.member.vo.MemberDTO;
 import com.project.member.vo.MemberVO;
 import com.project.msm.util.RegisterRequest;
 
@@ -41,7 +41,7 @@ public interface UserDAO {
 	public void update(MemberVO memberVO) throws Exception;
 	
 	//11. 회원권한 변경
-	public void updateAuth(MemberVO memberVO) throws Exception;
+	public void updateAuth(HashMap<String, Object> map) throws Exception;
 	
 	//12. 회원비밀번호 변경
 	public void updatePw(MemberVO memberVO) throws Exception;

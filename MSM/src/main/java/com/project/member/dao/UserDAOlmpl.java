@@ -1,5 +1,6 @@
 package com.project.member.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -79,8 +80,8 @@ public class UserDAOlmpl implements UserDAO {
 		sqlSession.update("userMapper.update", memberVO);
 	}
 	//11. 회원권한 변경
-	public void updateAuth(MemberVO memberVO) throws Exception{
-		sqlSession.update("userMapper.updateAuth", memberVO);
+	public void updateAuth(HashMap<String, Object> map) throws Exception{
+		sqlSession.update("userMapper.updateAuth", map);
 	}
 	
 	//12. 회원비밀번호 변경

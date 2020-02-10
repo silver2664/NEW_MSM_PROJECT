@@ -2,7 +2,9 @@ package com.project.msm.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -58,13 +60,29 @@ public class AdminCotroller {
 	// 회원 권한 변경
 	@RequestMapping(value = "/admin/updateAuth", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> updateAuth(@RequestBody Map<String, Object> map) throws Exception {
+	public void updateAuth(@RequestBody Map<String, Object> map) throws Exception {
+		
+		Set<String> keySet = map.keySet();
+		Iterator<String> keyIterator = keySet.iterator();
+		while(keyIterator.hasNext()) {
+			String key = keyIterator.next();
+			String mId = map.get(key).toString(); 
+			System.out.println("key : " + key + " " + "value : " + mId);
+		}
+		/*
 		System.out.println(map);
 		System.out.println("userId : " + map.get("mId"));
 		System.out.println("authority : " + map.get("authority"));
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-		map.put("AA", "1");
-		return resultMap;
+		for(int i = 0; i<resultMap.size(); i++) {
+			MemberVO vo = new MemberVO();
+			vo.setmId((String)map.get("mId"));
+		}
+		resultMap.put("mId", map.get("mId"));
+		resultMap.put("authority", map.get("authority"));
+		System.out.println(resultMap.size());
+		userService.updateAuth((HashMap<String, Object>) resultMap);
+		*/
 	}
 	
 
