@@ -83,7 +83,7 @@
 							<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
 							<button type = "submit" class = "btn btn-outline-white mb-5" style = "color : black" id = "signOut1">Sign Out</button>
 						</form>
-					</sec:authorize>
+						</sec:authorize>
 					</div>					
 				</li>
 			</ul>
