@@ -213,9 +213,11 @@ public class GoodsController {
 			@RequestMapping(value="/product/productModifyView",method=RequestMethod.GET)
 			public void getProductModify(@RequestParam("mgNum") int mgNum,Model model) throws Exception	 {
 				logger.info("get product modify");
-				GoodsViewVO vo = service.detailProduct(mgNum);
 				
+				GoodsViewVO vo = service.detailProduct(mgNum);				
 				model.addAttribute("mo",vo);
+				
+				
 				
 				List<CategoryVO> category = null;
 				category=service.category();
@@ -247,6 +249,7 @@ public class GoodsController {
 					vo.setMgImg(req.getParameter("mgImg"));
 					vo.setMgThumbImg(req.getParameter("mgThumbImg"));
 				}
+				
 				service.productModify(vo);
 				
 				return "redirect:/product/listView";
@@ -262,15 +265,7 @@ public class GoodsController {
 				return "redirect:/product/listView";
 				
 			}
-			@RequestMapping(value = "/list", method = RequestMethod.GET)
-			public String listView(Model model) throws Exception {
-				
-				logger.info("Goods List");	
-				
-				model.addAttribute("list", service.listProduct());
-				
-				return "/product/list";
-			}
+			
 			
 			
 			

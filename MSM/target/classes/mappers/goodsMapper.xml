@@ -54,11 +54,12 @@
 
 <!-- 상품 조회 + 카테고리 조인 -->
 <select id="goodsView" resultType="com.project.goods.vo.GoodsViewVO">
-	SELECT G.MGNUM, G.MGNAME, C.CATECODEREF,C.CATENAME, MGPRICE, MGCONTENT, MGIMG ,MGSTOCK,G.CATECODE
-	FROM EX_GOODS G
-	INNER JOIN GOODS_CATEGORY C
-	ON G.CATECODE = C.CATECODE
-	WHERE MGNUM = #{mgNum}
+	SELECT 
+		G.MGNUM, G.MGNAME, C.CATECODEREF,C.CATENAME, MGPRICE, MGCONTENT, MGIMG ,MGSTOCK,G.CATECODE
+		FROM EX_GOODS G
+			INNER JOIN GOODS_CATEGORY C
+				ON G.CATECODE = C.CATECODE
+			WHERE MGNUM = #{mgNum}
 </select>
 
 <!-- 카테고리 리스트 -->
@@ -67,8 +68,8 @@
     g.mgNum, g.mgName,g.cateCode,c.cateCodeRef,c.cateName,mgPrice,mgStock,mgContent,g.mgImg
     from ex_goods g
             inner join goods_category c
-                on g.catecode = c.catecode
-                where g.catecode = #{cateCode}
+                on g.cateCode = c.cateCode
+                where g.cateCode = #{cateCode}
 </select>
 
 </mapper>

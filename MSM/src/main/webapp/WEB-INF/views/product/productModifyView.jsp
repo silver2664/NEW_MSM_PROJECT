@@ -36,63 +36,67 @@ h2{
 </head>
 <body>
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
-<article class="mb-5">
-	<div class="container">
-		<h2> 상품  수정</h2>
-		<hr/>
-		<form name="form" id="form"  method="post" action="/product/productModify" enctype="multipart/form-data" >
-		<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
-		<input type="hidden" id="mgNum" name="mgNum" value="${mo.mgNum}" readonly="readonly">
-		<label>1차분류</label>
-			<select class="category1">
-				<option value="">브랜드</option>
-			</select>
-			<label>2차 분류</label>
-			<select class="category2" name ="cateCode">
-				<option value="">전체</option>
-			</select>
-			<div class="mb-3">
-				<label for="mgName"><strong>상품명</strong></label>
-				<input type="text" class="form-control" name="mgName" id="mgName" value="${mo.mgName}" required>
-			</div>
-			
-			<div class="mb-3">
-				<label for="mgPrice"><strong>가격</strong></label>
-				<input type="text" class="form-control" name="mgPrice" id="mgPrice" value="${mo.mgPrice}">
-			</div>
-			<div class="mb-3">
-				<label for="mgStock"><strong>수량</strong></label>
-				<input type="text" class="form-control" name="mgStock" id="mgStock" value="${mo.mgStock}">
-			</div>
-			<div class="inputArea">
- 			<label for="gdsImg">이미지</label>
- 			<input type="hidden" name="mgImg" value="${mo.mgImg}">
- 			<input type="file" id="mgImg" name="file"  />
- 			<div class="select_img"><img src="" /></div>
- 			
- 			</div>
-			
-			<div class="mb-3">
-				<label for="content"><strong>내용</strong></label>			
-				<textarea class="form-control" cols="80" rows="10" name="mgContent" id="mgContent"  required>${mo.mgContent}</textarea>
-				<script type="text/javascript">
-				editor = CKEDITOR.replace('mgContent');
-				editor.on( 'required', function( evt ) {
-				    alert( '내용을 입력하세요' );		
-				  
+	<article class="mb-5">
+		<div class="container">
+			<h2>상품 수정</h2>
+			<hr />
+			<form name="form" id="form" method="post"
+				action="/product/productModify" enctype="multipart/form-data">
+				<input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}" />
+				<input type="hidden" id="mgNum"name="mgNum" value="${mo.mgNum}">
+				<label>1차분류</label>
+				<select	class="category1">
+					<option value="">브랜드</option>
+				</select>
+				<label>2차 분류</label>
+					<select class="category2" name="cateCode">
+					<option value="">전체</option>
+					</select>
+				<div class="mb-3">
+					<label for="mgName"><strong>상품명</strong></label>
+					<input type="text"class="form-control" name="mgName" id="mgName"value="${mo.mgName}" required>
+				</div>
 
-				    evt.cancel();
-				} );
-				</script>			
-				<button type="submit" class="btn btn-sm btn-primary"  id="modify">수정</button>
-				<button type="button" class="btn btn-sm btn-info"  id="btnList">목록</button>
-			</div>
-		</form>
-	</div>
-</article>
-		
+				<div class="mb-3">
+					<label for="mgPrice"><strong>가격</strong></label>
+					<input type="text"class="form-control" name="mgPrice" id="mgPrice"value="${mo.mgPrice}">
+				</div>
+				<div class="mb-3">
+					<label for="mgStock"><strong>수량</strong></label>
+					<input type="text"class="form-control" name="mgStock" id="mgStock"value="${mo.mgStock}">
+				</div>
+				<div class="inputArea">
+					<label for="gdsImg">이미지</label>
+					<input type="hidden" name="mgImg"value="${mo.mgImg}">
+					<input type="file" id="mgImg"name="file" />
+					
+					<div class="select_img">
+						<img src="" />
+					</div>
 
-<%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>
+				</div>
+
+				<div class="mb-3">
+					<label for="content"><strong>내용</strong></label>
+					<textarea class="form-control" cols="80" rows="10" name="mgContent"
+						id="mgContent" required>${mo.mgContent}</textarea>
+					<script type="text/javascript">
+						editor = CKEDITOR.replace('mgContent');
+						editor.on('required', function(evt) {
+							alert('내용을 입력하세요');
+
+							evt.cancel();
+						});
+					</script>
+					<button type="submit" class="btn btn-sm btn-primary" id="modify">수정</button>
+					<button type="button" class="btn btn-sm btn-info" id="btnList">목록</button>
+				</div>
+			</form>
+		</div>
+	</article>
+
+
+	<%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>
 
 <!-- SCRIPTS -->
 <!-- JQuery -->
@@ -128,8 +132,8 @@ $(document).ready(function() {
 	
 	
 	$("#btnList").click(function(e) {
-		e.preventDefault();
-		location.href="listView";
+		
+		location.href="/product/listView";
 	});
 	
 	
@@ -200,12 +204,7 @@ $(document).ready(function() {
 	var select_cateCode = '${mo.cateCode}';
 	var select_cateCodeRef = '${mo.cateCodeRef}';
 	var select_cateName = '${mo.cateName}';
-	
-	console.log("select_cateCode = " + select_cateCode);
-	console.log("select_cateCodeRef = " + select_cateCodeRef);
 
-
-	
 	if(select_cateCodeRef != null && select_cateCodeRef != '') {
 	 $(".category1").val(select_cateCodeRef);
 	 $(".category2").val(select_cateCode);
@@ -216,7 +215,7 @@ $(document).ready(function() {
 	 $(".category1").val(select_cateCode);
 	 //$(".category2").val(select_cateCode);
 	 // select_cateCod가 부여되지 않는 현상이 있어서 아래 코드로 대체
-	 $(".category2").append("<option value='" + select_cateCode + "' selected='selected'>전체</option>");
+	 //$(".category2").append("<option value="' + select_cateCode + '" selected='selected'>전체</option>");
 	}
 	
 });

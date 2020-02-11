@@ -38,11 +38,12 @@ aside {
     column-count: 4;
 }
 #brandIntro {
-	height : 100vh;
+	height : 70vh;
 	background-image : url("/resources/images/indexPageImg/ms1.jpg");
 	background-size : cover;
 	background-position : center;
 	background-repeat : no-repeat;	
+	height:600px;
 }
 
 
@@ -62,7 +63,7 @@ aside {
 
 
 <div class = "container-fulid">
-	<div class = "mask rgba-blakc-white d-flex justify-content-start align-items-center" style = "height : 700px;" id = "brandIntro">
+	<div class = "mask rgba-blakc-white d-flex justify-content-start align-items-center"  id ="brandIntro">
 	<div class = "text-left mx-5">
 		<h3 class = "mb-4 font-weight-bold text-monospace"><strong>AAS-STUDIO</strong></h3>
 		<p class = "mb-3 text-monospace font-weight-bolder font-italic"><strong>젠더리스 쥬얼리 아스 - Find your second skin</strong></p>
