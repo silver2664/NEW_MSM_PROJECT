@@ -83,12 +83,13 @@
 
 <h1 class = "text-center mt-4">Member List</h1>
 <hr/>
-<button class = "btn btn-primary btn-sm" id = "updateAuth">권한변경하기</button>
-<button class = "btn btn-primary btn-sm" id = "updateAuth2">ROW DATA 출력</button>
+
 <!-- MemberList -->
 <div class = "container mb-3">
-	<form role = "form" method = "get">
-		
+<button class = "btn btn-primary btn-sm" id = "updateAuth">권한변경하기</button>
+<button class = "btn btn-primary btn-sm" id = "updateAuth2">ROW DATA 출력</button>
+	<form role = "form" method = "post">				
+		<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
 		<table class = "table table-bordered table-striped table-hover">
 			<thead class = "black white-text text-center">
 				<tr>
@@ -123,7 +124,7 @@
 					<td>${member.mPhone}</td>
 					<td>
 						<select name ="authority">
-							<option value = "${member.authority}" selected = "selected">${member.authority}</option>
+							<option value = "${member.authority}">${member.authority}</option>
 							<option value = "USER">USER</option>
 							<option value = "MANAGER">MANAGER</option>
 						</select>
@@ -281,35 +282,43 @@ $('#updateAuth').click(function(){
 	var confirm_val = confirm("회원 권한 변경하시겠습니까?");
 			
 	if(confirm_val){
+		
 		var tdArr = new Array();
-		var tdArr2 = new Array();		
-		var checkBox = $("input[name='chk']:checked")
+		var tdArr2 = new Array();
+		var checkBox = $("input[name='chk']:checked");
 				
-		$(checkBox).each(function(){
-			var authority = $("select[name='authority']").val();
+		$(checkBox).each(function(){			
 			tdArr.push($(this).attr("data-memberId"));
-			tdArr2.push(authority);
 		});
-				
-		var data = {};
+		
+		var selectBox = $("select[name='authority']");
+		
+		$(checkBox).each(function(){
+			tdArr2.push(selectBox.val());
+		});
+		
+		/*
+		data = {};
 		data["mId"] = tdArr;
 		data["authority"] = tdArr2;		
+		*/
+		
 		$.ajax({
 			url : "/admin/updateAuth",
-			type : "POST",
-			data : JSON.stringify(data),
-			dataType : "JSON",
-			contentType : "application/json;charset=UTF-8",
-			async : false,
+			type : "post",
+			data : {
+				id : tdArr,
+				auth : tdArr2
+			},
 			beforeSend : function(xhr) {
 				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
 			},
-			success : function(data, status, errorThrown){
-				console.log("success")
-				location.href = "/admin/admin"
+			success : function(){
+				console.log("success");
+				location.href = "/admin/admin";
 			},
-			error : function(jqXHR, textStatus, errorThrown){
-				alert("error = " + errorThrown)
+			error : function(){
+				alert("error");	
 			}
 		});
 	}

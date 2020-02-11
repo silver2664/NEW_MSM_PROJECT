@@ -80,8 +80,22 @@ public class UserDAOlmpl implements UserDAO {
 		sqlSession.update("userMapper.update", memberVO);
 	}
 	//11. 회원권한 변경
-	public void updateAuth(HashMap<String, Object> map) throws Exception{
-		sqlSession.update("userMapper.updateAuth", map);
+	public void updateAuth(MemberVO vo) throws Exception{
+		
+		sqlSession.update("userMapper.updateAuth", vo);
+		/*
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		String mId = map.get("mId").toString();
+		String authority = map.get("authority").toString();
+		resultMap.put("mId", mId);
+		resultMap.put("authority", authority);
+		System.out.println("권한변경DAO : " + resultMap);
+		sqlSession.update("userMapper.updateAuth", resultMap);
+		*/
+		/*
+		System.out.println("updateAuth DAO : " + vo.getAuthority() + " " + vo.getmId());
+		sqlSession.update("userMapper.updateAuth", vo);
+		*/
 	}
 	
 	//12. 회원비밀번호 변경
@@ -92,5 +106,10 @@ public class UserDAOlmpl implements UserDAO {
 	//13. 회원Email 체크
 	public String emailCheck(String mId) throws Exception {
 		return sqlSession.selectOne("checkEmail", mId);
+	}
+	
+	//13. 아이디, 권한 select
+	public List<HashMap<String, Object>> selectIdAuth() throws Exception {
+		return sqlSession.selectList("userMapper.selectIdAuth");
 	}
 }

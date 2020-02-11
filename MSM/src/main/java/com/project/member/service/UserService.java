@@ -35,12 +35,15 @@ public interface UserService {
 	public void update(MemberVO memberVO) throws Exception;
 	
 	//10. 회원권한 변경
-	public void updateAuth(HashMap<String, Object> map) throws Exception;
+	public void updateAuth(MemberVO vo) throws Exception;
 	
 	//11. 회원비밀번호 변경
 	public void updatePw(MemberVO memberVO) throws Exception;
 	
 	//12. 유저 이메일 셀렉.
 	public String checkEmail(String mId) throws Exception;
+	
+	//13. 아이디, 권한 select
+	public List<HashMap<String, Object>> selectIdAuth() throws Exception;
 	
 }

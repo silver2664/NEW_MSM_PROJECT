@@ -174,7 +174,7 @@
 		]]>
 	</update>
 	<!-- 회원권한 수정하기 -->
-	<update id = "updateAuth" parameterType = "HashMap">
+	<update id = "updateAuth" parameterType = "com.project.member.vo.MemberVO">
 		<![CDATA[
 			UPDATE MSM_MEMBER
 			SET AUTHORITYNAME = #{authority}
@@ -201,6 +201,14 @@
 		WHERE
 			MID = #{mId}
 	]]>
+	</select>
+	
+	<!-- 권한 체크를 위한 mId, authrotiy 셀렉 -->
+	<select id = "selectIdAuth" resultType = "map">
+		<![CDATA[
+			SELECT MID, AUTHTORITYNAME
+			FROM MSM_MEMBER
+		]]>
 	</select>
 	
 </mapper>

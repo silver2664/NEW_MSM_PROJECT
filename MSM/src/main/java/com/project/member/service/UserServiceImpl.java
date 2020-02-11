@@ -140,8 +140,10 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	//10. 회원권한 변경
-	public void updateAuth(HashMap<String, Object> map) throws Exception{
-		userDAO.updateAuth(map);
+	public void updateAuth(MemberVO vo) throws Exception{
+		
+		//System.out.println("updateAuth SERVICE : " + vo.getAuthority() + " " + vo.getmId());
+		userDAO.updateAuth(vo);
 	}
 	
 	//11. 회원비밀번호 변경
@@ -152,6 +154,11 @@ public class UserServiceImpl implements UserService {
 	//12. 유저 이메일 셀렉.
 	public String checkEmail(String mId) throws Exception {
 		return userDAO.emailCheck(mId);
+	}
+	
+	//13. 아이디, 권한 select
+	public List<HashMap<String, Object>> selectIdAuth() throws Exception {
+		return userDAO.selectIdAuth();
 	}
 	
 	
