@@ -93,12 +93,12 @@
 				<input class = "form-control" style = "top : 5px;" placeholder = "상세 주소" name = "mSecond_Addr" id = "mSecond_Addr"
 					type = "text"/>
 			</div>
-			
-			<div class = "form-group text-center">
-				<button type = "submit" class = "btn btn-primary">회원가입</button>
-				<button type = "reset" id = "cancel" class = "btn btn-warning">취소</button>
-			</div>
 		</form>
+		<div class = "form-group text-center">
+				<button class = "btn btn-primary" id = "signup_btn">회원가입</button>
+				<button type = "reset" id = "cancel" class = "btn btn-warning">취소</button>
+				<button class = "btn" id = "validCheck" onclick = "validCheck()">유효성 체크</button>
+		</div>
 	</div>
 </div>
 
@@ -200,6 +200,7 @@ $(document).ready(function(){
 			console.log(nameJ.test($('#mName').val()));
 			$('#name_check').text('');
 		} else {
+			console.log(nameJ.test($('#mName').val()));
 			$("#name_check").text('한글 2-6자 이내로 입력하세요. (특수기호, 공백 사용 불가)');
 			$("#name_check").css('color', 'red');
 		}
@@ -208,86 +209,96 @@ $(document).ready(function(){
 	// 이메일 양식 검사
 	$("#mEmail").blur(function(){
 		if(mailJ.test($('#mEmail').val())){
-			$('#email_check').text('');
+			$('#email_check').text('사용 가능 한 이메일입니다.');
+			$('#email_check').css('color', 'blue');
 		} else {
 			$('#email_check').text('이메일을 확인해주세요.');
 			$('#email_check').css('color', 'red');
 		}
 	});
-	
-	/*=== Form 제출 클릭 후 최종 유효성 체크 ===*/
-	
-	$('form').on('submit', function(){
 		
-		var inval_Arr = new Array(6).fill(false);
-		
-		if(idJ.test($("#mId").val())){
-			inval_Arr[0] = true;
-		} else {
-			inval_Arr[0] = false;
-			alert('아이디를 확인하세요.');
-			return false;
-		}
-		
-		// 비밀번호가 같을 경우 && 비밀번호 정규식		
-		if(($('#mPw').val() == ($('#mPw2').val())) && pwJ.test($('#mPw').val()))
-			inval_Arr[1] = true;		
-		else {
-			inval_Arr[1] = false;
-			alert('비밀번호를 확인하세요.');
-			return false;
-		}
-		
-		// 이름 정규식
-		if(nameJ.test($('#mName').val())) 
-			inval_Arr[2] = true;
-		else {
-			inval_Arr[2] = false;
-			alert('이름을 확인하세요.');
-			return false;
-		}
-		
-		// E-mail 정규식
-		if(mailJ.test($('#mEmail').val())) {
-			console.log(mailJ.test($('#mEmail').val()));
-			inval_Arr[3] = true;
-		} else {
-			inval_Arr[3] = false;
-			alert('이메일을 확인하세요.');
-			return false;
-		}
-		
-		//휴대전화 정규식
-		if(phoneJ.test($('#mPhone').val())){
-			console.log(phone.test($('#mPhone').val()));
-			inval_Arr[4] = true;
-		} else {
-			inval_Arr[4] = false;
-			alert('휴대전화번호 확인하세요.');
-			return false;
-		}
-		
-		//주소 확인
-		if(adress.val() == ''){
-			inval_Arr[5] = false;
-			alert('주소를 확인하세요.');
-			return false;
-		} else {
-			inval_Arr[5] = true;
-		}
-	
-		//전체 유효성 검사
-		var validAll = true;
-		for (var i = 0; i < inval_Arr.length; i++){
-			if (inval_Arr[i] == false){
-				validAll = false;
+	$("#signup_btn").on("click", function(){		
+			
+		var confirm_val = confirm("MSM 회원 가입 하시겠습니까?");
+			
+		if(confirm_val){
+				
+			var inval_Arr = new Array(6).fill(false);
+				
+			if(idJ.test($("#mId").val())){
+				inval_Arr[0] = true;
+			} else {
+				inval_Arr[0] = false;
+				alert('아이디를 확인하세요.');
+				return false;
+			}
+				
+			// 비밀번호가 같을 경우 && 비밀번호 정규식		
+			if(($('#mPw').val() == ($('#mPw2').val())) && pwJ.test($('#mPw').val())){
+				inval_Arr[1] = true;		
+			} else {
+				inval_Arr[1] = false;
+				alert('비밀번호를 확인하세요.');
+				return false;
+			}
+				
+			// 이름 정규식
+			if(nameJ.test($('#mName').val())){
+					inval_Arr[2] = true;
+			}else {
+				inval_Arr[2] = false;
+				alert('이름을 확인하세요.');
+				return false;
+			}
+				
+			// E-mail 정규식
+			if(mailJ.test($('#mEmail').val())) {
+				console.log(mailJ.test($('#mEmail').val()));
+				inval_Arr[3] = true;
+			} else {
+				inval_Arr[3] = false;
+				alert('이메일을 확인하세요.');
+				return false;
+			}
+				
+			//휴대전화 정규식
+			if(phoneJ.test($('#mPhone').val())){
+				console.log(phoneJ.test($('#mPhone').val()));
+				inval_Arr[4] = true;
+			} else {
+				inval_Arr[4] = false;
+				alert('휴대전화번호 확인하세요.');
+				return false;
+			}
+				
+			//주소 확인
+			if(($('#mZip_Code').val()).length > 3){
+				console.log($('#mZip_Code').val());
+				inval_Arr[5] = true;
+				return true;
+			} else {
+				inval_Arr[5] = false;
+				alert("주소를 확인해 주세요.");
+			}
+				
+			
+			//전체 유효성 검사
+			var validAll = true;
+				
+			for (var i = 0; i < inval_Arr.length; i++){
+				if (inval_Arr[i] == false){
+					validAll = false;
+				}
+			}
+				
+			if(validAll == true){ //유효성 통과
+				alert("MSM 회원가입을 환영합니다.");
+				location.href = "/home";
+			} else {
+				alert("정보를 다시 확인해주세요.");
 			}
 		}
-		if(validAll == true){ //유효성 통과
-			alert("MSM 회원가입을 환영합니다.");	
-		} else {
-			alert("정보를 다시 확인해주세요.");
-		}
+			
 	});
 	
 	//취소
@@ -408,6 +419,89 @@ function closeNav() {
 function closeNav2() {
 	  document.getElementById("mySidenav2").style.width = "0";
 	}
+</script>
+
+<script>
+function validCheck(){
+	
+	var inval_Arr = new Array(6).fill(false);
+	
+	var validAll = true;
+		
+	if(idJ.test($("#mId").val())){
+		console.log("유효성 체크1 : COMPLETE");
+		inval_Arr[0] = true;
+	} else {
+		inval_Arr[0] = false;
+		alert('아이디를 확인하세요.');
+		return false;
+	}
+			
+	// 비밀번호가 같을 경우 && 비밀번호 정규식		
+	if(($('#mPw').val() == ($('#mPw2').val())) && pwJ.test($('#mPw').val())){
+		console.log("유효성 체크2 : COMPLETE");
+		inval_Arr[1] = true;		
+	} else {
+		inval_Arr[1] = false;
+		alert('비밀번호를 확인하세요.');
+		return false;
+	}
+			
+	// 이름 정규식
+	if(nameJ.test($('#mName').val())){
+		console.log("유효성 체크3 : COMPLETE");
+		inval_Arr[2] = true;
+	} else {
+		inval_Arr[2] = false;
+		alert('이름을 확인하세요.');
+		return false;
+	}
+			
+	// E-mail 정규식
+	if(mailJ.test($('#mEmail').val())) {
+		console.log("유효성 체크4 : COMPLETE");
+		inval_Arr[3] = true;
+	} else {
+		inval_Arr[3] = false;
+		alert('이메일을 확인하세요.');
+		return false;
+	}
+			
+	//휴대전화 정규식
+	if(phoneJ.test($('#mPhone').val())){
+		console.log("유효성 체크5 : COMPLETE");
+		inval_Arr[4] = true;
+	} else {
+		inval_Arr[4] = false;
+		alert('휴대전화번호 확인하세요.');
+		return false;
+	}
+			
+	//주소 확인
+	if(($('#mZip_Code').val()).length > 3){
+		console.log("유효성 체크6 : COMPLETE");
+		inval_Arr[5] = true;
+		return true;
+	} else {
+		inval_Arr[5] = false;
+		alert("주소를 확인해 주세요.");
+	}
+	
+	//전체 유효성 검사
+	
+	$("#validCheck").on("click", function(){
+		
+		for (var i = 0; i < inval_Arr.length; i++){
+			if (inval_Arr[i] == false){
+				validAll = false;
+				alert("정보를 다시 확인해주세요.");
+			} else {
+				alert("MSM 회원가입을 환영합니다.");
+				location.href = "/home";
+			}
+		}
+	});
+}
 </script>
 <%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>
 </body>

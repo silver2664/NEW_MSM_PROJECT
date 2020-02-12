@@ -52,20 +52,6 @@ public class UserController {
 		logger.info("signUp step1");
 	}
 	
-	/*
-	@RequestMapping("/member/step2")
-	public ModelAndView step2(@RequestParam(value="agree", defaultValue="false") Boolean agree) throws Exception {
-		logger.info("signUp step2.jsp");
-		if(!agree) {
-			ModelAndView mv = new ModelAndView("/member/step1");
-			return mv;
-		}
-		ModelAndView mv = new ModelAndView("/member/step2");
-		mv.addObject("registerRequest", new RegisterRequest());
-		return mv;
-	}
-	*/
-	
 	// 회원가입 STEP2 (EMAIL인증코드생성)
 	@RequestMapping(value = "/member/step2", method = RequestMethod.POST)
 	public ModelAndView step2(@RequestParam(value="agree", defaultValue="false") Boolean agree) throws Exception {

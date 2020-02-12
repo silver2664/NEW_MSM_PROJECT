@@ -108,7 +108,7 @@
 				</tr>
 			</thead>
 			<tbody class = "text-center">
-				<c:forEach var = "member" items = "${memberList}">
+				<c:forEach var = "member" items = "${memberList}" varStatus = "status">
 				<tr id = "memberTR">
 					<td scope = "row">
 						<div class = "custom-control custom-checkbox">
@@ -123,7 +123,7 @@
 					<td>${member.mEmail}</td>
 					<td>${member.mPhone}</td>
 					<td>
-						<select name ="authority">
+						<select name ="authority" id = "authority${status.index}" onchange= "select(${status.index})">
 							<option value = "${member.authority}">${member.authority}</option>
 							<option value = "USER">USER</option>
 							<option value = "MANAGER">MANAGER</option>
@@ -159,9 +159,9 @@
 		<div class="search row justify-content-center">
 			
 		    <select name="searchType">
-		      	<option value="n"<c:out value="${scri.searchType == null ? 'selected' : ''}"/>>-----</option>
+		      	<option value="tnmpar"<c:out value="${scri.searchType eq 'tnmpar' ? 'selected' : ''}"/>>통합검색</option>
 		     	<option value="t"<c:out value="${scri.searchType eq 't' ? 'selected' : ''}"/>>ID</option>
-		      	<option value="c"<c:out value="${scri.searchType eq 'c' ? 'selected' : ''}"/>>EMAIL</option>	     
+		      	<option value="c"<c:out value="${scri.searchType eq 'm' ? 'selected' : ''}"/>>EMAIL</option>	     
 		    </select>
 			
 		    <input type="text" name="keyword" id="keywordInput" value="${scri.keyword}"/>
@@ -255,7 +255,7 @@ document.getElementById("defaultOpen").click();
 <script>
 $(function(){
 	$('#searchBtn').click(function() {
-		self.location = "list" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val());
+		self.location = "admin" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val());
 	});
 });   
 </script>
@@ -278,6 +278,14 @@ $(".chk").click(function(){
 
 <script>
 
+var selectValue;
+
+function select(index){
+	
+	selectValue = $("#authority" + index + " option:selected").val();
+	console.log(selectValue);	
+}
+
 $('#updateAuth').click(function(){
 	var confirm_val = confirm("회원 권한 변경하시겠습니까?");
 			
@@ -287,21 +295,13 @@ $('#updateAuth').click(function(){
 		var tdArr2 = new Array();
 		var checkBox = $("input[name='chk']:checked");
 				
-		$(checkBox).each(function(){			
+		$(checkBox).each(function(i){			
 			tdArr.push($(this).attr("data-memberId"));
+			var tr = checkBox.parent().parent().parent().eq(i);
+			var td = tr.children();
+			var authority = td.eq(5).children().val();
+			tdArr2.push(authority);
 		});
-		
-		var selectBox = $("select[name='authority']");
-		
-		$(checkBox).each(function(){
-			tdArr2.push(selectBox.val());
-		});
-		
-		/*
-		data = {};
-		data["mId"] = tdArr;
-		data["authority"] = tdArr2;		
-		*/
 		
 		$.ajax({
 			url : "/admin/updateAuth",
@@ -327,6 +327,7 @@ $('#updateAuth').click(function(){
 </script>
 
 <script>
+
 $('#updateAuth2').click(function(){
 	
 	var rowData = new Array();

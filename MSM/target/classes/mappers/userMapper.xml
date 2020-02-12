@@ -148,7 +148,18 @@
 	<sql id="search">
 		<if test="searchType != null">
 			<if test="searchType == 't'.toString()">AND MID LIKE '%' || #{keyword} || '%'</if>
-			<if test="searchType == 'c'.toString()">AND MEMAIL LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'n'.toString()">AND MNAME LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'm'.toString()">AND MEMAIL LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'p'.toString()">AND MPHONE LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'a'.toString()">AND AUTHORITYNAME LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'r'.toString()">AND REGDATE LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'tnmpar'.toString()">AND (MID LIKE '%' || #{keyword} || '%')
+			or (MNAME LIKE '%' || #{keyword} || '%')
+			or (MEMAIL LIKE '%' || #{keyword} || '%')
+			or (MPHONE LIKE '%' || #{keyword} || '%')
+			or (AUTHORITYNAME LIKE '%' || #{keyword} || '%')
+			or (REGDATE LIKE '%' || #{keyword} || '%')
+			</if>				
 		</if>
 	</sql>
 	
@@ -173,6 +184,7 @@
 			WHERE MID = #{mId}
 		]]>
 	</update>
+	
 	<!-- 회원권한 수정하기 -->
 	<update id = "updateAuth" parameterType = "com.project.member.vo.MemberVO">
 		<![CDATA[
@@ -201,14 +213,6 @@
 		WHERE
 			MID = #{mId}
 	]]>
-	</select>
-	
-	<!-- 권한 체크를 위한 mId, authrotiy 셀렉 -->
-	<select id = "selectIdAuth" resultType = "map">
-		<![CDATA[
-			SELECT MID, AUTHTORITYNAME
-			FROM MSM_MEMBER
-		]]>
 	</select>
 	
 </mapper>

@@ -98,20 +98,6 @@
 				<button type = "reset" id = "cancel" class = "btn btn-warning">취소</button>
 			</div>
 		</form>
-		<sec:authorize url = "/admin/**">
-		<form action = "/member/updateAuth" method = "POST">
-			<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}"/>			
-			<input type = "hidden" name = "mId" value = "${update.mId}"/>			
-			<div class = "form-group">
-				<label for = "authority">회원권한</label>
-				<select name = "authority" id = "authority">
-					<option value = "USER">USER</option>
-					<option value = "MANAGER">MANAGER</option>
-				</select>
-			</div>
-			<div><button type = "submit" class = "btn btn-primary btn-sm">회원권한변경</button></div>
-		</form>
-		</sec:authorize>
 	</div>
 </div>
 
