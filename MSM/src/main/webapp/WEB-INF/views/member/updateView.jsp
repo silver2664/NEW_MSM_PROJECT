@@ -29,7 +29,7 @@
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
 
 <div id="root" class = "container">	
-	<h1>회원정보 수정</h1>	
+	<h1 class = "text-center">회원정보 수정</h1>	
 	<hr />	
 	<div class = "col-md-12">
 		<form action = "/member/update" method = "post" role = "form" id = "usercheck" name ="member">
@@ -63,7 +63,7 @@
 				<input type = "email" style = "width : 40%; display : inline;" class = "form-control" id = "mEmail" name = "mEmail" value = "${update.mEmail}"/>
 				<button type = "button" class ="btn btn-primary" id = "emailBtn" style = "width : 170px; height : 38px;">인증메일 발송</button>
 				<div class = "eheck_font" id = "email_check"><span style = "color : blue">변경하실 EMAIL 주소 입력 후 인증 절차 진행해주세요.</span></div>				
-				<input type = "hidden" path = "random" id = "random" value = "${random}"/>
+				<input type = "hidden" id = "random" value = "${random}"/>
 				<input type = "text" style = "width : 40%; display : inline;" class = "form-control" id = "emailAuth" name = "emailAuth" placeholder = "인증번호 입력해주세요."/>
 				<button type = "button" class = "btn btn-primary" id = "emailAuthBtn" style = "width : 170px; height : 38px;">Email 인증하기</button>
 			</div>
@@ -105,11 +105,13 @@
 
 <!-- 비밀번호 변경 MODAL 창 처리 -->
 <div class="modal fade" id="changePw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
 	<div class="modal-dialog modal-notify modal-warning" role="document">
-		<!--Content-->
-		
+	
+		<!--Content-->		
 		<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
     	<div class="modal-content">
+    	
       		<!--Header-->
       		<div class="modal-header text-center">
         		<h4 class="modal-title white-text w-100 font-weight-bold py-2">Change Password</h4>
@@ -117,6 +119,7 @@
           		<span aria-hidden="true" class="white-text">&times;</span>
         		</button>
       		</div>
+      		
       		<!-- Body -->
       		<div class="modal-body">
       			<div class = "md-form mb-5">
@@ -139,13 +142,15 @@
           			<div class = "eheck_font" id = "pw2_check"></div>
         		</div>
       		</div>
+      		
       		<!--Footer-->
       		<div class="modal-footer justify-content-center">
         		<button type = "submit" id = "changePw_btn" class="btn btn-outline-primary waves-effect">비밀번호 변경</button>
       		</div>
       	</div>
       	
-	</div>  
+	</div>
+	  
 </div>
 
 <%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>
@@ -239,18 +244,20 @@ $(document).ready(function(){
 				validAll = false;
 			}
 		}
+		
 		if(validAll == true){ //유효성 통과
 			alert("회원정보 수정을 완료하였습니다.");	
 		} else {
 			alert("정보를 다시 확인해주세요.");
 		}
+		
 	});
 	
 	
 	//취소
 	$('#cancel').on("click", function(){
 		event.preventDefault();
-		location.href = "/home";
+		history.back();
 	});
 });
 </script>
@@ -349,8 +356,7 @@ $(document).ready(function(){
 
 <script>
 // 기존 비밀번호 매칭 AJAX
-$(document).ready(function(){
-	
+$(document).ready(function(){	
 
 	//비밀번호 정규식
 	var pwJ = /^.*(?=^.{7,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
@@ -430,8 +436,7 @@ $(document).ready(function(){
 				console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 			}
 		});
-	});
-	
+	});	
 });
 </script>
 

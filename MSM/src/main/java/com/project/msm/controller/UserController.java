@@ -1,8 +1,5 @@
 package com.project.msm.controller;
 
-
-
-import java.util.ArrayList;
 import java.util.Random;
 
 import javax.annotation.Resource;
@@ -26,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
-import com.project.board.vo.PageMaker;
 import com.project.board.vo.SearchCriteria;
 import com.project.member.service.UserService;
 import com.project.member.vo.MemberVO;
@@ -62,9 +58,9 @@ public class UserController {
 		
 		if(!agree) {
 			mv.setViewName("/member/step1");
-			return mv;
-			
-		}		
+			return mv;			
+		}
+		
 		int ran = new Random().nextInt(900000) + 100000;
 		mv.setViewName("/member/step2");
 		mv.addObject("random", ran);
@@ -121,50 +117,6 @@ public class UserController {
 		} else {
 			return new ResponseEntity<String>("false", HttpStatus.OK);
 		}
-	}	
-	
-	/*
-	@RequestMapping(value = "/member/step3", method=RequestMethod.POST)
-	public ModelAndView step3(RegisterRequest regReq, Errors errors) throws Exception {
-		
-		new RegisterRequestValidator().validate(regReq, errors);
-		ModelAndView mv = new ModelAndView();
-		
-		if(errors.hasErrors()) {
-			mv.setViewName("/member/step2");
-			return mv;
-		}
-		
-		try {
-			userService.insertUser(regReq);
-		}
-		catch (AlreadyExistingEmailException e) {
-			errors.rejectValue("mEmail", "duplicate", "이미 가입된 이메일입니다.");
-			mv.setViewName("/member/step2");
-			return mv;
-		}
-		catch (AlreadyExistingIdException e) {
-			errors.rejectValue("mId", "duplicate", "이미 가입된 ID입니다.");
-			mv.setViewName("/member/step2");
-			return mv;
-		}
-		mv.setViewName("/member/step3");
-		return mv;
-	}
-	*/
-	
-	// 회원목록 조회.
-	@RequestMapping(value = "/member/memberList")
-	public ModelAndView memberList(@ModelAttribute("scri") SearchCriteria scri) throws Exception {		
-		ArrayList<MemberVO> memberList = (ArrayList<MemberVO>)userService.getMemberList(scri);
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("memberList", memberList);
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(scri);
-		pageMaker.setTotalCount(userService.listCount(scri));
-		mv.addObject("pageMaker", pageMaker);
-		mv.setViewName("/member/memberList");
-		return mv;
 	}
 	
 	// 회원정보상세보기.
@@ -195,22 +147,6 @@ public class UserController {
 		logger.info("update MemberInfo");
 		
 		userService.update(memberVO);
-		
-		rttr.addAttribute("page", scri.getPage());
-		rttr.addAttribute("perPageNum", scri.getPerPageNum());
-		rttr.addAttribute("searchType", scri.getSearchType());
-		rttr.addAttribute("keyword", scri.getKeyword());
-		
-		return "redirect:/home";
-	}
-	
-	// 회원 권한 부여.
-	@RequestMapping(value = "/member/updateAuth", method = RequestMethod.POST)
-	public String updateAuth(MemberVO memberVO, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr) throws Exception {
-		
-		logger.info("update MemberAuth");
-		
-		//userService.updateAuth(memberVO);
 		
 		rttr.addAttribute("page", scri.getPage());
 		rttr.addAttribute("perPageNum", scri.getPerPageNum());
@@ -272,6 +208,7 @@ public class UserController {
 		System.out.println("RanCode : " + ran);
 		String mPw = Integer.toString(ran);
 		mPw = passwordEncoder.encode(mPw);
+		memberVO.setmId(mId);
 		memberVO.setmPw(mPw);
 		userService.updatePw(memberVO); // 랜덤숫자암호화하여 업데이트
 		String authCode = String.valueOf(ran);
@@ -280,6 +217,20 @@ public class UserController {
 		StringBuilder sb = new StringBuilder();
 		sb.append(mId + "님의 임시비밀번호는 " + authCode + "입니다.");		
 		return userService.send(subject, sb.toString(), "msmproject2020", mEmail, null);
+	}
+	
+	// 회원 탈퇴
+	@RequestMapping(value = "/member/delete", method = RequestMethod.POST)
+	public void delete(@RequestParam String mId, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr) throws Exception{
+		
+		logger.info("회원탈퇴");
+		
+		userService.delete(mId);
+		
+		rttr.addAttribute("page", scri.getPage());
+		rttr.addAttribute("perPageNum", scri.getPerPageNum());
+		rttr.addAttribute("searchType", scri.getSearchType());
+		rttr.addAttribute("keyword", scri.getKeyword());
 	}
 	
 }

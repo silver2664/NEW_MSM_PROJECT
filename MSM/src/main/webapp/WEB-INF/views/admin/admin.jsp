@@ -70,7 +70,7 @@
 
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
 
-<div style = "height : 1000px">
+<div style = "height : 1200px">
 
 <div class = "tab">
 	<button id = "defaultOpen" class = "tablinks" onclick = "openCity(event, 'member')">회원관리</button>
@@ -86,8 +86,9 @@
 
 <!-- MemberList -->
 <div class = "container mb-3">
-<button class = "btn btn-primary btn-sm" id = "updateAuth">권한변경하기</button>
-<button class = "btn btn-primary btn-sm" id = "updateAuth2">ROW DATA 출력</button>
+<div class = "text-right">
+	<button class = "btn btn-primary btn-sm" id = "updateAuth">권한변경하기</button>
+</div>
 	<form role = "form" method = "post">				
 		<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
 		<table class = "table table-bordered table-striped table-hover">
@@ -134,9 +135,6 @@
 				</c:forEach>
 			</tbody> 
 		</table>
-		
-		<div id = "result"></div><br/>
-		<div id = "result2"></div>
 		
 		<!-- pagination -->
 		<div style = "height : 50px;">
@@ -192,13 +190,6 @@
 </div>
 
 <%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>
-
-
-
-
-
-
-
 
 <!-- SCRIPTS -->
 <!-- JQuery -->

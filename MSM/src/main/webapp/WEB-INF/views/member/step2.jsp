@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -15,7 +14,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta id = "_csrf" name = "_csrf" content = "${_csrf.token}" />
-<title>Material Design Bootstrap</title>
+<title>Sign Up(Step 2)</title>
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <!-- Bootstrap core CSS -->
@@ -24,19 +23,21 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
 <!-- resource CSS -->
 <link href = "<c:url value = "/resources/css/home.css"/>" rel = "stylesheet" type = "text/css">
-
 </head>
+
 <body>
 
 <div class = "container">
+
 	<div class = "page-header">
-		<div class = "col-md-12">
-			<h3>회원가입</h3>
+		<div class = "col-md-12 mt-5">
+			<h3 class = "text-center">회원가입</h3>
+			<hr/>
 		</div>
 	</div>
 	
-	<div class = "col-md-12">
-		<form action = "/member/step3" method = "post" role = "form" id = "usercheck" name ="member">
+	<div class = "col-md-12 mb-5 mt-5">
+		<form action = "/member/step3" method = "post" role = "form" id = "usercheck" name ="member" onsubmit="return validCheck()">		
 		<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />		
 			<div class = "form-group">
 				<label for = "mId">아이디</label>
@@ -63,13 +64,13 @@
 			</div>
 			
 			<div class = "form-group">
-				<label for = "mEmail">E-mail</label>
-				<input type = "email" class = "form-control" id = "mEmail" name = "mEmail" placeholder = "EMAIL"/>
-				<div class = "eheck_font" id = "email_check"></div>
+				<label for = "mEmail">E-mail</label><br/>
+				<input type = "email" class = "form-control" id = "mEmail" name = "mEmail" placeholder = "EMAIL" style ="width : 40%; display : inline;"/>
 				<button type = "button" class ="btn btn-primary" id = "emailBtn">인증메일 발송</button>
-				<input type = "hidden" path = "random" id = "random" value = "${random}"/>
-				<input type = "text" class = "form-control" id = "emailAuth" name = "emailAuth" placeholder = "인증번호 입력해주세요."/>
-				<button type = "button" class = "btn btn-primary" id = "emailAuthBtn">Email 인증하기</button>
+				<div class = "eheck_font" id = "email_check"></div>				
+				<input type = "hidden" id = "random" value = "${random}"/>
+				<input type = "text" class = "form-control" id = "emailAuth" name = "emailAuth" placeholder = "인증번호 입력해주세요." style ="width : 40%; display : inline;"/>
+				<button type = "button" class = "btn btn-primary" id = "emailAuthBtn" onclick = "validEmail()">Email 인증하기</button>
 			</div>
 			
 			<div class = "form-group">
@@ -93,13 +94,13 @@
 				<input class = "form-control" style = "top : 5px;" placeholder = "상세 주소" name = "mSecond_Addr" id = "mSecond_Addr"
 					type = "text"/>
 			</div>
-		</form>
-		<div class = "form-group text-center">
+			<div class = "text-center">
 				<button class = "btn btn-primary" id = "signup_btn">회원가입</button>
-				<button type = "reset" id = "cancel" class = "btn btn-warning">취소</button>
-				<button class = "btn" id = "validCheck" onclick = "validCheck()">유효성 체크</button>
-		</div>
+				<button type = "reset" id = "cancel" class = "btn btn-danger">취소</button>
+			</div>
+		</form>
 	</div>
+	
 </div>
 
 <!-- SCRIPTS -->
@@ -129,6 +130,7 @@ var mailJ = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
 // 주소입력 시 사용
 var address = $('#mSecond_Addr');
+
 //================= ID 중복체크 AJAX ================= //
 $(document).ready(function(){			
 	
@@ -215,91 +217,7 @@ $(document).ready(function(){
 			$('#email_check').text('이메일을 확인해주세요.');
 			$('#email_check').css('color', 'red');
 		}
-	});
-		
-	$("#signup_btn").on("click", function(){		
-			
-		var confirm_val = confirm("MSM 회원 가입 하시겠습니까?");
-			
-		if(confirm_val){
-				
-			var inval_Arr = new Array(6).fill(false);
-				
-			if(idJ.test($("#mId").val())){
-				inval_Arr[0] = true;
-			} else {
-				inval_Arr[0] = false;
-				alert('아이디를 확인하세요.');
-				return false;
-			}
-				
-			// 비밀번호가 같을 경우 && 비밀번호 정규식		
-			if(($('#mPw').val() == ($('#mPw2').val())) && pwJ.test($('#mPw').val())){
-				inval_Arr[1] = true;		
-			} else {
-				inval_Arr[1] = false;
-				alert('비밀번호를 확인하세요.');
-				return false;
-			}
-				
-			// 이름 정규식
-			if(nameJ.test($('#mName').val())){
-					inval_Arr[2] = true;
-			}else {
-				inval_Arr[2] = false;
-				alert('이름을 확인하세요.');
-				return false;
-			}
-				
-			// E-mail 정규식
-			if(mailJ.test($('#mEmail').val())) {
-				console.log(mailJ.test($('#mEmail').val()));
-				inval_Arr[3] = true;
-			} else {
-				inval_Arr[3] = false;
-				alert('이메일을 확인하세요.');
-				return false;
-			}
-				
-			//휴대전화 정규식
-			if(phoneJ.test($('#mPhone').val())){
-				console.log(phoneJ.test($('#mPhone').val()));
-				inval_Arr[4] = true;
-			} else {
-				inval_Arr[4] = false;
-				alert('휴대전화번호 확인하세요.');
-				return false;
-			}
-				
-			//주소 확인
-			if(($('#mZip_Code').val()).length > 3){
-				console.log($('#mZip_Code').val());
-				inval_Arr[5] = true;
-				return true;
-			} else {
-				inval_Arr[5] = false;
-				alert("주소를 확인해 주세요.");
-			}
-				
-			
-			//전체 유효성 검사
-			var validAll = true;
-				
-			for (var i = 0; i < inval_Arr.length; i++){
-				if (inval_Arr[i] == false){
-					validAll = false;
-				}
-			}
-				
-			if(validAll == true){ //유효성 통과
-				alert("MSM 회원가입을 환영합니다.");
-				location.href = "/home";
-			} else {
-				alert("정보를 다시 확인해주세요.");
-			}
-		}
-			
-	});
+	});	
 	
 	//취소
 	$('#cancel').on("click", function(){
@@ -377,30 +295,115 @@ $(document).ready(function(){
 });
 </script>
 
+<!-- ===== 이메일 인증번호 확인 AJAX ===== -->
 <script>
-$(document).ready(function(){
-	$("#emailAuthBtn").on("click", function(){
-		$.ajax({
-			url : "/member/emailAuth/",
-			data : {
-				"authCode" : $('#emailAuth').val(),
-				"random" : $('#random').val()
-			},
-			success : function(data){
-				console.log("data : " + data)
-				if(data == "complete"){
-					alert("인증이 완료되었습니다.")
-				}
-				else if(data == "false"){
-					alert("인증번호를 잘못입력하셨습니다.")
-				}
-			},
-			error : function(request, status, error){
-				console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error)
+function validEmail(){	
+	$.ajax({
+		url : "/member/emailAuth/",
+		data : {
+			"authCode" : $('#emailAuth').val(),
+			"random" : $('#random').val()
+		},
+		success : function(data){
+			console.log("data : " + data)
+			if(data == "complete"){
+				alert("인증이 완료되었습니다.");
 			}
-		});
-	});
-});
+			else if(data == "false"){
+				alert("인증번호를 잘못입력하셨습니다.");
+			}
+		},
+		error : function(request, status, error){
+			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error)
+		}
+	});	
+}
+</script>
+
+<!-- ===== 회원정보 Submit 최종 점검 ===== -->
+<script>
+function validCheck(){
+	
+	var inval_Arr = new Array(6).fill(false);
+	
+	var confirm_val = confirm("MSM 회원 가입 하시겠습니까?");
+	
+	if(confirm_val){		
+		
+		//ID 유효성 체크.
+		if(idJ.test($("#mId").val())){
+			console.log("유효성 체크1 : COMPLETE");
+			inval_Arr[0] = true;
+		} else {
+			inval_Arr[0] = false;
+			alert('아이디를 확인하세요.');
+			return false;
+		}
+		
+		// 비밀번호가 같을 경우 && 비밀번호 정규식		
+		if(($('#mPw').val() == ($('#mPw2').val())) && pwJ.test($('#mPw').val())){
+			console.log("유효성 체크2 : COMPLETE");
+			inval_Arr[1] = true;		
+		} else {
+			inval_Arr[1] = false;
+			alert('비밀번호를 확인하세요.');
+			return false;
+		}
+		
+		// 이름 정규식
+		if(nameJ.test($('#mName').val())){
+			console.log("유효성 체크3 : COMPLETE");
+			inval_Arr[2] = true;
+		} else {
+			inval_Arr[2] = false;
+			alert('이름을 확인하세요.');
+			return false;
+		}
+		
+		// E-mail 정규식
+		if(($('#random').val()) == ($('#emailAuth').val())) {
+			console.log("유효성 체크4 : COMPLETE");
+			inval_Arr[3] = true;
+		} else {
+			inval_Arr[3] = false;
+			alert('이메일 인증해주세요.');
+			return false;
+		}
+		
+		//휴대전화 정규식
+		if(phoneJ.test($('#mPhone').val())){
+			console.log("유효성 체크5 : COMPLETE");
+			inval_Arr[4] = true;
+		} else {
+			inval_Arr[4] = false;
+			alert('휴대전화번호 확인하세요.');
+			return false;
+		}
+		
+		//주소 확인
+		if(($('#mZip_Code').val()).length > 3){
+			console.log("유효성 체크6 : COMPLETE");
+			inval_Arr[5] = true;
+		} else {
+			inval_Arr[5] = false;
+			alert("주소를 확인해 주세요.");
+		}
+		
+	} else {
+		return false;
+	}
+	
+	for(var i = 0; i < 6; i++){
+		if(inval_Arr[i] == false){
+			alert("회원정보를 다시 확인해주세요.");
+			return false;
+		}
+	}
+	
+	alert("MSM 회원가입을 환영합니다.");
+	
+	return true;
+}
 </script>
 
 <script>
@@ -421,88 +424,6 @@ function closeNav2() {
 	}
 </script>
 
-<script>
-function validCheck(){
-	
-	var inval_Arr = new Array(6).fill(false);
-	
-	var validAll = true;
-		
-	if(idJ.test($("#mId").val())){
-		console.log("유효성 체크1 : COMPLETE");
-		inval_Arr[0] = true;
-	} else {
-		inval_Arr[0] = false;
-		alert('아이디를 확인하세요.');
-		return false;
-	}
-			
-	// 비밀번호가 같을 경우 && 비밀번호 정규식		
-	if(($('#mPw').val() == ($('#mPw2').val())) && pwJ.test($('#mPw').val())){
-		console.log("유효성 체크2 : COMPLETE");
-		inval_Arr[1] = true;		
-	} else {
-		inval_Arr[1] = false;
-		alert('비밀번호를 확인하세요.');
-		return false;
-	}
-			
-	// 이름 정규식
-	if(nameJ.test($('#mName').val())){
-		console.log("유효성 체크3 : COMPLETE");
-		inval_Arr[2] = true;
-	} else {
-		inval_Arr[2] = false;
-		alert('이름을 확인하세요.');
-		return false;
-	}
-			
-	// E-mail 정규식
-	if(mailJ.test($('#mEmail').val())) {
-		console.log("유효성 체크4 : COMPLETE");
-		inval_Arr[3] = true;
-	} else {
-		inval_Arr[3] = false;
-		alert('이메일을 확인하세요.');
-		return false;
-	}
-			
-	//휴대전화 정규식
-	if(phoneJ.test($('#mPhone').val())){
-		console.log("유효성 체크5 : COMPLETE");
-		inval_Arr[4] = true;
-	} else {
-		inval_Arr[4] = false;
-		alert('휴대전화번호 확인하세요.');
-		return false;
-	}
-			
-	//주소 확인
-	if(($('#mZip_Code').val()).length > 3){
-		console.log("유효성 체크6 : COMPLETE");
-		inval_Arr[5] = true;
-		return true;
-	} else {
-		inval_Arr[5] = false;
-		alert("주소를 확인해 주세요.");
-	}
-	
-	//전체 유효성 검사
-	
-	$("#validCheck").on("click", function(){
-		
-		for (var i = 0; i < inval_Arr.length; i++){
-			if (inval_Arr[i] == false){
-				validAll = false;
-				alert("정보를 다시 확인해주세요.");
-			} else {
-				alert("MSM 회원가입을 환영합니다.");
-				location.href = "/home";
-			}
-		}
-	});
-}
-</script>
 <%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>
 </body>
 </html>

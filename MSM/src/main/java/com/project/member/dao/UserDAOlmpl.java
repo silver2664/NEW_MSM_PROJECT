@@ -108,8 +108,13 @@ public class UserDAOlmpl implements UserDAO {
 		return sqlSession.selectOne("checkEmail", mId);
 	}
 	
-	//13. 아이디, 권한 select
+	//14. 아이디, 권한 select
 	public List<HashMap<String, Object>> selectIdAuth() throws Exception {
 		return sqlSession.selectList("userMapper.selectIdAuth");
+	}
+	
+	//15. member 탈퇴
+	public void delete(String mId) throws Exception {
+		sqlSession.delete("userMapper.delete", mId);
 	}
 }

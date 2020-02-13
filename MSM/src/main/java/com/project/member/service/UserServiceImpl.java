@@ -161,6 +161,11 @@ public class UserServiceImpl implements UserService {
 		return userDAO.selectIdAuth();
 	}
 	
+	//14. member Ε»Επ
+	public void delete(String mId) throws Exception {
+		userDAO.delete(mId);
+	}
+	
 	
 	
 

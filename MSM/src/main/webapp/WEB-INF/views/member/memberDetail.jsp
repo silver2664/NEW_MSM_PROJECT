@@ -29,7 +29,7 @@
 
 <div class = "container">
 	
-	<h3>회원 상세정보</h3>
+	<h3 class = "text-center">회원 상세정보</h3>
 	<hr/>
 	
 	<form id = "memberDetailForm" role = "form" method = "post" action = "/member/updateView">
@@ -77,15 +77,57 @@
 				</tr>
 			</tbody>		
 		</table>
-		<div>
-			<button type="submit" class="update_btn" id = "update_btn">수정</button>
-			<button type="submit" class="delete_btn" id = "delete_btn">삭제</button>
+		<div class = "text-center">
+			<button type="submit" class="update_btn btn btn-primary" id = "update_btn">수정</button>
+			<a class = "btn btn-danger" data-toggle = "modal" data-target = "#deleteMember">탈퇴</a>
 			<sec:authorize url = "/admin/**">
-			<button type="submit" class="list_btn" id = "list_btn">목록</button>	
+			<a type = "button" class = "btn btn-secondary" href = "/admin/admin">목록</a>	
 			</sec:authorize>
 		</div>
 </div>
 
+<!-- 회원탈퇴 MODAL -->
+<div class="modal fade" id="deleteMember" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+	<div class="modal-dialog modal-notify modal-warning" role="document">
+		
+		<!--Content-->		
+		<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
+    	<div class="modal-content">
+    		
+    		<!--Header-->
+      		<div class="modal-header text-center">
+    			<h4 class="modal-title white-text w-100 font-weight-bold py-2">회원탈퇴 비밀번호 확인</h4>
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          		<span aria-hidden="true" class="white-text">&times;</span>
+        		</button>
+        	</div>
+    	
+	    	<!-- Body -->
+	      	<div class="modal-body">
+	      		<div class = "md-form mb-5">
+					<input type = "text" class = "form-control" id = "mId2" name = "mId2" value = "${memberDetail.mId}" readonly = "readonly"/>
+					<label for = "mId">아이디</label>
+				</div>
+				<div class="md-form mb-5">
+					<input type = "hidden" id = "mPw" name = "mPw" class = "form-control" value = "${memberDetail.mPw}" readonly = "readonly"/>
+					<input type = "password" id = "originalPw" name = "originalPw" class = "form-control" value = ""/>
+					<label for="originalPw">비밀번호</label>
+					<div id = "check_originalPw"></div>
+	      		</div>
+	      		<p style = "font-size : 12px;">올바른 비밀번호를 입력하시면, 탈퇴 버튼이 활성화 됩니다.</p>
+	      	</div>
+	      	
+	      	<!--Footer-->
+	      	<div class="modal-footer justify-content-center">
+	      		<form action = "http://localhost:8181/logout" method = "post" onsubmit = "return deleteMember()">
+	      			<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
+	        		<button type = "submit" id = "delete_btn" class="btn btn-outline-primary waves-effect" disabled>MSM 탈퇴</button>
+	        	</form>
+	      	</div>
+    	</div>
+	</div>
+</div>
 
 <%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>
 <!-- SCRIPTS -->
@@ -116,8 +158,8 @@ function closeNav2() {
 </script>
 
 <script>
-$(document).ready(function(){
-	
+
+$(document).ready(function(){	
 	var formObj = $("#memberDetailForm");
 	
 	//수정
@@ -127,7 +169,82 @@ $(document).ready(function(){
 		formObj.submit();
 	});
 });
+
 </script>
+
+<script>
+
+// 회원탈퇴 프로세스 전 비밀번호 확인.
+$(document).ready(function(){
+	
+	$('#originalPw').blur(function(){
+		
+		var mPw = $('#mPw').val();
+		var originalPw = $('#originalPw').val();
+		
+		if(originalPw.length > 0) {
+			$.ajax({
+				data : {
+					"originalPw" : originalPw,
+					"mPw" : mPw
+					},
+				url : "/member/pwCheck",
+				success : function(data){
+					console.log("data : " + data)
+					if(data == 1) {
+						$('#check_originalPw').text('기존비밀번호와 일치합니다.');
+						$('#check_originalPw').css('color', 'blue');
+						$('#delete_btn').removeAttr("disabled");
+					} else {
+						$('#check_originalPw').text('기존비밀번호와 일치하지 않습니다.');
+						$('#check_originalPw').css('color', 'red');
+						$('#delete_btn').attr("disabled", "true");
+					}
+				}
+			});
+		}	
+	});
+});
+
+//회원 탈퇴 method
+function deleteMember(){
+	
+	var confirm_val = confirm("MSM 회원 탈퇴 하시겠습니까?");
+	
+	if(confirm_val){
+		
+		$.ajax({
+			type : "post",
+			data : {
+				"mId" : $("#mId2").val()
+			},
+			url : "/member/delete",
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+			},
+			success : function(){
+				console.log("회원탈퇴처리 완료.");			
+			},
+			error : function(request, status, error){
+				console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+			}
+		});
+		
+	} else {
+		
+		return false;
+	}
+	
+	alert("회원탈퇴 처리되었습니다.");
+	
+	$('#deleteMember').modal('hide');
+	
+	return true;
+	
+}
+
+</script>
+
 
 </body>
 </html>

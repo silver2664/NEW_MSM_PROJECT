@@ -52,4 +52,7 @@ public interface UserDAO {
 	//14. ¾ÆÀÌµð, ±ÇÇÑ select
 	public List<HashMap<String, Object>> selectIdAuth() throws Exception;
 	
+	//15. member Å»Åð
+	public void delete(String mId) throws Exception;
+	
 }

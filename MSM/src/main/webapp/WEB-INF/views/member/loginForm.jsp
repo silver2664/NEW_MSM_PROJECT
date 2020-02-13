@@ -228,8 +228,7 @@ $(document).ready(function(){
 						console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 					}
 				});
-			}
-		
+			}		
 	});	
 		
 	$('#sendEmail').on("click", function(){
@@ -247,99 +246,8 @@ $(document).ready(function(){
 					alert("서버 에러가 발생하였습니다.");
 				}
 			});
-				
-		
+			
 	});
-	
-	
-	/*
-	//1번 AJAX ID 체크
-	function promise_function(){
-		return new Promise(function(resolve, reject){
-			$('#mId2').blur(function(){
-				if (($('#mId2').val()).length > 0){
-					var mId = $('#mId2').val();
-					$.ajax({
-						data : {"mId" : mId},								
-						url : "/member/idCheck",
-						success : function(data){
-							console.log("data : " + data);
-							if(data > 0 ){
-								$("#id_check").text('ID 확인되었습니다.');
-								$("#id_check").css('color', 'blue');
-							} else {
-								$('#id_check').text('등록되지 않은 ID입니다.');
-								$('#id_check').css('color', 'red');						
-							}
-						},
-						error : function(request, status, error){
-							console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-						}
-					}); //ajax 끝
-				} // if 끝
-			}); // blur function 끝
-		}); // new Promise 끝
-	} // promise_function() 끝
-	
-	//2번 AJAX 이메일 체크
-	function promise_function2(){
-		return new Promise(function(resolve, reject){
-			$('#mId2').blur(function(){
-				if (($('#mId2').val()).length > 0){
-					var mId = $('#mId2').val();
-					var mEmail = $('#mEmail').val();
-					$.ajax({
-						data : {
-							"mId" : mId,
-							"mEmail" : mEmail
-						},								
-						url : "/member/emailCheck",
-						success : function(data){
-							console.log("data : " + data);
-							if(data > 0 ){
-								$("#checkEmail").text('Email 확인되었습니다.');
-								$("#checkEmail").css('color', 'blue');
-							} else {
-								$('#checkEmail').text('해당 ID에 등록되지 않은 Email입니다.');
-								$('#checkEmail').css('color', 'red');						
-							}
-						},
-						error : function(request, status, error){
-							console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-						}
-					}); //ajax 끝
-				} // if 끝
-			}); // blur function 끝
-		}); // new Promise 끝
-	} // promise_function() 끝
-	
-	function promise_function3(){
-		return new Promise(function(resolve, reject){
-			$.ajax({
-				url : "/member/sendEmail",
-				data : {
-					"mEmail" : $('#mEmail').val(),
-					"mId" : $('#mId2').val()	
-				},
-				success : function(data){
-					alert ("메일발송완료하였습니다.<br/>전송된 임시비밀번호를 이용하여 로그인 해주세요.")
-				},
-				error : function(data){
-					alert("서버 에러가 발생하였습니다.")
-				}
-			}); // ajax 끝
-		}); // new Promise 끝
-	} // promise_function3 끝
-	
-	
-	
-	promise_function()
-	.then(promise_function2())
-	.then(promise_function3())
-	.catch(function(err){
-		console.log('then error : ', + err);
-	});
-	*/
 	
 });
 </script>
