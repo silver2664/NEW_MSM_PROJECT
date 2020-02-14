@@ -106,6 +106,7 @@ aside {
 	<div class="row">		
 		<c:forEach var = "row" items = "${list}">
 		
+		
 			<div class="col-xl-3 col-md-3 col-sm-3 card card-cascade narrow card-ecommerce d-flex">
 				<!-- Card Image -->
 				
@@ -139,8 +140,9 @@ aside {
 						  <fmt:formatNumber type="currency" value="${row.mgPrice}"/></strong>
 					    </span>
 						<span class="float-right">
-						  <a class="material-tooltip-main" data-toggle="tooltip"	data-place="top" title="Add to Cart" ng-click="addItem()">
-							 <i	class="fas fa-shopping-cart grey-text ml-3"></i></a>
+						  <a class="material-tooltip-main" data-toggle="tooltip"data-place="top" title="Add to Cart"  href="/cart/insert?mgNum=${row.mgNum}&amount=1" >
+							 <i	class="fas fa-shopping-cart grey-text ml-3">
+							 <input type="hidden" value="${row.mgNum}" name="mgNum"id="mgNum"/></i></a>
 							 <a class="material-tooltip-main" data-toggle="tooltip"	data-place="top" title="Add to WishList">
 						 <i	class="fas fa-heart grey-text ml-3"></i>
 						</a>
