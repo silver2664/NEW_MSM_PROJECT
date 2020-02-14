@@ -15,6 +15,13 @@
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <title>상품 목록 -- MSM</title>
 <style>
+body{
+    font-size:12px;
+    line-height:16px;
+    word-spacing:1px;
+    letter-spacing:-1px;
+    
+}
 .row {
 	
 	
@@ -56,6 +63,7 @@ aside {
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
 <!-- resource CSS -->
 <link href = "<c:url value = "/resources/css/home.css"/>" rel = "stylesheet" type = "text/css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
@@ -102,7 +110,7 @@ aside {
 						 <fmt:formatNumber type="currency" value="${row.mgPrice}"/></strong>
 						</span> <span class="float-right"> <a
 							class="material-tooltip-main" data-toggle="tooltip"
-							data-place="top" title="Add to Cart"> <i
+							data-place="top" title="Add to Cart" href="/cart/insert"> <i
 								class="fas fa-shopping-cart grey-text ml-3"></i>
 						</a> <a class="material-tooltip-main" data-toggle="tooltip"
 							data-place="top" title="Add to WishList"> <i

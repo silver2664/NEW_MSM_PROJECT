@@ -5,6 +5,7 @@ import java.util.List;
 import com.project.goods.vo.CategoryVO;
 import com.project.goods.vo.GoodsVO;
 import com.project.goods.vo.GoodsViewVO;
+import com.project.goods.vo.ReplyVO;
 
 public interface GoodsService {
 	
@@ -27,9 +28,9 @@ public interface GoodsService {
 	public List<CategoryVO> category() throws Exception;
 	
 	//카테고리 리스트
+	public List<GoodsViewVO> catelist(int cateCode) throws Exception;;
 	
 
-	public List<GoodsViewVO> catelist(int cateCode) throws Exception;;
 	
 	
 	

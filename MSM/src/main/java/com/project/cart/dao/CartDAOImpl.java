@@ -50,10 +50,10 @@ public class CartDAOImpl implements CartDAO {
 		
 	// 06. 장바구니 동일한 상품 레코드 확인
 	@Override
-	public int countCart(int productId, String userId) {
+	public int countCart(int mgNum, String userId) {
 		System.out.println("CartDAO COUNTCART 메서드 실행");
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("productId", productId);
+		map.put("mgNum", mgNum);
 		map.put("userId", userId);
 		int result = sqlSession.selectOne("cartMapper.countCart", map);
 		System.out.println("DAO-MAPPER 처리 후 RESULT 값 : " + result);

@@ -5,6 +5,7 @@ import java.util.List;
 import com.project.goods.vo.CategoryVO;
 import com.project.goods.vo.GoodsVO;
 import com.project.goods.vo.GoodsViewVO;
+import com.project.goods.vo.ReplyVO;
 
 public interface GoodsDAO {
 	
@@ -28,6 +29,8 @@ public interface GoodsDAO {
 	
 	//카테 리스트
 	public List<GoodsViewVO> catelist(int cateCode) throws Exception;
+	
+	
 	
 
 }

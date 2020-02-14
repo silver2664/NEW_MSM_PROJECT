@@ -23,7 +23,7 @@ public interface CartDAO {
 	public int sumMoney(String userId);
 	
 	// 06. 장바구니 동일한 상품 레코드 확인
-	public int countCart(int productId, String userId);
+	public int countCart(int mgNum, String userId);
 	
 	// 07. 장바구니 상품수량 변경
 	public void updateCart(CartVO vo);

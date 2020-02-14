@@ -10,6 +10,7 @@ import com.project.goods.dao.GoodsDAO;
 import com.project.goods.vo.CategoryVO;
 import com.project.goods.vo.GoodsVO;
 import com.project.goods.vo.GoodsViewVO;
+import com.project.goods.vo.ReplyVO;
 
 @Service
 public class GoodsServiceImpl implements GoodsService {
@@ -59,4 +60,8 @@ public class GoodsServiceImpl implements GoodsService {
 		return dao.catelist(cateCode);
 	}
 
-}
+		
+	}
+	
+
+

@@ -12,6 +12,8 @@ import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.validation.constraints.Max;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +33,8 @@ import com.project.goods.service.TabService;
 import com.project.goods.vo.CategoryVO;
 import com.project.goods.vo.GoodsVO;
 import com.project.goods.vo.GoodsViewVO;
+import com.project.goods.vo.ReplyVO;
+import com.project.member.vo.MemberVO;
 import com.project.msm.util.UploadFileUtils;
 
 import net.sf.json.JSONArray;
@@ -194,10 +198,9 @@ public class GoodsController {
 			
 			//  상품 상세보기
 			@RequestMapping(value = "/productView/{mgNum}")
-			public ModelAndView tablist(@PathVariable("mgNum")int mgNum,ModelAndView mav) throws Exception {
+			public ModelAndView tablist(@PathVariable("mgNum")int mgNum,ModelAndView mav,HttpSession session,ReplyVO reply) throws Exception {
 				
 				logger.info("productview");	
-				
 				
 				
 				mav.setViewName("/product/productView");
@@ -265,6 +268,8 @@ public class GoodsController {
 				return "redirect:/product/listView";
 				
 			}
+			
+			//
 			
 			
 			

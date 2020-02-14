@@ -15,6 +15,13 @@
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <title>상품 목록 -- MSM</title>
 <style>
+body{
+    font-size:12px;
+    line-height:15px;
+    word-spacing:1px;
+    letter-spacing:-1px;
+    font-color:black;
+}
 .row {
 	
 	
@@ -38,12 +45,12 @@ aside {
     column-count: 4;
 }
 #brandIntro {
-	height : 70vh;
+	height : 100vh;
 	background-image : url("/resources/images/indexPageImg/ms1.jpg");
 	background-size : cover;
 	background-position : center;
 	background-repeat : no-repeat;	
-	height:600px;
+	height:700px;
 }
 
 
@@ -57,13 +64,15 @@ aside {
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
 <!-- resource CSS -->
 <link href = "<c:url value = "/resources/css/home.css"/>" rel = "stylesheet" type = "text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
 
 
-<div class = "container-fulid">
-	<div class = "mask rgba-blakc-white d-flex justify-content-start align-items-center"  id ="brandIntro">
+<div class = "container-fluid">
+	<div class = "mask rgba-blakc-white d-flex justify-content-start align-items-center" id ="brandIntro">
 	<div class = "text-left mx-5">
 		<h3 class = "mb-4 font-weight-bold text-monospace"><strong>AAS-STUDIO</strong></h3>
 		<p class = "mb-3 text-monospace font-weight-bolder font-italic"><strong>젠더리스 쥬얼리 아스 - Find your second skin</strong></p>
@@ -90,12 +99,13 @@ aside {
 </div>
 <hr>
 
-<div class="container-fluid">
+<div class="container-fluid" >
 	<aside>
 	<%@ include file = "/WEB-INF/views/shareResource/aside.jsp" %>
 	</aside>
 	<div class="row">		
 		<c:forEach var = "row" items = "${list}">
+		
 			<div class="col-xl-3 col-md-3 col-sm-3 card card-cascade narrow card-ecommerce d-flex">
 				<!-- Card Image -->
 				
@@ -105,7 +115,7 @@ aside {
 						</a>			
 				</div>
 				<!-- Card Content -->
-				<div class="card-body card-body-cascade text-center pb-3">
+				<div class="card-body card-body-cascade text-center pb-3" >
 					<!-- Title -->
 					<h5 class="card-title mb-1">
 						<strong> <a href="${path}/product/productView/${row.mgNum}">${row.mgName}</a>
@@ -125,21 +135,26 @@ aside {
 					
 					<div class="card-footer px-1">
 						<span class="float-left font-weight-bold">
-						 <strong><fmt:setLocale value="ko_KR"/>
-						 <fmt:formatNumber type="currency" value="${row.mgPrice}"/></strong>
-						</span> <span class="float-right"> <a
-							class="material-tooltip-main" data-toggle="tooltip"
-							data-place="top" title="Add to Cart"> <i
-								class="fas fa-shopping-cart grey-text ml-3"></i>
-						</a> <a class="material-tooltip-main" data-toggle="tooltip"
-							data-place="top" title="Add to WishList"> <i
-								class="fas fa-heart grey-text ml-3"></i>
+						  <strong><fmt:setLocale value="ko_KR"/>
+						  <fmt:formatNumber type="currency" value="${row.mgPrice}"/></strong>
+					    </span>
+						<span class="float-right">
+						  <a class="material-tooltip-main" data-toggle="tooltip"	data-place="top" title="Add to Cart" ng-click="addItem()">
+							 <i	class="fas fa-shopping-cart grey-text ml-3"></i></a>
+							 <a class="material-tooltip-main" data-toggle="tooltip"	data-place="top" title="Add to WishList">
+						 <i	class="fas fa-heart grey-text ml-3"></i>
 						</a>
 						</span>
 					</div>
 				</div>
 			</div>
 			</c:forEach>		
+			
+
+
+
+
+			
 </div>
 </div>
 

@@ -2,6 +2,7 @@ package com.project.msm.controller;
 
 
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,18 +36,18 @@ public class CartController {
 	
 	// 01. 장바구니 추가
 	@RequestMapping(value = "/cart/insert")
-	public String insert(@ModelAttribute CartVO vo) throws Exception {
+	public String insert(@ModelAttribute CartVO vo)  throws Exception {
 		
 		logger.info("장바구니 추가");
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = (User) auth.getPrincipal();
 		String userId = user.getUsername();
 		System.out.println("userId : " + userId);
-		System.out.println("productId : " + vo.getProductId());
+		System.out.println("mgNum : " + vo.getMgNum());
 		vo.setUserId(userId);
 		
 		// 장바구니에 기존 상품이 있는지 검사
-		int count = service.countCart(vo.getProductId(), userId);
+		int count = service.countCart(vo.getMgNum(), userId);
 		System.out.println("COUNT값 : " + count);
 		
 		if(count == 0) {
@@ -69,7 +70,7 @@ public class CartController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<CartVO> list = service.listCart(userId);
 		int sumMoney = service.sumMoney(userId);
-		int fee = sumMoney >= 100000 ? 0 : 2500;
+		int fee = sumMoney >= 10000 ? 0 : 2500;
 		map.put("list", list);
 		map.put("count", list.size());
 		map.put("sumMoney", sumMoney);
@@ -77,6 +78,7 @@ public class CartController {
 		map.put("allsum", sumMoney + fee);
 		mv.setViewName("/cart/cartView");
 		mv.addObject("map", map);
+		
 		return mv;		
 	}
 	
@@ -89,15 +91,16 @@ public class CartController {
 	
 	// 04. 장바구니 수정
 	@RequestMapping("/cart/update")
-	public String update(@RequestParam int[] amount, @RequestParam int[] productId) throws Exception {
+	public String update(@RequestParam int[] amount, @RequestParam int[] mgNum) throws Exception {
+		logger.info("장바구니 수정");
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = (User) auth.getPrincipal();
 		String userId = user.getUsername();
-		for(int i = 0; i<productId.length; i++) {
+		for(int i = 0; i<mgNum.length; i++) {
 			CartVO vo = new CartVO();
 			vo.setUserId(userId);
 			vo.setAmount(amount[i]);
-			vo.setProductId(productId[i]);
+			vo.setMgNum(mgNum[i]);
 			service.modifyCart(vo);
 		}
 		return "redirect:/cart/cartView";

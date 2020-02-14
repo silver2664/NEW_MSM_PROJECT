@@ -71,6 +71,7 @@
 								<button type = "submit" class = "btn btn-outline-white mb-5" style = "color : black" id = "signOut1">Sign Out</button>
 							</form>
 						</sec:authorize>
+						
 						</div>					
 					</li>
 				</ul>

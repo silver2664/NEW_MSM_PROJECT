@@ -17,27 +17,30 @@
 <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
 <title>상품 페이지 --MSM</title>
 <!-- Font Awesome -->
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <!-- Bootstrap core CSS -->
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
 	rel="stylesheet">
 <!-- Material Design Bootstrap -->
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css"
-	rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" 	rel="stylesheet">
 <!-- resource CSS -->
-<link href="<c:url value = "/resources/css/home.css"/>" rel="stylesheet"
-	type="text/css">
+<link href="<c:url value = "/resources/css/home.css"/>" rel="stylesheet" 	type="text/css">
 <!-- CK EDITOR -->
 <script src="/resources/js/ckeditor/ckeditor.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/resources/css/tabs.css"/>" />
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/resources/css/tabstyles.css"/>" />
+<link rel="stylesheet" type="text/css" 	href="<c:url value="/resources/css/tabs.css"/>" />
+<link rel="stylesheet" type="text/css" 	href="<c:url value="/resources/css/tabstyles.css"/>" />
 <script src="/resources/js/modernizr.custom.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
+body{
+    font-size:12px;
+    line-height:16px;
+    word-spacing:1px;
+    letter-spacing:-1px;
+    
+}
 h2 {
 	text-align: center;
 	margin-bottom: 20px;
@@ -84,12 +87,12 @@ table {
 					</tr>
 					<tr align="center">
 						<td colspan="2">
-							<form name="form1" role="form" method="post"
-								action="/cart/insert">
-								<input type="hidden" name="${_csrf.parameterName}"
-									value="${_csrf.token}" /> <input type="hidden" id="mgNum"
-									name="mgNum" value="${vo.mgNum}" /> <select name="amount">
-									<c:forEach begin="1" end="10" var="i">
+							<form name="form1" role="form" method="post"action="/cart/insert">
+								<input type="hidden" name="${_csrf.parameterName}"	value="${_csrf.token}" />
+									 <input type="hidden" id="mgNum"name="mgNum" value="${vo.mgNum}" /> 
+									
+									 <select name="amount">
+									 <c:forEach begin="1" end="10" var="i">
 										<option value="${i}">${i}</option>
 									</c:forEach>
 								</select>&nbsp; 개 <input type="submit" value="장바구니에 담기">
@@ -107,6 +110,7 @@ table {
 	<br>
 	<hr class="container">
 	<br>
+	
 
 
 
@@ -117,8 +121,8 @@ table {
 				<ul>
 					<li><a href="#section-linetriangle-1"><span>상세정보</span></a></li>
 					<li><a href="#section-linetriangle-2"><span>배송정보</span></a></li>
-					<li><a href="#section-linetriangle-3"><span>교환및 환불
-								정책</span></a></li>
+					<li><a href="#section-linetriangle-3"><span>교환및 환불	정책</span></a></li>
+					
 				</ul>
 			</nav>
 			<div class="content-wrap">
@@ -126,11 +130,14 @@ table {
 					<section id="section-linetriangle-1">${vo.mgContent}</section>
 					<section id="section-linetriangle-2">${tablist.delivery}</section>
 					<section id="section-linetriangle-3">${tablist.refund }</section>
+					
 				</c:forEach>
 			</div>
 			<!-- /content -->
 		</div>
 	</section>
+	
+	
 
 
 	<script src="/resources/js/cbpFWTabs.js"></script>
@@ -142,7 +149,10 @@ table {
 				});
 
 			})();
-			</script>
+	</script>
+
+	
+	
 
 	<%@ include file="/WEB-INF/views/shareResource/footer.jsp"%>
 	<!-- SCRIPTS -->
@@ -184,6 +194,8 @@ $("#delete").click(function() {
 		formObj.submit();
 	}
 });
+
+
 
 
 </script>

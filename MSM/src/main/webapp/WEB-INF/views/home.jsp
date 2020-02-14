@@ -419,8 +419,7 @@
 								</span> <span class="float-right"> <a
 									class="material-tooltip-main" data-toggle="tooltip"
 									data-place="top" title="Add to Cart"> <i
-										class="fas fa-shopping-cart grey-text ml-3"></i>
-								</a> <a class="material-tooltip-main" data-toggle="tooltip"
+										class="fas fa-shopping-cart grey-text ml-3"></i>								</a> <a class="material-tooltip-main" data-toggle="tooltip"
 									data-place="top" title="Add to WishList"> <i
 										class="fas fa-heart grey-text ml-3"></i>
 								</a>

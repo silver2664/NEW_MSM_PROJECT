@@ -27,7 +27,7 @@
 
 </head>
 <body>
-
+<div class="container">
 <h2>CART</h2>
 <c:choose>
 	<c:when test = "${map.count == 0}">
@@ -35,7 +35,7 @@
 	</c:when>
 	<c:otherwise>
 		<form name = "form1" id = "form1" method = "post" action = "${path}/cart/update">
-			<table border = "1">
+			<table border = "1" class="table table-hover">
 				<tr>
 					<th>상품명</th>
 					<th>단가</th>
@@ -45,7 +45,7 @@
 				</tr>
 				<c:forEach var = "row" items = "${map.list}" varStatus = "i">
 					<tr>
-						<td>
+						<td >
 							${row.productName}
 						</td>
 						<td style = "width : 80px; align : right">
@@ -53,7 +53,7 @@
 						</td>
 						<td>
 							<input type = "number" style = "width : 40px;" name = "amount" value = "${row.amount}" min = "1" />
-							<input type = "hidden" name = "productId" value = "${row.productId}"/>
+							<input type = "hidden" name = "mgNum" value = "${row.mgNum}"/>
 						</td>
 						<td>
 							<fmt:formatNumber pattern = "###,###,###" value = "${row.money}"/>
@@ -78,7 +78,7 @@
 	</c:otherwise>
 </c:choose>
 <button type = "button" id = "btnList">상품목록</button>
-
+</div>
 
 
 <!-- SCRIPTS -->

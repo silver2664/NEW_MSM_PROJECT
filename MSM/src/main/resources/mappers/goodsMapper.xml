@@ -72,4 +72,10 @@
                 where g.cateCode = #{cateCode}
 </select>
 
+<!-- 상품 리뷰 작성 -->
+<insert id="registerReply">
+    insert into reply (mgNum,mId,repNum,repCon) 
+        values(#{mgNum},#{mId},reply_seq.nextval,#{repCon})
+</insert>
+
 </mapper>
