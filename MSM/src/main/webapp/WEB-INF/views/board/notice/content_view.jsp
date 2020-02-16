@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" session = "true"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session = "true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -38,9 +37,8 @@ h2 {
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
 <div class="container mb-5">
 	<h2>게시판 글 보기</h2>
-	
-	
-	<table  class="table table-hover">
+		
+	<table class="table table-hover">
 		<tbody>
 			<tr>
 				<th><strong>글번호</strong></th>

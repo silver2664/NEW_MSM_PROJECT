@@ -4,7 +4,6 @@ package com.project.member.service;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.mail.MessagingException;
@@ -52,12 +51,14 @@ public class UserServiceImpl implements UserService {
 		userDAO.insertUser2(memberVO);
 	}
 	
+	/*
 	@Override
 	public int idCheck(Map<String, Object> map) throws Exception {
 		System.out.println("Service idCheck");
 		return userDAO.idCheck(map);
 		
 	}
+	*/
 	
 	@Override
 	public int idCheck2(String mId) throws Exception {		

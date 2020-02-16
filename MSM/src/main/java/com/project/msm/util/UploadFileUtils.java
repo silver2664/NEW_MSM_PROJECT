@@ -43,11 +43,12 @@ public class UploadFileUtils {
 			//아이콘 생성
 			uploadedFileName = makeIcon(uploadPath, savedPath, savedName);
 		}
-		return uploadedFileName;
+		
+		return savedName;
  	}
 	
 	//날짜별 디렉토리 추출
-	private static String calcPath(String uploadPath) {
+	public static String calcPath(String uploadPath) {
 		Calendar cal = Calendar.getInstance();
 		//File.separator : 디렉토리 구분자 (\\)
 		//연도, ex) \\2020

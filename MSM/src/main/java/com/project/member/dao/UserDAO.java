@@ -2,7 +2,6 @@ package com.project.member.dao;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.project.board.vo.SearchCriteria;
 import com.project.member.vo.MemberVO;
@@ -23,7 +22,7 @@ public interface UserDAO {
 	public void insertUser2(MemberVO memberVO) throws Exception;	
 
 	// 05. idCheck
-	public int idCheck(Map<String, Object> map) throws Exception;
+	//public int idCheck(Map<String, Object> map) throws Exception;
 	
 	// 06. idChek2
 	public int idCheck2(String mId) throws Exception;

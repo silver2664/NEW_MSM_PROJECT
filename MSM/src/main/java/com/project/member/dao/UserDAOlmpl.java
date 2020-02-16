@@ -2,7 +2,6 @@ package com.project.member.dao;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -10,7 +9,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.project.board.vo.SearchCriteria;
-import com.project.member.vo.MemberDTO;
 import com.project.member.vo.MemberVO;
 import com.project.msm.util.RegisterRequest;
 
@@ -43,6 +41,7 @@ public class UserDAOlmpl implements UserDAO {
 	}
 	
 	
+	/*
 	@Override
 	@SuppressWarnings("unchecked")
 	public int idCheck(Map<String, Object> map) throws Exception {
@@ -51,7 +50,7 @@ public class UserDAOlmpl implements UserDAO {
 		int result = Integer.valueOf(String.valueOf(resultMap.get(map)));
 		return result;
 	}
-	
+	*/
 	
 	@Override
 	public int idCheck2(String mId) throws Exception {			

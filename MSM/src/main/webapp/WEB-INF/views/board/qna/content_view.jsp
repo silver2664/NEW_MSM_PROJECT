@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -47,8 +46,8 @@ h2 {
 			<input type="hidden" id="qid" name="qid" value="${content_view.qid }" />
 			<input type="hidden" id="page" name="page" value="${scri.page}">
 			<input type="hidden" id="perPageNum" name="perPageNum"	value="${scri.perPageNum}">
-			<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}">
-			<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
+			 <input type="hidden"	id="searchType" name="searchType" value="${scri.searchType}">
+			<input type="hidden" id="keyword" name="keyword"	value="${scri.keyword}">
 		</form>
 		<table class="table table-hover">
 			<tbody>
@@ -105,7 +104,7 @@ h2 {
 			<div class="form-group">
 				<label for="writer" class="col-sm-2 control-label">댓글 작성자</label>
 				<div class="col-sm-5">
-					<input class="form-control" type="text" id="writer" name="writer"  required >
+					<input class="form-control" type="text" id="writer" value="${user}" name="writer" readonly required >
 				</div>
 			</div>
 			<div class="form-group">

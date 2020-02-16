@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -49,11 +48,11 @@ h2{
 			</div>
 			<div class="mb-3">
 				<label for="reg_id"><strong>작성자</strong></label>
-				<input type="text" class="form-control"name="qwriter" id="qwriter" placeholder="이름을 입력해 주세요" required>
+				<input type="text" class="form-control"name="qwriter" id="qwriter" value="${user}" readonly required>
 			</div>	
 			<div class="mb-3">
 				<label for="content"><strong>내용</strong></label>			
-				<textarea class="form-control" cols="80" rows="10" name="qcontent" id="qcontent" value="내용을 입력해주세요" required></textarea>
+				<textarea class="form-control" cols="80" rows="10" name="qcontent" id="qcontent"  required></textarea>
 				<script type="text/javascript">
 				editor = CKEDITOR.replace('qcontent');
 				editor.on( 'required', function( evt ) {

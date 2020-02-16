@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.member.vo.MemberAuthorityDTO;
-import com.project.member.vo.MemberDTO;
 import com.project.member.vo.MemberVO;
 
 @Repository("userAuthDAO")

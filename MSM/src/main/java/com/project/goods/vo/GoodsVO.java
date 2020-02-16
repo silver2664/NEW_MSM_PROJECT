@@ -18,9 +18,37 @@ public class GoodsVO {
 	private int mgNum;
 	private String mgName;
 	private int mgPrice;
+	private int mgStock;
 	private String mgContent;
 	private String mgImg; // 상품이미지경로
 	private MultipartFile productPhoto; // 상품이미지파일
+	private String mgThumbImg;
+	private String cateCode;
+	
+	
+	
+	
+	
+	
+	
+	public String getCateCode() {
+		return cateCode;
+	}
+	public void setCateCode(String cateCode) {
+		this.cateCode = cateCode;
+	}
+	public String getMgThumbImg() {
+		return mgThumbImg;
+	}
+	public void setMgThumbImg(String mgThumbImg) {
+		this.mgThumbImg = mgThumbImg;
+	}
+	public int getMgStock() {
+		return mgStock;
+	}
+	public void setMgStock(int mgStock) {
+		this.mgStock = mgStock;
+	}
 	public int getMgNum() {
 		return mgNum;
 	}

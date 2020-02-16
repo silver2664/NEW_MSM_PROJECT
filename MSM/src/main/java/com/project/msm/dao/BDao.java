@@ -58,6 +58,7 @@ public class BDao {
 		Connection connection = null;
 		PreparedStatement psmt = null;
 		ResultSet resultSet = null;
+		System.out.println(strId);
 		
 		try {
 			connection = dataSource.getConnection();
