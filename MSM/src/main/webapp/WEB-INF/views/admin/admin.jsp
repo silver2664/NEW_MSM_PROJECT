@@ -176,6 +176,41 @@
 <div id = "goods" class = "tabcontent">
 <h1 class = "text-center mt-4">상품관리</h1>
 <hr/>
+<div class = "container mb-3">
+	<form role = "form" method = "post">
+	<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
+		<table class = "table table-bordered table-striped table-hover">
+			<thead class = "black white-text text-center">
+				<tr>
+					<th>
+						<div class = "custom-control custom-checkbox allcheck">
+							<input type = "checkbox" class = "custom-control-input allcheck" id = "allcheck2">
+							<label class = "custom-control-label" for = "allcheck"></label>
+						</div>
+					</th>
+					<th>상품번호</th>
+					<th>상품명</th>
+					<th>가격</th>
+				</tr>
+			</thead>
+			<tbody class = "text-center">
+				<c:forEach var = "goods" items = "${goodsList}" varStatus = "status">
+				<tr id = "memberTR">
+					<td scope = "row">
+						<div class = "custom-control custom-checkbox">
+							<input type = "checkbox" class = "custom-control-input chk" name = "chk" id = "${goods.mgNum}" data-memberId="${goods.mgNum}">
+							<label class = "custom-control-label" for = "${goods.mgNum}"></label>
+						</div>
+					</td>
+					<td>${goods.mgNum}</td>
+					<td>${goods.mgName}</td>
+					<td>${goods.mgPrice}</td>		
+				</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</form>
+</div>
 </div>
 
 <div id = "notice" class = "tabcontent">

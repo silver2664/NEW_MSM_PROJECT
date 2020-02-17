@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.board.vo.PageMaker;
 import com.project.board.vo.SearchCriteria;
+import com.project.goods.service.GoodsService;
 import com.project.member.service.UserService;
 import com.project.member.vo.MemberVO;
 
@@ -28,12 +29,16 @@ public class AdminCotroller {
 	@Inject
 	UserService userService;
 	
+	@Inject
+	GoodsService goodsService;
+	
 	// 관리자 페이지 이동. (Admin.jsp)
 	@RequestMapping(value = "/admin/admin", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView adminPage(@ModelAttribute("scri") SearchCriteria scri) throws Exception {
 		ArrayList<MemberVO> memberList = (ArrayList<MemberVO>)userService.getMemberList(scri);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("memberList", memberList);
+		mv.addObject("goodsList", goodsService.listProduct());
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(scri);
 		pageMaker.setTotalCount(userService.listCount(scri));

@@ -130,8 +130,7 @@
 						<include refid = "search"></include>
 			) MP
 			WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
-			ORDER BY MID DESC
-		
+			ORDER BY MID DESC		
 	</select>
 	
 	<!-- 총 회원의 수 -->
