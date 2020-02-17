@@ -3,6 +3,9 @@ package com.project.cart.service;
 import java.util.List;
 
 import com.project.cart.vo.CartVO;
+import com.project.cart.vo.OrderDetailVO;
+import com.project.cart.vo.OrderVO;
+import com.project.member.vo.MemberVO;
 
 public interface CartService {
 	
@@ -26,4 +29,11 @@ public interface CartService {
 		
 	// 07. 장바구니 상품수량 변경
 	public void updateCart(CartVO vo);
+	
+	//회원정보 가져오기
+	public List<MemberVO> member(String userId);
+
+	
+	
+	
 }

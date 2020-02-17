@@ -34,13 +34,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
-body{
-    font-size:12px;
-    line-height:16px;
-    word-spacing:1px;
-    letter-spacing:-1px;
-    
-}
+
 h2 {
 	text-align: center;
 	margin-bottom: 20px;
@@ -73,16 +67,20 @@ table {
 
 	<table>
 		<tr>
-			<td><img src="/resources/${vo.mgImg}" width="540" height="300">
+			<td style="width:600px;">
+			<img src="/resources/${vo.mgImg}" width="500" height="400">
 			</td>
 			<td>
-				<table style="height: 516px; width: 456px;">
+				<table style="height:500px; width: 300px;">
 					<tr align="center">
 
-						<td><span>${vo.mgName}</span></td>
+						<td style="height:75px">
+						<span>${vo.mgName}</span>
+						</td>
 					</tr>
 					<tr align="center">
-						<td><fmt:setLocale value="ko_KR" />
+						<td style="height:75px">
+						<fmt:setLocale value="ko_KR" />
 							<fmt:formatNumber type="currency" value="${vo.mgPrice}" /></td>
 					</tr>
 					<tr align="center">
@@ -96,7 +94,9 @@ table {
 										<option value="${i}">${i}</option>
 									</c:forEach>
 								</select>&nbsp; 개 <input type="submit" value="장바구니에 담기">
-							</form> <a href="/product/listView">상품목록</a>
+							</form>
+							<br>
+							<a href="/product/listView">상품목록</a>
 							<button class="btn btn-primary btn-sm" id="update">상품 수정</button>
 							<button class="btn btn-danger btn-sm" id="delete">상품 삭제</button>
 
@@ -181,6 +181,9 @@ function closeNav2() {
 	  document.getElementById("mySidenav2").style.width = "0";
 	}
 	
+	$(document).ready(function() {
+		console.log(JSON.stringify({mgNum:${vo.mgNum}}));
+	});
 var formObj = $("form[role='form']");
 $("#update").click(function() {
 	formObj.attr("action","/product/productModifyView");
@@ -193,6 +196,7 @@ $("#delete").click(function() {
 		formObj.attr("action","/product/productDelete");
 		formObj.submit();
 	}
+	
 });
 
 

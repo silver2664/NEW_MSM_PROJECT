@@ -3,6 +3,7 @@ package com.project.msm.controller;
 
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +25,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.cart.service.CartService;
 import com.project.cart.vo.CartVO;
+import com.project.cart.vo.OrderDetailVO;
+import com.project.cart.vo.OrderVO;
+import com.project.member.vo.MemberVO;
 
 
 @Controller
@@ -42,9 +47,12 @@ public class CartController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = (User) auth.getPrincipal();
 		String userId = user.getUsername();
+		
 		System.out.println("userId : " + userId);
 		System.out.println("mgNum : " + vo.getMgNum());
 		vo.setUserId(userId);
+		
+		
 		
 		// 장바구니에 기존 상품이 있는지 검사
 		int count = service.countCart(vo.getMgNum(), userId);
@@ -57,6 +65,7 @@ public class CartController {
 			// 있으면 update
 			service.updateCart(vo);
 		}
+		
 		return "redirect:/cart/cartView";
 	}
 	
@@ -69,6 +78,9 @@ public class CartController {
 		String userId = user.getUsername();
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<CartVO> list = service.listCart(userId);
+		
+		
+		
 		int sumMoney = service.sumMoney(userId);
 		int fee = sumMoney >= 10000 ? 0 : 2500;
 		map.put("list", list);
@@ -104,6 +116,22 @@ public class CartController {
 			service.modifyCart(vo);
 		}
 		return "redirect:/cart/cartView";
+	}
+	
+	//주문
+	@RequestMapping(value="cart/order")
+	public ModelAndView order(ModelAndView mv)throws Exception{
+		logger.info("order");
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User) auth.getPrincipal();
+		String userId = user.getUsername();
+		ArrayList<MemberVO> vo = (ArrayList<MemberVO>)service.member(userId);
+		mv.addObject("member", vo);
+		mv.setViewName("/order/orderInfo");
+		
+		
+		return mv;
+		
 	}
 
 }

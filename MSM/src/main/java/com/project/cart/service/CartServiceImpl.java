@@ -8,12 +8,16 @@ import org.springframework.stereotype.Service;
 
 import com.project.cart.dao.CartDAO;
 import com.project.cart.vo.CartVO;
+import com.project.cart.vo.OrderDetailVO;
+import com.project.cart.vo.OrderVO;
+import com.project.member.vo.MemberVO;
 
 @Service
 public class CartServiceImpl implements CartService {
 
 	@Inject
 	CartDAO dao;
+	
 	
 	// 01. 장바구니 추가
 	public void insert(CartVO vo) {
@@ -50,4 +54,14 @@ public class CartServiceImpl implements CartService {
 	public void updateCart(CartVO vo) {
 		dao.updateCart(vo);
 	}
+
+	
+	public List<MemberVO> member(String userId) {
+		// TODO Auto-generated method stub
+		return dao.member(userId);
+	}
+
+	
+	
+	
 }

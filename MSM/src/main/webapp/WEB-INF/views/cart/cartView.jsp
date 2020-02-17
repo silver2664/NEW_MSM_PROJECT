@@ -22,6 +22,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 <!-- Material Design Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- resource CSS -->
 <link href = "<c:url value = "/resources/css/home.css"/>" rel = "stylesheet" type = "text/css">
 
@@ -43,20 +44,22 @@
 					<th>금액</th>
 					<th>취소</th>
 				</tr>
+				
 				<c:forEach var = "row" items = "${map.list}" varStatus = "i">
 					<tr>
 						<td >
 							${row.productName}
 						</td>
 						<td style = "width : 80px; align : right">
-							<fmt:formatNumber pattern = "###,###,###" value ="${row.productPrice}"/>
+							<fmt:formatNumber type="currency" value ="${row.productPrice}"/>
 						</td>
 						<td>
 							<input type = "number" style = "width : 40px;" name = "amount" value = "${row.amount}" min = "1" />
 							<input type = "hidden" name = "mgNum" value = "${row.mgNum}"/>
+							<input type = "hidden" name="userId" value="${row.userId }"/>
 						</td>
 						<td>
-							<fmt:formatNumber pattern = "###,###,###" value = "${row.money}"/>
+							<fmt:formatNumber type="currency" value = "${row.money}"/>
 						</td>
 						<td style = "width : 100px;" align = "right">
 							<a href = "${path}/cart/delete?cartId=${row.cartId}">삭제</a>
@@ -65,19 +68,20 @@
 				</c:forEach>
 				<tr>
 					<td colspan = "5" align = "right">
-						장바구니 금액 합계 : <fmt:formatNumber pattern = "###,###,###" value ="${map.sumMoney}"/><br/>
+						장바구니 금액 합계 : <fmt:formatNumber type="currency" value ="${map.sumMoney}"/><br/>
 						배송료 : ${map.fee}<br/>
-						전체 주문 금액 : <fmt:formatNumber pattern = "###,###,###" value = "${map.allsum}"/>
+						전체 주문 금액 : <fmt:formatNumber type="currency" value = "${map.allsum}"/>
 					</td>
 				</tr>
 			</table>
 			<input type = "hidden" name = "count" value ="${map.count}">
 			<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
-			<button type = "submit" id = "btnUpdate">수정</button>
+			<button class="btn btn-success btn-sm"  type="button" id="order">주문 정보 입력</button>
+			<button class="btn btn-sm btn-primary" type = "submit" id = "btnUpdate">수정</button>
+			<button class="btn btn-info btn-sm"type = "button" id = "btnList">상품목록</button>
 		</form>
 	</c:otherwise>
 </c:choose>
-<button type = "button" id = "btnList">상품목록</button>
 </div>
 
 
@@ -112,6 +116,9 @@ $(document).ready(function(){
 	$("#btnList").click(function(){
 		location.href = "${path}/product/listView";
 	});
+	$("#order").click(function(){
+        location.href = "${path}/cart/order";
+    });
 });
 </script>
 

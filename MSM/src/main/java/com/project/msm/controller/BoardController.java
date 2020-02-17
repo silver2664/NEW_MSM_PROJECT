@@ -91,7 +91,7 @@ public class BoardController {
 		public String list(Model model,@ModelAttribute("scri") SearchCriteria scri) throws Exception{
 			logger.info("qnalist");			
 			model.addAttribute("list",service.list(scri));	
-			System.out.println(model);
+			
 			
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(scri);
@@ -188,6 +188,8 @@ public class BoardController {
 			System.out.println("list()");
 			command = new BListCommand();
 			command.execute(model);
+			
+			
 			
 			return "/board/notice/noticeList";
 		}

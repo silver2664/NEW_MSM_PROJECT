@@ -74,4 +74,26 @@
 	AND MGNUM = #{mgNum}
 </update>
 
+<!-- 주문 정보   -->
+<insert id="orderInfo">
+    insert into morder(oNum,mId,orderAddr1,orderAddr2,orderAddr3,amount)
+        values(#{oNum},#{mId},#{orderAddr1},#{orderAddr2},#{orderAddr3},{amount})
+</insert>
+
+<!-- 주문 상세정보 -->
+<insert id="orderInfo_Details">
+    insert into order_details(orderDetailsNum,oNum,mgNum,cartStock)    
+        select order_details_seq,#{oNum},mgNum,cartStock
+        from cart
+</insert>
+
+<!-- 회원정보 가져오기 -->
+<select id="member" resultType="com.project.member.vo.MemberVO">
+<![CDATA[
+    select m.mzip_code as mZip_Code, m.m_first_addr as mFirst_Addr, m.m_second_addr as mSecond_Addr, m.mId, m.mPhone
+    from msm_member m,ex_cart c
+    where m.mid = c.user_id and c.user_id=#{userId}
+]]>
+</select>
+
 </mapper>

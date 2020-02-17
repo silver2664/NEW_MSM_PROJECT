@@ -78,4 +78,6 @@
         values(#{mgNum},#{mId},reply_seq.nextval,#{repCon})
 </insert>
 
+
+
 </mapper>

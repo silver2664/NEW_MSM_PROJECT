@@ -1,4 +1,5 @@
 <head>
+
 </head>
 <body>
 <!-- Header Navbar -->
@@ -28,6 +29,7 @@
 			<!-- Header Menu -->
 			<div class = "collapse navbar-collapse" id = "headerMenu">
 				<ul class = "navbar-nav ml-auto">
+				
 					<!-- SignUP -->
 					<li class = "nav-item">					
 						<!-- <a type = "button" class = "btn btn-link waves-effect" data-toggle = "modal" data-target = "#signUp" style = "color : black">sign up</a> -->		
@@ -40,7 +42,7 @@
 							<a type = "button" class = "btn btn-link waves-effect" href = "/member/loginForm">sign in</a>
 						</sec:authorize>
 						<sec:authorize access = "isAuthenticated()">
-							<form action = "logout" method = "post">
+							<form action = "/logout" method = "post">
 								<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
 								<button type = "submit" class = "btn btn-link waves-effect" style = "color : black">sign out</button>
 							</form>
@@ -56,7 +58,7 @@
 							<a class = "btn btn-outline-white mb-5" href = "#" target = "_blank" role = "button">
 								Profile
 							</a>
-							<a class = "btn btn-outline-white mb-5" href = "#" target = "_blank" role = "button">
+							<a class = "btn btn-outline-white mb-5" href = "/cart/cartView" role = "button">
 								Cart
 							</a>
 							<a class = "btn btn-outline-white mb-5" href = "/board/notice/noticeList" role = "button">
@@ -66,7 +68,7 @@
 								QnA
 							</a>
 							<sec:authorize access = "isAuthenticated()">
-							<form action = "logout" method = "post">
+							<form action = "/logout" method = "post">
 								<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
 								<button type = "submit" class = "btn btn-outline-white mb-5" style = "color : black" id = "signOut1">Sign Out</button>
 							</form>

@@ -10,6 +10,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.project.cart.vo.CartVO;
+import com.project.cart.vo.OrderDetailVO;
+import com.project.cart.vo.OrderVO;
+import com.project.member.vo.MemberVO;
 
 @Repository
 public class CartDAOImpl implements CartDAO {
@@ -65,5 +68,12 @@ public class CartDAOImpl implements CartDAO {
 	public void updateCart(CartVO vo) {
 		sqlSession.update("cartMapper.updateCart", vo);
 	}
+
+	@Override
+	public List<MemberVO> member(String userId) {		
+		return sqlSession.selectList("cartMapper.member", userId);
+	}
+
+
 		
 }

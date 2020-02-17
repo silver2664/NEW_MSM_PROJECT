@@ -109,7 +109,7 @@ aside {
 						 <strong><fmt:setLocale value="ko_KR"/>
 						 <fmt:formatNumber type="currency" value="${row.mgPrice}"/></strong>
 						</span> <span class="float-right">
-						 <a	class="material-tooltip-main" data-toggle="tooltip" data-place="top" title="Add to Cart" href="/cart/insert?mgNum=${row.mgNum}&amount=1">
+						 <a	class="material-tooltip-main"  data-toggle="tooltip" data-place="top" id="addCart" title="Add to Cart" href="/cart/insert?mgNum=${row.mgNum}&amount=1">
 							<input type="hidden" value="${row.mgNum}" name="mgNum"id="mgNum"/>
 							 <i	class="fas fa-shopping-cart grey-text ml-3"></i></a>
 							 <a class="material-tooltip-main" data-toggle="tooltip"	data-place="top" title="Add to WishList">
@@ -141,6 +141,7 @@ $(document).ready(function() {
 		
 		location.href="/product/product_reg";
 	});
+	
 });
 function openNav() {
 	  document.getElementById("mySidenav").style.width = "30vw";

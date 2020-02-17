@@ -502,12 +502,11 @@
 							<p class="card-text">MSM Goods No.3 Example</p>
 							<!-- Card Footer -->
 							<div class="card-footer px-1">
-								<span class="float-left font-weight-bold"> <strong>89,000원</strong>
-								</span> <span class="float-right"> <a
-									class="material-tooltip-main" data-toggle="tooltip"
-									data-place="top" title="Add to Cart"> <i
-										class="fas fa-shopping-cart grey-text ml-3"></i>
-								</a> <a class="material-tooltip-main" data-toggle="tooltip"
+								<span class="float-left font-weight-bold"> <strong>89,000원</strong></span>
+								 <span class="float-right"> 
+								<a class="material-tooltip-main" data-toggle="tooltip"	data-place="top" title="Add to Cart">
+								 <i class="fas fa-shopping-cart grey-text ml-3"></i></a> 
+								 <a class="material-tooltip-main" data-toggle="tooltip"
 									data-place="top" title="Add to WishList"> <i
 										class="fas fa-heart grey-text ml-3"></i>
 								</a>
