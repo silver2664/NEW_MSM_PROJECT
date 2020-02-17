@@ -1,41 +1,30 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" session="true"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+<meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
 <title>상품 페이지 --MSM</title>
 <!-- Font Awesome -->
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <!-- Bootstrap core CSS -->
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 <!-- Material Design Bootstrap -->
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css"
-	rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
 <!-- resource CSS -->
-<link href="<c:url value = "/resources/css/home.css"/>" rel="stylesheet"
-	type="text/css">
+<link href="<c:url value = "/resources/css/home.css"/>" rel="stylesheet" type="text/css">
 <!-- CK EDITOR -->
 <script src="/resources/js/ckeditor/ckeditor.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/resources/css/tabs.css"/>" />
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/resources/css/tabstyles.css"/>" />
+<link rel="stylesheet" href="<c:url value="/resources/css/tabs.css"/>" type="text/css">
+<link rel="stylesheet" href="<c:url value="/resources/css/tabstyles.css"/>" type="text/css">
 <script src="/resources/js/modernizr.custom.js"></script>
 <style>
 h2 {
@@ -117,8 +106,7 @@ table {
 				<ul>
 					<li><a href="#section-linetriangle-1"><span>상세정보</span></a></li>
 					<li><a href="#section-linetriangle-2"><span>배송정보</span></a></li>
-					<li><a href="#section-linetriangle-3"><span>교환및 환불
-								정책</span></a></li>
+					<li><a href="#section-linetriangle-3"><span>교환및 환불정책</span></a></li>
 				</ul>
 			</nav>
 			<div class="content-wrap">

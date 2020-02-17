@@ -28,7 +28,7 @@
 							<a type = "button" class = "btn btn-link waves-effect" href = "/member/loginForm">sign in</a>
 						</sec:authorize>
 						<sec:authorize access = "isAuthenticated()">
-							<form action = "http://localhost:8181/logout" method = "post">
+							<form action = "/logout" method = "post">
 								<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
 								<button type = "submit" class = "btn btn-link waves-effect" style = "color : black">sign out</button>
 							</form>
@@ -54,7 +54,7 @@
 								QnA
 							</a>
 							<sec:authorize access = "isAuthenticated()">
-							<form action = "http://localhost:8181/logout" method = "post">
+							<form action = "/logout" method = "post">
 								<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
 								<button type = "submit" class = "btn btn-outline-white mb-5" style = "color : black" id = "signOut1">Sign Out</button>
 							</form>

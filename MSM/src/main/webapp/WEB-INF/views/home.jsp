@@ -61,14 +61,13 @@
 					<!-- My Account Sidebar Btn -->
 					<a type = "button" class = "btn btn-link waves-effect" href = "#" onclick = "openNav()">My Account</a>
 					<div id = "mySidenav" class = "sidenav">
-						<h3 class = "text-center text-white mb-5">My Account</h3>
 						<a href = "javascript:void(0)" class = "closebtn" onclick = "closeNav()">&times;</a>
 						<sec:authorize access="isAuthenticated()">
 						<sec:authentication property ="principal.username" var = "mId"/>
+						<h3 class = "text-center text-white mb-5">${mId} 님 ACCOUNT</h3>												
 						<a id ="mId" class = "btn btn-outline-white mb-5" href = "/member/memberDetail?mId=${mId}&page=1&perPageNum=10&searchType=&keyword=" role = "button">
 							Profile
-						</a>						
-						</sec:authorize>
+						</a>					
 						<a class = "btn btn-outline-white mb-5" href = "/cart/cartView" role = "button">
 							Cart
 						</a>
@@ -78,7 +77,7 @@
 						<a class = "btn btn-outline-white mb-5" href = "/board/qna/qnaList" role = "button">
 							QnA
 						</a>
-						<sec:authorize access = "isAuthenticated()">
+						
 						<form action = "logout" method = "post">
 							<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
 							<button type = "submit" class = "btn btn-outline-white mb-5" style = "color : black" id = "signOut1">Sign Out</button>
@@ -245,7 +244,6 @@
 						</li>
 						<li class = "dropdown-item">
 							<a class = "dropdown-link">GOLD PRODUCTS</a>
-						</li>	
 						</li>
 						<li class = "dropdown-item">
 							<a class = "dropdown-link">GLASSES CHAINS</a>
@@ -272,7 +270,6 @@
 						</li>
 						<li class = "dropdown-item">
 							<a class = "dropdown-link">EXAMPLE 06</a>
-						</li>	
 						</li>
 						<li class = "dropdown-item">
 							<a class = "dropdown-link">EXAMPLE 07</a>
@@ -299,7 +296,6 @@
 						</li>
 						<li class = "dropdown-item">
 							<a class = "dropdown-link">EXAMPLE 06</a>
-						</li>	
 						</li>
 						<li class = "dropdown-item">
 							<a class = "dropdown-link">EXAMPLE 07</a>
@@ -326,7 +322,6 @@
 						</li>
 						<li class = "dropdown-item">
 							<a class = "dropdown-link">EXAMPLE 06</a>
-						</li>	
 						</li>
 						<li class = "dropdown-item">
 							<a class = "dropdown-link">EXAMPLE 07</a>
@@ -380,12 +375,9 @@
 				<div class="col-lg-3 col-md-6 mb-4">
 					<div class="card card-cascade narrow card-ecommerce">
 						<!-- Card Image -->
-						<div class="view view-cascade overlay">
-							<img
-								src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/1.jpg"
-								class="card-img-top" alt="sample photo"> <a>
-								<div class="mask rgba-white-slight"></div>
-							</a>
+						<div class="view view-cascade overlay">							
+							<img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/1.jpg" class="card-img-top" alt="sample photo">
+							<a><div class="mask rgba-white-slight"></div></a>														
 						</div>
 						<!-- Card Content -->
 						<div class="card-body card-body-cascade text-center pb-3">
@@ -1038,42 +1030,57 @@
 	<!-- //Recommand Goods -->
 	
 	<!-- Brand-Logo -->
-	<div class = "container mb-5">
+	<div class = "container-fluid mb-5">
 		<div class = "card text-white" style = "max-width : 100%; background-color : #ce93d8">
 			<div class = "card-body">
 				<h4 class = "text-center">MSM PARTNER BRAND</h4>
 			</div>
 		</div>
 	</div>
-	<div class = "container">
-		<section>
-			<div class = "row">
-				<div class = "col-lg-4 col-md-6 mb-5">
-					<div class = "view zoom z-depth-1 rounded view-logo">
-						<a href = "#">
-							<img src = "http://blogfiles.naver.net/20150830_55/kudshop_14408818986977UrjW_PNG/Screen_Shot_2015-08-30_at_5.57.33_AM.png" class = "img-fluid logo1">
-						</a>
-					</div>
+	<div class = "mt-2" style = "height : 150px; background-color : #fafafa">
+		<div class = "container-fluid">
+			<div class = "row mb-2" style = "margin : auto">
+				<div class = "col-sm-2 mt-3 mb-2 ml-4" style = "height : 100px; margin : auto">
+					<img src = "/resources/images/logo/logo2.jpg" style = "width : 200px; height : 100px;">
 				</div>
-				<div class = "col-lg-4 col-md-6 mb-5">
-					<div class = "view zoom z-depth-1 rounded view-logo">
-						<a href = "#">
-							<img src = "http://thumbnail.10x10.co.kr/webimage/image/add1_600/146/A001462480_01-1.jpg?cmd=thumb&w=500&h=500&fit=true&ws=false" class = "img-fluid logo1">
-						</a>
-					</div>
+				<div class = "col-sm-2 mt-3 mb-2 ml-4" style = "height : 100px; margin : auto">
+					<img src= "/resources/images/logo/aasLogo.jpg" style = "width : 200px; height : 100px;">
 				</div>
-				<div class = "col-lg-4 col-md-6 mb-5">
-					<div class = "view zoom z-depth-1 rounded view-logo">						
-						<a href = "#">
-							<img src = "http://blogfiles.naver.net/20150419_47/sye821_1429414910763K4qfm_JPEG/11101832_1558861107735935_1999409747053864656_n.jpg" class = "img-fluid logo1">
-						</a>
-					</div>
+				<div class = "col-sm-2 mt-3 mb-2 ml-4" style = "height : 100px; margin : auto">
+					<img src= "/resources/images/logo/mdbLogo.jpg" style = "width : 200px; height : 100px;">
 				</div>
+				<div class = "col-sm-2 mt-3 mb-2 ml-4" style = "height : 100px; margin : auto">
+					<img src= "/resources/images/logo/githubLogo.jpg" style = "width : 200px; height : 100px;">
+				</div>
+				<div class = "col-sm-2 mt-3 mb-2 ml-4" style = "height : 100px; margin : auto">
+					<img src= "/resources/images/logo/javaLogo.jpg" style = "width : 200px; height : 100px;">
+				</div>	
 			</div>
-		</section>
+		</div>
+	</div>
+	<div class = "mb-3" style = "height : 150px; background-color : #fafafa">
+		<div class = "container-fluid">
+			<div class = "row mb-2" style = "margin : auto">
+				<div class = "col-sm-2 mt-3 mb-2 ml-4" style = "height : 100px; margin : auto">
+					<img src = "/resources/images/logo/springLogo.png" style = "width : 200px; height : 100px;">
+				</div>
+				<div class = "col-sm-2 mt-3 mb-2 ml-4" style = "height : 100px; margin : auto">
+					<img src= "/resources/images/logo/eclipseLogo.jpg" style = "width : 200px; height : 100px;">
+				</div>
+				<div class = "col-sm-2 mt-3 mb-2 ml-4" style = "height : 100px; margin : auto">
+					<img src= "/resources/images/logo/bootstrapLogo.png" style = "width : 200px; height : 100px;">
+				</div>
+				<div class = "col-sm-2 mt-3 mb-2 ml-4" style = "height : 100px; margin : auto">
+					<img src= "/resources/images/logo/googleLogo.jpg" style = "width : 200px; height : 100px;">
+				</div>
+				<div class = "col-sm-2 mt-3 mb-2 ml-4" style = "height : 100px; margin : auto">
+					<img src= "/resources/images/logo/w3shools.png" style = "width : 200px; height : 100px;">
+				</div>	
+			</div>
+		</div>
 	</div>
 	<!-- //Brand-Logo -->
-	
+		
 </main>
 
 <footer class = "page-footer text-center font-small mt-4">

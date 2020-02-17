@@ -140,7 +140,7 @@ body {
   		<a href="/home">MSM HOME</a>
   		<a href="/product/listView">BRAND MALL</a>
   		<a href="/product/listView">ACCESSORY MALL</a>
-  		<a href="/login">SIGN IN</a>
+  		<a href="/member/loginForm">SIGN IN</a>
   		<a href="/member/step1">REGISTER</a>
 	</div>
 
@@ -163,13 +163,6 @@ body {
 		
 		<div class="section" id ="sec5"></div>
 	</div>
-	<!-- 
-	<div class="slide" id="slide1"></div>
-	<div class="slide" id="slide2"></div>
-	<div class="slide" id="slide3"></div>
-	<div class="slide" id="slide4"></div>
-	<div class="slide" id="slide5"></div>
-	 -->
 </div>
 
 <!-- SCRIPTS -->

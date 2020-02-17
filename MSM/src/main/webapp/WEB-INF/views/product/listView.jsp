@@ -15,6 +15,14 @@
 <title>상품 목록 -- MSM</title>
 
 <style>
+body{
+    font-size:12px;
+    line-height:15px;
+    word-spacing:1px;
+    letter-spacing:-1px;
+    font-color:black;
+}
+
 .row {
 	
 	
@@ -98,7 +106,7 @@ aside {
 				
 				<div class="view view-cascade overlay">
 					<a href = "${path}/product/productView/${row.mgNum}">
-							<img src = "/resources/images/${row.mgImg}" style="width:100%">
+							<img src = "/resources/${row.mgImg}" style="width:100%">
 						</a>			
 				</div>
 				<!-- Card Content -->

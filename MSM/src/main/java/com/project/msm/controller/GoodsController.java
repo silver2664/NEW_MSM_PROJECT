@@ -221,6 +221,7 @@ public class GoodsController {
 			//상품 수정
 			@RequestMapping(value="/product/productModifyView",method=RequestMethod.GET)
 			public void getProductModify(@RequestParam("mgNum") int mgNum,Model model) throws Exception	 {
+				
 				logger.info("get product modify");
 				
 				GoodsViewVO vo = service.detailProduct(mgNum);				

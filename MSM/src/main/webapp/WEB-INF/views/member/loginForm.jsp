@@ -43,7 +43,7 @@
 	
 	    <!-- Form -->
 	    <form class="text-center" style="color: #757575;" action="/login" method = "POST">
-	    <input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
+	    <input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}"/>
 	
 	      <!-- ID -->
 	      <div class="md-form">
@@ -112,7 +112,7 @@
 	<div class="modal-dialog modal-notify modal-warning" role="document">
 	
 		<!--Content-->		
-		<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
+		<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}"/>
     	<div class="modal-content">
       		<!--Header-->
       		<div class="modal-header text-center">

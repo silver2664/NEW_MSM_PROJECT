@@ -35,7 +35,7 @@ public class CartController {
 	
 	// 01. 장바구니 추가
 	@RequestMapping(value = "/cart/insert")
-	public String insert(@ModelAttribute CartVO vo) throws Exception {
+	public void insert(@ModelAttribute CartVO vo) throws Exception {
 		
 		logger.info("장바구니 추가");
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -56,7 +56,6 @@ public class CartController {
 			// 있으면 update
 			service.updateCart(vo);
 		}
-		return "redirect:/cart/cartView";
 	}
 	
 	// 02. 장바구니 목록

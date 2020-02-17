@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -13,6 +12,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta id = "_csrf" name = "_csrf" content = "${_csrf.token}"/>
 <title>상품 수정 -- MSM</title>
 <style>
 body {
@@ -36,13 +36,13 @@ h2{
 </head>
 <body>
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
+	
 	<article class="mb-5">
 		<div class="container">
 			<h2>상품 수정</h2>
 			<hr />
-			<form name="form" id="form" method="post"
-				action="/product/productModify" enctype="multipart/form-data">
-				<input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}" />
+			<form name="form" id="form" method="post" action="/product/productModify" enctype="multipart/form-data">
+				<input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}"/>
 				<input type="hidden" id="mgNum"name="mgNum" value="${mo.mgNum}">
 				<label>1차분류</label>
 				<select	class="category1">
@@ -79,7 +79,7 @@ h2{
 				<div class="mb-3">
 					<label for="content"><strong>내용</strong></label>
 					<textarea class="form-control" cols="80" rows="10" name="mgContent"
-						id="mgContent" required>${mo.mgContent}</textarea>
+						id="mgContent" style = "height : 500px" required>${mo.mgContent}</textarea>
 					<script type="text/javascript">
 						editor = CKEDITOR.replace('mgContent');
 						editor.on('required', function(evt) {
@@ -131,8 +131,7 @@ function closeNav2() {
 $(document).ready(function() {
 	
 	
-	$("#btnList").click(function(e) {
-		
+	$("#btnList").click(function(e) {		
 		location.href="/product/listView";
 	});
 	
