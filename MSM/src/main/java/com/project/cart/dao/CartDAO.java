@@ -3,6 +3,7 @@ package com.project.cart.dao;
 import java.util.List;
 
 import com.project.cart.vo.CartVO;
+import com.project.member.vo.MemberVO;
 
 
 public interface CartDAO {
@@ -23,9 +24,12 @@ public interface CartDAO {
 	public int sumMoney(String userId);
 	
 	// 06. 장바구니 동일한 상품 레코드 확인
-	public int countCart(int productId, String userId);
+	public int countCart(int mgNum, String userId);
 	
 	// 07. 장바구니 상품수량 변경
 	public void updateCart(CartVO vo);
+	
+	//회원 정보 가져오기
+	public MemberVO member(String userId);
 
 }

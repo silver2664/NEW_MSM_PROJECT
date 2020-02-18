@@ -27,6 +27,14 @@ public class CartVO {
 	private int productPrice; // 상품단가
 	private int amount; // 구매 수량
 	private int money; // 상품 가격
+	private int mgNum;
+		
+	public int getMgNum() {
+		return mgNum;
+	}
+	public void setMgNum(int mgNum) {
+		this.mgNum = mgNum;
+	}
 	public int getCartId() {
 		return cartId;
 	}

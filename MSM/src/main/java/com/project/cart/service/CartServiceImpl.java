@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.cart.dao.CartDAO;
 import com.project.cart.vo.CartVO;
+import com.project.member.vo.MemberVO;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -41,13 +42,19 @@ public class CartServiceImpl implements CartService {
 	}
 		
 	// 06. 장바구니 동일한 상품 레코드 확인
-	public int countCart(int productId, String userId) {
+	public int countCart(int mgNum, String userId) {
 		System.out.println("CartService countCart 메서드 실행");
-		return dao.countCart(productId, userId);
+		return dao.countCart(mgNum, userId);
 	}
 			
 	// 07. 장바구니 상품수량 변경
 	public void updateCart(CartVO vo) {
 		dao.updateCart(vo);
 	}
+	
+	public MemberVO member(String userId) {
+		// TODO Auto-generated method stub
+		return dao.member(userId);
+	}
+
 }

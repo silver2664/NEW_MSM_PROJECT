@@ -26,15 +26,24 @@
 <!-- 네이버로그인 -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
 </head>
+<style>
+#loginForm {
+	background-image : url("/resources/images/indexPageImg/se4.jpg");
+	background-repeat: no-repeat;
+	background-size: 100%;
+	height : 1000px;
+}
+</style>
 <body>
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
 
+<div id = "loginForm">
 <div class = "container">
 	<!-- Material form login -->
 	<div class = "row">
-	<div class="card col-md-6 offset-md-3" style = "width : 50%;">
+	<div class="card col-md-6 offset-md-3" style = "width : 100%; margin-top : 200px;">
 	
-	  <h5 class="card-header secondary-color white-text text-center py-4">
+	  <h5 class="card-header text-center py-4">
 	    <strong>Sign In</strong>
 	  </h5>
 	
@@ -103,6 +112,7 @@
 	
 	</div>
 	</div>
+</div>
 </div>
 <!-- Material form login -->
 

@@ -7,8 +7,8 @@
 <!-- 01. 장바구니 추가 -->
 <insert id = "insertCart">
 	<![CDATA[
-		INSERT INTO EX_CART (CART_ID, USER_ID, PRODUCT_ID, AMOUNT)
-		VALUES (SEQ_CART.NEXTVAL, #{userId}, #{productId}, #{amount})
+		INSERT INTO EX_CART (CART_ID, USER_ID, MGNUM, AMOUNT)
+		VALUES (SEQ_CART.NEXTVAL, #{userId}, #{mgNum}, #{amount})
 	]]>
 </insert>
 
@@ -18,7 +18,7 @@
 		SELECT
 			C.CART_ID AS cartId,
 			C.USER_ID AS userId,
-			P.MGNUM AS productId,
+			P.MGNUM AS mgNum,
 			M.MNAME AS userName,
 			P.MGNAME AS productName,
 			C.AMOUNT,
@@ -27,7 +27,7 @@
 		FROM
 			MSM_MEMBER M, EX_GOODS P, EX_CART C
 		WHERE M.MID = C.USER_ID
-		AND   P.MGNUM = C.PRODUCT_ID
+		AND   P.MGNUM = C.MGNUM
 		AND   C.USER_ID = #{userId}
 		ORDER BY C.CART_ID			
 	]]>
@@ -38,7 +38,7 @@
 	<![CDATA[
 		SELECT NVL(SUM(MGPRICE * AMOUNT), 0) MONEY
 		FROM EX_CART C, EX_GOODS P
-		WHERE C.PRODUCT_ID = P.MGNUM AND C.USER_ID = #{userId}
+		WHERE C.MGNUM = P.MGNUM AND C.USER_ID = #{userId}
 	]]>
 </select>
 
@@ -48,7 +48,7 @@
 		UPDATE EX_CART
 		SET AMOUNT = #{amount}
 		WHERE USER_ID = #{userId}
-		AND PRODUCT_ID = #{productId}
+		AND MGNUM = #{mgNum}
 	]]>
 </update>
 
@@ -63,7 +63,7 @@
 	SELECT COUNT(*)
 	FROM EX_CART
 	WHERE USER_ID = #{userId}
-	AND PRODUCT_ID = #{productId}
+	AND MGNUM = #{mgNum}
 </select>
 
 <!-- 7. 장바구니에 동일한 상품이 존재하면 수정 -->
@@ -71,7 +71,16 @@
 	UPDATE EX_CART
 	SET AMOUNT = AMOUNT + #{amount}
 	WHERE USER_ID = #{userId}
-	AND PRODUCT_ID = #{productId}
+	AND MGNUM = #{mgNum}
 </update>
+
+<!-- 회원정보 가져오기 -->
+<select id="member" resultType="com.project.member.vo.MemberVO">
+<![CDATA[
+    select mzip_code as mZip_Code, m_first_addr as mFirst_Addr, m_second_addr as mSecond_Addr,mId, mPhone,mName
+    from msm_member
+    where mid = #{userId}
+]]>
+</select>
 
 </mapper>

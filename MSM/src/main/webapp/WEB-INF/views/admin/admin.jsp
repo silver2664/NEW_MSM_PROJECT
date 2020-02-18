@@ -13,396 +13,213 @@
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta id = "_csrf" name = "_csrf" content = "${_csrf.token}"/>
 <title>Admin Page</title>
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-<!-- Bootstrap core CSS -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-<!-- Material Design Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
-<!-- resource CSS -->
-<link href = "<c:url value = "/resources/css/home.css"/>" rel = "stylesheet" type = "text/css">
-<!-- CK EDITOR -->
-<script src="/resources/js/ckeditor/ckeditor.js"></script>
 <style>
-/* Style the tab */
-.tab {
-  float: left;
-  border: 1px solid #ccc;
-  background-color: #f1f1f1;
-  width: 20%;
-  height: 100%;
-}
-/* Style the buttons that are used to open the tab content */
-.tab button {
-  display: block;
-  background-color: inherit;
-  color: black;
-  padding: 22px 16px;
-  width: 100%;
-  border: none;
-  outline: none;
-  text-align: left;
-  cursor: pointer;
-  transition: 0.3s;
-}
-/* Change background color of buttons on hover */
-.tab button:hover {
-  background-color: #ddd;
+:root {
+	--primary: 0, 0%, 100%;
+	--secondary: 202, 73%, 28%;
+	--c: cubic-bezier(1,.49,.16,.96);
 }
 
-/* Create an active/current "tab button" class */
-.tab button.active {
-  background-color: #ccc;
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100vh;
+	font-family: 'Poppins', 'Helvetica', sans-serif;
+	background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);	
 }
 
-/* Style the tab content */
-.tabcontent {
-  float: left;
-  padding: 0px 12px;
-  border: 1px solid #ccc;
-  width: 80%;
-  border-left: none;
-  height: 100%;
+.btn {
+	--w: 300px;
+	--h: 45px;
+	position: relative;
+	display: flex;
+	width: var(--w);
+	height: var(--h);
+	border: 1px solid hsl(var(--primary));
+}
+
+div {margin-bottom: 20px;}
+div:last-child {margin-bottom: 0px;}
+
+i {
+	content: '';
+	width: 100%;
+	height: 100%;
+	transition: all .5s var(--c);
+	background: hsl(var(--primary));
+}
+
+i:nth-child(1) {transition-delay: .02s;}
+i:nth-child(2) {transition-delay: .04s;}
+i:nth-child(3) {transition-delay: .06s;}
+i:nth-child(4) {transition-delay: .08s;}
+i:nth-child(5) {transition-delay: .10s;}
+i:nth-child(6) {transition-delay: .12s;}
+i:nth-child(7) {transition-delay: .14s;}
+i:nth-child(8) {transition-delay: .16s;}
+i:nth-child(9) {transition-delay: .18s;}
+i:nth-child(10) {transition-delay: .2s;}
+
+
+span {
+	position: absolute;
+	width: 100%;	
+	font-size: 14px;
+	font-weight: 800;
+	line-height: var(--h);
+	letter-spacing: 4px;
+	text-align: center;
+	text-transform: uppercase;
+	color: hsl(var(--primary));	
+	transition: all .4s var(--c);
+	z-index: 100;
+}
+
+.style-1, 
+.style-2 {
+	flex-direction: column;
+}
+.style-3, 
+.style-4, 
+.style-5, 
+.style-6 {
+	flex-direction: row;
+}
+
+.style-1 i,
+.style-5 i {transform-origin: center left;}
+
+.style-2 i,
+.style-6 i {transform-origin: center right;}
+
+.style-3 i {transform-origin: center bottom;}
+
+.style-4 i {transform-origin: center top;}
+
+.style-1 i,
+.style-2 i,
+.style-5 i,
+.style-6 i {	
+	transform: scaleX(0);
+}
+
+.style-3 i,
+.style-4 i {
+	transform: scaleY(0);
+}
+
+.style-1:hover i,
+.style-2:hover i,
+.style-5:hover i,
+.style-6:hover i {
+	transform: scaleX(1);
+}
+
+.style-3:hover i,
+.style-4:hover i {
+	transform: scaleY(1);
+}
+
+.btn:hover span {
+	color: hsl(var(--secondary));
+	transition-delay: .4s;
 }
 </style>
 </head>
 <body>
 
-<%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
-
-<div style = "height : 1200px">
-
-<div class = "tab">
-	<button id = "defaultOpen" class = "tablinks" onclick = "openCity(event, 'member')">회원관리</button>
-	<button class = "tablinks" onclick = "openCity(event, 'goods')">상품관리</button>
-	<button class = "tablinks" onclick = "openCity(event, 'notice')">공지사항</button>
-	<button class = "tablinks" onclick = "openCity(event, 'Seoul')">Seoul</button>
-</div>
-
-<div id = "member" class = "tabcontent">
-
-<h1 class = "text-center mt-4">Member List</h1>
-<hr/>
-
-<!-- MemberList -->
-<div class = "container mb-3">
-<div class = "text-right">
-	<button class = "btn btn-primary btn-sm" id = "updateAuth">권한변경하기</button>
-</div>
-	<form role = "form" method = "post">				
-		<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
-		<table class = "table table-bordered table-striped table-hover">
-			<thead class = "black white-text text-center">
-				<tr>
-					<th>
-						<div class = "custom-control custom-checkbox allcheck">
-							<input type = "checkbox" class = "custom-control-input allcheck" id = "allcheck">
-							<label class = "custom-control-label" for = "allcheck"></label>
-						</div>
-					</th>
-					<th>ID</th>
-					<th>NAME</th>
-					<th>EMAIL</th>
-					<th>PHONE</th>
-					<th>권한</th>				
-					<th>가입일</th>
-				</tr>
-			</thead>
-			<tbody class = "text-center">
-				<c:forEach var = "member" items = "${memberList}" varStatus = "status">
-				<tr id = "memberTR">
-					<td scope = "row">
-						<div class = "custom-control custom-checkbox">
-							<input type = "checkbox" class = "custom-control-input chk" name = "chk" id = "${member.mId}" data-memberId="${member.mId}">
-							<label class = "custom-control-label" for = "${member.mId}"></label>
-						</div>
-					</td>
-					<td>
-						<a href="/member/memberDetail?mId=${member.mId}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}"><c:out value="${member.mId}"/></a>
-					</td>
-					<td>${member.mName}</td>
-					<td>${member.mEmail}</td>
-					<td>${member.mPhone}</td>
-					<td>
-						<select name ="authority" id = "authority${status.index}" onchange= "select(${status.index})">
-							<option value = "${member.authority}">${member.authority}</option>
-							<option value = "USER">USER</option>
-							<option value = "MANAGER">MANAGER</option>
-						</select>
-					</td>			
-					<td>${member.regDate}</td>			
-				</tr>
-				</c:forEach>
-			</tbody> 
-		</table>
-		
-		<!-- pagination -->
-		<div style = "height : 50px;">
-	  		<ul class = "pagination pg-blue justify-content-center">
-	    		<c:if test="${pageMaker.prev}">
-	    			<li style = "list-style : none; float : left; padding : 6px;"><a href="admin${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
-	    		</c:if> 
-	
-	    		<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-	    			<li style = "list-style : none; float : left; padding : 6px;"><a href="admin${pageMaker.makeSearch(idx)}">${idx}</a></li>
-	    		</c:forEach>
-	
-	    		<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-	    			<li style = "list-style : none; float : left; padding : 6px;"><a href="admin${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
-	    		</c:if> 
-	  		</ul>
-		</div>
-		
-		<!-- search -->
-		<div class="search row justify-content-center">
-			
-		    <select name="searchType">
-		      	<option value="tnmpar"<c:out value="${scri.searchType eq 'tnmpar' ? 'selected' : ''}"/>>통합검색</option>
-		     	<option value="t"<c:out value="${scri.searchType eq 't' ? 'selected' : ''}"/>>ID</option>
-		      	<option value="c"<c:out value="${scri.searchType eq 'm' ? 'selected' : ''}"/>>EMAIL</option>	     
-		    </select>
-			
-		    <input type="text" name="keyword" id="keywordInput" value="${scri.keyword}"/>
-		
-		    <button id="searchBtn" type="button"><i class="fas fa-search" aria-hidden="true"></i></button>
-		   				
-  		</div>
-  
-	</form>
-</div>
+<div>
+	<h1>ADMIN PAGE</h1>
+	<hr/>
 </div>
 
 
-<div id = "goods" class = "tabcontent">
-<h1 class = "text-center mt-4">상품관리</h1>
-<hr/>
-<div class = "container mb-3">
-	<form role = "form" method = "post">
-	<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
-		<table class = "table table-bordered table-striped table-hover">
-			<thead class = "black white-text text-center">
-				<tr>
-					<th>
-						<div class = "custom-control custom-checkbox allcheck">
-							<input type = "checkbox" class = "custom-control-input allcheck" id = "allcheck2">
-							<label class = "custom-control-label" for = "allcheck"></label>
-						</div>
-					</th>
-					<th>상품번호</th>
-					<th>카테고리</th>
-					<th>상품명</th>
-					<th>가격</th>
-				</tr>
-			</thead>
-			<tbody class = "text-center">
-				<c:forEach var = "goods" items = "${goodsList}" varStatus = "status">
-				<tr id = "memberTR">
-					<td scope = "row">
-						<div class = "custom-control custom-checkbox">
-							<input type = "checkbox" class = "custom-control-input chk" name = "chk" id = "${goods.mgNum}" data-memberId="${goods.mgNum}">
-							<label class = "custom-control-label" for = "${goods.mgNum}"></label>
-						</div>
-					</td>
-					<td>${goods.mgNum}</td>
-					<td>${goods.cateCode}</td>
-					<td>${goods.mgName}</td>
-					<td>${goods.mgPrice}</td>		
-				</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-		
-		<!-- pagination -->
-		<div style = "height : 50px;">
-	  		<ul class = "pagination pg-blue justify-content-center">
-	    		<c:if test="${pageMaker2.prev}">
-	    			<li style = "list-style : none; float : left; padding : 6px;"><a href="admin${pageMaker2.makeSearch(pageMaker2.startPage - 1)}">이전</a></li>
-	    		</c:if> 
-	
-	    		<c:forEach begin="${pageMaker2.startPage}" end="${pageMaker2.endPage}" var="idx">
-	    			<li style = "list-style : none; float : left; padding : 6px;"><a href="admin${pageMaker2.makeSearch(idx)}">${idx}</a></li>
-	    		</c:forEach>
-	
-	    		<c:if test="${pageMaker2.next && pageMaker2.endPage > 0}">
-	    			<li style = "list-style : none; float : left; padding : 6px;"><a href="admin${pageMaker2.makeSearch(pageMaker2.endPage + 1)}">다음</a></li>
-	    		</c:if>
-	  		</ul>
-		</div>
-	</form>
+<div class="btn style-1">		
+	<a href = "/admin/memberList"><span>회원 관리</span></a>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>	
 </div>
+<div class="btn style-2">
+	<a href = "/admin/goodsList"><span>상품 관리</span></a>	
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+</div>
+<div class="btn style-3">
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<span>Style 3</span>
+</div>
+<div class="btn style-4">
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<span>Style 4</span>
+</div>
+<div class="btn style-5">
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<span>Style 5</span>
+</div>
+<div class="btn style-6">
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<i></i>
+	<span>Style 6</span>
 </div>
 
-<div id = "notice" class = "tabcontent">
-<h1 class = "text-center mt-4">공지사항</h1>
-<hr/>
-</div>
-
-<div id = "Seoul" class = "tabcontent">
-<h1>Seoul</h1>
-</div>
-
-</div>
-
-<%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>
-
-<!-- SCRIPTS -->
-<!-- JQuery -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- Bootstrap tooltips -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-<!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<!-- MDB core JavaScript -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
-<script>
-function openNav() {
-	  document.getElementById("mySidenav").style.width = "30vw";
-	}
-	
-function openNav2() {
-	  document.getElementById("mySidenav2").style.width = "30vw";
-	}
-
-function closeNav() {
-	  document.getElementById("mySidenav").style.width = "0";
-	}
-
-function closeNav2() {
-	  document.getElementById("mySidenav2").style.width = "0";
-	}
-</script>
-<script>
-function openCity(evt, cityName) {
-	  // Declare all variables
-	  var i, tabcontent, tablinks;
-
-	  // Get all elements with class="tabcontent" and hide them
-	  tabcontent = document.getElementsByClassName("tabcontent");
-	  for (i = 0; i < tabcontent.length; i++) {
-	    tabcontent[i].style.display = "none";
-	  }
-
-	  // Get all elements with class="tablinks" and remove the class "active"
-	  tablinks = document.getElementsByClassName("tablinks");
-	  for (i = 0; i < tablinks.length; i++) {
-	    tablinks[i].className = tablinks[i].className.replace(" active", "");
-	  }
-
-	  // Show the current tab, and add an "active" class to the link that opened the tab
-	  document.getElementById(cityName).style.display = "block";
-	  evt.currentTarget.className += " active";
-}
-
-//Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
-</script>
-
-<script>
-$(function(){
-	$('#searchBtn').click(function() {
-		self.location = "admin" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val());
-	});
-});   
-</script>
-
-<script>
-$('#allcheck').click(function(){
-	var chk = $('#allcheck').prop("checked");
-	if(chk){
-		$(".chk").prop("checked", true);
-	} else {
-		$(".chk").prop("checked", false);
-	}
-});
 
 
-$(".chk").click(function(){
-	$('#allcheck').prop("checked", false);
-});
-</script>
 
-<script>
 
-var selectValue;
-
-function select(index){
-	
-	selectValue = $("#authority" + index + " option:selected").val();
-	console.log(selectValue);	
-}
-
-$('#updateAuth').click(function(){
-	var confirm_val = confirm("회원 권한 변경하시겠습니까?");
-			
-	if(confirm_val){
-		
-		var tdArr = new Array();
-		var tdArr2 = new Array();
-		var checkBox = $("input[name='chk']:checked");
-				
-		$(checkBox).each(function(i){			
-			tdArr.push($(this).attr("data-memberId"));
-			var tr = checkBox.parent().parent().parent().eq(i);
-			var td = tr.children();
-			var authority = td.eq(5).children().val();
-			tdArr2.push(authority);
-		});
-		
-		$.ajax({
-			url : "/admin/updateAuth",
-			type : "post",
-			data : {
-				id : tdArr,
-				auth : tdArr2
-			},
-			beforeSend : function(xhr) {
-				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-			},
-			success : function(){
-				console.log("success");
-				location.href = "/admin/admin";
-			},
-			error : function(){
-				alert("error");	
-			}
-		});
-	}
-});
-
-</script>
-
-<script>
-
-$('#updateAuth2').click(function(){
-	
-	var rowData = new Array();
-	var tdArr = new Array();
-	var checkBox = $("input[name='chk']:checked");
-	
-	checkBox.each(function(i){
-		var tr = checkBox.parent().parent().parent().eq(i); // checkbox의 부모 div -> td -> tr
-		var td = tr.children();
-		
-		rowData.push(tr.text()); // 체크된 모든 ROW 데이터
-		
-		var id = td.eq(1).text()+", ";
-		var name = td.eq(2).text()+", ";
-		var email = td.eq(3).text()+", ";
-		var phone = td.eq(4).text()+", ";
-		var authority = td.eq(5).text()+", ";
-		
-		tdArr.push(id);
-		tdArr.push(name);
-		tdArr.push(email);
-		tdArr.push(phone);
-		tdArr.push(authority);
-	});
-	
-	$("#result").html("체크된 모든 ROW 데이터 : " + rowData);
-	$('#result2').html(tdArr);
-});
-
-</script>
 
 </body>
 </html>
