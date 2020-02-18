@@ -64,7 +64,6 @@ table {
 			<td>
 				<table style="height: 516px; width: 456px;">
 					<tr align="center">
-
 						<td><span>${vo.mgName}</span></td>
 					</tr>
 					<tr align="center">
@@ -73,31 +72,32 @@ table {
 					</tr>
 					<tr align="center">
 						<td colspan="2">
-							<form name="form1" role="form" method="post"
-								action="/cart/insert">
-								<input type="hidden" name="${_csrf.parameterName}"
-									value="${_csrf.token}" /> <input type="hidden" id="mgNum"
-									name="mgNum" value="${vo.mgNum}" /> <select name="amount">
+							<form name="form1" role="form" method="post" action="/cart/insert">
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+								<input type="hidden" id="mgNum"	name="mgNum" value="${vo.mgNum}" /> 
+								<select name="amount">
 									<c:forEach begin="1" end="10" var="i">
 										<option value="${i}">${i}</option>
 									</c:forEach>
 								</select>&nbsp; 개 <input type="submit" value="장바구니에 담기">
-							</form> <a href="/product/listView">상품목록</a>
-							<button class="btn btn-primary btn-sm" id="update">상품 수정</button>
-							<button class="btn btn-danger btn-sm" id="delete">상품 삭제</button>
-
+							</form>
 						</td>
 					</tr>
-
 				</table>
 			</td>
 		</tr>
 	</table>
+	<div class = "text-center">		
+		<a class = "btn btn-secondary btn-sm" href="/product/listView">상품목록</a>
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+		<button class="btn btn-primary btn-sm" id="update">상품 수정</button>
+		<button class="btn btn-danger btn-sm" id="delete">상품 삭제</button>
+		<a class="btn btn-warning btn-sm" href = "/admin/goodsList">관리자 상품리스트</a>
+		</sec:authorize>
+	</div>
 	<br>
 	<hr class="container">
 	<br>
-
-
 
 	<!--  tab -->
 	<section>
@@ -119,7 +119,6 @@ table {
 			<!-- /content -->
 		</div>
 	</section>
-
 
 	<script src="/resources/js/cbpFWTabs.js"></script>
 	<script>

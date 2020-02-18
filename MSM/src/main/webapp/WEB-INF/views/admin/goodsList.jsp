@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta id = "_csrf" name = "_csrf" content = "${_csrf.token}"/>
-<title>Basic Form</title>
+<title>Goods List(admin)</title>
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <!-- Bootstrap core CSS -->
@@ -24,20 +24,18 @@
 <!-- CK EDITOR -->
 <script src="/resources/js/ckeditor/ckeditor.js"></script>
 </head>
-
 <body>
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
 
-<h1 class = "text-center mt-4">Member List</h1>
+<h1 class = "text-center mt-4">상품관리</h1>
 <hr/>
-
-<!-- MemberList -->
 <div class = "container mb-3">
-<div class = "text-right">
-	<button class = "btn btn-primary" id = "updateAuth">권한변경하기</button>
-</div>
-	<form role = "form" method = "post">				
-		<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
+	<div class = "text-right">
+		<a type = "button" class = "btn btn-primary" href = "/product/product_reg">상품등록</a>
+		<a type = "button" class = "btn btn-danger" id = "deleteGoods" href = "#">상품삭제</a>
+	</div>
+	<form role = "form" method = "post">
+	<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
 		<table class = "table table-bordered table-striped table-hover">
 			<thead class = "black white-text text-center">
 				<tr>
@@ -47,66 +45,50 @@
 							<label class = "custom-control-label" for = "allcheck"></label>
 						</div>
 					</th>
-					<th>ID</th>
-					<th>NAME</th>
-					<th>EMAIL</th>
-					<th>PHONE</th>
-					<th>권한</th>				
-					<th>가입일</th>
+					<th>상품번호</th>
+					<th>상품명</th>
+					<th>가격</th>
 				</tr>
 			</thead>
 			<tbody class = "text-center">
-				<c:forEach var = "member" items = "${memberList}" varStatus = "status">
+				<c:forEach var = "goods" items = "${goodsList}" varStatus = "status">
 				<tr id = "memberTR">
 					<td scope = "row">
 						<div class = "custom-control custom-checkbox">
-							<input type = "checkbox" class = "custom-control-input chk" name = "chk" id = "${member.mId}" data-memberId="${member.mId}">
-							<label class = "custom-control-label" for = "${member.mId}"></label>
+							<input type = "checkbox" class = "custom-control-input chk" name = "chk" id = "${goods.mgNum}" data-goodsId="${goods.mgNum}">
+							<label class = "custom-control-label" for = "${goods.mgNum}"></label>
 						</div>
 					</td>
-					<td>
-						<a href="/member/memberDetail?mId=${member.mId}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}"><c:out value="${member.mId}"/></a>
-					</td>
-					<td>${member.mName}</td>
-					<td>${member.mEmail}</td>
-					<td>${member.mPhone}</td>
-					<td>
-						<select name ="authority" id = "authority${status.index}" onchange= "select(${status.index})">
-							<option value = "${member.authority}">${member.authority}</option>
-							<option value = "USER">USER</option>
-							<option value = "MANAGER">MANAGER</option>
-						</select>
-					</td>			
-					<td>${member.regDate}</td>			
+					<td><a href = "${path}/product/productView/${goods.mgNum}">${goods.mgNum}</a></td>
+					<td><a href = "${path}/product/productView/${goods.mgNum}">${goods.mgName}</a></td>
+					<td>${goods.mgPrice}</td>		
 				</tr>
 				</c:forEach>
-			</tbody> 
+			</tbody>
 		</table>
 		
 		<!-- pagination -->
 		<div style = "height : 50px;">
 	  		<ul class = "pagination pg-blue justify-content-center">
 	    		<c:if test="${pageMaker.prev}">
-	    			<li style = "list-style : none; float : left; padding : 6px;"><a href="memberList${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
+	    			<li style = "list-style : none; float : left; padding : 6px;"><a href="goodsList${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
 	    		</c:if> 
 	
 	    		<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-	    			<li style = "list-style : none; float : left; padding : 6px;"><a href="memberList${pageMaker.makeSearch(idx)}">${idx}</a></li>
+	    			<li style = "list-style : none; float : left; padding : 6px;"><a href="goodsList${pageMaker.makeSearch(idx)}">${idx}</a></li>
 	    		</c:forEach>
 	
-	    		<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-	    			<li style = "list-style : none; float : left; padding : 6px;"><a href="memberList${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
-	    		</c:if> 
+	    		<c:if test="${pageMaker.next && pageMaker2.endPage > 0}">
+	    			<li style = "list-style : none; float : left; padding : 6px;"><a href="goodsList${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
+	    		</c:if>
 	  		</ul>
 		</div>
 		
 		<!-- search -->
 		<div class="search row justify-content-center">
 			
-		    <select name="searchType">
-		      	<option value="tnmpar"<c:out value="${scri.searchType eq 'tnmpar' ? 'selected' : ''}"/>>통합검색</option>
-		     	<option value="t"<c:out value="${scri.searchType eq 't' ? 'selected' : ''}"/>>ID</option>
-		      	<option value="c"<c:out value="${scri.searchType eq 'm' ? 'selected' : ''}"/>>EMAIL</option>	     
+		    <select name="searchType">		      	
+		     	<option value="t"<c:out value="${scri.searchType eq 't' ? 'selected' : ''}"/>>상품명</option>     
 		    </select>
 			
 		    <input type="text" name="keyword" id="keywordInput" value="${scri.keyword}"/>
@@ -114,7 +96,7 @@
 		    <button id="searchBtn" type="button"><i class="fas fa-search" aria-hidden="true"></i></button>
 		   				
   		</div>
-  
+  		
 	</form>
 </div>
 
@@ -127,7 +109,7 @@
 
 
 
-
+<%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>
 <!-- SCRIPTS -->
 <!-- JQuery -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -155,14 +137,6 @@ function closeNav2() {
 	}
 </script>
 <script>
-$(function(){
-	$('#searchBtn').click(function() {
-		self.location = "admin" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val());
-	});
-});   
-</script>
-
-<script>
 $('#allcheck').click(function(){
 	var chk = $('#allcheck').prop("checked");
 	if(chk){
@@ -177,89 +151,35 @@ $(".chk").click(function(){
 	$('#allcheck').prop("checked", false);
 });
 </script>
-
 <script>
-
-var selectValue;
-
-function select(index){
+$('#deleteGoods').on("click", function(){
+	var confirm_val = confirm("해당 상품들을 삭제하시겠습니까?");
 	
-	selectValue = $("#authority" + index + " option:selected").val();
-	console.log(selectValue);	
-}
-
-$('#updateAuth').click(function(){
-	var confirm_val = confirm("회원 권한 변경하시겠습니까?");
-			
 	if(confirm_val){
-		
-		var tdArr = new Array();
-		var tdArr2 = new Array();
+		var mgNum = new Array();
 		var checkBox = $("input[name='chk']:checked");
-				
-		$(checkBox).each(function(i){			
-			tdArr.push($(this).attr("data-memberId"));
-			var tr = checkBox.parent().parent().parent().eq(i);
-			var td = tr.children();
-			var authority = td.eq(5).children().val();
-			tdArr2.push(authority);
+		
+		$(checkBox).each(function(){
+			mgNum.push($(this).attr("data-goodsId"));
 		});
 		
 		$.ajax({
-			url : "/admin/updateAuth",
+			url : "/admin/productDelete",
 			type : "post",
-			data : {
-				id : tdArr,
-				auth : tdArr2
-			},
+			data : {mgNum : mgNum},
 			beforeSend : function(xhr) {
 				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
 			},
 			success : function(){
-				alert("권한변경성공");
-				location.href = "/admin/admin";
+				alert("삭제성공");
+				location.href = "/admin/goodsList";
 			},
-			error : function(){
-				alert("error");	
-			}
+			error : function(request, status, error){
+				console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error)
+			}		
 		});
 	}
 });
-
 </script>
-
-<script>
-
-$('#updateAuth2').click(function(){
-	
-	var rowData = new Array();
-	var tdArr = new Array();
-	var checkBox = $("input[name='chk']:checked");
-	
-	checkBox.each(function(i){
-		var tr = checkBox.parent().parent().parent().eq(i); // checkbox의 부모 div -> td -> tr
-		var td = tr.children();
-		
-		rowData.push(tr.text()); // 체크된 모든 ROW 데이터
-		
-		var id = td.eq(1).text()+", ";
-		var name = td.eq(2).text()+", ";
-		var email = td.eq(3).text()+", ";
-		var phone = td.eq(4).text()+", ";
-		var authority = td.eq(5).text()+", ";
-		
-		tdArr.push(id);
-		tdArr.push(name);
-		tdArr.push(email);
-		tdArr.push(phone);
-		tdArr.push(authority);
-	});
-	
-	$("#result").html("체크된 모든 ROW 데이터 : " + rowData);
-	$('#result2').html(tdArr);
-});
-
-</script>
-<%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>
 </body>
 </html>

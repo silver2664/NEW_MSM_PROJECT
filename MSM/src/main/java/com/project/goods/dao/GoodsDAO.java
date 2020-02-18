@@ -2,6 +2,7 @@ package com.project.goods.dao;
 
 import java.util.List;
 
+import com.project.board.vo.SearchCriteria;
 import com.project.goods.vo.CategoryVO;
 import com.project.goods.vo.GoodsVO;
 import com.project.goods.vo.GoodsViewVO;
@@ -28,6 +29,12 @@ public interface GoodsDAO {
 	
 	//카테 리스트
 	public List<GoodsViewVO> catelist(int cateCode) throws Exception;
+	
+	// 모든 상품 조회
+	public List<GoodsViewVO> getGoodsList(SearchCriteria scri) throws Exception;
+	
+	// 게시물 갯수
+	public int listCount(SearchCriteria scri) throws Exception;
 	
 
 }

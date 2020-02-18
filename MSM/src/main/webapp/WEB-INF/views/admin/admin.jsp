@@ -189,6 +189,7 @@
 						</div>
 					</th>
 					<th>상품번호</th>
+					<th>카테고리</th>
 					<th>상품명</th>
 					<th>가격</th>
 				</tr>
@@ -203,12 +204,30 @@
 						</div>
 					</td>
 					<td>${goods.mgNum}</td>
+					<td>${goods.cateCode}</td>
 					<td>${goods.mgName}</td>
 					<td>${goods.mgPrice}</td>		
 				</tr>
 				</c:forEach>
 			</tbody>
 		</table>
+		
+		<!-- pagination -->
+		<div style = "height : 50px;">
+	  		<ul class = "pagination pg-blue justify-content-center">
+	    		<c:if test="${pageMaker2.prev}">
+	    			<li style = "list-style : none; float : left; padding : 6px;"><a href="admin${pageMaker2.makeSearch(pageMaker2.startPage - 1)}">이전</a></li>
+	    		</c:if> 
+	
+	    		<c:forEach begin="${pageMaker2.startPage}" end="${pageMaker2.endPage}" var="idx">
+	    			<li style = "list-style : none; float : left; padding : 6px;"><a href="admin${pageMaker2.makeSearch(idx)}">${idx}</a></li>
+	    		</c:forEach>
+	
+	    		<c:if test="${pageMaker2.next && pageMaker2.endPage > 0}">
+	    			<li style = "list-style : none; float : left; padding : 6px;"><a href="admin${pageMaker2.makeSearch(pageMaker2.endPage + 1)}">다음</a></li>
+	    		</c:if>
+	  		</ul>
+		</div>
 	</form>
 </div>
 </div>

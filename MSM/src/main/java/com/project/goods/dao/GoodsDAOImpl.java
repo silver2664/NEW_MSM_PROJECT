@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.project.board.vo.SearchCriteria;
 import com.project.goods.vo.CategoryVO;
 import com.project.goods.vo.GoodsVO;
 import com.project.goods.vo.GoodsViewVO;
@@ -57,6 +58,17 @@ public class GoodsDAOImpl implements GoodsDAO {
 	public List<GoodsViewVO> catelist(int cateCode) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("goodsMapper.cateList",cateCode);
+	}
+	
+	// 모든 상품 조회
+	@Override
+	public List<GoodsViewVO> getGoodsList(SearchCriteria scri) throws Exception{
+		return sqlSession.selectList("goodsMapper.allGoods", scri);
+	}
+	
+	// 게시물 갯수
+	public int listCount(SearchCriteria scri) throws Exception{
+		return sqlSession.selectOne("goodsMapper.listCount", scri);
 	}
 
 }

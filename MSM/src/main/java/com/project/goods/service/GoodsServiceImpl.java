@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.project.board.vo.SearchCriteria;
 import com.project.goods.dao.GoodsDAO;
 import com.project.goods.vo.CategoryVO;
 import com.project.goods.vo.GoodsVO;
@@ -57,6 +58,16 @@ public class GoodsServiceImpl implements GoodsService {
 	public List<GoodsViewVO> catelist(int cateCode) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.catelist(cateCode);
+	}
+	
+	// 모든 상품 조회
+	public List<GoodsViewVO> getGoodsList(SearchCriteria scri) throws Exception{
+		return dao.getGoodsList(scri);
+	}
+			
+	// 게시물 갯수
+	public int listCount(SearchCriteria scri) throws Exception{
+		return dao.listCount(scri);
 	}
 
 }

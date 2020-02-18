@@ -71,4 +71,39 @@
                 where g.cateCode = #{cateCode}
 </select>
 
+<!-- 상품 전체 목록 -->
+<select id = "allGoods" resultType = "com.project.goods.vo.GoodsViewVO" parameterType = "com.project.board.vo.Criteria">
+	
+		SELECT MGNUM, MGNAME, CATECODE, CATECODEREF, CATENAME, MGPRICE, MGSTOCK, MGCONTENT, MGIMG
+		FROM (
+			SELECT g.MGNUM, g.MGNAME, g.CATECODE, c.CATECODEREF, c.CATENAME, g.MGPRICE, g.MGSTOCK, g.MGCONTENT, g.MGIMG,
+			ROW_NUMBER() OVER(ORDER BY g.MGNUM DESC) AS RNUM
+			FROM EX_GOODS g
+			INNER JOIN GOODS_CATEGORY c
+			ON g.CATECODE = c.CATECODE
+			WHERE 1=1
+				<include refid = "search"></include>			   
+		) MP
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY MGNUM DESC
+	
+</select>
+
+<!-- 총 상품의 수 -->
+<select id = "listCount" resultType = "int"  parameterType="com.project.board.vo.SearchCriteria">
+	
+		SELECT COUNT(MGNUM)
+		FROM EX_GOODS
+		WHERE 1=1
+		<include refid = "search"></include>
+	
+</select>
+
+<!-- 상품검색 -->
+<sql id="search">
+	<if test="searchType != null">
+		<if test="searchType == 't'.toString()">AND MGNAME LIKE '%' || #{keyword} || '%'</if>						
+	</if>
+</sql>
+
 </mapper>

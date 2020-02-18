@@ -148,8 +148,6 @@ aside {
 </div>
 </div>
 
-<button class="btn btn-info btn-sm" id="register">상품등록</button>
-
 
 <!-- SCRIPTS -->
 <!-- JQuery -->
@@ -162,12 +160,6 @@ aside {
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
 
 <script>
-$(document).ready(function() {	
-	$("#register").click(function(e) {
-		
-		location.href="/product/product_reg";
-	});
-});
 
 function openNav() {
 	  document.getElementById("mySidenav").style.width = "30vw";

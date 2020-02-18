@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.board.vo.PageMaker;
 import com.project.board.vo.SearchCriteria;
 import com.project.goods.service.GoodsService;
+import com.project.goods.vo.GoodsViewVO;
 import com.project.member.service.UserService;
 import com.project.member.vo.MemberVO;
 
@@ -35,14 +36,24 @@ public class AdminCotroller {
 	// 包府磊 其捞瘤 捞悼. (Admin.jsp)
 	@RequestMapping(value = "/admin/admin", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView adminPage(@ModelAttribute("scri") SearchCriteria scri) throws Exception {
+		
+		//包府磊 雀盔 包府
 		ArrayList<MemberVO> memberList = (ArrayList<MemberVO>)userService.getMemberList(scri);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("memberList", memberList);
-		mv.addObject("goodsList", goodsService.listProduct());
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(scri);
 		pageMaker.setTotalCount(userService.listCount(scri));
 		mv.addObject("pageMaker", pageMaker);
+		
+		//包府磊 惑前 包府
+		ArrayList<GoodsViewVO> goodsList = (ArrayList<GoodsViewVO>)goodsService.getGoodsList(scri);
+		mv.addObject("goodsList", goodsList);
+		PageMaker pageMaker2 = new PageMaker();
+		pageMaker2.setCri(scri);
+		pageMaker2.setTotalCount(goodsService.listCount(scri));
+		mv.addObject("pageMaker2", pageMaker2);		
+		
 		mv.setViewName("/admin/admin");		
 		return mv;		
 	}
@@ -81,6 +92,33 @@ public class AdminCotroller {
 			vo.setmId(mId.get(i));
 			vo.setAuthority(authority.get(i));
 			userService.updateAuth(vo);
+		}
+	}
+	
+	// 惑前格废 炼雀.
+	@RequestMapping(value = "/admin/goodsList")
+	public ModelAndView goodsList(@ModelAttribute("scri") SearchCriteria scri) throws Exception {
+		ArrayList<GoodsViewVO> goodsList = (ArrayList<GoodsViewVO>)goodsService.getGoodsList(scri);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("goodsList", goodsList);
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(scri);
+		pageMaker.setTotalCount(goodsService.listCount(scri));
+		mv.addObject("pageMaker", pageMaker);
+		mv.setViewName("/admin/goodsList");
+		return mv;
+	}
+	
+	//惑前 昏力
+	@RequestMapping(value="/admin/productDelete", method=RequestMethod.POST)
+	@ResponseBody
+	public void productDelete(@RequestParam(value="mgNum[]") List<Integer> mgNum) {
+	
+		List<Integer> mgNum1 = new ArrayList<Integer>();
+		mgNum1.addAll(mgNum);
+		for(int i = 0; i < mgNum1.size(); i++) {
+			System.out.println("昏力 mgNum : " + mgNum1.get(i));
+			goodsService.productDelete(mgNum1.get(i));
 		}
 	}
 	
