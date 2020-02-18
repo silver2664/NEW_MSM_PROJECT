@@ -3,7 +3,7 @@ package com.project.msm.controller;
 
 
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,9 +25,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.cart.service.CartService;
 import com.project.cart.vo.CartVO;
-import com.project.cart.vo.OrderDetailVO;
-import com.project.cart.vo.OrderVO;
-import com.project.member.vo.MemberVO;
+
+
+
 
 
 @Controller
@@ -105,6 +105,12 @@ public class CartController {
 	@RequestMapping("/cart/update")
 	public String update(@RequestParam int[] amount, @RequestParam int[] mgNum) throws Exception {
 		logger.info("장바구니 수정");
+		for(int i = 0; i<mgNum.length; i++) {
+			System.out.println(amount[i]);
+			System.out.println(mgNum[i]);
+		}
+		System.out.println(amount);
+		System.out.println(mgNum);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = (User) auth.getPrincipal();
 		String userId = user.getUsername();
@@ -120,18 +126,61 @@ public class CartController {
 	
 	//주문
 	@RequestMapping(value="cart/order")
-	public ModelAndView order(ModelAndView mv)throws Exception{
+	public String order(Model model,HttpSession session)throws Exception{
 		logger.info("order");
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = (User) auth.getPrincipal();
 		String userId = user.getUsername();
-		ArrayList<MemberVO> vo = (ArrayList<MemberVO>)service.member(userId);
-		mv.addObject("member", vo);
-		mv.setViewName("/order/orderInfo");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<CartVO> list = service.listCart(userId);
 		
 		
-		return mv;
+		
+		int sumMoney = service.sumMoney(userId);
+		int fee = sumMoney >= 10000 ? 0 : 2500;
+		map.put("list", list);
+		map.put("count", list.size());
+		map.put("sumMoney", sumMoney);
+		map.put("fee", fee);
+		map.put("allsum", sumMoney + fee);
+		model.addAttribute("map",map);
+		
+		
+		
+		model.addAttribute("member",service.member(userId));	
+		
+		return "order/orderInfo";
 		
 	}
+	
+	// 04. 장바구니 수정
+		@RequestMapping("/cart/update2")
+		public String orederupdate(@RequestParam int[] amount, @RequestParam int[] mgNum) throws Exception {
+			logger.info("장바구니 수정");
+			for(int i = 0; i<mgNum.length; i++) {
+				System.out.println(amount[i]);
+				System.out.println(mgNum[i]);
+			}
+			System.out.println(amount);
+			System.out.println(mgNum);
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			User user = (User) auth.getPrincipal();
+			String userId = user.getUsername();
+			for(int i = 0; i<mgNum.length; i++) {
+				CartVO vo = new CartVO();
+				vo.setUserId(userId);
+				vo.setAmount(amount[i]);
+				vo.setMgNum(mgNum[i]);
+				service.modifyCart(vo);
+			}
+			return "redirect:/cart/order";
+		}
+		
+		@RequestMapping(value = "/cart/delete2")
+		public String oredrcartdelete(@RequestParam int cartId) throws Exception {
+			service.delete(cartId);
+			return "redirect:/cart/order";
+		}
 
 }

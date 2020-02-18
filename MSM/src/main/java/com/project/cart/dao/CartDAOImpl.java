@@ -10,8 +10,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.project.cart.vo.CartVO;
-import com.project.cart.vo.OrderDetailVO;
-import com.project.cart.vo.OrderVO;
+
+
 import com.project.member.vo.MemberVO;
 
 @Repository
@@ -70,8 +70,9 @@ public class CartDAOImpl implements CartDAO {
 	}
 
 	@Override
-	public List<MemberVO> member(String userId) {		
-		return sqlSession.selectList("cartMapper.member", userId);
+	public MemberVO member(String userId) {		
+		return sqlSession.selectOne("cartMapper.member", userId);
+		
 	}
 
 

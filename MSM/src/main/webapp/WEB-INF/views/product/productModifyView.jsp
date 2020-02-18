@@ -68,8 +68,10 @@ h2{
 				<div class="inputArea">
 					<label for="gdsImg">이미지</label>
 					<input type="hidden" name="mgImg"value="${mo.mgImg}">
-					<input type="file" id="mgImg"name="file" />
-					
+					<div class="custom-file">
+					<input type="file" class="custom-file-input"id="mgImg"name="file" />
+					<label class="custom-file-label" for="mgImg">Choose file...</label>
+					</div>
 					<div class="select_img">
 						<img src="" />
 					</div>
