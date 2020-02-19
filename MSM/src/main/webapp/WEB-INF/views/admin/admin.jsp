@@ -164,6 +164,7 @@ span {
 	<i></i>
 </div>
 <div class="btn style-3">
+	<a href = "/board/notice/noticeList"><span>공지사항</span></a>	
 	<i></i>
 	<i></i>
 	<i></i>
@@ -174,9 +175,9 @@ span {
 	<i></i>
 	<i></i>
 	<i></i>
-	<span>Style 3</span>
 </div>
 <div class="btn style-4">
+	<a href = "/board/qna/qnaList"><span>QnA</span></a>	
 	<i></i>
 	<i></i>
 	<i></i>
@@ -187,9 +188,9 @@ span {
 	<i></i>
 	<i></i>
 	<i></i>
-	<span>Style 4</span>
 </div>
 <div class="btn style-5">
+	<a href = "/admin/goodsList"><span>배송 관리</span></a>	
 	<i></i>
 	<i></i>
 	<i></i>
@@ -200,9 +201,9 @@ span {
 	<i></i>
 	<i></i>
 	<i></i>
-	<span>Style 5</span>
 </div>
 <div class="btn style-6">
+	<a href = "/admin/goodsList"><span>매출 관리</span></a>	
 	<i></i>
 	<i></i>
 	<i></i>
@@ -212,14 +213,8 @@ span {
 	<i></i>
 	<i></i>
 	<i></i>
-	<i></i>
-	<span>Style 6</span>
+	<i></i>	
 </div>
-
-
-
-
-
 
 </body>
 </html>

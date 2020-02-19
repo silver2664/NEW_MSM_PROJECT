@@ -35,27 +35,10 @@ public class AdminCotroller {
 	
 	// 관리자 페이지 이동. (Admin.jsp)
 	@RequestMapping(value = "/admin/admin", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView adminPage(@ModelAttribute("scri") SearchCriteria scri) throws Exception {
+	public String adminPage() throws Exception {
 		
-		//관리자 회원 관리
-		ArrayList<MemberVO> memberList = (ArrayList<MemberVO>)userService.getMemberList(scri);
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("memberList", memberList);
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(scri);
-		pageMaker.setTotalCount(userService.listCount(scri));
-		mv.addObject("pageMaker", pageMaker);
+		return "/admin/admin";
 		
-		//관리자 상품 관리
-		ArrayList<GoodsViewVO> goodsList = (ArrayList<GoodsViewVO>)goodsService.getGoodsList(scri);
-		mv.addObject("goodsList", goodsList);
-		PageMaker pageMaker2 = new PageMaker();
-		pageMaker2.setCri(scri);
-		pageMaker2.setTotalCount(goodsService.listCount(scri));
-		mv.addObject("pageMaker2", pageMaker2);		
-		
-		mv.setViewName("/admin/admin");		
-		return mv;		
 	}
 		
 	// 회원목록 조회.
@@ -109,6 +92,41 @@ public class AdminCotroller {
 		return mv;
 	}
 	
+	// 재고 변경
+	@RequestMapping(value = "/admin/updateAmount", method = RequestMethod.POST)
+	@ResponseBody
+	public void updateAmount(@RequestParam(value="mgNum[]") List<Integer> mgNum,
+			@RequestParam(value="mgAmount[]") List<Integer> mgStock) throws Exception {
+		List<Integer> mgNum1 = new ArrayList<Integer>();
+		List<Integer> mgStock1 = new ArrayList<Integer>();
+		GoodsViewVO vo = new GoodsViewVO();
+		mgNum1.addAll(mgNum);
+		mgStock1.addAll(mgStock);
+		for(int i = 0; i < mgNum1.size(); i++) {
+			System.out.println("상품NUMBER : " + mgNum1.get(i) + " " + "해당상품재고 : " + mgStock1.get(i));
+			vo.setMgNum(mgNum1.get(i));
+			vo.setMgStock(mgStock1.get(i));
+			goodsService.updateAmount(vo);
+		}
+	}
+	
+	// 가격 변경
+	@RequestMapping(value = "/admin/updatePrice", method = RequestMethod.POST)
+	@ResponseBody
+	public void updatePrice(@RequestParam(value="mgNum[]") List<Integer> mgNum,
+			@RequestParam(value="mgPrice[]") List<Integer> mgPrice) throws Exception {
+		List<Integer> mgNum1 = new ArrayList<Integer>();
+		List<Integer> mgPrice1 = new ArrayList<Integer>();
+		GoodsViewVO vo = new GoodsViewVO();
+		mgNum1.addAll(mgNum);
+		mgPrice1.addAll(mgPrice);
+		for(int i = 0; i < mgNum1.size(); i++) {
+			System.out.println("상품NUMBER : " + mgNum1.get(i) + " " + "해당상품가격 : " + mgPrice1.get(i));
+			vo.setMgNum(mgNum1.get(i));
+			vo.setMgPrice(mgPrice1.get(i));
+			goodsService.updatePrice(vo);
+		}
+	}
 	//상품 삭제
 	@RequestMapping(value="/admin/productDelete", method=RequestMethod.POST)
 	@ResponseBody

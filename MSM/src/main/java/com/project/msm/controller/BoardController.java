@@ -207,7 +207,7 @@ public class BoardController {
 		// 공지사항 FAQ
 		@RequestMapping("/board/notice/faq")
 		public String FAQ() {
-			return "/notice/faq";
+			return "/board/notice/faq";
 		}
 		
 		@RequestMapping("delivery")

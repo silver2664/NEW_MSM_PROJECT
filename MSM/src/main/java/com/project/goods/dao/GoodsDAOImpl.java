@@ -67,8 +67,21 @@ public class GoodsDAOImpl implements GoodsDAO {
 	}
 	
 	// 게시물 갯수
+	@Override
 	public int listCount(SearchCriteria scri) throws Exception{
 		return sqlSession.selectOne("goodsMapper.listCount", scri);
+	}
+	
+	// Admin Page 재고 변경
+	@Override
+	public void updateAmount(GoodsViewVO vo) throws Exception {
+		sqlSession.update("goodsMapper.updateAmount", vo);
+	}
+		
+	// Admin Page 가격 변경
+	@Override
+	public void updatePrice(GoodsViewVO vo) throws Exception {
+		sqlSession.update("goodsMapper.updatePrice", vo);
 	}
 
 }

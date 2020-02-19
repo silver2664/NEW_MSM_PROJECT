@@ -69,5 +69,17 @@ public class GoodsServiceImpl implements GoodsService {
 	public int listCount(SearchCriteria scri) throws Exception{
 		return dao.listCount(scri);
 	}
+	
+	// Admin Page 재고 변경
+	@Override
+	public void updateAmount(GoodsViewVO vo) throws Exception {
+		dao.updateAmount(vo);
+	}
+		
+	// Admin Page 가격 변경
+	@Override
+	public void updatePrice(GoodsViewVO vo) throws Exception {
+		dao.updatePrice(vo);
+	}
 
 }

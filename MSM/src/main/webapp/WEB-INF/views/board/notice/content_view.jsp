@@ -25,7 +25,7 @@
 <script src="/resources/js/ckeditor/ckeditor.js"></script>
 <style>
 h2{
-	padding-top:70px;
+	padding-top:30px;
 	padding-bottom:30px;
 }
 h2 {
@@ -64,9 +64,12 @@ h2 {
 		</tbody>
 		
 	</table>
-	<button type="button" class="btn btn-sm btn-danger" id="delete">삭제</button>
+	
 	<button type="button" class="btn btn-sm btn-info" id="btnList">목록</button>
+	<sec:authorize access = "hasRole('ROLE_ADMIN')">
 	<button class="btn btn-sm btn-success" id="modify">수정</button>
+	<button type="button" class="btn btn-sm btn-danger" id="delete">삭제</button>		
+	</sec:authorize>
 
 
 

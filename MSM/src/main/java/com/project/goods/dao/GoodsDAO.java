@@ -36,5 +36,10 @@ public interface GoodsDAO {
 	// 게시물 갯수
 	public int listCount(SearchCriteria scri) throws Exception;
 	
+	// Admin Page 재고 변경
+	public void updateAmount(GoodsViewVO vo) throws Exception;
+	
+	// Admin Page 가격 변경
+	public void updatePrice(GoodsViewVO vo) throws Exception;
 
 }

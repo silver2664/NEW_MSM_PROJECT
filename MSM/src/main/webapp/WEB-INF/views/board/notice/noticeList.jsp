@@ -15,7 +15,7 @@
 <title>공지사항 목록</title>
 <style>
 body {
-	padding-top:70px;
+	padding-top:30px;
 	
 }
 h2 {
@@ -69,9 +69,11 @@ h2 {
 				</tbody>
 			</table>
 		</div>
+		<sec:authorize access = "hasRole('ROLE_ADMIN')">
 		<div>
 			<button type="button" class="btn bnt-sm btn-primary" id="btnWriteForm">글쓰기</button><br><br>
 		</div>
+		</sec:authorize>
 		
 	</div>
 </article>

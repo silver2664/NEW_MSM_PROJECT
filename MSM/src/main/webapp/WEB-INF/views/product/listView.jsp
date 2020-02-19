@@ -102,50 +102,38 @@ aside {
 	<div class="row">		
 		<c:forEach var = "row" items = "${list}">
 			<div class="col-xl-3 col-md-3 col-sm-3 card card-cascade narrow card-ecommerce d-flex">
-				<!-- Card Image -->
-				
+			
+				<!-- Card Image -->				
 				<div class="view view-cascade overlay">
 					<a href = "${path}/product/productView/${row.mgNum}">
-							<img src = "/resources/${row.mgImg}" style="width:100%">
-						</a>			
+						<img src = "/resources/${row.mgImg}" style="width:100%"></a>
 				</div>
+				
 				<!-- Card Content -->
 				<div class="card-body card-body-cascade text-center pb-3">
+				
 					<!-- Title -->
 					<h5 class="card-title mb-1">
-						<strong> <a href="${path}/product/productView/${row.mgNum}">${row.mgName}</a>
-						</strong>
+						<strong> <a href="${path}/product/productView/${row.mgNum}">${row.mgName}</a></strong>
 					</h5>
-					<!-- Rating 
-					<div class="container">
-						<i class="fas fa-star amber-text"></i> <i
-							class="fas fa-star amber-text"></i> <i
-							class="fas fa-star amber-text"></i> <i
-							class="fas fa-star amber-text"></i> <i
-							class="fas fa-star amber-text"></i>
-					</div>-->
-					<!-- Description 
-					<p class="card-text">MSM Goods No.1 Example</p>-->
-					<!-- Card Footer -->
 					
+					<!-- Card Footer -->
 					<div class="card-footer px-1">
 						<span class="float-left font-weight-bold">
-						 <strong><fmt:setLocale value="ko_KR"/>
-						 <fmt:formatNumber type="currency" value="${row.mgPrice}"/></strong>
-						</span> <span class="float-right"> <a
-							class="material-tooltip-main" data-toggle="tooltip"
-							data-place="top" title="Add to Cart"> <i
-								class="fas fa-shopping-cart grey-text ml-3"></i>
-						</a> <a class="material-tooltip-main" data-toggle="tooltip"
-							data-place="top" title="Add to WishList"> <i
-								class="fas fa-heart grey-text ml-3"></i>
-						</a>
+							<strong><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${row.mgPrice}"/></strong>
+						</span> 
+						<span class="float-right"> 
+							<a class="material-tooltip-main" data-toggle="tooltip" data-place="top" title="Add to Cart"> 
+							<i class="fas fa-shopping-cart grey-text ml-3"></i></a> 
+							
+							<a class="material-tooltip-main" data-toggle="tooltip" data-place="top" title="Add to WishList"> 
+							<i class="fas fa-heart grey-text ml-3"></i></a>
 						</span>
 					</div>
 				</div>
 			</div>
-			</c:forEach>		
-</div>
+		</c:forEach>		
+	</div>
 </div>
 
 

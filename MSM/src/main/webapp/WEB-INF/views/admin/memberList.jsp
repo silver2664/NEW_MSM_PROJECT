@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta id = "_csrf" name = "_csrf" content = "${_csrf.token}"/>
-<title>Basic Form</title>
+<title>Member List(admin)</title>
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <!-- Bootstrap core CSS -->
@@ -28,13 +28,18 @@
 <body>
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
 
-<h1 class = "text-center mt-4">Member List</h1>
+<h1 class = "text-center mt-4">회원관리</h1>
+<hr/>
 <hr/>
 
 <!-- MemberList -->
 <div class = "container mb-3">
 <div class = "text-right">
-	<button class = "btn btn-primary" id = "updateAuth">권한변경하기</button>
+	<a type = "button" class = "btn btn-success" href = "/admin/admin">
+	<i class="fas fa-home"></i>&nbsp;&nbsp;ADMIN HOME</a>
+	
+	<a type = "button" class = "btn btn-primary" id = "updateAuth">
+	<i class="fas fa-exchange-alt"></i>&nbsp;&nbsp;권한변경하기</a>
 </div>
 	<form role = "form" method = "post">				
 		<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
@@ -71,7 +76,7 @@
 					<td>${member.mEmail}</td>
 					<td>${member.mPhone}</td>
 					<td>
-						<select name ="authority" id = "authority${status.index}" onchange= "select(${status.index})">
+						<select name ="authority" id = "authority${status.index}" onchange = "select(${status.index})">
 							<option value = "${member.authority}">${member.authority}</option>
 							<option value = "USER">USER</option>
 							<option value = "MANAGER">MANAGER</option>
@@ -217,7 +222,7 @@ $('#updateAuth').click(function(){
 			},
 			success : function(){
 				alert("권한변경성공");
-				location.href = "/admin/admin";
+				location.href = "/admin/memberList";
 			},
 			error : function(){
 				alert("error");	

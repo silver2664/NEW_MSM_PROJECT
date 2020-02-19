@@ -29,25 +29,40 @@
 
 <h1 class = "text-center mt-4">상품관리</h1>
 <hr/>
+<hr/>
 <div class = "container mb-3">
-	<div class = "text-right">
-		<a type = "button" class = "btn btn-primary" href = "/product/product_reg">상품등록</a>
-		<a type = "button" class = "btn btn-danger" id = "deleteGoods" href = "#">상품삭제</a>
+	<div class = "text-center mb-2">
+		<a type = "button" class = "btn btn-success" href = "/admin/admin">
+		<i class="fas fa-home"></i>&nbsp;&nbsp;ADMIN HOME</a>
+		
+		<a type = "button" class = "btn btn-primary" href = "/product/product_reg">		
+		<i class="fas fa-plus-circle"></i>&nbsp;&nbsp;상품등록</a>
+		
+		<a type = "button" class = "btn btn-info" id = "updateAmount">
+		<i class="fas fa-warehouse"></i>&nbsp;&nbsp;재고수정</a>
+		
+		<a type = "button" class = "btn btn-secondary" id = "updatePrice">
+		<i class="fas fa-dollar-sign"></i>&nbsp;&nbsp;가격수정</a>
+		
+		<a type = "button" class = "btn btn-danger" id = "deleteGoods">
+		<i class="fas fa-trash-alt"></i>&nbsp;&nbsp;상품삭제</a>
+		
 	</div>
 	<form role = "form" method = "post">
 	<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
 		<table class = "table table-bordered table-striped table-hover">
 			<thead class = "black white-text text-center">
 				<tr>
-					<th>
+					<th style = "width : 5%">
 						<div class = "custom-control custom-checkbox allcheck">
 							<input type = "checkbox" class = "custom-control-input allcheck" id = "allcheck">
 							<label class = "custom-control-label" for = "allcheck"></label>
 						</div>
 					</th>
-					<th>상품번호</th>
-					<th>상품명</th>
-					<th>가격</th>
+					<th style = "width : 10%">상품번호</th>
+					<th style = "width : 50%">상품명</th>
+					<th style = "width : 15%">재고</th>
+					<th style = "width : 20%">가격</th>
 				</tr>
 			</thead>
 			<tbody class = "text-center">
@@ -61,7 +76,12 @@
 					</td>
 					<td><a href = "${path}/product/productView/${goods.mgNum}">${goods.mgNum}</a></td>
 					<td><a href = "${path}/product/productView/${goods.mgNum}">${goods.mgName}</a></td>
-					<td>${goods.mgPrice}</td>		
+					<td>
+						<input class = "text-center" type = "text" name = "mgStock" id = "mgStock" value = "${goods.mgStock}"/>
+					</td>
+					<td>
+						<input class = "text-center" type = "text" name = "mgPrice" id = "mgPrice" value = "${goods.mgPrice}"/>
+					</td>		
 				</tr>
 				</c:forEach>
 			</tbody>
@@ -178,6 +198,84 @@ $('#deleteGoods').on("click", function(){
 				console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error)
 			}		
 		});
+	}
+});
+
+$('#updateAmount').on("click", function(){
+	var confirm_val = confirm("해당 상품들의 수량을 변경하시겠습니까?");
+	
+	if(confirm_val){
+		
+		var mgNum = new Array();
+		var mgAmount = new Array();
+		var checkBox = $("input[name='chk']:checked");
+		
+		$(checkBox).each(function(i){
+			mgNum.push($(this).attr("data-goodsId"));
+			var tr = checkBox.parent().parent().parent().eq(i);
+			var td = tr.children();
+			var amount = td.eq(3).children().val();
+			mgAmount.push(amount);
+		});
+		
+		$.ajax({
+			url : "/admin/updateAmount",
+			type : "post",
+			data : {
+				mgNum : mgNum,
+				mgAmount : mgAmount
+			},
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+			},
+			success : function(){
+				alert("재고변경됨.");
+				location.href = "/admin/goodsList";
+			},
+			error : function(){
+				alert("error");	
+			}
+		});
+		
+	}
+});
+
+$('#updatePrice').on("click", function(){
+	var confirm_val = confirm("해당 상품들의 가격을 변경하시겠습니까?");
+	
+	if(confirm_val){
+		
+		var mgNum = new Array();
+		var mgPrice = new Array();
+		var checkBox = $("input[name='chk']:checked");
+		
+		$(checkBox).each(function(i){
+			mgNum.push($(this).attr("data-goodsId"));
+			var tr = checkBox.parent().parent().parent().eq(i);
+			var td = tr.children();
+			var price = td.eq(4).children().val();
+			mgPrice.push(price);
+		});
+		
+		$.ajax({
+			url : "/admin/updatePrice",
+			type : "post",
+			data : {
+				mgNum : mgNum,
+				mgPrice : mgPrice
+			},
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+			},
+			success : function(){
+				alert("가격변경됨.");
+				location.href = "/admin/goodsList";
+			},
+			error : function(){
+				alert("error");	
+			}
+		});
+		
 	}
 });
 </script>

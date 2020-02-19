@@ -25,7 +25,7 @@
 <script src="/resources/js/ckeditor/ckeditor.js"></script>
 <style>
 body {
- 	padding-top:70px;
+ 	padding-top:30px;
  	
 }
 h2{

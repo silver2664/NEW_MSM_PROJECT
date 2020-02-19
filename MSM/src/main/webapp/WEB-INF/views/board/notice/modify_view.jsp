@@ -15,7 +15,7 @@
 <title>공지사항 수정 -- MSM</title>
 <style>
 body {
- 	padding-top:70px;
+ 	padding-top:30px;
  	padding-bottpm:30px;
 }
 h2{

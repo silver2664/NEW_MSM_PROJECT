@@ -12,10 +12,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Q&A - MSM</title>
+<title>Q&amp;A - MSM</title>
 <style>
 body {
-	padding-top:70px;
+	padding-top:30px;
 	
 }
 h2 {
@@ -41,7 +41,7 @@ list-style : none; float : left; padding:6px;
 <article>
 	<div class="container">
 		<div class="table-responsive">
-			<h2>Q&A</h2>
+			<h2>Q&amp;A</h2>
 			<hr/>
 			<table class="table table-striped table-sm table-hover">
 				<colgroup>
@@ -75,27 +75,13 @@ list-style : none; float : left; padding:6px;
 								<td> <fmt:formatDate value="${list.qdate}" pattern="yyyy-MM-dd  HH:mm"/></td>
 								
 							</tr>
-						</c:forEach>					
+					</c:forEach>					
 				</tbody>
 			</table>
-			<!-- 검색기능 -->
-			<div class="seaech">
-				<select>
-					<option value="n"<c:out value="${scri.searchType == null ? 'selected' : ''}"/>>-----</option>
-      				<option value="t"<c:out value="${scri.searchType eq 't' ? 'selected' : ''}"/>>제목</option>
-      				<option value="c"<c:out value="${scri.searchType eq 'c' ? 'selected' : ''}"/>>내용</option>
-      				<option value="w"<c:out value="${scri.searchType eq 'w' ? 'selected' : ''}"/>>작성자</option>
-      				<option value="tc"<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>제목+내용</option>
-				</select>
-				<input type="text" name="keyword" id="keywordInput" value="${scri.keyword}"/>
-
-    				<button id="searchBtn" type="button">검색</button>
-    		
-			</div>
 			
 			<!-- 페이징 -->
-			<div id="page">
-				<ul>
+			<div style = "height : 50px;">
+				<ul class = "pagination pg-blue justify-content-center">
 					<c:if test="${pageMaker.prev}" >
 						<li><a href="qnaList${pagrMarker.makeSearch(pageMaker.startPage-1 )}">이전</a></li>
 					</c:if>
@@ -107,11 +93,28 @@ list-style : none; float : left; padding:6px;
 					</c:if>
 				</ul>
 			</div>
-		</div>
-		<div>
-			<button type="button" class="btn bnt-sm btn-primary" id="btnWriteForm" >글쓰기</button><br><br>
-		</div>
-		
+			
+			<div class = "text-center">
+				<button type="button" class="btn bnt-sm btn-primary" id="btnWriteForm" >글쓰기</button><br><br>
+			</div>
+			
+			<!-- 검색기능 -->
+			<div class="search text-center">
+			
+				<select>
+					<option value="n"<c:out value="${scri.searchType == null ? 'selected' : ''}"/>>-----</option>
+      				<option value="t"<c:out value="${scri.searchType eq 't' ? 'selected' : ''}"/>>제목</option>
+      				<option value="c"<c:out value="${scri.searchType eq 'c' ? 'selected' : ''}"/>>내용</option>
+      				<option value="w"<c:out value="${scri.searchType eq 'w' ? 'selected' : ''}"/>>작성자</option>
+      				<option value="tc"<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>제목+내용</option>
+				</select>
+				
+				<input type="text" name="keyword" id="keywordInput" value="${scri.keyword}"/>
+
+    			<button id="searchBtn" type="button">검색</button>
+    		
+			</div>
+		</div>		
 	</div>
 </article>
 </form>

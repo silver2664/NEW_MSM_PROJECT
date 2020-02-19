@@ -24,7 +24,7 @@
 </head>
 <body>
 <!-- Header Navbar -->
-<nav class = "navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+<nav class = "navbar fixed-top navbar-expand-lg navbar-light white">
 	<div class = "container-fluid">
 		<!-- BRAND -->
 		<a class = "navbar-brand wave-effect" href = "/home">
@@ -36,29 +36,54 @@
 	    </button>
 		<!-- Header Menu -->
 		<div class = "collapse navbar-collapse" id = "headerMenu">
-			<ul class = "navbar-nav ml-auto">
+			<ul class="navbar-nav" style = "margin : auto">
+				<li class="nav-item">
+					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
+						style = "font-size : 16px;" href = "/product/listView">brandmall</a>									
+				</li>
+				<li class="nav-item">
+					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
+						style = "font-size : 16px;" href="/brand/brandList?c=101&l=2">ring</a>					
+				</li>
+				<li class="nav-item">
+					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
+						style = "font-size : 16px;" href="/brand/brandList?c=102&l=2">earring</a>
+				</li>
+				<li class="nav-item">
+					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
+						style = "font-size : 16px;" href="/brand/brandList?c=103&l=2">bracelet</a>
+				</li>
+				<li class="nav-item">
+					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
+						style = "font-size : 16px;" href="/brand/brandList?c=104&l=2">necklace</a>
+				</li>
+			</ul>
+			<ul class = "navbar-nav" style= "margin : auto">
 				<!-- SignUP -->
-				<li class = "nav-item">					
-					<!-- <a type = "button" class = "btn btn-link waves-effect" data-toggle = "modal" data-target = "#signUp" style = "color : black">sign up</a> -->		
-					<a type = "button" class = "btn btn-link waves-effect" href = "/member/step1">SIGN UP</a>
+				<li class = "nav-item">		
+					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
+						style = "font-size : 16px;" href = "/member/step1">SIGN UP</a>
 				</li>
 				<!-- //SignUp -->
 				<!-- LOGIN -->
 				<li class = "nav-item">
 					<sec:authorize access = "isAnonymous()">
-						<a type = "button" class = "btn btn-link waves-effect" href = "/member/loginForm" id = "login">sign in</a>
+						<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
+							style = "font-size : 16px;" href = "/member/loginForm" id = "login">sign in</a>
 					</sec:authorize>
 					<sec:authorize access = "isAuthenticated()">
 						<form action = "logout" method = "post">
 							<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
-							<button type = "submit" class = "btn btn-link waves-effect" style = "color : black">sign out</button>
+							<button type = "submit" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
+								style = "font-size : 16px; color : black;">sign out</button>
 						</form>
 					</sec:authorize>								
 				</li>
 				<!-- //LOGIN -->
 				<li class = "nav-item">				
 					<!-- My Account Sidebar Btn -->
-					<a type = "button" class = "btn btn-link waves-effect" href = "#" onclick = "openNav()">My Account</a>
+					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
+						style = "font-size : 16px; color : black;" onclick = "openNav()">My Account</a>
 					<div id = "mySidenav" class = "sidenav">
 						<a href = "javascript:void(0)" class = "closebtn" onclick = "closeNav()">&times;</a>						
 						<sec:authorize access="isAnonymous()">
@@ -220,174 +245,9 @@
 </div>
 <!-- Main -->
 <main>
-	<!-- Navbar -->
-	<nav class="navbar navbar-expand-lg navbar-light white mt-1 mb-5">
-		<!-- Navbar Brand -->
-		<span class="navbar-brand">Categories : </span>
-		<!-- Collapse button -->
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#CategoryNav">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<!-- Collapsible Content -->
-		<div class="collapse navbar-collapse" id="CategoryNav">
-			<!-- Links -->
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item dropdown mega-dropdown">
-					<a class="nav-link text-uppercase" data-toggle="dropdown">brand</a>					
-					<div class="dropdown-menu mega-menu v-2 z-depth-1 py-4 px-0">
-						<div class = "row">										
-							<div class="col-md-6 col-xl-3 sub-menu mb-xl-0 mb-4">
-								<h6 class="sub-title text-uppercase font-weight-bold">ACCESSORY</h6>
-								<ul class="list-unstyled">
-									<li><a href="/product/brandListView" class="menu-item">AAS-Studio</a></li>
-									<li><a href="#" class="menu-item">Example01</a></li>
-									<li><a href="#" class="menu-item">Example02</a></li>
-								</ul>
-							</div>
-							<div class="col-md-6 col-xl-3 sub-menu mb-xl-0 mb-4">
-								<h6 class="sub-title text-uppercase font-weight-bold">PhoneCase</h6>
-								<ul class="list-unstyled">
-									<li><a href="#" class="menu-item">Example</a></li>
-									<li><a href="#" class="menu-item">Example01</a></li>
-									<li><a href="#" class="menu-item">Example02</a></li>
-								</ul>
-							</div>
-							<div class="col-md-6 col-xl-3 sub-menu mb-xl-0 mb-4">
-								<h6 class="sub-title text-uppercase font-weight-bold">New Category</h6>
-								<ul class="list-unstyled">
-									<li><a href="#" class="menu-item">Example</a></li>
-									<li><a href="#" class="menu-item">Example01</a></li>
-									<li><a href="#" class="menu-item">Example02</a></li>
-								</ul>
-							</div>
-							<div class="col-md-6 col-xl-3 sub-menu mb-xl-0 mb-4">
-								<h6 class="sub-title text-uppercase font-weight-bold">New Category</h6>
-								<ul class="list-unstyled">
-									<li><a href="#" class="menu-item">Example</a></li>
-									<li><a href="#" class="menu-item">Example01</a></li>
-									<li><a href="#" class="menu-item">Example02</a></li>
-								</ul>
-							</div>	
-						</div>						
-					</div>					
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link" data-toggle = "dropdown" href="#">ACCESSORY</a>
-					<ul class = "dropdown-menu">
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">RINGS</a>
-						</li>
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">BRACELETS</a>
-						</li>
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">NECKLACES</a>
-						</li>
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">EARRINGS</a>
-						</li>
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">PET NECKLACES</a>
-						</li>
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">GOLD PRODUCTS</a>
-						</li>
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">GLASSES CHAINS</a>
-						</li>					
-					</ul>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link" data-toggle = "dropdown" href="#">PHONECASE</a>
-					<ul class = "dropdown-menu">
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">EXAMPLE 01</a>
-						</li>
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">EXAMPLE 02</a>
-						</li>
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">EXAMPLE 03</a>
-						</li>
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">EXAMPLE 04</a>
-						</li>
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">EXAMPLE 05</a>
-						</li>
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">EXAMPLE 06</a>
-						</li>
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">EXAMPLE 07</a>
-						</li>					
-					</ul>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link" data-toggle = "dropdown" href="#">Ex_Category 01</a>
-					<ul class = "dropdown-menu">
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">EXAMPLE 01</a>
-						</li>
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">EXAMPLE 02</a>
-						</li>
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">EXAMPLE 03</a>
-						</li>
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">EXAMPLE 04</a>
-						</li>
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">EXAMPLE 05</a>
-						</li>
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">EXAMPLE 06</a>
-						</li>
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">EXAMPLE 07</a>
-						</li>					
-					</ul>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link" data-toggle = "dropdown" href="#">Ex_Category 02</a>
-					<ul class = "dropdown-menu">
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">EXAMPLE 01</a>
-						</li>
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">EXAMPLE 02</a>
-						</li>
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">EXAMPLE 03</a>
-						</li>
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">EXAMPLE 04</a>
-						</li>
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">EXAMPLE 05</a>
-						</li>
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">EXAMPLE 06</a>
-						</li>
-						<li class = "dropdown-item">
-							<a class = "dropdown-link">EXAMPLE 07</a>
-						</li>					
-					</ul>
-				</li>
-			</ul>
-			<!-- Search -->
-			<form class="form-inline">
-				<div class="md-form my-0">
-					<input class="form-control mr-sm-2" type="text"
-						placeholder="Search">
-				</div>
-			</form>
-		</div>
-	</nav>
-		<!-- MSM Policy -->
-	<div class = "container-fluid">
+	
+	<!-- MSM Policy -->
+	<div class = "container-fluid mt-3">
 		<div class = "row">
 			<div class = "col-lg-3 col-md-6 text-center p-5" id = "pol1">
 				<i class="fas fa-sync-alt fa-10x mb-5 green-text"></i>
