@@ -54,6 +54,11 @@ public class HomeController {
 		
 		return "home"; 
 	}
+	@RequestMapping("shareResource/header")
+	public String header(Locale	locale) throws	Exception{
+		 return "/shareResource/header";
+	
+	}
 
 	
 }

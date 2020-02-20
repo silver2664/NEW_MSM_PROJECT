@@ -172,7 +172,20 @@ $(document).ready(function() {
 		location.href="/product/product_reg";
 	});
 
+	var products = JSON.parse(localStorage.getItem("cartKey"));
+	console.log(products);
 	
+		
+	var a = Array.from(products, ({mgPrice})=>mgPrice);
+	console.log(a);	
+	
+	var sum = a.reduce(function(pre,value) {
+		return pre + value;
+	});
+	console.log(sum);
+	
+	
+
 	
 });
 	

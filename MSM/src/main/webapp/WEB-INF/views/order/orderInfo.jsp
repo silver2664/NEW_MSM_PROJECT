@@ -40,7 +40,7 @@
 
 <div class="container">
     
-    
+    <h2>주문 내역</h2>
     <form name = "form1" id = "form1" method = "post" action = "order/insert">
     <input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
     <c:choose>

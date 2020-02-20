@@ -89,11 +89,11 @@ table {
 								<input type="hidden" name="${_csrf.parameterName}"	value="${_csrf.token}" />
 									 <input type="hidden" id="mgNum"name="mgNum" value="${vo.mgNum}" /> 
 									
-									 <select name="amount">
+									 <select name="amount" id="amount">
 									 <c:forEach begin="1" end="10" var="i">
-										<option value="${i}">${i}</option>
+										<option  value="${i}">${i}</option>
 									</c:forEach>
-								</select>&nbsp; 개 <input type="submit" value="장바구니에 담기">
+								</select>&nbsp; 개 <button class="btn btn-sm btn-info" type="button" id="cartBtn" >카트</button><input type="submit" value="장바구니에 담기">
 							</form>
 							<br>
 							<a href="/product/listView">상품목록</a>
@@ -141,30 +141,62 @@ table {
 
 
 	<script src="/resources/js/cbpFWTabs.js"></script>
-	<script>
-			(function() {
-
-				[].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
-					new CBPFWTabs( el );
-				});
-
-			})();
-	</script>
+	
 
 	
 	
 
-	<%@ include file="/WEB-INF/views/shareResource/footer.jsp"%>
-	<!-- SCRIPTS -->
-	<!-- JQuery -->
-	<script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<!-- Bootstrap tooltips -->
-	<script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-	<!-- Bootstrap core JavaScript -->
-	<script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<!-- MDB core JavaScript -->
-	<script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
-	<script>
+<%@ include file="/WEB-INF/views/shareResource/footer.jsp"%>
+<!-- SCRIPTS -->
+<!-- JQuery -->
+<script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
+<script>
+$(document).ready(function() {
+	$("#cartBtn").click(function() {
+		var cartKey;
+		var value = {};
+		var obj=[];
+		
+		value = {
+				mgNum : '${vo.mgNum}',
+				mgPrice : '${vo.mgPrice}',
+				mgStock : $("#amount option:selected").val(),
+				mgName : '${vo.mgName}',
+				mgImg : '${vo.mgImg}'
+		}
+		
+		if(localStorage.getItem("cartKey") == null) {
+			obj[0] =value;
+			var y = JSON.stringify(obj);
+			localStorage.setItem("cartKey",y);
+		}else{
+			var z = localStorage.getItem("cartKey");
+			
+			obj=JSON.parse(z);
+			leng = obj.length;
+			obj[leng] =value;
+			var a = JSON.stringify(obj);
+			localStorage.setItem("cartKey",a);
+		}
+		location.href="/resources/html/cart1.html"
+	});
+});
+
+(function() {
+
+	[].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
+		new CBPFWTabs( el );
+	});
+
+})();
+
+
 function openNav() {
 	  document.getElementById("mySidenav").style.width = "30vw";
 	}
@@ -181,9 +213,9 @@ function closeNav2() {
 	  document.getElementById("mySidenav2").style.width = "0";
 	}
 	
-	$(document).ready(function() {
-		console.log(JSON.stringify({mgNum:${vo.mgNum}}));
-	});
+	
+		
+
 var formObj = $("form[role='form']");
 $("#update").click(function() {
 	formObj.attr("action","/product/productModifyView");

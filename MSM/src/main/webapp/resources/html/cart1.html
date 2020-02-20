@@ -21,54 +21,69 @@
 </head>
 <body ng-app="cart">
  <!-- <div ng-include="'/shareResource/header'"></div>   -->
-<div class="container">
+<div class="container z-depth-1 p-5 my-5">
 <h2>CART</h2>
-<div   ng-controller="myCtrl">
-		<form name = "form1" id = "form1" method = "post" action = "${path}/cart/update">
-		<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
-			<table border = "1" class="table table-hover">
-				<tr>
-					<th>상품명</th>
-					<th>단가</th>
-					<th>수량</th>
-					<th>금액</th>
-					<th>취소</th>
+<section>
+<div ng-controller="myCtrl" class="table-reponsive">		
+	<table class="table product-table table-cart-v-1">
+		<thead>
+			<tr>
+				
+				<th class="font-weight-blod">
+					<strong>상품명</strong>
+				</th>
+				<th class="font-weight-blod">
+					<strong>단가</strong>
+				</th>
+				<th class="font-weight-blod">
+					<strong>수량</strong>
+				</th>
+				<th class="font-weight-blod">
+					<strong>금액</strong>
+				</th>
+				<th ></th>
+				
+			</tr>
+		</thead>
+		<tbody>			
+			<tr ng-repeat="x in products track by $index">
+			
+				<td class="font-weight-bold" >
+					
+					<strong>{{x.mgName}}</strong>
+									
+				</td>
+				<td  class="font-weight-bold"style = "width : 120px; ">
+					<strong>{{x.mgPrice | number}}</strong>
+				</td>
+				<td class="font-weight-bold"  style = "width : 80px;">					
+					<strong>{{x.mgStock}}개</strong>									
+				</td>				
+				<td class="font-weight-bold" style = "width : 120px; align : right">
+					<strong>{{x.mgPrice | number}}원</strong>
+				</td>
+				<td class="font-weight-blod"style = "width : 120px;" align = "right">
+					<a ng-click="removeItem($index)"><strong>삭제</strong></a>
+				</td>
 				</tr>
-				
-				
-					<tr ng-repeat="x in products track by $index">
-						<td >
-							{{x.mgName}}
-						</td>
-						<td style = "width : 80px; align : right">
-							{{x.mgPrice | number}}
-						</td>
-						<td>					
-							{{x.mgStock}}개
-						</td>
-						<td>
-							{{x.mgPrice | number}}원
-						</td>
-						<td style = "width : 100px;" align = "right">
-							<a ng-click="removeItem($index)">삭제</a>
-						</td>
-					</tr>
-				
+			
 				<tr>
-					<td colspan = "5" align = "right">
-						
-						전체 주문 금액 :  {{getTotal() | number}} 원
+					<td class="font-weight-blod" colspan = "5" align = "right">					
+						<strong>전체 주문 금액 :  {{getTotal() | number}} 원 </strong>
 					</td>
 				</tr>
-			</table>
-			<input type = "hidden" name = "count" value ="${map.count}">
-			<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}"/>
-			<button class="btn btn-success btn-sm"  type="button" id="order">주문 정보 입력</button>
-			<button class="btn btn-sm btn-primary" type = "button" id = "btnUpdate">수정</button>
-			<button class="btn btn-info btn-sm"type = "button" id = "btnList" >상품목록</button>
-		
-		</form>
+			</tbody>
+	</table>
+	<input type = "hidden" name = "count" value ="${map.count}">
+	<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}"/>
+	<!--  
+	<button class="btn btn-success btn-sm"  type="button" id="order">주문 정보 입력</button>
+	<button class="btn btn-sm btn-primary" type = "button" id = "btnUpdate">수정</button>-->
+	<button class="btn btn-info btn-sm"type = "button" id = "btnList" >상품목록</button>
+
+	
 	</div>
+	</section>
 </div>
 
 
