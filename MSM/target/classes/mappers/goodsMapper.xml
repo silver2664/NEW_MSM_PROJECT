@@ -8,7 +8,7 @@
 <select id = "listProduct" resultType = "com.project.goods.vo.GoodsVO">
 	SELECT	MGNUM, MGNAME, MGPRICE, MGCONTENT, MGIMG
 	FROM EX_GOODS
-	ORDER BY MGNUM DESC
+	ORDER BY CATECODE ASC
 </select>
 
 <!-- 02. 상품 상세 보기
@@ -46,7 +46,7 @@
 <!-- 카테고리 호출 -->
 <select id="category" resultType="com.project.goods.vo.CategoryVO">
 	select level, cateName,cateCode,cateCodeRef
-	 from goods_category
+	from goods_category
 	Start with cateCodeRef is null connect by prior cateCode = cateCodeRef
 			
 </select>
@@ -69,6 +69,50 @@
             inner join goods_category c
                 on g.cateCode = c.cateCode
                 where g.cateCode = #{cateCode}
+</select>
+
+<!-- DB 전체 반지리스트 -->
+<select id="ringList" resultType="com.project.goods.vo.GoodsViewVO">
+	select
+    g.mgNum, g.mgName,g.cateCode,c.cateCodeRef,c.cateName,mgPrice,mgStock,mgContent,g.mgImg
+    from ex_goods g
+            inner join goods_category c
+                on g.cateCode = c.cateCode
+                where g.cateCode = 101 
+                or g.cateCode = 201
+</select>
+
+<!-- DB 전체 귀걸이 리스트 -->
+<select id="earringList" resultType="com.project.goods.vo.GoodsViewVO">
+	select
+    g.mgNum, g.mgName,g.cateCode,c.cateCodeRef,c.cateName,mgPrice,mgStock,mgContent,g.mgImg
+    from ex_goods g
+            inner join goods_category c
+                on g.cateCode = c.cateCode
+                where g.cateCode = 102 
+                or g.cateCode = 202
+</select>
+
+<!-- DB 전체 팔찌 리스트 -->
+<select id="braceletList" resultType="com.project.goods.vo.GoodsViewVO">
+	select
+    g.mgNum, g.mgName,g.cateCode,c.cateCodeRef,c.cateName,mgPrice,mgStock,mgContent,g.mgImg
+    from ex_goods g
+            inner join goods_category c
+                on g.cateCode = c.cateCode
+                where g.cateCode = 103 
+                or g.cateCode = 203
+</select>
+
+<!-- DB 전체 목걸이 리스트 -->
+<select id="necklaceList" resultType="com.project.goods.vo.GoodsViewVO">
+	select
+    g.mgNum, g.mgName,g.cateCode,c.cateCodeRef,c.cateName,mgPrice,mgStock,mgContent,g.mgImg
+    from ex_goods g
+            inner join goods_category c
+                on g.cateCode = c.cateCode
+                where g.cateCode = 104 
+                or g.cateCode = 204
 </select>
 
 <!-- 상품 전체 목록 -->

@@ -81,5 +81,28 @@ public class GoodsServiceImpl implements GoodsService {
 	public void updatePrice(GoodsViewVO vo) throws Exception {
 		dao.updatePrice(vo);
 	}
+	
+	// Ring 리스트
+	@Override
+	public List<GoodsViewVO> ringList() throws Exception {
+		return dao.ringList();
+	}
+	
+	// Earring 리스트
+	@Override
+	public List<GoodsViewVO> earringList() throws Exception {
+		return dao.earringList();
+	}
+				
+	// Bracelet 리스트
+	@Override
+	public List<GoodsViewVO> braceletList() throws Exception {
+		return dao.braceletList();
+	}
+				
+	// necklace 리스트
+	public List<GoodsViewVO> necklaceList() throws Exception {
+		return dao.necklaceList();
+	}
 
 }

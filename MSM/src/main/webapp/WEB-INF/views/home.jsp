@@ -43,19 +43,19 @@
 				</li>
 				<li class="nav-item">
 					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
-						style = "font-size : 16px;" href="/brand/brandList?c=101&l=2">ring</a>					
+						style = "font-size : 16px;" href="/brand/ringList">ring</a>					
 				</li>
 				<li class="nav-item">
 					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
-						style = "font-size : 16px;" href="/brand/brandList?c=102&l=2">earring</a>
+						style = "font-size : 16px;" href="/brand/earringList">earring</a>
 				</li>
 				<li class="nav-item">
 					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
-						style = "font-size : 16px;" href="/brand/brandList?c=103&l=2">bracelet</a>
+						style = "font-size : 16px;" href="/brand/braceletList">bracelet</a>
 				</li>
 				<li class="nav-item">
 					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
-						style = "font-size : 16px;" href="/brand/brandList?c=104&l=2">necklace</a>
+						style = "font-size : 16px;" href="/brand/necklaceList">necklace</a>
 				</li>
 			</ul>
 			<ul class = "navbar-nav" style= "margin : auto">
@@ -101,22 +101,24 @@
 						<sec:authorize access="hasRole('ROLE_USER')">
 						<sec:authentication property ="principal.username" var = "mId"/>
 						<h3 class = "text-center text-white mb-5">${mId} 님 환영합니다.</h3>												
-						<a id ="mId" class = "btn btn-outline-white mb-5" href = "/member/memberDetail?mId=${mId}&page=1&perPageNum=10&searchType=&keyword=" role = "button">
+						<a id ="mId" class = "btn btn-outline-white mb-3" href = "/member/memberDetail?mId=${mId}&page=1&perPageNum=10&searchType=&keyword=" role = "button">
 							Profile
-						</a>					
-						<a class = "btn btn-outline-white mb-5" href = "/board/notice/noticeList" role = "button">
-							Notice
-						</a>
-						<a class = "btn btn-outline-white mb-5" href = "/board/qna/qnaList" role = "button">
-							QnA
-						</a>
-						<a class = "btn btn-outline-white mb-5" href = "/cart/cartView" role = "button">
+						</a>						
+						<a class = "btn btn-outline-white mb-3" href = "/cart/cartView" role = "button">
 							Cart
 						</a>						
-						<form action = "logout" method = "post">
-							<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
-							<button type = "submit" class = "btn btn-outline-white mb-5" style = "color : black" id = "signOut1">Sign Out</button>
-						</form>
+						<a class = "btn btn-outline-white mb-3" href = "/order/orderList" role = "button">
+							Order List
+						</a>					
+						<a class = "btn btn-outline-white mb-3" href = "/board/notice/noticeList" role = "button">
+							Notice
+						</a>
+						<a class = "btn btn-outline-white mb-3" href = "/board/qna/qnaList" role = "button">
+							Q&amp;A
+						</a>
+						<a class = "btn btn-outline-white mb-3" href = "/board/notice/faq" role = "button">
+							FAQ
+						</a>
 						</sec:authorize>
 						<sec:authorize access="hasRole('ROLE_ADMIN')">
 						<h3 class = "text-center text-white mb-5">관리자(ADMIN)계정 접속</h3>

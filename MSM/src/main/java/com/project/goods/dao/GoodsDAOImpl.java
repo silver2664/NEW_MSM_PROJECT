@@ -83,5 +83,30 @@ public class GoodsDAOImpl implements GoodsDAO {
 	public void updatePrice(GoodsViewVO vo) throws Exception {
 		sqlSession.update("goodsMapper.updatePrice", vo);
 	}
+	
+	// Ring 리스트
+	@Override
+	public List<GoodsViewVO> ringList() throws Exception {
+		return sqlSession.selectList("goodsMapper.ringList");
+	}
+
+	// Earring 리스트
+	@Override
+	public List<GoodsViewVO> earringList() throws Exception {
+		return sqlSession.selectList("goodsMapper.earringList");
+	}
+		
+	// Bracelet 리스트
+	@Override
+	public List<GoodsViewVO> braceletList() throws Exception {
+		return sqlSession.selectList("goodsMapper.braceletList");
+	}
+			
+	// necklace 리스트
+	@Override
+	public List<GoodsViewVO> necklaceList() throws Exception {
+		return sqlSession.selectList("goodsMapper.necklaceList");
+	}
+
 
 }

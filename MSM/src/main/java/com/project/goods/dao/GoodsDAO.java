@@ -41,5 +41,17 @@ public interface GoodsDAO {
 	
 	// Admin Page 가격 변경
 	public void updatePrice(GoodsViewVO vo) throws Exception;
+	
+	// Ring 리스트
+	public List<GoodsViewVO> ringList() throws Exception;
+	
+	// Earring 리스트
+	public List<GoodsViewVO> earringList() throws Exception;
+		
+	// Bracelet 리스트
+	public List<GoodsViewVO> braceletList() throws Exception;
+		
+	// necklace 리스트
+	public List<GoodsViewVO> necklaceList() throws Exception;
 
 }

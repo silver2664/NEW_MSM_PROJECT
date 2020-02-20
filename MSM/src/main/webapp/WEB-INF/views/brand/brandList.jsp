@@ -30,11 +30,6 @@ div#root {
 	width:90%;
 	margin: 0 auto;
 }
-
-aside {
-	float:left;
-	width:180px;
-}
  
 .card {
 	margin-bottom:20px;
@@ -65,62 +60,44 @@ aside {
 <body>
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
 
-
-
-
-<div class="container-fluid">
-	<aside>
-	<%@ include file = "/WEB-INF/views/shareResource/aside.jsp" %>
-	</aside>
+<div class="container">
 	<div class="row">		
 		<c:forEach var = "row" items = "${list}">
 			<div class="col-xl-3 col-md-3 col-sm-3 card card-cascade narrow card-ecommerce d-flex">
-				<!-- Card Image -->
-				
+				<!-- Card Image -->				
 				<div class="view view-cascade overlay">
-					<a href = "${path}/product/productView/${row.mgNum}">
-							<img src = "/resources/${row.mgImg}" style="width:100%">
-						</a>			
+					<a href = "${path}/product/productView/${row.mgNum}"><img src = "/resources/${row.mgImg}" style="width:100%"></a>			
 				</div>
+				
 				<!-- Card Content -->
 				<div class="card-body card-body-cascade text-center pb-3">
-					<!-- Title -->
-					<h5 class="card-title mb-1">
-						<strong> <a href="${path}/product/productView/${row.mgNum}">${row.mgName}</a>
-						</strong>
-					</h5>
-					<!-- Rating 
-					<div class="container">
-						<i class="fas fa-star amber-text"></i> <i
-							class="fas fa-star amber-text"></i> <i
-							class="fas fa-star amber-text"></i> <i
-							class="fas fa-star amber-text"></i> <i
-							class="fas fa-star amber-text"></i>
-					</div>-->
-					<!-- Description 
-					<p class="card-text">MSM Goods No.1 Example</p>-->
-					<!-- Card Footer -->
 					
+					<!-- Title -->
+					<h6 class="card-title mb-1">
+						<a style = "color : black;" href="${path}/product/productView/${row.mgNum}">${row.mgName}</a>						
+					</h6>
+					
+					<!-- Card Footer -->					
 					<div class="card-footer px-1">
 						<span class="float-left font-weight-bold">
-						 <strong><fmt:setLocale value="ko_KR"/>
-						 <fmt:formatNumber type="currency" value="${row.mgPrice}"/></strong>
-						</span> <span class="float-right">
-						 <a	class="material-tooltip-main" data-toggle="tooltip" data-place="top" title="Add to Cart" href="/cart/insert?mgNum=${row.mgNum}&amount=1">
-							<input type="hidden" value="${row.mgNum}" name="mgNum"id="mgNum"/>
-							 <i	class="fas fa-shopping-cart grey-text ml-3"></i></a>
-							 <a class="material-tooltip-main" data-toggle="tooltip"	data-place="top" title="Add to WishList">
-							  <i class="fas fa-heart grey-text ml-3"></i>
-						</a>
+							<strong><fmt:setLocale value="ko_KR"/>
+							<fmt:formatNumber type="currency" value="${row.mgPrice}"/></strong>
+						</span> 
+						<span class="float-right">
+							<a class="material-tooltip-main" data-toggle="tooltip" data-place="top" title="Add to Cart" href="/cart/insert?mgNum=${row.mgNum}&amount=1">
+								<input type="hidden" value="${row.mgNum}" name="mgNum"id="mgNum"/>
+								<i class="fas fa-shopping-cart grey-text ml-3"></i></a>
+							<a class="material-tooltip-main" data-toggle="tooltip"	data-place="top" title="Add to WishList">
+								<i class="fas fa-heart grey-text ml-3"></i></a>
 						</span>
 					</div>
 				</div>
 			</div>
-			</c:forEach>		
-</div>
+		</c:forEach>		
+	</div>
 </div>
 
-<button class="btn btn-info btn-sm" id="register">상품등록</button>
+
 
 
 <!-- SCRIPTS -->
@@ -133,12 +110,9 @@ aside {
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
 <script>
-$(document).ready(function() {	
-	$("#register").click(function(e) {
-		
-		location.href="/product/product_reg";
-	});
-});
+$(function () {
+	  $('[data-toggle="tooltip"]').tooltip()
+	})
 function openNav() {
 	  document.getElementById("mySidenav").style.width = "30vw";
 	}
@@ -154,8 +128,6 @@ function closeNav() {
 function closeNav2() {
 	  document.getElementById("mySidenav2").style.width = "0";
 	}
-	
-
 </script>
 
 <%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>

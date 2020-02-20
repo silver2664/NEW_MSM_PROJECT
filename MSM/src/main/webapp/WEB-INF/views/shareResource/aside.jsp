@@ -26,10 +26,10 @@
 	<li class = "nav-item dropdown">
 		<a class = "nav-link" data-toggle = "dropdown" href="">Brand2</a>
 		<ul class = "dropdown-menu">
-			<li class = "dropdown-item"><a href="/brand/brandList?c=101&l=2">Ring</a></li>
-			<li class = "dropdown-item"><a href="/brand/brandList?c=102&l=2">Earrings</a></li>
-			<li class = "dropdown-item"><a href="/brand/brandList?c=103&l=2">Bracelets</a></li>
-			<li class = "dropdown-item"><a href="/brand/brandList?c=104&l=2">Necklaces</a></li>
+			<li class = "dropdown-item"><a href="/brand/brandList?c=201&l=2">Ring</a></li>
+			<li class = "dropdown-item"><a href="/brand/brandList?c=202&l=2">Earrings</a></li>
+			<li class = "dropdown-item"><a href="/brand/brandList?c=203&l=2">Bracelets</a></li>
+			<li class = "dropdown-item"><a href="/brand/brandList?c=204&l=2">Necklaces</a></li>
 		</ul>
 	</li>
 	

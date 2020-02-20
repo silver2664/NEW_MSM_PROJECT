@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.project.goods.service.GoodsService;
 import com.project.goods.vo.GoodsViewVO;
@@ -34,5 +35,69 @@ public class BrandController {
 		
 		model.addAttribute("list",list);
 	}
+	
+	//ºÓ«Œ∏Ù ¿¸√º π›¡ˆ ∏ÆΩ∫∆Æ.
+	@RequestMapping(value="/ringList", method=RequestMethod.GET)
+	public ModelAndView getRingList() throws Exception{
+		logger.info("BrandList");
+			
+		ModelAndView mv = new ModelAndView();
+			
+		List<GoodsViewVO> list = null;
+		list = service.ringList();
+			
+		mv.addObject("list", list);
+		mv.setViewName("/brand/brandList");
+			
+		return mv;
+	}
+	
+	//ºÓ«Œ∏Ù ¿¸√º ∆»¬Ó ∏ÆΩ∫∆Æ.
+	@RequestMapping(value="/braceletList", method=RequestMethod.GET)
+	public ModelAndView getBraceletList() throws Exception{
+		logger.info("Bracelet List");
+				
+		ModelAndView mv = new ModelAndView();
+				
+		List<GoodsViewVO> list = null;
+		list = service.braceletList();
+				
+		mv.addObject("list", list);
+		mv.setViewName("/brand/brandList");
+				
+		return mv;
+	}
+		
+	//ºÓ«Œ∏Ù ¿¸√º ±Õ∞…¿Ã ∏ÆΩ∫∆Æ.
+	@RequestMapping(value="/earringList", method=RequestMethod.GET)
+	public ModelAndView getEarringList() throws Exception{
+		logger.info("Earring List");
+				
+		ModelAndView mv = new ModelAndView();
+				
+		List<GoodsViewVO> list = null;
+		list = service.earringList();
+				
+		mv.addObject("list", list);
+		mv.setViewName("/brand/brandList");
+				
+		return mv;
+	}
+		
+	//ºÓ«Œ∏Ù ¿¸√º ∏Ò∞…¿Ã ∏ÆΩ∫∆Æ.
+	@RequestMapping(value="/necklaceList", method=RequestMethod.GET)
+	public ModelAndView getNecklaceList() throws Exception{
+		logger.info("Necklace List");
+				
+		ModelAndView mv = new ModelAndView();
+				
+		List<GoodsViewVO> list = null;
+		list = service.necklaceList();
+				
+		mv.addObject("list", list);
+		mv.setViewName("/brand/brandList");
+				
+		return mv;
+	}	
 
 }

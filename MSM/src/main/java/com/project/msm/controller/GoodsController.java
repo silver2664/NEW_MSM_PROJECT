@@ -74,6 +74,17 @@ public class GoodsController {
 		return "/product/listView";
 	}
 	
+	// 01. AAS브랜드 카테고리별 - 1
+	@RequestMapping(value = "/listView2", method = RequestMethod.GET)
+	public String aasList(Model model, @RequestParam("c") int cateCode) throws Exception {
+			
+		logger.info("Goods List");	
+			
+		model.addAttribute("list", service.catelist(cateCode));
+			
+		return "/product/listView";
+	}
+
 	// 02. 상품상세보기
 	@RequestMapping(value = "/detailView/{mgNum}")
 	public ModelAndView detail(@PathVariable("mgNum") int mgNum, ModelAndView mav) {

@@ -15,7 +15,7 @@
 <title>상품등록 -- MSM</title>
 <style>
 body {
- 	padding-top:70px;
+ 	padding-top:30px;
  	
 }
 h2{

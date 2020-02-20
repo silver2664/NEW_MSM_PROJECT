@@ -31,11 +31,6 @@ div#root {
 	width:90%;
 	margin: 0 auto;
 }
-
-aside {
-	float:left;
-	width:180px;
-}
  
 .card {
 	margin-bottom:20px;
@@ -66,8 +61,6 @@ aside {
 <body>
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
 
-
-
 <div class = "mask rgba-black-white d-flex justify-content-start align-items-center" style = "height : 600px;" id ="brandIntro">
 	<div class = "text-left mx-5">
 		<h3 class = "mb-4 font-weight-bold text-monospace"><strong>AAS-STUDIO</strong></h3>
@@ -93,29 +86,66 @@ aside {
 	</div>	
 </div>
 
-<hr>
+<br/>
 
-<div class="container-fluid">
-	<aside>
-	<%@ include file = "/WEB-INF/views/shareResource/aside.jsp" %>
-	</aside>
+<div class = "container" style = "height : 80px;">
+	<nav class = "navbar navbar-expand-lg white">
+		<img src = "/resources/images/logo/aasLogo.jpg" style = "width : 120px; height : 80px;">
+		<!-- Collapse Menu -->
+	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#goodsNav">
+	   		<span class="navbar-toggler-icon"></span>
+	    </button>
+	    <!-- Header Menu -->
+		<div class = "collapse navbar-collapse" id = "goodsNav">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item">
+					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
+						style = "font-size : 14px; color : black" href = "/product/listView">ALL</a>									
+				</li>
+				<li class="nav-item">
+					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
+						style = "font-size : 14px; color : black" href = "/product/listView2?c=101">RING</a>									
+				</li>
+				<li class="nav-item">
+					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
+						style = "font-size : 14px; color : black" href = "/product/listView2?c=102">earring</a>									
+				</li>
+				<li class="nav-item">
+					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
+						style = "font-size : 14px; color : black" href = "/product/listView2?c=103">barcelet</a>									
+				</li>
+				<li class="nav-item">
+					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
+						style = "font-size : 14px; color : black" href = "/product/listView2?c=104">necklace</a>									
+				</li>
+			</ul>
+			<form class = "form-inline my-2 my-lg-0 ml-auto">
+				<input class = "form-control" type = "search" placeholder = "search"/>
+				<button class = "btn btn-outline-secondary btn-md my-2 my-sm-0 ml-3" type = "submit">Search</button>
+			</form>
+		</div>	
+	</nav>
+</div>
+
+<br/><br/>
+
+<div class="container">
 	<div class="row">		
 		<c:forEach var = "row" items = "${list}">
 			<div class="col-xl-3 col-md-3 col-sm-3 card card-cascade narrow card-ecommerce d-flex">
 			
 				<!-- Card Image -->				
-				<div class="view view-cascade overlay">
-					<a href = "${path}/product/productView/${row.mgNum}">
-						<img src = "/resources/${row.mgImg}" style="width:100%"></a>
+				<div class="view zoom view-cascade overlay">
+					<a href = "${path}/product/productView/${row.mgNum}"><img src = "/resources/${row.mgImg}" style="width:100%"></a>
 				</div>
 				
 				<!-- Card Content -->
 				<div class="card-body card-body-cascade text-center pb-3">
 				
 					<!-- Title -->
-					<h5 class="card-title mb-1">
-						<strong> <a href="${path}/product/productView/${row.mgNum}">${row.mgName}</a></strong>
-					</h5>
+					<h6 class="card-title mb-1">
+						<a style = "color : black;" href="${path}/product/productView/${row.mgNum}">${row.mgName}</a>
+					</h6>
 					
 					<!-- Card Footer -->
 					<div class="card-footer px-1">
@@ -123,7 +153,8 @@ aside {
 							<strong><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${row.mgPrice}"/></strong>
 						</span> 
 						<span class="float-right"> 
-							<a class="material-tooltip-main" data-toggle="tooltip" data-place="top" title="Add to Cart"> 
+							<a class="material-tooltip-main" data-toggle="tooltip" data-place="top" title="Add to Cart" id = "addCart" href="/cart/insert?mgNum=${row.mgNum}&amount=1">
+							<input type="hidden" value="${row.mgNum}" name="mgNum"id="mgNum"/> 
 							<i class="fas fa-shopping-cart grey-text ml-3"></i></a> 
 							
 							<a class="material-tooltip-main" data-toggle="tooltip" data-place="top" title="Add to WishList"> 
@@ -148,6 +179,9 @@ aside {
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
 
 <script>
+$(function () {
+	  $('[data-toggle="tooltip"]').tooltip()
+	})
 
 function openNav() {
 	  document.getElementById("mySidenav").style.width = "30vw";
@@ -163,8 +197,7 @@ function closeNav() {
 
 function closeNav2() {
 	  document.getElementById("mySidenav2").style.width = "0";
-	}	
-
+	}
 </script>
 
 <%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>
