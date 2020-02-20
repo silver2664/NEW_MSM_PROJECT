@@ -104,5 +104,15 @@ public class GoodsServiceImpl implements GoodsService {
 	public List<GoodsViewVO> necklaceList() throws Exception {
 		return dao.necklaceList();
 	}
+	
+	// BRAND AAS 리스트
+	public List<GoodsViewVO> aasList() throws Exception{
+		return dao.aasList();
+	}
+		
+	// BRAND BBS 리스트
+	public List<GoodsViewVO> bbsList() throws Exception {
+		return dao.bbsList();
+	}
 
 }

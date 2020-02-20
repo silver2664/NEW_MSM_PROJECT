@@ -53,6 +53,12 @@ public interface GoodsService {
 			
 	// necklace 리스트
 	public List<GoodsViewVO> necklaceList() throws Exception;
+	
+	// BRAND AAS 리스트
+	public List<GoodsViewVO> aasList() throws Exception;
+		
+	// BRAND BBS 리스트
+	public List<GoodsViewVO> bbsList() throws Exception;
 
 	
 	

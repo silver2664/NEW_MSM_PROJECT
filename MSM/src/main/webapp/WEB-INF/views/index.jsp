@@ -138,7 +138,7 @@ body {
 	<div id="mySidenav" class="sidenav">
   		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   		<a href="/home">MSM HOME</a>
-  		<a href="/product/listView">BRAND MALL</a>
+  		<a href="/brand/brandIndex">BRAND MALL</a>
   		<a href="/product/listView">ACCESSORY MALL</a>
   		<a href="/member/loginForm">SIGN IN</a>
   		<a href="/member/step1">REGISTER</a>

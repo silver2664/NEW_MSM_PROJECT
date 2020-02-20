@@ -25,6 +25,12 @@ public class BrandController {
 	@Inject
 	GoodsService service;
 	
+	//브랜드인덱스
+	@RequestMapping(value = "/brandIndex")
+	public String brandIndex() {
+		return "/brand/brandIndex";
+	}
+	
 	//브랜드리스트.
 	@RequestMapping(value="/brandList", method=RequestMethod.GET)
 	public void getList(@RequestParam("c") int cateCode,@RequestParam("l")int level,Model model) throws Exception{

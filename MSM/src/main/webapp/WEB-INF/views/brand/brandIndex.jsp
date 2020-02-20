@@ -1,16 +1,74 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session = "true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix = "sec" uri = "http://www.springframework.org/security/tags" %>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta id = "_csrf" name = "_csrf" content = "${_csrf.token}"/>
+<title>Basic Form</title>
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
+<!-- CK EDITOR -->
+<script src="/resources/js/ckeditor/ckeditor.js"></script>
+<link href = "<c:url value = "/resources/css/home.css"/>" rel = "stylesheet" type = "text/css">
+<style>
+
+  html,
+  body,
+  header,
+  .view {
+    height: 100%;
+  }
+
+  @media (max-width: 740px) {
+    html,
+    body,
+    header,
+    .view {
+      height: 100vh;
+    }
+  }
+
+  .top-nav-collapse {
+    background-color: #82b1ff !important;
+  }
+
+  .navbar:not(.top-nav-collapse) {
+    background: transparent !important;
+  }
+
+  @media (max-width: 991px) {
+   .navbar:not(.top-nav-collapse) {
+    background: #82b1ff !important;
+   }
+  }
+  
+  h5 {
+    letter-spacing: 3px;
+  }
+
+</style>
+
 </head>
 <body>
-<!-- Header Navbar -->
-<div style = "height : 120px;" class = "mb-1">
-	<nav class = "navbar fixed-top navbar-expand-lg navbar-light white" id = "headerNav">
+
+<!-- header Nav -->
+<nav class = "navbar fixed-top navbar-expand-lg navbar-light white" id = "headerNav">
 		<div class = "container-fluid">
 			<!-- BRAND -->
 			<a class = "navbar-brand wave-effect" href = "/home">
-				<img src = "/resources/images/logo/logo2.jpg" style = "width : 200px; height : 80px;">
+				Multi Shopping Mall
 			</a>
 			<!-- Collapse Menu -->
 		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerMenu">
@@ -146,5 +204,65 @@
 			</div>
 		</div>
 	</nav>
-</div>
+
+<!-- Full Page Intro -->
+  <div class="view jarallax" data-jarallax='{"speed": 0.2}' style="background-image: url('/resources/images/indexPageImg/brandmall.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+    <!-- Mask & flexbox options-->
+    <div class="mask rgba-white-light d-flex justify-content-center align-items-center">
+      <!-- Content -->
+      <div class="container">
+        <!--Grid row-->
+        <div class="row">
+          <!--Grid column-->
+          <div class="col-md-12 white-text text-center">
+            <h1 class="display-3 mb-0 pt-md-5 pt-5 white-text font-weight-bold wow fadeInDown" data-wow-delay="0.3s">MSM
+              <a class="indigo-text font-weight-bold">BRAND MALL</a>
+            </h1>
+            <h5 class="text-uppercase pt-md-5 pt-sm-2 pt-5 pb-md-5 pb-sm-3 pb-5 white-text font-weight-bold wow fadeInDown"
+              data-wow-delay="0.3s">Best Brand &amp; Accessories</h5>
+            <div class="wow fadeInDown" data-wow-delay="0.3s">
+              <a class="btn btn-light-blue btn-lg btn-rounded" href = "/product/aasList">aas-studio</a>
+              <a class="btn btn-indigo btn-lg btn-rounded" href = "/product/bbsList">bbs-studio</a>
+            </div>
+          </div>
+          <!--Grid column-->
+        </div>
+        <!--Grid row-->
+      </div>
+      <!-- Content -->
+    </div>
+    <!-- Mask & flexbox options-->
+  </div>
+  <!-- Full Page Intro -->
+
+<!-- SCRIPTS -->
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
+<script>
+new WOW().init();
+</script>
+<script>
+function openNav() {
+	  document.getElementById("mySidenav").style.width = "30vw";
+	}
+	
+function openNav2() {
+	  document.getElementById("mySidenav2").style.width = "30vw";
+	}
+
+function closeNav() {
+	  document.getElementById("mySidenav").style.width = "0";
+	}
+
+function closeNav2() {
+	  document.getElementById("mySidenav2").style.width = "0";
+	}
+</script>
 </body>
+</html>

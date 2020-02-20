@@ -107,6 +107,16 @@ public class GoodsDAOImpl implements GoodsDAO {
 	public List<GoodsViewVO> necklaceList() throws Exception {
 		return sqlSession.selectList("goodsMapper.necklaceList");
 	}
+	
+	// BRAND AAS 리스트
+	public List<GoodsViewVO> aasList() throws Exception {
+		return sqlSession.selectList("goodsMapper.aasList");
+	}
+		
+	// BRAND BBS 리스트
+	public List<GoodsViewVO> bbsList() throws Exception {
+		return sqlSession.selectList("goodsMapper.bbsList");
+	}
 
 
 }

@@ -36,14 +36,6 @@ div#root {
 	
 }
 
-#brandIntro {
-	height : 100vh;
-	background-image : url("/resources/images/indexPageImg/ms1.jpg");
-	background-size : cover;
-	background-position : center;
-	background-repeat : no-repeat;	
-}
-
 
 </style>
 
@@ -59,6 +51,8 @@ div#root {
 </head>
 <body>
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
+
+
 
 <div class="container">
 	<div class="row">		

@@ -63,15 +63,26 @@ public class GoodsController {
 		return "/product/brandListView";
 	}
 		
-	// 01. 상품전체목록
-	@RequestMapping(value = "/listView", method = RequestMethod.GET)
-	public String list(Model model) throws Exception {
+	// 01. 상품전체목록(AAS-Studio)
+	@RequestMapping(value = "/aasList", method = RequestMethod.GET)
+	public String aasList(Model model) throws Exception {
 		
 		logger.info("Goods List");	
 		
-		model.addAttribute("list", service.listProduct());
+		model.addAttribute("list", service.aasList());
 		
-		return "/product/listView";
+		return "/product/aasList";
+	}
+	
+	// 01. 상품전체목록(BBS-Studio)
+	@RequestMapping(value = "/bbsList", method = RequestMethod.GET)
+	public String bbsList(Model model) throws Exception {
+			
+		logger.info("Goods List");	
+			
+		model.addAttribute("list", service.bbsList());
+			
+		return "/product/bbsList";
 	}
 	
 	// 01. AAS브랜드 카테고리별 - 1
@@ -82,7 +93,7 @@ public class GoodsController {
 			
 		model.addAttribute("list", service.catelist(cateCode));
 			
-		return "/product/listView";
+		return "/product/aasList";
 	}
 
 	// 02. 상품상세보기

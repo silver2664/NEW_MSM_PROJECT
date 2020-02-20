@@ -39,7 +39,7 @@
 			<ul class="navbar-nav" style = "margin : auto">
 				<li class="nav-item">
 					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
-						style = "font-size : 16px;" href = "/product/listView">brandmall</a>									
+						style = "font-size : 16px;" href = "/brand/brandIndex">brandmall</a>									
 				</li>
 				<li class="nav-item">
 					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
