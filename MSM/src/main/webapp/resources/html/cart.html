@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<head lang="ko">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
+
+
+<title>Insert title here</title>
+</head>
+<body>
+
+<div class="container">
+<h2>CART</h2>
+<div  ng-app="cart" ng-controller="myCtrl">
+		<form name = "form1" id = "form1" method = "post" action = "${path}/cart/update">
+			<table border = "1" class="table table-hover">
+				<tr>
+					<th>상품명</th>
+					<th>단가</th>
+					<th>수량</th>
+					<th>금액</th>
+					<th>취소</th>
+				</tr>
+				
+				
+					<tr ng-repeat="x in products track by $index">
+						<td >
+							{{x.mgName}}
+						</td>
+						<td style = "width : 80px; align : right">
+							{{x.mgPrice}}
+						</td>
+						<td>					
+							{{x.mgStock}}개
+						</td>
+						<td>
+							{{x.mgPrice}}원
+						</td>
+						<td style = "width : 100px;" align = "right">
+							<a ng-click="removeItem($index)">삭제</a>
+						</td>
+					</tr>
+				
+				<tr>
+					<td colspan = "5" align = "right">
+						상품갯수 : {{getItem()}} 개 <br>
+						전체 주문 금액 :  {{getTotal() }} 원
+					</td>
+				</tr>
+			</table>
+			<input type = "hidden" name = "count" value ="${map.count}">
+			<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}"/>
+			<button class="btn btn-success btn-sm"  type="button" id="order">주문 정보 입력</button>
+			<button class="btn btn-sm btn-primary" type = "submit" id = "btnUpdate">수정</button>
+			<button class="btn btn-info btn-sm"type = "button" id = "btnList" >상품목록</button>
+		
+		</form>
+	</div>
+</div>
+
+
+<!--jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!--popper -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<!--javascript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!--angula js -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+<script>
+
+var app = angular.module("cart",[]);
+app.controller("myCtrl",function($scope){
+	$scope.products = JSON.parse(localStorage.getItem("cartKey"));
+	console.log($scope.products);
+	
+	//행 삭제
+	$scope.removeItem = function(x) {
+		$scope.products.splice(x,1);
+		localStorage.removeItem("cartKey");
+		localStorage.setItem("cartKey",JSON.stringify($scope.products));
+	}
+	
+	$scope.getTotal = function() {
+		var total = 0;
+		for (var i =0 ; i< $scope.products.length; i++) {
+			var x = $scope.products[i];
+			total += (x.mgPrice * x.mgStock);
+		}
+		return total;
+	}
+	
+	
+	
+		
+
+	
+});
+</script>
+</body>
+</html>

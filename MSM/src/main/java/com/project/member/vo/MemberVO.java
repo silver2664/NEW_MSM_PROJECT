@@ -40,14 +40,14 @@ public class MemberVO implements UserDetails {
 	private String mZip_Code;
 	private String mFirst_Addr;
 	private String mSecond_Addr;
-	private String authority;
+	private String authorityName;
 	private boolean enabled;
 	private Date regDate;
 	
 	@Override
 	public Collection <? extends GrantedAuthority> getAuthorities(){
 		ArrayList<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
-		auth.add(new SimpleGrantedAuthority(authority));
+		auth.add(new SimpleGrantedAuthority(authorityName));
 		return auth;
 	}
 	
@@ -146,11 +146,11 @@ public class MemberVO implements UserDetails {
 	}
 
 	public String getAuthority() {
-		return authority;
+		return authorityName;
 	}
 
-	public void setAuthority(String authority) {
-		this.authority = authority;
+	public void setAuthority(String authorityName) {
+		this.authorityName = authorityName;
 	}
 
 	public Date getRegDate() {

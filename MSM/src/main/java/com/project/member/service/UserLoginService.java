@@ -28,8 +28,8 @@ public class UserLoginService implements UserDetailsService {
 		System.out.println("UserLoginService mId : " + mId);
 		
 		MemberVO vo = dao.getUserById(mId);
-		GrantedAuthority authority = new SimpleGrantedAuthority(vo.getAuthority());
-		UserDetails userDetails = (UserDetails)new User(vo.getUsername(), vo.getmPw(), Arrays.asList(authority));
+		GrantedAuthority authorityName = new SimpleGrantedAuthority(vo.getAuthority());
+		UserDetails userDetails = (UserDetails)new User(vo.getUsername(), vo.getmPw(), Arrays.asList(authorityName));
 		System.out.println("Password : " + vo.getmPw());
 		
 		return userDetails;

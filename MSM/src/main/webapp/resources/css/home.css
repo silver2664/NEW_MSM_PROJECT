@@ -2,6 +2,8 @@
 
 html, body, header, .carousel {
 	height: 60vh;
+	font-family: NanumGothic;
+	font-size:15px;
 }
 
 @media ( max-width : 740px) {
