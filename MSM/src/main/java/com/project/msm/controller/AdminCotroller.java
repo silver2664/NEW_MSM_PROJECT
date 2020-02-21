@@ -21,6 +21,8 @@ import com.project.goods.service.GoodsService;
 import com.project.goods.vo.GoodsViewVO;
 import com.project.member.service.UserService;
 import com.project.member.vo.MemberVO;
+import com.project.order.service.OrderService;
+import com.project.order.vo.OrderVO;
 
 @Controller
 @RequestMapping(value = "/admin/*")
@@ -32,6 +34,9 @@ public class AdminCotroller {
 	
 	@Inject
 	GoodsService goodsService;
+	
+	@Inject
+	OrderService orderService;
 	
 	// 관리자 페이지 이동. (Admin.jsp)
 	@RequestMapping(value = "/admin/admin", method = {RequestMethod.GET, RequestMethod.POST})
@@ -137,6 +142,38 @@ public class AdminCotroller {
 		for(int i = 0; i < mgNum1.size(); i++) {
 			System.out.println("삭제 mgNum : " + mgNum1.get(i));
 			goodsService.productDelete(mgNum1.get(i));
+		}
+	}
+	
+	// Delivery Info
+	@RequestMapping(value = "/admin/delivery")
+	public ModelAndView deliveryInfo(@ModelAttribute("scri") SearchCriteria scri) throws Exception {
+		ArrayList<OrderVO> orderInfo = (ArrayList<OrderVO>) orderService.orderInfo2(scri);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("orderInfo", orderInfo);
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(scri);
+		pageMaker.setTotalCount(orderService.listCount(scri));
+		mv.addObject("pageMaker", pageMaker);
+		mv.setViewName("/admin/deliveryInfo");
+		return mv;
+	}
+	
+	// Delivery 처리 (ADMIN)
+	@RequestMapping(value = "/admin/updateDeliveryInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public void updateDeliveryInfo(@RequestParam(value="orderNum[]") List<String> orderNum,
+			@RequestParam(value="orderState[]") List<String> orderState) throws Exception {
+		List<String> orderNum1 = new ArrayList<String>();
+		List<String> orderState1 = new ArrayList<String>();
+		OrderVO vo = new OrderVO();
+		orderNum1.addAll(orderNum);
+		orderState1.addAll(orderState);
+		for(int i = 0; i < orderNum1.size(); i++) {
+			System.out.println("주문번호 : " + orderNum1.get(i) + " " + " : " + orderState1.get(i));
+			vo.setOrderNum(orderNum1.get(i));
+			vo.setOrderState(orderState1.get(i));
+			orderService.updateDeliveryInfo(vo);
 		}
 	}
 	

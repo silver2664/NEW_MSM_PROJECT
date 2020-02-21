@@ -190,7 +190,7 @@ span {
 	<i></i>
 </div>
 <div class="btn style-5">
-	<a href = "/admin/goodsList"><span>배송 관리</span></a>	
+	<a href = "/admin/delivery"><span>배송 관리</span></a>	
 	<i></i>
 	<i></i>
 	<i></i>

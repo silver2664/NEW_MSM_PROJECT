@@ -113,7 +113,7 @@ function closeNav2() {
 <script>
 $(document).ready(function(){
 	$("#btnList").click(function(){
-		location.href = "${path}/product/listView";
+		location.href = "${path}/product/aasList";
 	});
 	$("#order").click(function(){
         location.href = "${path}/cart/order";

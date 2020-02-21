@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<head lang="ko">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- resource CSS -->
+<link href = "/resources/css/home.css" rel = "stylesheet" type = "text/css">
+
+<title>Insert title here</title>
+</head>
+<body ng-app="cart">
+ <!-- <div ng-include="'/shareResource/header'"></div>   -->
+<div class="container z-depth-1 p-5 my-5">
+<h2>CART</h2>
+<section>
+<div ng-controller="myCtrl" class="table-reponsive">		
+	<table class="table product-table table-cart-v-1">
+		<thead>
+			<tr>
+				
+				<th class="font-weight-blod">
+					<strong>상품명</strong>
+				</th>
+				<th class="font-weight-blod">
+					<strong>단가</strong>
+				</th>
+				<th class="font-weight-blod">
+					<strong>수량</strong>
+				</th>
+				<th class="font-weight-blod">
+					<strong>금액</strong>
+				</th>
+				<th ></th>
+				
+			</tr>
+		</thead>
+		<tbody>			
+			<tr ng-repeat="x in products track by $index">
+			
+				<td class="font-weight-bold" >
+					
+					<strong>{{x.mgName}}</strong>
+									
+				</td>
+				<td  class="font-weight-bold"style = "width : 120px; ">
+					<strong>{{x.mgPrice | number}}</strong>
+				</td>
+				<td class="font-weight-bold"  style = "width : 80px;">					
+					<strong>{{x.mgStock}}개</strong>									
+				</td>				
+				<td class="font-weight-bold" style = "width : 120px; align : right">
+					<strong>{{x.mgPrice | number}}원</strong>
+				</td>
+				<td class="font-weight-blod"style = "width : 120px;" align = "right">
+					<a ng-click="removeItem($index)"><strong>삭제</strong></a>
+				</td>
+				</tr>
+			
+				<tr>
+					<td class="font-weight-blod" colspan = "5" align = "right">					
+						<strong>전체 주문 금액 :  {{getTotal() | number}} 원 </strong>
+					</td>
+				</tr>
+			</tbody>
+	</table>
+	<input type = "hidden" name = "count" value ="${map.count}">
+	<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}"/>
+	<!--  
+	<button class="btn btn-success btn-sm"  type="button" id="order">주문 정보 입력</button>
+	<button class="btn btn-sm btn-primary" type = "button" id = "btnUpdate">수정</button>-->
+	<button class="btn btn-info btn-sm"type = "button" id = "btnList" >상품목록</button>
+
+	
+	</div>
+	</section>
+</div>
+
+
+<!--jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!--popper -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<!--javascript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!--angula js -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+<script>
+
+var app = angular.module("cart",[]);
+app.controller("myCtrl",function($scope){
+	$scope.products = JSON.parse(localStorage.getItem("cartKey"));
+	console.log($scope.products);
+	
+	//행 삭제
+	$scope.removeItem = function(x) {
+		$scope.products.splice(x,1);
+		localStorage.removeItem("cartKey");
+		localStorage.setItem("cartKey",JSON.stringify($scope.products));
+	}
+	
+
+	
+	$scope.getTotal = function() {
+		var total = 0;
+		for (var i =0 ; i< $scope.products.length; i++) {
+			var x = $scope.products[i];
+			total += (x.mgPrice * x.mgStock);
+			
+		}
+		return total;
+	}
+	
+});
+
+$(document).ready(function() {
+	$("#btnList").click(function() {
+		location.href="/product/aasList";
+	});
+	
+});
+function openNav() {
+	  document.getElementById("mySidenav").style.width = "30vw";
+	}
+	
+function openNav2() {
+	  document.getElementById("mySidenav2").style.width = "30vw";
+	}
+
+function closeNav() {
+	  document.getElementById("mySidenav").style.width = "0";
+	}
+
+function closeNav2() {
+	  document.getElementById("mySidenav2").style.width = "0";
+	}
+</script>
+</body>
+</html>

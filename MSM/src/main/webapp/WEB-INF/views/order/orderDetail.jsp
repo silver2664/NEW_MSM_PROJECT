@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta id = "_csrf" name = "_csrf" content = "${_csrf.token}"/>
-<title>주문 내역 --MSM</title>
+<title>주문 상세 내역 --MSM</title>
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <!-- Bootstrap core CSS -->
@@ -27,8 +27,8 @@
 <body>
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
 
-<div class ="container">
-	<h1>주문 내역</h1>
+<div class ="container mb-5 mt-3">
+	<h1>주문 상세 내역</h1>
 	<hr/>
 	<table class="table">
 		<tr>
@@ -38,7 +38,7 @@
 			<th>배송상태</th>
 		</tr>
 		
-		<c:forEach var = "list" items = "${map.list}">
+		<c:forEach var = "list" items = "${order}">
 		<tr>
 			<td>${list.orderProductName}</td>
 			<td>${list.orderPrice}</td>
@@ -46,16 +46,10 @@
 			<td>${list.orderState}</td>
 		</tr>	
 		</c:forEach>
+		
 	</table>
+	<button type="button" class="btn btn-info btn-sm"id="order">주문 조회</button>
 </div>
-
-
-
-
-
-
-
-
 
 
 
@@ -70,6 +64,11 @@
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
 <script>
+$(document).ready(function() {
+	$("#order").click(function() {
+		location.href ="/order/order";
+	});
+});
 function openNav() {
 	  document.getElementById("mySidenav").style.width = "30vw";
 	}

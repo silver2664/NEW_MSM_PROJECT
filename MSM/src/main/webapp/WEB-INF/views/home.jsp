@@ -107,7 +107,7 @@
 						<a class = "btn btn-outline-white mb-3" href = "/cart/cartView" role = "button">
 							Cart
 						</a>						
-						<a class = "btn btn-outline-white mb-3" href = "/order/orderList" role = "button">
+						<a class = "btn btn-outline-white mb-3" href = "/order/order" role = "button">
 							Order List
 						</a>					
 						<a class = "btn btn-outline-white mb-3" href = "/board/notice/noticeList" role = "button">
