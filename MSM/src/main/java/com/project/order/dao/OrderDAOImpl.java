@@ -27,4 +27,10 @@ public class OrderDAOImpl implements OrderDAO {
 		return sqlSession.selectList("orderMapper.orderList", mId);
 	}
 
+	@Override
+	public List<OrderVO> order(String mId) throws Exception {
+		
+		return sqlSession.selectList("orderMapper.order",mId);
+	}
+
 }

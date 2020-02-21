@@ -11,4 +11,8 @@ public interface OrderService {
 	
 	// 02. 결제내역
 	public List<OrderVO> orderList(String mId) throws Exception;
+	
+	//주문 내역 조회
+	public List<OrderVO> order(String mId) throws	Exception;
+	
 }

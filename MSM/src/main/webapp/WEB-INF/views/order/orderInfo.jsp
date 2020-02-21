@@ -41,7 +41,7 @@
 <div class="container">
     
     
-    <form name = "form1" id = "form1" method = "post" action = "order/insert">
+    <form name = "form1" id = "form1" method = "post" action = "/order/insert">
     <input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
     <c:choose>
     <c:when test = "${map.count == 0}">
@@ -64,7 +64,7 @@
                     <tr>
                         <td >
                            <input type="text" readonly name="orderProductName" id="orderProductName" class="form-control-plaintext" value="${row.productName}"><br/> 
-                           <input type = "text" class ="form-control-plaintext" name = "cartId" value = "${row.cartId}"/>
+                           <input type = "hidden" class ="form-control-plaintext" name = "cartId" value = "${row.cartId}"/>
                            <input type = "hidden" class="form-control-plaintext" name = "mgNum" value = "${row.mgNum}"/>
                         </td>
                         <td style = "width : 200px; align : left">
@@ -91,7 +91,7 @@
                 </tr>
             </table>
             <input type = "hidden" name = "count" value ="${map.count}">   
-            <button class="btn btn-sm btn-primary" type = "submit" id = "btnUpdate" formaction="/cart/update2">수정</button>               
+            <button  class="btn btn-sm btn-primary" type = "submit" id = "btnUpdate" formaction="/cart/update2">수정</button>               
             
     </c:otherwise>
 </c:choose>
@@ -125,7 +125,7 @@
             </div>
     배송 시 요청사항 <input type="text" name="orderReq" id="orderReq"class="form-control form-control-sm">
     
-    <button class="btn btn-danger btn-sm" formaction="/order/insert">주문</button>
+    <button type="submit"class="btn btn-danger btn-sm" formaction="/order/insert">주문</button>
     </form>  
 </div>
 

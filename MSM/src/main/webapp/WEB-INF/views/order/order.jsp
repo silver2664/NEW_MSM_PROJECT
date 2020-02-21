@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta id = "_csrf" name = "_csrf" content = "${_csrf.token}"/>
-<title>주문 내역 --MSM</title>
+<title>주문 내역 조회 --MSM</title>
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <!-- Bootstrap core CSS -->
@@ -27,23 +27,21 @@
 <body>
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
 
-<div class ="container">
-	<h1>주문 내역</h1>
+<div class ="container mb-5">
+	<h1>주문 조회</h1>
 	<hr/>
 	<table class="table">
 		<tr>
-			<th>상품명</th>
+			<th>주문 번호</th>
 			<th>가격</th>
-			<th>수량</th>
-			<th>배송상태</th>
+			
 		</tr>
 		
-		<c:forEach var = "list" items = "${map.list}">
+		<c:forEach var = "list" items = "${order}">
 		<tr>
-			<td>${list.orderProductName}</td>
-			<td>${list.orderPrice}</td>
-			<td>${list.orderAmount}</td>
-			<td>${list.orderState}</td>
+			<td><a href="/order/orderDetail?orderTotal=${list.orderTotal}">${list.orderTotal}</a></td>
+			<td>${list.totalMoney}</td>
+			
 		</tr>	
 		</c:forEach>
 	</table>

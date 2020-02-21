@@ -6,8 +6,8 @@
 
 <!-- 주문 -->
 <insert id="orderInsert">
-       INSERT INTO MORDER (ORDERNUM,ORDERPRODUCTNAME,ORDERAMOUNT,ORDERPRICE,TOTALMONEY,ORDERNAME,ORDERPHONE,ORDERADDR1,ORDERADDR2,ORDERADDR3,ORDERREQ,MID,MGNUM)
-       VALUES (order_seq.nextval,#{orderProductName},#{orderAmount},#{orderPrice},#{totalMoney},#{orderName},#{orderPhone},#{orderAddr1},#{orderAddr2},#{orderAddr3},#{orderReq},#{mId},#{mgNum})
+       INSERT INTO MORDER (ORDERNUM,ORDERPRODUCTNAME,ORDERAMOUNT,ORDERPRICE,TOTALMONEY,ORDERNAME,ORDERPHONE,ORDERADDR1,ORDERADDR2,ORDERADDR3,ORDERREQ,MID,MGNUM,ORDERTOTAL)
+       VALUES (order_seq.nextval,#{orderProductName},#{orderAmount},#{orderPrice},#{totalMoney},#{orderName},#{orderPhone},#{orderAddr1},#{orderAddr2},#{orderAddr3},#{orderReq},#{mId},#{mgNum},#{orderTotal})
 </insert>
 
 <select id = "orderList" resultType = "com.project.order.vo.OrderVO">
@@ -19,8 +19,18 @@
 			ORDERSTATE
 		FROM
 			MORDER
-		WHERE MID = #{mId}
+		WHERE ORDERTOTAL = #{orderTotal}
 	]]>
+</select>
+
+<select id="order" resultType = "com.project.order.vo.OrderVO">
+	SELECT DISTINCT
+		   ORDERTOTAL,
+	       TOTALMONEY,
+	       ORDERSTATE
+	FROM MORDER
+	WHERE MID = #{mid}
+	       
 </select>
 
 

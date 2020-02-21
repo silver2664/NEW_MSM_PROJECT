@@ -29,4 +29,10 @@ public class OrderServiceImpl implements OrderService {
 		return dao.orderList(mId);
 	}
 
+	@Override
+	public List<OrderVO> order(String mId) throws Exception {
+	
+		return dao.order(mId);
+	}
+
 }
