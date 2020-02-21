@@ -78,7 +78,7 @@ li{
  
         <ul class="list-unstyled" >
           <li>
-            <a href="#!">Contact</a>
+            <a href="/contact/contact">Contact</a>
           </li>
           <li>
             <a href="#!">ABOUT</a>

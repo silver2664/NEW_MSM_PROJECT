@@ -40,7 +40,7 @@ ALTER TABLE morder
 	private String mId; //회원 아이디(주문자)
 	private String orderState; //주문 상태 디폴트 '배송준비'
 	private int mgNum;
-	private String orderTotal;
+	private String orderTotal; 
 	
 	
 	

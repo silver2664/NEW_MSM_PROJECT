@@ -43,6 +43,12 @@ public class HomeController {
 	public String home(HttpServletRequest request, HttpServletResponse response) { 
 		return "home"; 
 	}
+	
+	@RequestMapping(value="/contact/contact")
+	public String contact() throws Exception{ 
+		
+		return "/contact/contact";
+	}
 
 	
 }

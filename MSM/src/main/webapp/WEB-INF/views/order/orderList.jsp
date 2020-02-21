@@ -41,11 +41,13 @@
 		<c:forEach var = "list" items = "${map.list}">
 		<tr>
 			<td>${list.orderProductName}</td>
-			<td>${list.orderPrice}</td>
+			<td><fmt:formatNumber type="currency" value="${list.orderPrice}"/></td>
 			<td>${list.orderAmount}</td>
 			<td>${list.orderState}</td>
 		</tr>	
+		
 		</c:forEach>
+		
 	</table>
 </div>
 
@@ -70,6 +72,8 @@
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
 <script>
+
+
 function openNav() {
 	  document.getElementById("mySidenav").style.width = "30vw";
 	}

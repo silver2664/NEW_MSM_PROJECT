@@ -34,14 +34,15 @@
 		<tr>
 			<th>주문 번호</th>
 			<th>가격</th>
+			<th>배송상태</th>
 			
 		</tr>
 		
 		<c:forEach var = "list" items = "${order}">
 		<tr>
 			<td><a href="/order/orderDetail?orderTotal=${list.orderTotal}">${list.orderTotal}</a></td>
-			<td>${list.totalMoney}</td>
-			
+			<td><fmt:formatNumber type="currency" value ="${list.totalMoney}"/></td>
+			<td>${list.orderState} </td>
 		</tr>	
 		</c:forEach>
 	</table>

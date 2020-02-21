@@ -1,6 +1,7 @@
 package com.project.msm.controller;
 
 import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -64,6 +65,8 @@ public class OrderController {
 			order.setOrderAmount(orderAmount[i]);
 			order.setOrderPrice(orderPrice[i]);
 			
+			
+			
 			service.insert(order);
 			cartService.delete(cartId[i]);
 		}
@@ -71,6 +74,7 @@ public class OrderController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		System.out.println(orderTotal);
 		List<OrderVO> list = service.orderList(orderTotal);
+		model.addAttribute("order",service.orderList(orderTotal));
 		map.put("list", list);
 		model.addAttribute("map",map);
 		
