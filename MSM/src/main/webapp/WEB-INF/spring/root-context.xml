@@ -51,7 +51,6 @@
 		<property name = "transactionManager" ref = "transactionManager"></property>
 	</bean>	
 	
-	
 	<!-- Password Encoder -->
 	<bean name = "passwordEncoder" class = "org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 	

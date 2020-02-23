@@ -52,8 +52,132 @@ div#root {
 <body>
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
 
-
-
+<!-- Carousel Wrapper -->
+<div id="video-carousel-example2" class="carousel slide carousel-fade" data-ride="carousel">
+	<!--Indicators-->
+	<ol class="carousel-indicators">
+    	<li data-target="#video-carousel-example2" data-slide-to="0" class="active"></li>
+    	<li data-target="#video-carousel-example2" data-slide-to="1"></li>
+    	<li data-target="#video-carousel-example2" data-slide-to="2"></li>
+  	</ol>
+  	<!--/.Indicators-->
+  	<!--Slides-->
+  	<div class="carousel-inner" role="listbox">
+  		<!-- First slide -->
+    	<div class="carousel-item active">
+      		<!--Mask color-->
+      		<div class="view">
+        	<!--Video source-->
+        		<video class="video-fluid" autoplay loop muted>
+          		<source src="https://mdbootstrap.com/img/video/Lines.mp4" type="video/mp4" />
+        		</video>
+        	<div class="mask rgba-indigo-light"></div>
+      		</div>
+      		<!--Caption-->
+      		<div class="carousel-caption">
+        		<div class="animated fadeInDown">
+          			<h3 class="h3-responsive">Light mask</h3>
+          			<p>First text</p>
+        		</div>
+      		</div>
+      		<!--Caption-->
+    	</div>
+    	<!-- /.First slide -->
+    	<!-- Second slide -->
+   	 	<div class="carousel-item">
+      		<!--Mask color-->
+      		<div class="view">
+        		<!--Video source-->
+        		<video class="video-fluid" autoplay loop muted>
+         	 		<source src="https://mdbootstrap.com/img/video/animation-intro.mp4" type="video/mp4" />
+        		</video>
+       	 	<div class="mask rgba-purple-slight"></div>
+      		</div>
+	      	<!--Caption-->
+	      	<div class="carousel-caption">
+	       		<div class="animated fadeInDown">
+	          		<h3 class="h3-responsive">Super light mask</h3>
+	          		<p>Secondary text</p>
+	        	</div>
+	      	</div>
+	      	<!--Caption-->
+    	</div>
+    	<!-- /.Second slide -->
+    	<!-- Third slide -->
+    	<div class="carousel-item">
+      		<!--Mask color-->
+      		<div class="view">
+        		<!--Video source-->
+        		<video class="video-fluid" autoplay loop muted>
+          			<source src="https://mdbootstrap.com/img/video/Tropical.mp4" type="video/mp4" />
+        		</video>
+        		<div class="mask rgba-black-strong"></div>
+      		</div>
+      		<!--Caption-->
+      		<div class="carousel-caption">
+        		<div class="animated fadeInDown">
+          			<h3 class="h3-responsive">Strong mask</h3>
+          			<p>Third text</p>
+        		</div>
+      		</div>
+      		<!--Caption-->
+    	</div>
+    	<!-- /.Third slide -->
+  	</div>
+  	<!--/.Slides-->
+  	<!--Controls-->
+  	<a class="carousel-control-prev" href="#video-carousel-example2" role="button" data-slide="prev">
+    	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    	<span class="sr-only">Previous</span>
+  	</a>
+  	<a class="carousel-control-next" href="#video-carousel-example2" role="button" data-slide="next">
+    	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+    	<span class="sr-only">Next</span>
+  	</a>
+  	<!--/.Controls-->
+</div>
+<!-- /Carousel Wrapper -->
+<br/><br/>
+<!-- ALL PRODUCT NAVIGATION -->
+<div class = "container" style = "height : 80px;">
+	<nav class = "navbar navbar-expand-lg white">
+		<img src = "/resources/images/logo/aasLogo.jpg" style = "width : 120px; height : 80px;">
+		<!-- Collapse Menu -->
+	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#goodsNav">
+	   		<span class="navbar-toggler-icon"></span>
+	    </button>
+	    <!-- Header Menu -->
+		<div class = "collapse navbar-collapse" id = "goodsNav">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item">
+					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
+						style = "font-size : 14px; color : black" href = "/product/aasList">ALL</a>									
+				</li>
+				<li class="nav-item">
+					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
+						style = "font-size : 14px; color : black" href = "/brand/ringList">RING</a>									
+				</li>
+				<li class="nav-item">
+					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
+						style = "font-size : 14px; color : black" href = "/brand/earringList">earring</a>									
+				</li>
+				<li class="nav-item">
+					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
+						style = "font-size : 14px; color : black" href = "/brand/braceletList">bracelet</a>									
+				</li>
+				<li class="nav-item">
+					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
+						style = "font-size : 14px; color : black" href = "/brand/necklaceList">necklace</a>									
+				</li>
+			</ul>
+			<form class = "form-inline my-2 my-lg-0 ml-auto">
+				<input class = "form-control" type = "search" placeholder = "search"/>
+				<button class = "btn btn-outline-secondary btn-md my-2 my-sm-0 ml-3" type = "submit">Search</button>
+			</form>
+		</div>	
+	</nav>
+</div>
+<br/><br/>
 <div class="container">
 	<div class="row">		
 		<c:forEach var = "row" items = "${list}">
