@@ -20,10 +20,11 @@ public class GoodsVO {
 	private int mgPrice;
 	private int mgStock;
 	private String mgContent;
-	private String mgImg; // »óÇ°ÀÌ¹ÌÁö°æ·Î
-	private MultipartFile productPhoto; // »óÇ°ÀÌ¹ÌÁöÆÄÀÏ
+	private String mgImg; // ï¿½ï¿½Ç°ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private MultipartFile productPhoto; // ï¿½ï¿½Ç°ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private String mgThumbImg;
 	private String cateCode;
+	private String orderAmount;
 	
 	
 	
@@ -31,6 +32,14 @@ public class GoodsVO {
 	
 	
 	
+	
+	
+	public String getOrderAmount() {
+		return orderAmount;
+	}
+	public void setOrderAmount(String orderAmount) {
+		this.orderAmount = orderAmount;
+	}
 	public String getCateCode() {
 		return cateCode;
 	}

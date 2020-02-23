@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.project.goods.vo.GoodsVO;
 import com.project.order.dao.OrderDAO;
 import com.project.order.service.OrderService;
 import com.project.order.vo.OrderVO;
@@ -23,7 +24,7 @@ public class OrderServiceImpl implements OrderService {
 
 	}
 	
-	// 02. °áÁ¦³»¿ª
+	// 02. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@Override
 	public List<OrderVO> orderList(String mId) throws Exception{
 		return dao.orderList(mId);
@@ -33,6 +34,12 @@ public class OrderServiceImpl implements OrderService {
 	public List<OrderVO> order(String mId) throws Exception {
 	
 		return dao.order(mId);
+	}
+
+	@Override
+	public void changStock(GoodsVO goods) throws Exception {
+		dao.changeStock(goods);
+		
 	}
 
 }

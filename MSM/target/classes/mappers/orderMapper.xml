@@ -33,6 +33,10 @@
 	WHERE MID = #{mid}
 	       
 </select>
-
-
+<!-- 상품 수량 조절 -->
+<update id="changeStock">
+	update ex_goods	
+		set mgStock = mgStock - #{orderAmount}
+		where mgNum= #{mgNum}
+</update>
 </mapper>

@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.project.goods.vo.GoodsVO;
 import com.project.order.vo.OrderVO;
 
 @Repository
@@ -21,7 +22,7 @@ public class OrderDAOImpl implements OrderDAO {
 
 	}
 	
-	// 02. °áÁ¦³»¿ª
+	// 02. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@Override
 	public List<OrderVO> orderList(String mId) throws Exception{
 		return sqlSession.selectList("orderMapper.orderList", mId);
@@ -31,6 +32,12 @@ public class OrderDAOImpl implements OrderDAO {
 	public List<OrderVO> order(String mId) throws Exception {
 		
 		return sqlSession.selectList("orderMapper.order",mId);
+	}
+
+	@Override
+	public void changeStock(GoodsVO goods) throws Exception {
+		sqlSession.update("orderMapper.changeStock",goods);
+		
 	}
 
 }

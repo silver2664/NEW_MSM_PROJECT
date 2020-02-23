@@ -2,17 +2,20 @@ package com.project.order.dao;
 
 import java.util.List;
 
+import com.project.goods.vo.GoodsVO;
 import com.project.order.vo.OrderVO;
 
 public interface OrderDAO {
 	
-	//ÁÖ¹®
+	//ï¿½Ö¹ï¿½
 	public void insert(OrderVO order);
 	
-	// 02. °áÁ¦³»¿ª
+	// 02. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public List<OrderVO> orderList(String mId) throws Exception;
 	
-	//ÁÖ¹® ³»¿ª Á¶È¸
+	//ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 	public List<OrderVO> order(String mId) throws Exception;
 	
+	//ìƒí’ˆ ìˆ˜ëŸ‰ ì¡°ì ˆ
+	public void changeStock(GoodsVO goods) throws Exception;
 }

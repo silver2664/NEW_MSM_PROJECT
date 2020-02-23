@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.cart.service.CartService;
 import com.project.cart.vo.CartVO;
+import com.project.goods.vo.GoodsVO;
 import com.project.order.service.OrderService;
 import com.project.order.vo.OrderVO;
 
@@ -42,9 +43,9 @@ public class OrderController {
 	@RequestMapping(value="/order/insert")
 	public String insert(@ModelAttribute OrderVO order, @ModelAttribute CartVO cart, @RequestParam int[] mgNum,
 			@RequestParam String[] orderProductName, @RequestParam String[] orderAmount, 
-			@RequestParam String[] orderPrice, @RequestParam int[] cartId,Model model) throws Exception{
+			@RequestParam String[] orderPrice, @RequestParam int[] cartId,Model model,GoodsVO goods) throws Exception{
 		
-		logger.info("ÁÖ¹®");
+		logger.info("ï¿½Ö¹ï¿½");
 		
 		Calendar cal = Calendar.getInstance();
 		int year = cal.get(Calendar.YEAR);
@@ -77,17 +78,19 @@ public class OrderController {
 		model.addAttribute("order",service.orderList(orderTotal));
 		map.put("list", list);
 		model.addAttribute("map",map);
-		
+		service.changStock(goods);
 		return "/order/orderList";
 		
 	}
 	@RequestMapping(value="/order/orderList")
-	public String orderList() throws Exception{
+	public String orderList(GoodsVO goods) throws Exception{
+		service.changStock(goods);
+		logger.info("changeStock");
 		return "/order/orderList";
 	}
 	/*@RequestMapping(value="/order/orderList")
 	public ModelAndView orderList(ModelAndView mv) throws Exception {
-		logger.info("°áÁ¦³»¿ª");
+		logger.info("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = (User) auth.getPrincipal();
 		String mId = user.getUsername();
@@ -109,7 +112,7 @@ public class OrderController {
 		return "/order/order";
 	}
 	
-	//ÁÖ¹® »ó¼¼ ³»¿ª
+	//ï¿½Ö¹ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value="/order/orderDetail")
 	public String orderDetail(Model model,OrderVO vo) throws Exception{
 		
