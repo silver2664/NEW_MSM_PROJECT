@@ -38,7 +38,10 @@
           width:100%;
           position:absolute;
         }
-      </style>
+ #myModal {
+ z-index:1044; 
+}
+</style>
 
 </head>
 <body>
@@ -55,9 +58,7 @@
       <!-- Section heading -->
       <h3 class="font-weight-bold text-center mb-4">Contact Us</h3>
       <!-- Section description -->
-      <p class="text-center w-responsive mx-auto pb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-        Fugit, error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum quisquam
-        eum porro a pariatur veniam.</p>
+      <p class="text-center w-responsive mx-auto pb-5">MSM -- 악세사리 전문 쇼핑몰</p>
 
       <!-- Grid row -->
       <div class="row">
@@ -109,7 +110,7 @@
 
           <!--Google map-->
           <div id="map-container-section" class="z-depth-1-half map-container-section mb-4" style="height: 400px">
-            <iframe src="https://maps.google.com/maps?q=Manhatan&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0"
+            <iframe src="https://maps.google.com/maps?q=Seoul&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0"
               style="border:0" allowfullscreen></iframe>
           </div>
           <!-- Buttons-->
@@ -118,22 +119,22 @@
               <a class="btn-floating blue accent-1">
                 <i class="fas fa-map-marker-alt"></i>
               </a>
-              <p>New York, 94126</p>
-              <p class="mb-md-0">United States</p>
+              <p>서울시 </p>
+              <p class="mb-md-0"></p>
             </div>
             <div class="col-md-4">
               <a class="btn-floating blue accent-1">
                 <i class="fas fa-phone"></i>
               </a>
               <p>+ 01 234 567 89</p>
-              <p class="mb-md-0">Mon - Fri, 8:00-22:00</p>
+              <p class="mb-md-0">Mon - Fri, 9:00-18:00</p>
             </div>
             <div class="col-md-4">
               <a class="btn-floating blue accent-1">
                 <i class="fas fa-envelope"></i>
               </a>
-              <p>info@gmail.com</p>
-              <p class="mb-0">sale@gmail.com</p>
+              <p>msm@gmail.com</p>
+              <p class="mb-0">msm@gmail.com</p>
             </div>
           </div>
 
@@ -145,8 +146,24 @@
 
     </section>
     <!--Section: Content-->
+    </div>
 
 
+  <div class="modal fade" id="myModal" role="dialog">
+  	<div class="modal-dialog">
+  		<div class="modal-content">
+  			<div class="modal-header">
+  				
+  				<h4 class="modal-title">Modal Header</h4>  				
+  			</div>
+  			<div class="modal-body">
+  				<p>Some text in the modal.</p>
+  			</div>
+  			<div class="modal-footer">
+  				<button type="button" class="btn btn-default" data-dismiss="modal"> Close</button>
+  			</div>
+  		</div>
+  	</div>
   </div>
   <%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>
 <!-- SCRIPTS -->

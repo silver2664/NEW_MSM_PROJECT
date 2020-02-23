@@ -5,25 +5,56 @@
 li{
  text-align:center;
 }
+	/* The Modal (background) */
+	.modal {
+	    display: none; /* Hidden by default */
+	    position: fixed; /* Stay in place */
+	    z-index: 1; /* Sit on top */
+	    left: 0;
+	    top: 0;
+	    width: 100%; /* Full width */
+	    height: 100%; /* Full height */
+	    overflow: auto; /* Enable scroll if needed */
+	    background-color: rgb(0,0,0); /* Fallback color */
+	    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	}
+	
+	/* Modal Content/Box */
+	.modal-content {
+	    background-color: #fefefe;
+	    margin: 15% auto; /* 15% from the top and centered */
+	    padding: 20px;
+	    border: 1px solid #888;
+	    width: 50%; /* Could be more or less, depending on screen size */                          
+	}
+	/* The Close Button */
+	.close {
+	    color: #aaa;
+	    float: right;
+	    font-size: 28px;
+	    font-weight: bold;
+	}
+	.close:hover,
+	.close:focus {
+	    color: black;
+	    text-decoration: none;
+	    cursor: pointer;
+	}
+
 </style>
 </head>
 <body>
 <!-- Footer -->
 <footer class="page-footer font-small blue pt-4">
-
   <!-- Footer Links -->
   <div class="container-fluid text-center text-md-left">
-
     <!-- Grid row -->
     <div class="row">
-
       <!-- Grid column -->
       <div class="col-md-4 mt-md-0 mt-3">
-
         <!-- Content -->
-        <h5 class="text-uppercase">Footer Content</h5>
-        <p>Here you can use rows and columns to organize your footer content.</p>
-
+        <h3>적용 기술</h3>
+        <button type="button" class="btn btn-info btn-sm" data-toggle="modal"  data-target="#myModal">Open Modal</button>
       </div>
       <!-- Grid column -->
 
@@ -96,19 +127,19 @@ li{
 
         <ul class="list-unstyled">
           <li>
-            <a href="#!">AAS</a>
+            <a href="/product/aasList">AAS</a>
           </li>
           <li>
-            <a href="#!">Ring</a>
+            <a href="/brand/ringList">Ring</a>
           </li>
           <li>
-            <a href="#!">EARRING</a>
+            <a href="/brand/earringList">EARRING</a>
           </li>
           <li>
-            <a href="#!">NECKLACE</a>
+            <a href="/brand/necklaceList">NECKLACE</a>
           </li>
            <li>
-            <a href="#!">BRACELET</a>
+            <a href="/brand/braceletList">BRACELET</a>
           </li>
         </ul>
 
@@ -122,12 +153,15 @@ li{
   <!-- Footer Links -->
 
   <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">� 2020 Copyright:
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
     <a href=""> MSM</a>
   </div>
   <!-- Copyright -->
 
 </footer>
 <!-- Footer -->
+<script>
+
+</script>
 </body>
 </html>
