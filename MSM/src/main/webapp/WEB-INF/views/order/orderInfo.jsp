@@ -74,7 +74,7 @@
                             <input type = "number" id="orderAmount" name = "orderAmount" value = "${row.amount}" min = "1" />
                         </td>
                         <td style = "width : 150px; align : left">
-                           <input type="text" readonly class="form-control-plaintext" id="orderPrice" name="orderPrice" value= "<fmt:formatNumber value = "${row.money}" type = "currency"/>">
+                           <input type="text" readonly class="form-control-plaintext" id="orderPrice" name="orderPrice" value= "${row.money}"/>
                         </td>
                         <td style = "width : 100px;" align = "right">
                             <a href = "${path}/cart/delete2?cartId=${row.cartId}">삭제</a>

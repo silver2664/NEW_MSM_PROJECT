@@ -3,6 +3,7 @@ package com.project.order.service;
 import java.util.List;
 
 import com.project.board.vo.SearchCriteria;
+import com.project.goods.vo.GoodsVO;
 import com.project.order.vo.OrderVO;
 
 public interface OrderService {
@@ -27,4 +28,19 @@ public interface OrderService {
 	
 	// 06. Update OrderState (Admin)
 	public void updateDeliveryInfo(OrderVO vo) throws Exception;
+	
+	// 07. Select Total Ring Amount
+	public List<OrderVO> amountRing() throws Exception;
+		
+	// 08. Select Total Earring Amount
+	public List<OrderVO> amountEarring() throws Exception;
+			
+	// 09. Select Total Bracelet Amount
+	public List<OrderVO> amountBracelet() throws Exception;
+			
+	// 10. Select Total Ring Amount
+	public List<OrderVO> amountNecklace() throws Exception;
+	
+	// 11. 상품 수량 조절
+	public void changeStock(GoodsVO goods) throws Exception;
 }

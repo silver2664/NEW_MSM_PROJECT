@@ -59,7 +59,7 @@ table {
 
 	<table>
 		<tr>
-			<td><img src="/resources/${vo.mgImg}" width="540" height="300">
+			<td><div class = "view zoom"><img src="/resources/${vo.mgImg}" width="540" height="400"></div>
 			</td>
 			<td>
 				<table style="height: 516px; width: 456px;">
@@ -88,7 +88,7 @@ table {
 		</tr>
 	</table>
 	<div class = "text-center">		
-		<a class = "btn btn-secondary btn-sm" href="/product/listView">상품목록</a>
+		<a class = "btn btn-secondary btn-sm" href="/product/aasList">상품목록</a>
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
 		<button class="btn btn-primary btn-sm" id="update">상품 수정</button>
 		<button class="btn btn-danger btn-sm" id="delete">상품 삭제</button>
@@ -129,8 +129,8 @@ table {
 				});
 
 			})();
-			</script>
-
+	</script>
+	<br/><br/><br/><br/><br/><br/><br/><br/>
 	<%@ include file="/WEB-INF/views/shareResource/footer.jsp"%>
 	<!-- SCRIPTS -->
 	<!-- JQuery -->

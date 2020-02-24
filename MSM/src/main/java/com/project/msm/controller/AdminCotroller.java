@@ -1,7 +1,9 @@
 package com.project.msm.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -175,6 +177,54 @@ public class AdminCotroller {
 			vo.setOrderState(orderState1.get(i));
 			orderService.updateDeliveryInfo(vo);
 		}
+	}
+	
+	// 매출관리 PAGE 매핑
+	@RequestMapping(value = "/admin/chart")
+	public ModelAndView chart(ModelAndView mv) throws Exception {
+		List<Object> amountRing = new ArrayList<Object>();
+		List<Object> amountEarring = new ArrayList<Object>();
+		List<Object> amountBracelet = new ArrayList<Object>();
+		List<Object> amountNecklace = new ArrayList<Object>();
+		OrderVO vo = new OrderVO();
+		OrderVO vo2 = new OrderVO();
+		OrderVO vo3 = new OrderVO();
+		OrderVO vo4 = new OrderVO();
+		amountRing.addAll(orderService.amountRing());
+		amountEarring.addAll(orderService.amountEarring());
+		amountBracelet.addAll(orderService.amountBracelet());
+		amountNecklace.addAll(orderService.amountNecklace());
+		int ring = 0;
+		int earring = 0;
+		int bracelet = 0;
+		int necklace = 0;
+		for (int i = 0; i < amountRing.size(); i++) {
+			System.out.println(amountRing.get(i));
+			vo = (OrderVO)amountRing.get(i);
+			System.out.println(vo.getOrderAmount());
+			ring += Integer.parseInt(vo.getOrderAmount());			
+		}
+		for (int i = 0; i <amountEarring.size(); i++) {
+			vo2 = (OrderVO)amountEarring.get(i);
+			earring += Integer.parseInt(vo2.getOrderAmount()); 
+		}
+		for (int i = 0; i < amountBracelet.size(); i++) {
+			vo3 = (OrderVO)amountBracelet.get(i);
+			bracelet += Integer.parseInt(vo3.getOrderAmount());
+		}
+		for (int i = 0; i < amountNecklace.size(); i++) {
+			vo4 = (OrderVO)amountNecklace.get(i);
+			necklace += Integer.parseInt(vo4.getOrderAmount());
+		}
+		System.out.println("total ring : " + ring);
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("ring", ring);
+		map.put("earring", earring);
+		map.put("bracelet", bracelet);
+		map.put("necklace", necklace);		
+		mv.addObject("map", map);
+		mv.setViewName("/admin/chart");
+		return mv;
 	}
 	
 

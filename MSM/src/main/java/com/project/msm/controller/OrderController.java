@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.cart.service.CartService;
 import com.project.cart.vo.CartVO;
+import com.project.goods.vo.GoodsVO;
 import com.project.order.service.OrderService;
 import com.project.order.vo.OrderVO;
 
@@ -41,7 +42,7 @@ public class OrderController {
 	@RequestMapping(value="/order/insert")
 	public ModelAndView insert(@ModelAttribute OrderVO order, @ModelAttribute CartVO cart, @RequestParam int[] mgNum,
 			@RequestParam String[] orderProductName, @RequestParam String[] orderAmount, 
-			@RequestParam String[] orderPrice, @RequestParam int[] cartId) throws Exception{
+			@RequestParam String[] orderPrice, @RequestParam int[] cartId, GoodsVO goods) throws Exception{
 		
 		logger.info("¡÷πÆ");
 		
@@ -65,8 +66,10 @@ public class OrderController {
 			order.setOrderProductName(orderProductName[i]);
 			order.setOrderAmount(orderAmount[i]);
 			order.setOrderPrice(orderPrice[i]);
-			
+			goods.setOrderAmount(orderAmount[i]);
+			goods.setMgNum(mgNum[i]);
 			service.insert(order);
+			service.changeStock(goods);
 			cartService.delete(cartId[i]);
 		}
 		

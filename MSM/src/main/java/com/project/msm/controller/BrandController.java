@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.goods.service.GoodsService;
+import com.project.goods.vo.GoodsVO;
 import com.project.goods.vo.GoodsViewVO;
 
 @Controller
@@ -104,6 +105,22 @@ public class BrandController {
 		mv.setViewName("/brand/brandList");
 				
 		return mv;
-	}	
+	}
+	
+	//쇼핑몰 전체 목걸이 리스트.
+	@RequestMapping(value="/allList", method=RequestMethod.GET)
+	public ModelAndView allList() throws Exception{
+		logger.info("Necklace List");
+					
+		ModelAndView mv = new ModelAndView();
+					
+		List<GoodsVO> list = null;
+		list = service.listProduct();
+					
+		mv.addObject("list", list);
+		mv.setViewName("/brand/brandList");
+					
+		return mv;
+	}
 
 }

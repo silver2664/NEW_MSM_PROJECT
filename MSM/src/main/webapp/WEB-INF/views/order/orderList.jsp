@@ -47,6 +47,7 @@
 		</tr>	
 		</c:forEach>
 	</table>
+	<button type = "button" class = "btn btn-info btn-sm" id = "order">주문 조회</button>
 </div>
 
 
@@ -70,6 +71,12 @@
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
 <script>
+$(document).ready(function() {
+	$("#order").click(function() {
+	     location.href ="/order/order";
+	});
+});
+
 function openNav() {
 	  document.getElementById("mySidenav").style.width = "30vw";
 	}

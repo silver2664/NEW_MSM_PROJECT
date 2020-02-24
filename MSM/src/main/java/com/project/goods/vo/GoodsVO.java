@@ -24,6 +24,7 @@ public class GoodsVO {
 	private MultipartFile productPhoto; // 상품이미지파일
 	private String mgThumbImg;
 	private String cateCode;
+	private String orderAmount;
 	
 	
 	
@@ -31,6 +32,12 @@ public class GoodsVO {
 	
 	
 	
+	public String getOrderAmount() {
+		return orderAmount;
+	}
+	public void setOrderAmount(String orderAmount) {
+		this.orderAmount = orderAmount;
+	}
 	public String getCateCode() {
 		return cateCode;
 	}

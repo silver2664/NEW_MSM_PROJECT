@@ -32,6 +32,7 @@
 <c:choose>
 	<c:when test = "${map.count == 0}">
 		장바구니가 비어있습니다.
+		<button class="btn btn-info btn-sm"type = "button" id = "btnList" onclick = "history.go(-1)">상품목록</button>
 	</c:when>
 	<c:otherwise>
 		<form name = "form1" id = "form1" method = "post" action = "${path}/cart/update">
@@ -77,7 +78,7 @@
 			<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}"/>
 			<button class="btn btn-success btn-sm"  type="button" id="order">주문 정보 입력</button>
 			<button class="btn btn-sm btn-primary" type = "submit" id = "btnUpdate">수정</button>
-			<button class="btn btn-info btn-sm"type = "button" id = "btnList">상품목록</button>
+			<button class="btn btn-info btn-sm"type = "button" id = "btnList" onclick = "history.go(-1)">상품목록</button>
 		</form>
 	</c:otherwise>
 </c:choose>
@@ -112,9 +113,6 @@ function closeNav2() {
 </script>
 <script>
 $(document).ready(function(){
-	$("#btnList").click(function(){
-		location.href = "${path}/product/aasList";
-	});
 	$("#order").click(function(){
         location.href = "${path}/cart/order";
     });

@@ -27,9 +27,9 @@
 <body>
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
 
-<div class = "container">
+<div class = "container mb-4 mt-4">
 	
-	<h3 class = "text-center">회원 상세정보</h3>
+	<h3 class = "text-center mt-4">회원 상세정보</h3>
 	<hr/>
 	
 	<form id = "memberDetailForm" role = "form" method = "post" action = "/member/updateView">

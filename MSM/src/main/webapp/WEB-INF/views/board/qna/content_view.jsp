@@ -94,6 +94,7 @@ h2 {
 				</c:forEach>
 			</ol>
 		</div>
+		<sec:authorize access = "hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')">
 		<form name="replyForm" method="post">
 			<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
 			<input type="hidden" id="qid" name="qid" value="${content_view.qid}" />
@@ -101,6 +102,7 @@ h2 {
 			<input type="hidden" id="perPageNum" name="perPageNum"	value="${scri.perPageNum}">
 			 <input type="hidden"	id="searchType" name="searchType" value="${scri.searchType}">
 			<input type="hidden" id="keyword" name="keyword"	value="${scri.keyword}">
+			
 			<div class="form-group">
 				<label for="writer" class="col-sm-2 control-label">댓글 작성자</label>
 				<div class="col-sm-5">
@@ -118,8 +120,9 @@ h2 {
 			</div>
 			<br>
 			<br>
-
+			
 		</form>
+		</sec:authorize>
 
 
 		

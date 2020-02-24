@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.project.board.vo.SearchCriteria;
+import com.project.goods.vo.GoodsVO;
 import com.project.order.dao.OrderDAO;
 import com.project.order.service.OrderService;
 import com.project.order.vo.OrderVO;
@@ -58,6 +59,31 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void updateDeliveryInfo(OrderVO vo) throws Exception {
 		dao.updateDeliveryInfo(vo);
+	}
+	
+	// 07. Select Total Ring Amount
+	public List<OrderVO> amountRing() throws Exception {
+		return dao.amountRing();
+	}
+		
+	// 08. Select Total Earring Amount
+	public List<OrderVO> amountEarring() throws Exception {
+		return dao.amountEarring();
+	}
+			
+	// 09. Select Total Bracelet Amount
+	public List<OrderVO> amountBracelet() throws Exception {
+		return dao.amountBracelet();
+	}
+			
+	// 10. Select Total Ring Amount
+	public List<OrderVO> amountNecklace() throws Exception {
+		return dao.amountNecklace();
+	}
+	
+	// 11. 상품 수량 조절
+	public void changeStock(GoodsVO goods) throws Exception {
+		dao.changeStock(goods);
 	}
 
 }

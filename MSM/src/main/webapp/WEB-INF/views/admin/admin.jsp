@@ -203,7 +203,7 @@ span {
 	<i></i>
 </div>
 <div class="btn style-6">
-	<a href = "/admin/goodsList"><span>매출 관리</span></a>	
+	<a href = "/admin/chart"><span>매출 관리</span></a>	
 	<i></i>
 	<i></i>
 	<i></i>

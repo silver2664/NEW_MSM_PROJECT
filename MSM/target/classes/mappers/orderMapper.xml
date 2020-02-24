@@ -81,5 +81,44 @@
 	WHERE ORDERNUM = #{orderNum}
 </update>
 
+<!-- 주문 Ring Amount LIST -->
+<select id = "amountRing" resultType = "com.project.order.vo.OrderVO">
+	select orderamount
+	from morder m, ex_goods p
+	where p.catecode = 101
+	AND M.MGNUM = P.MGNUM
+</select>
+
+<!-- 주문 Earring Amount LIST -->
+<select id = "amountEarring" resultType = "com.project.order.vo.OrderVO">
+	select orderamount
+	from morder m, ex_goods p
+	where p.catecode = 102
+	AND M.MGNUM = P.MGNUM
+</select>
+
+<!-- 주문 Bracelet Amount LIST -->
+<select id = "amountBracelet" resultType = "com.project.order.vo.OrderVO">
+	select orderamount
+	from morder m, ex_goods p
+	where p.catecode = 103
+	AND M.MGNUM = P.MGNUM
+</select>
+
+<!-- 주문 Necklace Amount LIST -->
+<select id = "amountNecklace" resultType = "com.project.order.vo.OrderVO">
+	select orderamount
+	from morder m, ex_goods p
+	where p.catecode = 104
+	AND M.MGNUM = P.MGNUM
+</select>
+
+<!-- 상품 수량 조절 -->
+<update id="changeStock">
+	update ex_goods	
+	set mgStock = mgStock - #{orderAmount}
+	where mgNum= #{mgNum}
+</update>
+
 
 </mapper>

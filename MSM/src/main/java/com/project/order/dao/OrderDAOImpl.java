@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.project.board.vo.SearchCriteria;
+import com.project.goods.vo.GoodsVO;
 import com.project.order.vo.OrderVO;
 
 @Repository
@@ -56,6 +57,31 @@ public class OrderDAOImpl implements OrderDAO {
 	@Override
 	public void updateDeliveryInfo(OrderVO vo) throws Exception {
 		sqlSession.update("orderMapper.updateDeliveryInfo", vo);
+	}
+	
+	// 07. Select Total Ring Amount
+	public List<OrderVO> amountRing() throws Exception {
+		return sqlSession.selectList("amountRing");
+	}
+		
+	// 08. Select Total Earring Amount
+	public List<OrderVO> amountEarring() throws Exception{
+		return sqlSession.selectList("amountEarring");
+	}
+			
+	// 09. Select Total Bracelet Amount
+	public List<OrderVO> amountBracelet() throws Exception {
+		return sqlSession.selectList("amountBracelet");
+	}
+			
+	// 10. Select Total Ring Amount
+	public List<OrderVO> amountNecklace() throws Exception {
+		return sqlSession.selectList("amountNecklace");
+	}
+	
+	// 11. 상품 수량 조절
+	public void changeStock(GoodsVO goods) throws Exception {
+		sqlSession.update("orderMapper.changeStock",goods);
 	}
 
 }

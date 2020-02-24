@@ -24,6 +24,7 @@
 </head>
 <body>
 <!-- Header Navbar -->
+<div style = "height : 110px">
 <nav class = "navbar fixed-top navbar-expand-lg navbar-light white">
 	<div class = "container-fluid">
 		<!-- BRAND -->
@@ -164,8 +165,9 @@
 		</div>
 	</div>
 </nav>
+</div>
 <!-- Carousel Wrapper -->
-<div id = "carousel-example-1z" class = "carousel slide carousel-fade pt-5" data-ride = "carousel">
+<div id = "carousel-example-1z" class = "carousel slide carousel-fade" data-ride = "carousel">
 	<!--Indicators-->
     <ol class="carousel-indicators">
       <li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
@@ -180,15 +182,15 @@
     			background-repeat: no-repeat; background-size: cover;">
     			<!-- Mask & FlexBox Option -->
     			<div class = "mask rgba-black-strong d-flex justify-content-center align-items-center">
-    				<div class = "text-center white-text mx-5 wow fadeIn">
-    					<h1 class = "mb-4">
-    						<strong>Test MSM Home</strong>
+    				<div class = "text-center white-text wow fadeIn" style = "border : 2px solid white; padding : auto; width : 500px;">
+    					<h1 class = "mt-5 mb-4 text-weight-bold">
+    						<strong>GRAND OPEN!!</strong>
     					</h1>
     					<p>
-    						<strong>Example Mask &amp; FlexBox Option!</strong>
+    						<strong>2020. 02. 26. wed. <br/> New BrandMall MSM, Launching AAS-Studio.com</strong>
     					</p>
     					<p class = "mb-4 d-none d-md-block">
-    						<strong> Example MSM Homepage <br/> 2019.12.30. AM 10 : 39. Monday.</strong>
+    						<strong>Coming Soon <br/> New Luxurious Product &amp; BRAND</strong>
     					</p>
     				</div>
     			</div>
@@ -200,15 +202,15 @@
     			background-repeat: no-repeat; background-size: cover;">
     			<!-- Mask & FlexBox Option -->
     			<div class = "mask rgba-black-strong d-flex justify-content-center align-items-center">
-    				<div class = "text-center white-text mx-5 wow fadeIn">
-    					<h1 class = "mb-4">
-    						<strong>Test MSM Home</strong>
+    				<div class = "text-center white-text wow fadeIn" style = "border : 2px solid white; padding : auto; width : 500px;">
+    					<h1 class = "mt-5 mb-4 text-weight-bold">
+    						<strong>GRAND OPEN!!</strong>
     					</h1>
     					<p>
-    						<strong>Example Mask &amp; FlexBox Option!</strong>
+    						<strong>2020. 02. 26. wed. <br/> New BrandMall MSM, Launching AAS-Studio.com</strong>
     					</p>
     					<p class = "mb-4 d-none d-md-block">
-    						<strong> Example MSM Homepage <br/> 2019.12.30. AM 10 : 39. Monday.</strong>
+    						<strong>Coming Soon <br/> New Luxurious Product &amp; BRAND</strong>
     					</p>
     				</div>
     			</div>
@@ -220,15 +222,15 @@
     			background-repeat: no-repeat; background-size: cover;">
     			<!-- Mask & FlexBox Option -->
     			<div class = "mask rgba-black-strong d-flex justify-content-center align-items-center">
-    				<div class = "text-center white-text mx-5 wow fadeIn">
-    					<h1 class = "mb-4">
-    						<strong>Test MSM Home</strong>
+    				<div class = "text-center white-text wow fadeIn" style = "border : 2px solid white; padding : auto; width : 500px;">
+    					<h1 class = "mt-5 mb-4 text-weight-bold">
+    						<strong>GRAND OPEN!!</strong>
     					</h1>
     					<p>
-    						<strong>Example Mask &amp; FlexBox Option!</strong>
+    						<strong>2020. 02. 26. wed. <br/> New BrandMall MSM, Launching AAS-Studio.com</strong>
     					</p>
     					<p class = "mb-4 d-none d-md-block">
-    						<strong> Example MSM Homepage <br/> 2019.12.30. AM 10 : 39. Monday.</strong>
+    						<strong>Coming Soon <br/> New Luxurious Product &amp; BRAND</strong>
     					</p>
     				</div>
     			</div>
@@ -277,7 +279,7 @@
 			<h3 class="font-weight-bold mb-4 pb-2">MSM BestSellers</h3>
 			<!-- Section Description -->
 			<p class="grey-text w-responsive mx-auto mb-5">
-				Example BestSellers Section. <br /> 2019. 12. 30. 13 : 10. Monday.
+				BestSellers Section. <br /> 2020. 02. 24. wed.
 			</p>
 			<!-- Grid Row -->
 			<div class="row">
@@ -285,8 +287,8 @@
 				<div class="col-lg-3 col-md-6 mb-4">
 					<div class="card card-cascade narrow card-ecommerce">
 						<!-- Card Image -->
-						<div class="view view-cascade overlay">							
-							<img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/1.jpg" class="card-img-top" alt="sample photo">
+						<div class="view zoom view-cascade overlay">							
+							<img src="/resources/images/bestSeller1.png" class="card-img-top" alt="sample photo">
 							<a><div class="mask rgba-white-slight"></div></a>														
 						</div>
 						<!-- Card Content -->
@@ -326,9 +328,9 @@
 				<div class="col-lg-3 col-md-6 mb-4">
 					<div class="card card-cascade narrow card-ecommerce">
 						<!-- Card Image -->
-						<div class="view view-cascade overlay">
+						<div class="view zoom view-cascade overlay">
 							<img
-								src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/2.jpg"
+								src="/resources/images/bestSeller2.png"
 								class="card-img-top" alt="sample photo"> <a>
 								<div class="mask rgba-white-slight"></div>
 							</a>
@@ -368,11 +370,11 @@
 				</div>
 					<!-- Card 3 -->
 				<div class="col-lg-3 col-md-6 mb-4">
-					<div class="card card-cascade narrow card-ecommerce">
+					<div class="card zoom card-cascade narrow card-ecommerce">
 						<!-- Card Image -->
 						<div class="view view-cascade overlay">
 							<img
-								src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/3.jpg"
+								src="/resources/images/bestSeller3.png"
 								class="card-img-top" alt="sample photo"> <a>
 								<div class="mask rgba-white-slight"></div>
 							</a>
@@ -412,11 +414,11 @@
 				</div>
 					<!-- Card 4 -->
 				<div class="col-lg-3 col-md-6 mb-4">
-					<div class="card card-cascade narrow card-ecommerce">
+					<div class="card zoom card-cascade narrow card-ecommerce">
 						<!-- Card Image -->
 						<div class="view view-cascade overlay">
 							<img
-								src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/4.jpg"
+								src="/resources/images/bestSeller4.png"
 								class="card-img-top" alt="sample photo"> <a>
 								<div class="mask rgba-white-slight"></div>
 							</a>
@@ -993,58 +995,7 @@
 		
 </main>
 
-<footer class = "page-footer text-center font-small mt-4">
-	<!-- Call to Action -->
-	<div class = "pt-4">
-		<a class = "btn btn-outline-white" href = "#" target = "_blank" role = "button">
-			The Project MSM.
-		</a>
-	</div>
-	
-	<!-- Social icons -->
-	<div class = "my-4">
-    	<div class="pb-4">
-	      	<a href="https://www.facebook.com/mdbootstrap" target="_blank">
-	        	<i class="fab fa-facebook-f mr-3"></i>
-	      	</a>
-	
-	      	<a href="https://twitter.com/MDBootstrap" target="_blank">
-	        	<i class="fab fa-twitter mr-3"></i>
-	      	</a>
-	
-	      	<a href="https://www.youtube.com/watch?v=7MUISDJ5ZZ4" target="_blank">
-	        	<i class="fab fa-youtube mr-3"></i>
-	      	</a>
-	
-	      	<a href="https://plus.google.com/u/0/b/107863090883699620484" target="_blank">
-	        	<i class="fab fa-google-plus-g mr-3"></i>
-	      	</a>
-	
-	      	<a href="https://dribbble.com/mdbootstrap" target="_blank">
-	       		<i class="fab fa-dribbble mr-3"></i>
-	      	</a>
-	
-	      	<a href="https://pinterest.com/mdbootstrap" target="_blank">
-	        	<i class="fab fa-pinterest mr-3"></i>
-	      	</a>
-	
-	      	<a href="https://github.com/mdbootstrap/bootstrap-material-design" target="_blank">
-	        	<i class="fab fa-github mr-3"></i>
-	      	</a>
-	
-	      	<a href="http://codepen.io/mdbootstrap/" target="_blank">
-	        	<i class="fab fa-codepen mr-3"></i>
-	      	</a>
-		</div>
-	</div>
-	
-	<!--Copyright-->
-    <div class="footer-copyright py-3">
-      © 2020 Copyright:
-      <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> Project MSM </a>
-    </div>
-    
-</footer>
+<%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>
 
 <!-- Modal Signup -->
 <!-- 
@@ -1112,6 +1063,7 @@ function openNav() {
 function closeNav() {
 	  document.getElementById("mySidenav").style.width = "0";
 	}
+new WOW().init();
 </script>
 </body>
 </html>

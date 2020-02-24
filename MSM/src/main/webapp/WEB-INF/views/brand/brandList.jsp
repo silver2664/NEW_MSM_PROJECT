@@ -73,14 +73,16 @@ div#root {
         		</video>
         	<div class="mask rgba-indigo-light"></div>
       		</div>
-      		<!--Caption-->
+      		    		
+    		<!--Caption-->
       		<div class="carousel-caption">
         		<div class="animated fadeInDown">
-          			<h3 class="h3-responsive">Light mask</h3>
-          			<p>First text</p>
+          			<h3 class="h3-responsive text-weight-bold">GRAND OPEN!!</h3>
+          			<p>2020. 02. 26. wed.</p>
         		</div>
       		</div>
       		<!--Caption-->
+      		
     	</div>
     	<!-- /.First slide -->
     	<!-- Second slide -->
@@ -94,13 +96,13 @@ div#root {
        	 	<div class="mask rgba-purple-slight"></div>
       		</div>
 	      	<!--Caption-->
-	      	<div class="carousel-caption">
-	       		<div class="animated fadeInDown">
-	          		<h3 class="h3-responsive">Super light mask</h3>
-	          		<p>Secondary text</p>
-	        	</div>
-	      	</div>
-	      	<!--Caption-->
+      		<div class="carousel-caption">
+        		<div class="animated fadeInDown">
+          			<h3 class="h3-responsive text-weight-bold">GRAND OPEN!!</h3>
+          			<p>2020. 02. 26. wed.</p>
+        		</div>
+      		</div>
+      		<!--Caption-->
     	</div>
     	<!-- /.Second slide -->
     	<!-- Third slide -->
@@ -116,8 +118,8 @@ div#root {
       		<!--Caption-->
       		<div class="carousel-caption">
         		<div class="animated fadeInDown">
-          			<h3 class="h3-responsive">Strong mask</h3>
-          			<p>Third text</p>
+          			<h3 class="h3-responsive text-weight-bold">GRAND OPEN!!</h3>
+          			<p>2020. 02. 26. wed.</p>
         		</div>
       		</div>
       		<!--Caption-->
@@ -151,7 +153,7 @@ div#root {
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
 					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
-						style = "font-size : 14px; color : black" href = "/product/aasList">ALL</a>									
+						style = "font-size : 14px; color : black" href = "/brand/allList">ALL</a>									
 				</li>
 				<li class="nav-item">
 					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 

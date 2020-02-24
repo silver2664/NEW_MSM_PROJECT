@@ -28,8 +28,8 @@
 <body>
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
 
-<div id="root" class = "container">	
-	<h1 class = "text-center">회원정보 수정</h1>	
+<div id="root" class = "container mt-4 mb-4">	
+	<h1 class = "text-center mt-4">회원정보 수정</h1>	
 	<hr />	
 	<div class = "col-md-12">
 		<form action = "/member/update" method = "post" role = "form" id = "usercheck" name ="member">
