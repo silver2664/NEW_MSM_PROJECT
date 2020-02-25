@@ -156,6 +156,23 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
+<script>
+function openNav() {
+	  document.getElementById("mySidenav").style.width = "30vw";
+	}
+	
+function openNav2() {
+	  document.getElementById("mySidenav2").style.width = "30vw";
+	}
+
+function closeNav() {
+	  document.getElementById("mySidenav").style.width = "0";
+	}
+
+function closeNav2() {
+	  document.getElementById("mySidenav2").style.width = "0";
+	}
+</script>
 
 </body>
 </html>
