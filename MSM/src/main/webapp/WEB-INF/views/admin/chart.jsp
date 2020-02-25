@@ -50,12 +50,14 @@
 		</div>
 	</div>
 	
+	<br/><br/>
+	
 	<div class ="row">
 		<div class = "col-md-6 col-lg-3 mb-4">
 			<div class = "card primary-color white-text">
 				<div class = "card-body d-flex justify-content-between align-items-center">
 					<div>
-						<p class = "h2-responsive font-weight-bold mt-n2 mb-0">New Order</p>
+						<p class = "h2-responsive font-weight-bold mt-n2 mb-0">New <br/>Order</p>
 					</div>
 					<div>
 						<i class="fas fa-shopping-bag fa-4x text-black-40"></i>
@@ -70,7 +72,7 @@
 			<div class = "card warning-color white-text">
 				<div class = "card-body d-flex justify-content-between align-items-center">
 					<div>
-						<p class = "h2-responsive font-weight-bold mt-n2 mb-0">Chart Info</p>
+						<p class = "h2-responsive font-weight-bold mt-n2 mb-0">Chart <br/>Infomation</p>
 					</div>
 					<div>
 						<i class="fas fa-chart-bar fa-4x text-black-40"></i>
@@ -85,7 +87,7 @@
 			<div class = "card light-blue lighten-1 white-text">
 				<div class = "card-body d-flex justify-content-between align-items-center">
 					<div>
-						<p class = "h2-responsive font-weight-bold mt-n2 mb-0">User Registrations</p>
+						<p class = "h2-responsive font-weight-bold mt-n2 mb-0">User <br/>Registrations</p>
 					</div>
 					<div>
 						 <i class="fas fa-user-plus fa-4x text-black-40"></i>
@@ -100,7 +102,7 @@
 			<div class = "card red accent-2 white-text">
 				<div class = "card-body d-flex justify-content-between align-items-center">
 					<div>
-						<p class = "h2-responsive font-weight-bold mt-n2 mb-0">Unique Visitors</p>
+						<p class = "h2-responsive font-weight-bold mt-n2 mb-0">Unique <br/>Visitors</p>
 					</div>
 					<div>
 						 <i class="fas fa-chart-pie fa-4x text-black-40"></i>
@@ -110,7 +112,9 @@
 					More Info<i class="fas fa-arrow-circle-right pl-2"></i></a>
 			</div>
 		</div>		
-	</div>	
+	</div>
+	
+	<br/><br/>	
 	
 	<div class = "row wow fadeIn">
 	
@@ -122,10 +126,13 @@
 							<i class="far fa-money-bill-alt fa-lg primary-color z-depth-2 p-4 ml-3 mt-n3 rounded text-white"></i>
 							<div class = "float-right text-right p-3">
 								<p class = "text-uppercase text-muted mb-1"><small>sales</small></p>
-								<h4 class="font-weight-bold mb-0">4,000,000</h4>
+								<h6 class="font-weight-bold mb-0">
+									<fmt:setLocale value="ko_KR" /><fmt:formatNumber type="currency" value="${map.price}"/>
+								</h6>
 							</div>							
 						</div>
-						<div class = "card-body pt-0">
+						
+						<div class = "card-body pt-0" style = "margin-top : 12px;">
 							<div class = "progress md-progress">
 								<div class = "progress-bar bg-success" role = "progressbar" style = "width : 75%"></div>
 							</div>
@@ -139,7 +146,7 @@
 							<i class="fas fa-chart-line fa-lg teal z-depth-2 p-4 ml-3 mt-n3 rounded text-white"></i>
 							<div class = "float-right text-right p-3">
 								<p class = "text-uppercase text-muted mb-1"><small>order</small></p>
-								<h4 class="font-weight-bold mb-0">35</h4>
+								<h4 class="font-weight-bold mb-0">${map.order}</h4>
 							</div>
 						</div>
 						<div class = "card-body pt-0">
@@ -187,7 +194,6 @@
 			<div class = "card">
 				<div class = "card-body">
 					<canvas id = "lineChart" style = "max-width : 500px;"></canvas>
-
 				</div>
 			</div>
 		</div>

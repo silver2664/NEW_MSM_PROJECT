@@ -94,7 +94,7 @@ h2{
 				
 			<div>
 				<button type="submit" class="btn btn-sm btn-primary" id="btnSave">상품등록</button>
-				<button type="button" class="btn btn-sm btn-info" id="btnList">목록</button>
+				<button type="button" class="btn btn-sm btn-info" id="btnList" onclick = "history.go(-1)">목록</button>
 			</div>
 		</form>
 	</div>
@@ -111,10 +111,7 @@ h2{
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
 
 <script>
-$(document).ready(function() {	
-	$("#btnList").click(function(e) {		
-		location.href="/product/listView";
-	});
+$(document).ready(function() {
 	
 	$("#mgImg").change(function(){
 		   if(this.files && this.files[0]) {
@@ -192,6 +189,16 @@ $(document).ready(function() {
 		});
 	
 });
+</script>
+
+<script>
+function openNav() {
+	  document.getElementById("mySidenav").style.width = "30vw";
+	}
+function closeNav() {
+	  document.getElementById("mySidenav").style.width = "0";
+	}
+new WOW().init();
 </script>
 
 </body>

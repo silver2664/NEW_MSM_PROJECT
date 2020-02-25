@@ -88,7 +88,7 @@ table {
 		</tr>
 	</table>
 	<div class = "text-center">		
-		<a class = "btn btn-secondary btn-sm" href="/product/aasList">상품목록</a>
+		<a class = "btn btn-secondary btn-sm" onclick = "history.go(-1)">상품목록</a>
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
 		<button class="btn btn-primary btn-sm" id="update">상품 수정</button>
 		<button class="btn btn-danger btn-sm" id="delete">상품 삭제</button>

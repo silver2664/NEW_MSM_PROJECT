@@ -132,7 +132,7 @@ $(document).ready(function() {
 	
 	
 	$("#btnList").click(function(e) {		
-		location.href="/product/listView";
+		location.href="/admin/goodsList";
 	});
 	
 	

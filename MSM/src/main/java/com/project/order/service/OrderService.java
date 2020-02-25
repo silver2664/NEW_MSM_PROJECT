@@ -43,4 +43,10 @@ public interface OrderService {
 	
 	// 11. 상품 수량 조절
 	public void changeStock(GoodsVO goods) throws Exception;
+	
+	// 12. 총 매출
+	public int sumPrice() throws Exception;
+		
+	// 13. 주문 수
+	public int counterOrder() throws Exception;
 }

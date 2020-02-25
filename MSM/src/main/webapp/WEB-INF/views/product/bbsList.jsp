@@ -63,7 +63,7 @@ div#root {
 
 <div class = "mask rgba-black-white d-flex justify-content-start align-items-center" style = "height : 600px;" id ="brandIntro">
 	<div class = "text-left mx-5">
-		<h3 class = "mb-4 font-weight-bold text-monospace"><strong>AAS-STUDIO</strong></h3>
+		<h3 class = "mb-4 font-weight-bold text-monospace"><strong>BBS-STUDIO</strong></h3>
 		<p class = "mb-3 text-monospace font-weight-bolder font-italic"><strong>젠더리스 쥬얼리 아스 - Find your second skin</strong></p>
 		<p class = "text-monospace mb-3 font-weight-light" style = "font-size : 12px;">
 			컬러를 담은 쥬얼리. <br/>
@@ -82,7 +82,7 @@ div#root {
 			소장하고 싶고 모으고 싶은, 하나의 작품으로서 가치를 인정받고 시습니다. <br/>
 			아스의 가치를 알아주시는 모든 분을 생각하며 처음과 변함없는 마음가짐을 지켜가겠습니다.
 		</p>
-		<a target = "_blank" href = "http://aas-studio.com" class = "btn btn-outline-secondary btn-lg">AAS-STUDIO HOMEPAGE</a>
+		<a target = "_blank" href = "http://aas-studio.com" class = "btn btn-outline-secondary btn-lg">BBS-STUDIO HOMEPAGE</a>
 	</div>	
 </div>
 
@@ -100,23 +100,23 @@ div#root {
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
 					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
-						style = "font-size : 14px; color : black" href = "/product/listView">ALL</a>									
+						style = "font-size : 14px; color : black" href = "/product/bbsList">ALL</a>									
 				</li>
 				<li class="nav-item">
 					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
-						style = "font-size : 14px; color : black" href = "/product/listView2?c=101">RING</a>									
+						style = "font-size : 14px; color : black" href = "/product/listView3?c=201">RING</a>									
 				</li>
 				<li class="nav-item">
 					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
-						style = "font-size : 14px; color : black" href = "/product/listView2?c=102">earring</a>									
+						style = "font-size : 14px; color : black" href = "/product/listView3?c=202">earring</a>									
 				</li>
 				<li class="nav-item">
 					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
-						style = "font-size : 14px; color : black" href = "/product/listView2?c=103">barcelet</a>									
+						style = "font-size : 14px; color : black" href = "/product/listView3?c=203">bracelet</a>									
 				</li>
 				<li class="nav-item">
 					<a type = "button" class="btn btn-link waves-effect text-uppercase text-monospace font-weight-bold" 
-						style = "font-size : 14px; color : black" href = "/product/listView2?c=104">necklace</a>									
+						style = "font-size : 14px; color : black" href = "/product/listView3?c=204">necklace</a>									
 				</li>
 			</ul>
 			<form class = "form-inline my-2 my-lg-0 ml-auto">

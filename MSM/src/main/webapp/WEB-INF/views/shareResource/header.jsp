@@ -113,7 +113,7 @@
 							<a class = "btn btn-outline-white mb-5" href = "/board/qna/qnaList" role = "button">
 								QnA
 							</a>
-							<a class = "btn btn-outline-white mb-5" href = "/product/listView" role = "button">
+							<a class = "btn btn-outline-white mb-5" href = "/brand/allList" role = "button">
 								Goods List
 							</a>
 							<form action = "/logout" method = "post">

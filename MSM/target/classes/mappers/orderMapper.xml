@@ -120,5 +120,13 @@
 	where mgNum= #{mgNum}
 </update>
 
+<select id = "sumPrice" resultType = "int">
+	select sum(orderprice) from morder
+</select>
+
+<select id = "counterOrder" resultType = "int">
+	select count(ordernum) from morder
+</select>
+
 
 </mapper>

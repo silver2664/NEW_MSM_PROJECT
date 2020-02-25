@@ -279,5 +279,12 @@ $('#updatePrice').on("click", function(){
 	}
 });
 </script>
+<script>
+$(function(){
+	$('#searchBtn').click(function() {
+		self.location = "goodsList" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val());
+	});
+});   
+</script>
 </body>
 </html>

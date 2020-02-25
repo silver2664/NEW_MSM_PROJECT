@@ -217,11 +217,15 @@ public class AdminCotroller {
 			necklace += Integer.parseInt(vo4.getOrderAmount());
 		}
 		System.out.println("total ring : " + ring);
+		int order = orderService.counterOrder();
+		int price = orderService.sumPrice();
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("ring", ring);
 		map.put("earring", earring);
 		map.put("bracelet", bracelet);
-		map.put("necklace", necklace);		
+		map.put("necklace", necklace);
+		map.put("order", order);
+		map.putIfAbsent("price", price);
 		mv.addObject("map", map);
 		mv.setViewName("/admin/chart");
 		return mv;

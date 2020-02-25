@@ -26,9 +26,9 @@
 </head>
 <body>
 <%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
-
+<br/><br/>
 <div class ="container mb-5">
-	<h1>주문 조회</h1>
+	<h1 class = "text-center">주문 조회</h1>
 	<hr/>
 	<table class="table">
 		<tr>
@@ -47,6 +47,7 @@
 	</table>
 </div>
 
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 
 

@@ -36,7 +36,7 @@
 	</c:when>
 	<c:otherwise>
 		<form name = "form1" id = "form1" method = "post" action = "${path}/cart/update">
-			<table border = "1" class="table table-hover">
+			<table class="table table-hover">
 				<tr>
 					<th>상품명</th>
 					<th>단가</th>
@@ -83,7 +83,7 @@
 	</c:otherwise>
 </c:choose>
 </div>
-
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 <!-- SCRIPTS -->
 <!-- JQuery -->

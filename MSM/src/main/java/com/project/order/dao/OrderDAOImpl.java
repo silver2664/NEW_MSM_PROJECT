@@ -83,5 +83,15 @@ public class OrderDAOImpl implements OrderDAO {
 	public void changeStock(GoodsVO goods) throws Exception {
 		sqlSession.update("orderMapper.changeStock",goods);
 	}
+	
+	// 12. 총 매출
+	public int sumPrice() throws Exception {
+		return sqlSession.selectOne("orderMapper.sumPrice");
+	}
+		
+	// 13. 주문 수
+	public int counterOrder() throws Exception {
+		return sqlSession.selectOne("orderMapper.counterOrder");
+	}
 
 }

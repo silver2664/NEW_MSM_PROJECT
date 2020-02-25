@@ -85,5 +85,15 @@ public class OrderServiceImpl implements OrderService {
 	public void changeStock(GoodsVO goods) throws Exception {
 		dao.changeStock(goods);
 	}
+	
+	// 12. 총 매출
+	public int sumPrice() throws Exception {
+		return dao.sumPrice();
+	}
+		
+	// 13. 주문 수
+	public int counterOrder() throws Exception {
+		return dao.counterOrder();
+	}
 
 }

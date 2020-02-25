@@ -49,7 +49,7 @@
     </c:when>
     <c:otherwise>
         
-            <table border = "1" class="table table-hover">
+            <table class="table table-hover">
                 <tr>
                     <th>상품명</th>
                     <th>단가</th>

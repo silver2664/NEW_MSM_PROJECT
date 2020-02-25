@@ -52,16 +52,7 @@ public class GoodsController {
 	
 
 	
-	// 01. 상품전체목록
-	@RequestMapping(value = "/brandListView", method = RequestMethod.GET)
-	public String list2(Model model) throws Exception {
-			
-		logger.info("Goods List");	
-			
-		model.addAttribute("list", service.listProduct());
-			
-		return "/product/brandListView";
-	}
+	
 		
 	// 01. 상품전체목록(AAS-Studio)
 	@RequestMapping(value = "/aasList", method = RequestMethod.GET)
@@ -94,6 +85,17 @@ public class GoodsController {
 		model.addAttribute("list", service.catelist(cateCode));
 			
 		return "/product/aasList";
+	}
+	
+	// 01. AAS브랜드 카테고리별 - 1
+	@RequestMapping(value = "/listView3", method = RequestMethod.GET)
+	public String bbsList(Model model, @RequestParam("c") int cateCode) throws Exception {
+				
+		logger.info("Goods List");	
+				
+		model.addAttribute("list", service.catelist(cateCode));
+				
+		return "/product/bbsList";
 	}
 
 	// 02. 상품상세보기
@@ -219,7 +221,7 @@ public class GoodsController {
 				//상품등록
 				service.register(vo);
 				
-				return "redirect:/product/listView";
+				return "redirect:/admin/goodsList";
 				
 			}
 			
@@ -294,7 +296,7 @@ public class GoodsController {
 				
 				service.productDelete(mgNum);
 				
-				return "redirect:/product/listView";
+				return "redirect:/admin/goodsList";
 				
 			}
 			
