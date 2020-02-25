@@ -79,23 +79,25 @@ list-style : none; float : left; padding:6px;
 				</tbody>
 			</table>
 			
+			
+			
+			<div class = "text-center">
+				<button type="button" class="btn bnt-sm btn-primary" id="btnWriteForm" >글쓰기</button><br><br>
+			</div>
+			
 			<!-- 페이징 -->
 			<div style = "height : 50px;">
 				<ul class = "pagination pg-blue justify-content-center">
 					<c:if test="${pageMaker.prev}" >
-						<li><a href="qnaList${pagrMarker.makeSearch(pageMaker.startPage-1 )}">이전</a></li>
+						<li style = "margin-right : 10px"><a href="qnaList${pagrMarker.makeSearch(pageMaker.startPage-1 )}">이전</a></li>
 					</c:if>
 					<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage  }" var ="idx">
-						<li><a href="qnaList${pageMaker.makeSearch(idx) }">${idx }</a></li>					
+						<li style = "margin-right : 10px"><a href="qnaList${pageMaker.makeSearch(idx) }">${idx }</a></li>					
 					</c:forEach>
 					<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 						<li><a href="qnaList${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>					
 					</c:if>
 				</ul>
-			</div>
-			
-			<div class = "text-center">
-				<button type="button" class="btn bnt-sm btn-primary" id="btnWriteForm" >글쓰기</button><br><br>
 			</div>
 			
 			<!-- 검색기능 -->
@@ -118,6 +120,7 @@ list-style : none; float : left; padding:6px;
 	</div>
 </article>
 </form>
+<br/><br/><br/><br/>
 
 <%@ include file = "/WEB-INF/views/shareResource/footer.jsp" %>
 <!-- SCRIPTS -->
